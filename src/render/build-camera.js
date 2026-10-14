@@ -1,5 +1,4 @@
 // Kamera im Baumodus: Position, Zoom, Verschieben.
-import './lights.js'; // Ladereihenfolge: dieses Modul läuft nach render/lights.js
 import { game } from '../core/state.js';
 import { clamp } from '../core/util.js';
 import { buildCam } from './renderer.js';

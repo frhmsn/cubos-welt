@@ -1,5 +1,5 @@
 // Welt-Zustand: Felder, Objekte, Neuaufbau von Boden und Objekten, Welt vergrößern, Großbauten.
-import '../content/models/blocks.js'; // Ladereihenfolge: dieses Modul läuft nach content/models/blocks.js
+import '../content/models/blocks.js'; // Ladereihenfolge: läuft nach content/models/blocks.js (siehe docs/ARCHITEKTUR.md)
 import { game } from './state.js';
 import { DIRS, GROW, I, MAX_N, TILE, ZMAX, center, inb } from './grid.js';
 import { ITEMS } from '../content/catalog.js';

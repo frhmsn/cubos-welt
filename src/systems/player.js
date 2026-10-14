@@ -1,5 +1,5 @@
 // Spielfigur und Fahren: Joystick, Tastatur, Laufen, Fahren, Boote.
-import '../ui/build-input.js'; // Ladereihenfolge: dieses Modul läuft nach ui/build-input.js
+import '../ui/build-input.js'; // Ladereihenfolge: läuft nach ui/build-input.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { $, clamp } from '../core/util.js';
 import { tileAt } from '../core/grid.js';

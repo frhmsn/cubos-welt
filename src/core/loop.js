@@ -1,5 +1,5 @@
 // Spielschleife: jedes Bild alle Systeme aktualisieren und zeichnen, Leistung anpassen.
-import '../systems/editor.js'; // Ladereihenfolge: dieses Modul läuft nach systems/editor.js
+import '../systems/editor.js'; // Ladereihenfolge: läuft nach systems/editor.js (siehe docs/ARCHITEKTUR.md)
 import { game } from './state.js';
 import { $ } from './util.js';
 import { buildCam, dprMax, renderer, scene, walkCam } from '../render/renderer.js';

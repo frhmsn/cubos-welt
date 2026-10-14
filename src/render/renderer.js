@@ -1,5 +1,4 @@
 // Three.js-Grundgerüst: Renderer, Szene, Kameras, Sonne, Mond, Himmel.
-import '../content/catalog.js'; // Ladereihenfolge: dieses Modul läuft nach content/catalog.js
 import { game } from '../core/state.js';
 import { $ } from '../core/util.js';
 

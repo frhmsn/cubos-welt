@@ -1,5 +1,5 @@
 // Fähre: Fahrt über Wasser, Anleger, Autos auf dem Deck.
-import './trains.js'; // Ladereihenfolge: dieses Modul läuft nach systems/trains.js
+import './trains.js'; // Ladereihenfolge: läuft nach systems/trains.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { clamp } from '../core/util.js';
 import { DIRS, I, TILE, center, inb, tileAt } from '../core/grid.js';

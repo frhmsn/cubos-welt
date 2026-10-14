@@ -1,5 +1,4 @@
 // Tag und Nacht: Sonnenstand, Himmelsfarben, Licht.
-import '../systems/audio.js'; // Ladereihenfolge: dieses Modul läuft nach systems/audio.js
 import { game } from '../core/state.js';
 import { $, clamp } from '../core/util.js';
 import { fill, hemi, moon, moonBall, renderer, scene, stars, sun, sunBall } from './renderer.js';

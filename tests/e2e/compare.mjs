@@ -1,5 +1,6 @@
 // Vergleicht zwei Testläufe: Fingerabdrücke müssen gleich sein, Bilder fast gleich.
-// Aufruf: node tests/e2e/compare.mjs <ausgabeA> <ausgabeB>
+// Aufruf: node tests/e2e/compare.mjs <A> <B>   (Name unter tests/output/ oder Pfad wie tests/baseline)
+// Fehlen bei A die Bilder (z. B. tests/baseline, dort liegen nur Daten), werden nur die Daten verglichen.
 import fs from 'node:fs';
 import path from 'node:path';
 import { PNG } from 'pngjs';
@@ -7,7 +8,8 @@ import pixelmatch from 'pixelmatch';
 import { ROOT } from './harness.mjs';
 
 const [a, b] = process.argv.slice(2);
-const A = path.join(ROOT, 'tests/output', a), B = path.join(ROOT, 'tests/output', b);
+const dir = (x) => (x.includes('/') ? path.join(ROOT, x) : path.join(ROOT, 'tests/output', x));
+const A = dir(a), B = dir(b);
 const LIMIT = Number(process.env.PIXEL_LIMIT || 0.5); // Prozent abweichender Pixel
 let bad = 0;
 const diffKeys = (x, y, pre = '') => {
@@ -29,11 +31,14 @@ for (const f of fs.readdirSync(A).filter((f) => f.endsWith('.json')).sort()) {
     if (!sb) { console.log('FEHLT  ', ra.name, sa.label); bad++; return; }
     const dk = diffKeys(sa.fp, sb.fp);
     if (JSON.stringify(sa.extra) !== JSON.stringify(sb.extra)) dk.push('extra');
-    const ia = PNG.sync.read(fs.readFileSync(path.join(A, sa.file))), ib = PNG.sync.read(fs.readFileSync(path.join(B, sb.file)));
-    const diff = new PNG({ width: ia.width, height: ia.height });
-    const n = pixelmatch(ia.data, ib.data, diff.data, ia.width, ia.height, { threshold: 0.1 });
-    const pct = (100 * n) / (ia.width * ia.height);
-    if (pct > LIMIT) fs.writeFileSync(path.join(B, sb.file.replace('.png', '.diff.png')), PNG.sync.write(diff));
+    let pct = 0;
+    if (fs.existsSync(path.join(A, sa.file))) {
+      const ia = PNG.sync.read(fs.readFileSync(path.join(A, sa.file))), ib = PNG.sync.read(fs.readFileSync(path.join(B, sb.file)));
+      const diff = new PNG({ width: ia.width, height: ia.height });
+      const n = pixelmatch(ia.data, ib.data, diff.data, ia.width, ia.height, { threshold: 0.1 });
+      pct = (100 * n) / (ia.width * ia.height);
+      if (pct > LIMIT) fs.writeFileSync(path.join(B, sb.file.replace('.png', '.diff.png')), PNG.sync.write(diff));
+    }
     const ok = !dk.length && pct <= LIMIT;
     if (!ok) bad++;
     console.log(`${ok ? 'gleich ' : 'ANDERS '} ${ra.name}/${sa.label}  Pixel ${pct.toFixed(2)} %${dk.length ? '  Daten: ' + dk.join(', ') : ''}`);

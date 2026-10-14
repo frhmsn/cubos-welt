@@ -1,5 +1,5 @@
 // Echte Lichter: Pool von Punktlichtern für Laternen und Scheinwerfer, Garagentore.
-import './daynight.js'; // Ladereihenfolge: dieses Modul läuft nach render/daynight.js
+import '../systems/animals.js'; // Ladereihenfolge: läuft nach systems/animals.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { scene, walkCam } from './renderer.js';
 import { glowFire } from './materials.js';

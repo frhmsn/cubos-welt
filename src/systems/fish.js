@@ -1,5 +1,5 @@
 // Fische im Wasser: erscheinen, schwimmen, fliehen, springen.
-import '../content/fish.js'; // Ladereihenfolge: dieses Modul läuft nach content/fish.js
+import '../core/storage.js'; // Ladereihenfolge: läuft nach core/storage.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { clamp } from '../core/util.js';
 import { center, tileAt } from '../core/grid.js';
@@ -9,17 +9,17 @@ import { gAt, tiles } from '../core/world.js';
 import { nearFocus } from './trains.js';
 import { angDiff } from './ferries.js';
 import { lightTime } from '../render/lights.js';
+import { FISH_BY_ID, fishGrounds } from '../content/fish/index.js';
 import { FISH, finGeo, fishModel, fishes, pickFish, silGeo, silMat, splashGeo, splashes } from '../content/fish.js';
 import { fishing } from './fishing.js';
 
-function fishOk(type,x,z){const t=tileAt(x,z);if(!t)return false;const g=gAt(t.i,t.j);
-  if(type==='barsch'||type==='stoer')return g==='wasser'||g==='meer';
-  if(FISH[type].where==='im Meer')return g==='meer';return g==='wasser';}
+/** Darf diese Art an dieser Stelle schwimmen? (Habitat aus content/fish/<art>.js) */
+function fishOk(type,x,z){const t=tileAt(x,z);if(!t)return false;return fishGrounds(type).includes(gAt(t.i,t.j));}
 function anyWater(x,z){const t=tileAt(x,z);if(!t)return false;const g=gAt(t.i,t.j);return g==='wasser'||g==='meer';}
 const okF=(f,x,z)=>f.free?anyWater(x,z):fishOk(f.type,x,z);
 function addFish(type,x,z){
   const sil=new THREE.Mesh(silGeo,silMat);sil.scale.setScalar(FISH[type].sil);sil.position.set(x,.035,z);scene.add(sil);
-  let fin=null;if(type==='hai'){fin=new THREE.Mesh(finGeo,M('#4A5560'));fin.scale.setScalar(1.6);fin.castShadow=false;scene.add(fin);}
+  let fin=null;if(FISH_BY_ID[type].dorsalFin){fin=new THREE.Mesh(finGeo,M('#4A5560'));fin.scale.setScalar(1.6);fin.castShadow=false;scene.add(fin);}
   const f={type,x,z,h:Math.random()*6.3,tx:x,tz:z,sil,fin,jumpT:6+Math.random()*14,jump:null,model:null,hook:false,flee:0};fishes.push(f);return f;
 }
 function removeFish(f){const k=fishes.indexOf(f);if(k<0)return;scene.remove(f.sil);if(f.fin)scene.remove(f.fin);if(f.model){scene.remove(f.model);disposeGroup(f.model);}fishes.splice(k,1);}
@@ -33,7 +33,7 @@ function updateFish(dt){
     const wantSea=Math.min(22,Math.round(sea.length*.35)),wantLake=Math.min(12,Math.round(lake.length*.3));
     const lakeN=fishes.filter(f=>!f.free&&!inSea(f)).length;
     for(let q=0;q<2;q++){
-      if(nSea+q<wantSea&&sea.length){const k=sea[Math.floor(Math.random()*sea.length)],c=center(k%game.N,(k/game.N)|0),r=Math.random(),sharks=fishes.filter(f=>f.type==='hai').length;
+      if(nSea+q<wantSea&&sea.length){const k=sea[Math.floor(Math.random()*sea.length)],c=center(k%game.N,(k/game.N)|0);
         const type=pickFish(true);addFish(type,c.x+(Math.random()-.5)*3,c.z+(Math.random()-.5)*3);}
       if(lakeN+q<wantLake&&lake.length){const k=lake[Math.floor(Math.random()*lake.length)],c=center(k%game.N,(k/game.N)|0);addFish(pickFish(false),c.x+(Math.random()-.5)*3,c.z+(Math.random()-.5)*3);}
     }
@@ -51,7 +51,7 @@ function updateFish(dt){
     f.sil.position.set(f.x,.035,f.z);f.sil.rotation.y=f.h+wig;
     if(f.fin){f.fin.position.set(f.x+Math.sin(f.h)*.2,-.02+Math.sin(lightTime*2+f.z)*.03,f.z+Math.cos(f.h)*.2);f.fin.rotation.y=f.h;}
     if(FISH[f.type].jump&&!f.hook){f.jumpT-=dt;
-      if(f.jumpT<=0&&!f.jump&&nearFocus(f.x,f.z,45)){f.jump={t:0};f.jumpT=8+Math.random()*16;if(!f.model){f.model=fishModel(f.type);f.model.scale.setScalar(f.type==='barsch'?1.4:1.1);scene.add(f.model);}f.model.visible=true;splash(f.x,f.z);}}
+      if(f.jumpT<=0&&!f.jump&&nearFocus(f.x,f.z,45)){f.jump={t:0};f.jumpT=8+Math.random()*16;if(!f.model){f.model=fishModel(f.type);f.model.scale.setScalar(FISH_BY_ID[f.type].scale.jump);scene.add(f.model);}f.model.visible=true;splash(f.x,f.z);}}
     if(f.jump){f.jump.t+=dt/1.0;const t=f.jump.t;
       if(t>=1){f.jump=null;f.model.visible=false;f.sil.visible=true;splash(f.x+Math.sin(f.h)*.8,f.z+Math.cos(f.h)*.8);}
       else{f.sil.visible=false;f.model.position.set(f.x+Math.sin(f.h)*t*.8,Math.sin(Math.PI*t)*1.1-.1,f.z+Math.cos(f.h)*t*.8);f.model.rotation.set(-(t-.5)*2.2,f.h,0);}}

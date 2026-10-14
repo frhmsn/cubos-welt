@@ -1,5 +1,5 @@
 // Speicherort der Welten: Claude-Speicher im Artifact oder localStorage in der App.
-import '../ui/modes.js'; // Ladereihenfolge: dieses Modul läuft nach ui/modes.js
+import '../ui/modes.js'; // Ladereihenfolge: läuft nach ui/modes.js (siehe docs/ARCHITEKTUR.md)
 import { game } from './state.js';
 import { $ } from './util.js';
 import { renderWorlds } from '../ui/worlds-menu.js';

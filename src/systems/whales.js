@@ -1,5 +1,5 @@
 // Wale im Meer: schwimmen, auftauchen, Fontäne, gesehen-Zähler.
-import '../content/whales.js'; // Ladereihenfolge: dieses Modul läuft nach content/whales.js
+import './fish.js'; // Ladereihenfolge: läuft nach systems/fish.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { clamp } from '../core/util.js';
 import { center, tileAt } from '../core/grid.js';
@@ -13,7 +13,7 @@ import { lightTime } from '../render/lights.js';
 import { hint } from '../ui/modes.js';
 import { silGeo, silMat } from '../content/fish.js';
 import { WHALE, whaleModel } from '../content/whales.js';
-import { renderItems } from '../ui/inventory.js';
+import { emit } from '../core/events.js';
 
 let whaleBook={};for(const k of Object.keys(WHALE))whaleBook[k]=0;try{const c=JSON.parse(localStorage.getItem('kunos-wale')||'null');if(c)whaleBook=Object.assign(whaleBook,c);}catch(e){}
 const whales=[],spouts=[];
@@ -35,7 +35,7 @@ function spout(w){
     spouts.push({m,vx:(Math.random()-.5)*1.2,vy:5+Math.random()*3,vz:(Math.random()-.5)*1.2,t:0});}
   if(nearFocus(w.x,w.z,40)){blowSound();
     if(!w.seen){w.seen=true;whaleBook[w.type]++;try{localStorage.setItem('kunos-wale',JSON.stringify(whaleBook));}catch(e){}
-      if(game.curCat==='fang')renderItems();hint('Ein '+WHALE[w.type].label+'! Pffffff! Schau, wie er pustet.',3500);}}
+      emit('wal:gesehen',{type:w.type});hint('Ein '+WHALE[w.type].label+'! Pffffff! Schau, wie er pustet.',3500);}}
 }
 function whaleTarget(w){for(let q=0;q<12;q++){const a=Math.random()*6.283,r=8+Math.random()*16,nx=w.x+Math.cos(a)*r,nz=w.z+Math.sin(a)*r;if(whaleOk(nx,nz)){w.tx=nx;w.tz=nz;return;}}w.tx=w.x;w.tz=w.z;}
 let whaleCheck=0;

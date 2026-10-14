@@ -4,9 +4,11 @@
   "type": "module",
   "scripts": {
     "build": "vite build && node tools/build.mjs",
-    "test:e2e": "node tests/e2e/run.mjs dist",
-    "test:compare": "node tests/e2e/compare.mjs legacy dist",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:e2e": "node tests/e2e/run.mjs dist:aktuell && node tests/e2e/compare.mjs tests/baseline aktuell",
+    "test:baseline": "node tools/save-baseline.mjs",
+    "check": "npm test && npm run build && npm run test:e2e",
+    "deps": "node tools/deps.mjs"
   },
   "devDependencies": {
     "acorn": "^8.19.0",

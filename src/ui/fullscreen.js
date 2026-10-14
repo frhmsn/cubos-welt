@@ -1,5 +1,4 @@
 // Vollbild-Knopf.
-import './worlds-menu.js'; // Ladereihenfolge: dieses Modul läuft nach ui/worlds-menu.js
 import { $ } from '../core/util.js';
 import { ac } from '../systems/audio.js';
 import { hint } from './modes.js';

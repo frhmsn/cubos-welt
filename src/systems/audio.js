@@ -1,5 +1,4 @@
 // Töne und Geräusche (Web Audio).
-import './animals.js'; // Ladereihenfolge: dieses Modul läuft nach systems/animals.js
 import { ITEMS } from '../content/catalog.js';
 
 // ---------- Sound ----------

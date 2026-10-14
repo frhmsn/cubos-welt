@@ -1,5 +1,4 @@
 // 3D-Modelle für Gleise, Bahnhof, Bahnübergang, Tunnel, Anleger und Seetor.
-import './ground.js'; // Ladereihenfolge: dieses Modul läuft nach content/models/ground.js
 import { DIRS, TILE } from '../../core/grid.js';
 import { BX, G, M, box, bulbMat, glowTex, mesh, seaMat, waterMat } from '../../render/materials.js';
 import { rot } from '../../core/world.js';

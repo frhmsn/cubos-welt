@@ -1,5 +1,5 @@
 // Bahnhof- und Anleger-Panel: Einsteigen und Aussteigen.
-import '../systems/player.js'; // Ladereihenfolge: dieses Modul läuft nach systems/player.js
+import '../systems/player.js'; // Ladereihenfolge: läuft nach systems/player.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { $ } from '../core/util.js';
 import { I, center, tileAt } from '../core/grid.js';

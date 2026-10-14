@@ -1,5 +1,5 @@
 // Die Beispielstadt und die leere Wiese als Startwelten.
-import '../core/save.js'; // Ladereihenfolge: dieses Modul läuft nach core/save.js
+import '../core/save.js'; // Ladereihenfolge: läuft nach core/save.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { I, START_N, center } from '../core/grid.js';
 import { ITEMS } from './catalog.js';

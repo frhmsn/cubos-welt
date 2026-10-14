@@ -1,5 +1,5 @@
 // Spielstand: Welt in Daten umwandeln (serialize) und wieder aufbauen (applyData).
-import '../ui/inventory.js'; // Ladereihenfolge: dieses Modul läuft nach ui/inventory.js
+import '../ui/inventory.js'; // Ladereihenfolge: läuft nach ui/inventory.js (siehe docs/ARCHITEKTUR.md)
 import { game } from './state.js';
 import { DIRS, MAX_N, START_N, tileAt } from './grid.js';
 import { ITEMS } from '../content/catalog.js';
@@ -13,13 +13,14 @@ import { addAnimal } from '../systems/animals.js';
 import { bc } from '../render/build-camera.js';
 import { FISH, fishes } from '../content/fish.js';
 import { addFish, anyWater } from '../systems/fish.js';
+import { SAVE_VERSION, migrate } from './save-schema.js';
 
 // ---------- Speichern ----------
 const KEY='kunos-welt-1'; let saveT=null;
 function saveSoon(){clearTimeout(saveT);saveT=setTimeout(save,600);game.dirty=false;game.worldDirty=true;}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(serialize()));}catch(e){}}
 function serialize(){
-  return {v:1,n:game.N,dayT: game.dayT,
+  return {v:SAVE_VERSION,n:game.N,dayT: game.dayT,
     tiles:tiles.map(t=>t.o?(t.o.b?[t.g,t.o.t,t.o.r,t.o.s,t.o.b]:[t.g,t.o.t,t.o.r,t.o.s]):[t.g]),
     cars:cars.map(c=>[c.type,+c.x.toFixed(2),+c.z.toFixed(2),+c.h.toFixed(3),c.mode==='park'?0:1]),
     animals:animals.map(a=>[a.type,+a.x.toFixed(2),+a.z.toFixed(2)]),
@@ -32,7 +33,8 @@ function load(){
   return applyData(d);
 }
 function applyData(d){
-  if(!d||!Array.isArray(d.tiles))return false;
+  d=migrate(d);
+  if(!d)return false;
   const n=Math.round(Math.sqrt(d.tiles.length));
   if(n*n!==d.tiles.length||n<10||n>MAX_N)return false;
   resetTiles(n);

@@ -1,5 +1,5 @@
 // 3D-Modelle für Häuser, Garage, Feuerwache, Aquarium, Natur und Lichter (MODELS).
-import './rail.js'; // Ladereihenfolge: dieses Modul läuft nach content/models/rail.js
+import './rail.js'; // Ladereihenfolge: läuft nach content/models/rail.js (siehe docs/ARCHITEKTUR.md)
 import { mulberry } from '../../core/util.js';
 import { BX, G, M, box, bulbMat, doorMat, facadeMat, fairyMats, flameCore, flameMat, floodMat, glowFire, glowWarm, mesh, polBlue, winMat } from '../../render/materials.js';
 import { signMat } from './rail.js';

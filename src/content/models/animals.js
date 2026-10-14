@@ -1,5 +1,4 @@
 // 3D-Modelle für Tiere.
-import './vehicles.js'; // Ladereihenfolge: dieses Modul läuft nach content/models/vehicles.js
 import { G, bake, box, mesh } from '../../render/materials.js';
 
 // ---------- Tiere ----------

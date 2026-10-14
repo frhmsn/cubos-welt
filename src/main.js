@@ -1,5 +1,5 @@
 // Startpunkt: lädt alle Module in fester Reihenfolge und startet das Spiel.
-import './debug.js'; // Ladereihenfolge: dieses Modul läuft nach debug.js
+import './debug.js'; // Test-Schnittstelle (nur aktiv in Tests)
 import { game } from './core/state.js';
 import { hint, setMode } from './ui/modes.js';
 import { saveWorld } from './ui/worlds-menu.js';

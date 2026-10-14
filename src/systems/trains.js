@@ -1,5 +1,5 @@
 // Eisenbahn: Züge, Fahrt über Gleise, Halt an Bahnhöfen, Mitfahren.
-import './traffic.js'; // Ladereihenfolge: dieses Modul läuft nach systems/traffic.js
+import './traffic.js'; // Ladereihenfolge: läuft nach systems/traffic.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { clamp } from '../core/util.js';
 import { DIRS, I, TILE, center, tileAt } from '../core/grid.js';

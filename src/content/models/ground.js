@@ -1,5 +1,4 @@
 // 3D-Modelle für Bodenarten (Straße, Sand, Wasser, Meer ...).
-import '../../render/materials.js'; // Ladereihenfolge: dieses Modul läuft nach render/materials.js
 import { game } from '../../core/state.js';
 import { TILE } from '../../core/grid.js';
 import { scene } from '../../render/renderer.js';

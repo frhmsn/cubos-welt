@@ -1,5 +1,4 @@
 // Test-Schnittstelle window.__cubo. Nur aktiv, wenn window.__CUBO_DEBUG gesetzt ist (Tests).
-import './core/loop.js'; // Ladereihenfolge: dieses Modul läuft nach core/loop.js
 import { game } from './core/state.js';
 import { center } from './core/grid.js';
 import { animals, aquariums, cars, ferries, trains } from './core/world.js';

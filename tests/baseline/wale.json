@@ -1,0 +1,195 @@
+{
+ "name": "wale",
+ "error": null,
+ "errors": [],
+ "snaps": [
+  {
+   "label": "meer-mit-walen",
+   "file": "wale-01-meer-mit-walen.png",
+   "fp": {
+    "mode": "build",
+    "N": 20,
+    "sel": "meer",
+    "curCat": "land",
+    "world": "{\"v\":1,\"n\":20,\"dayT\":0.459999999999989,\"tiles\":[[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"]],\"cars\":[],\"animals\":[],\"fish\":[],\"trains\":[],\"ferries\":[]}",
+    "cars": [],
+    "trains": [],
+    "ferries": [],
+    "fishes": [
+     [
+      "makrele",
+      21.96,
+      -23.221,
+      false
+     ],
+     [
+      "makrele",
+      -27.49,
+      -34.059,
+      false
+     ],
+     [
+      "thunfisch",
+      -11.337,
+      -28.838,
+      false
+     ],
+     [
+      "hai",
+      -0.847,
+      -21.625,
+      false
+     ],
+     [
+      "barrakuda",
+      -7.524,
+      -14.744,
+      false
+     ],
+     [
+      "barrakuda",
+      -16.421,
+      -5.745,
+      false
+     ],
+     [
+      "mahimahi",
+      25.203,
+      -22.417,
+      false
+     ],
+     [
+      "barrakuda",
+      -4.505,
+      -37.146,
+      false
+     ],
+     [
+      "barsch",
+      27.456,
+      -21.194,
+      false
+     ],
+     [
+      "thunfisch",
+      5.527,
+      -29.376,
+      false
+     ],
+     [
+      "barrakuda",
+      -34.749,
+      -18.556,
+      false
+     ],
+     [
+      "makrele",
+      -19.859,
+      0.528,
+      false
+     ],
+     [
+      "bonito",
+      3.938,
+      -19.63,
+      false
+     ],
+     [
+      "barsch",
+      39.037,
+      -33.476,
+      false
+     ],
+     [
+      "mahimahi",
+      -2.57,
+      -20.622,
+      false
+     ],
+     [
+      "thunfisch",
+      34.578,
+      -39.991,
+      false
+     ],
+     [
+      "barsch",
+      12.805,
+      -15.013,
+      false
+     ],
+     [
+      "thunfisch",
+      27.486,
+      -5.794,
+      false
+     ],
+     [
+      "thunfisch",
+      -32.611,
+      -16.144,
+      false
+     ],
+     [
+      "thunfisch",
+      -37.323,
+      -13.376,
+      false
+     ],
+     [
+      "barsch",
+      -38.682,
+      -1.778,
+      false
+     ],
+     [
+      "hai",
+      14.127,
+      7.436,
+      false
+     ]
+    ],
+    "whales": [
+     [
+      "pottwal",
+      "swim",
+      -11.315,
+      -19.328
+     ],
+     [
+      "orca",
+      "swim",
+      18.199,
+      -2.903
+     ],
+     [
+      "buckelwal",
+      "swim",
+      30.024,
+      -17.019
+     ]
+    ],
+    "animals": [],
+    "pl": [
+     0,
+     0,
+     0
+    ],
+    "driving": null,
+    "riding": false,
+    "fishing": null,
+    "catchBook": "{\"barsch\":0,\"hecht\":0,\"karpfen\":0,\"wels\":0,\"stoer\":0,\"thunfisch\":0,\"hai\":0,\"makrele\":0,\"bonito\":0,\"mahimahi\":0,\"barrakuda\":0,\"schwertfisch\":0,\"marlin\":0,\"mondfisch\":0}",
+    "whaleBook": "{\"buckelwal\":1,\"pottwal\":1,\"orca\":1}",
+    "aquarium": [],
+    "ui": {
+     "st": false,
+     "aq": false,
+     "dive": false,
+     "fish": false,
+     "menu": false,
+     "catch": false
+    }
+   }
+  }
+ ]
+}

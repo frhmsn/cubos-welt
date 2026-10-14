@@ -1,5 +1,4 @@
 // 3D-Modelle für Autos, Züge, Fähre, Boote und U-Boot.
-import './buildings.js'; // Ladereihenfolge: dieses Modul läuft nach content/models/buildings.js
 import { BX, G, M, bake, box, glassMat, headMat, mesh, polBlue, polRed, tailMat, winMat } from '../../render/materials.js';
 
 // ---------- Autos ----------

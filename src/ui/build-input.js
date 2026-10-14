@@ -1,5 +1,5 @@
 // Touch- und Maus-Eingabe im Baumodus (tippen, malen, zoomen, drehen).
-import '../systems/build.js'; // Ladereihenfolge: dieses Modul läuft nach systems/build.js
+import '../systems/build.js'; // Ladereihenfolge: läuft nach systems/build.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { clamp } from '../core/util.js';
 import { ZMAX } from '../core/grid.js';

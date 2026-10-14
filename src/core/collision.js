@@ -1,5 +1,5 @@
 // Kollision von Spielfigur und Fahrzeugen mit Gebäuden.
-import './world.js'; // Ladereihenfolge: dieses Modul läuft nach core/world.js
+import './world.js'; // Ladereihenfolge: läuft nach core/world.js (siehe docs/ARCHITEKTUR.md)
 import { game } from './state.js';
 import { clamp } from './util.js';
 import { I, TILE, inb } from './grid.js';

@@ -1,5 +1,4 @@
 // Material- und Geometrie-Cache, Bau-Helfer (box, mesh), Nacht-Materialien, Wasser.
-import './renderer.js'; // Ladereihenfolge: dieses Modul läuft nach render/renderer.js
 
 // ---------- Material & Geometrie ----------
 const geoC={}, matC={};

@@ -1,5 +1,5 @@
 // Modus-Wechsel (Bauen, Laufen, Fahren, Mitfahren), Hinweise, Knöpfe oben rechts.
-import './station-panel.js'; // Ladereihenfolge: dieses Modul läuft nach ui/station-panel.js
+import './station-panel.js'; // Ladereihenfolge: läuft nach ui/station-panel.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { $ } from '../core/util.js';
 import { DIRS, I, center, inb, tileAt } from '../core/grid.js';

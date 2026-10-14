@@ -1,5 +1,5 @@
 // Bauen: Feld antippen, Dinge setzen, abreißen, Regeln für das Platzieren.
-import '../render/build-camera.js'; // Ladereihenfolge: dieses Modul läuft nach render/build-camera.js
+import '../render/lights.js'; // Ladereihenfolge: läuft nach render/lights.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { DIRS, I, center, inb, tileAt } from '../core/grid.js';
 import { ITEMS } from '../content/catalog.js';

@@ -1,5 +1,5 @@
 // Bauwerkstatt: Häuser Stein für Stein bauen.
-import '../content/sample-world.js'; // Ladereihenfolge: dieses Modul läuft nach content/sample-world.js
+import '../content/sample-world.js'; // Ladereihenfolge: läuft nach content/sample-world.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { $ } from '../core/util.js';
 import { DIRS, I, center } from '../core/grid.js';

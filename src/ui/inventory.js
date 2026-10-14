@@ -1,5 +1,5 @@
 // Inventar: Kategorien, Gegenstände, Vorschaubilder.
-import './fullscreen.js'; // Ladereihenfolge: dieses Modul läuft nach ui/fullscreen.js
+import './worlds-menu.js'; // Ladereihenfolge: läuft nach ui/worlds-menu.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { $ } from '../core/util.js';
 import { CATS, ITEMS } from '../content/catalog.js';
@@ -18,6 +18,7 @@ import { FISH, fishModel } from '../content/fish.js';
 import { WHALE, whaleModel } from '../content/whales.js';
 import { whaleBook } from '../systems/whales.js';
 import { catchBook, catchRec, fmtLen } from '../systems/fishing.js';
+import { on } from '../core/events.js';
 
 let thumbs={};
 function select(id){
@@ -110,5 +111,10 @@ function makeThumbs(){
   }
   R.dispose(); try{R.forceContextLoss();}catch(e){}
 }
+
+// Fangbuch-Ansicht aktuell halten
+const refreshFang=()=>{if(game.curCat==='fang')renderItems();};
+on('fang:geaendert',refreshFang);
+on('wal:gesehen',refreshFang);
 
 export { makeThumbs, renderCats, renderItems, select, thumbs };

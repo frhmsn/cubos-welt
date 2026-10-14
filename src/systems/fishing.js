@@ -1,5 +1,5 @@
 // Angeln: Rute, Schnur, Biss, Fang, Fangbuch und Rekorde.
-import './whales.js'; // Ladereihenfolge: dieses Modul läuft nach systems/whales.js
+import './whales.js'; // Ladereihenfolge: läuft nach systems/whales.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { $ } from '../core/util.js';
 import { tileAt } from '../core/grid.js';
@@ -13,8 +13,9 @@ import { FISH, fishModel, fishes, pickFish } from '../content/fish.js';
 import { addFish, anyWater, fishOk, okF, removeFish, splash } from './fish.js';
 import { WHALE } from '../content/whales.js';
 import { whaleBook } from './whales.js';
-import { refreshAquariums } from './aquarium.js';
-import { renderItems, thumbs } from '../ui/inventory.js';
+import { thumbs } from '../ui/inventory.js';
+import { FISH_BY_ID } from '../content/fish/index.js';
+import { emit } from '../core/events.js';
 
 let fishing=null;
 const fishLine=new THREE.Line(new THREE.BufferGeometry().setFromPoints(Array.from({length:12},()=>new THREE.Vector3())),new THREE.LineBasicMaterial({color:0x222222}));
@@ -70,7 +71,7 @@ function reelIn(){
   if(F.phase!=='bite'){stopFishing();return;}
   const f=F.fish;const L=FISH[f.type].len;F.type=f.type;F.len=L[0]+Math.random()*(L[1]-L[0]);
   removeFish(f);F.fish=null;F.phase='reel';F.t=0;$('#btnFish').classList.remove('hot');
-  F.model=fishModel(F.type);F.model.scale.setScalar(FISH[F.type].rs||(F.type==='barsch'||F.type==='karpfen'?1.6:F.type==='hecht'?1.2:F.type==='thunfisch'?1.1:.9));scene.add(F.model);
+  F.model=fishModel(F.type);F.model.scale.setScalar(FISH[F.type].rs);scene.add(F.model);
   splash(F.x,F.z,true);tone(400,.12,'sine',.08,0,2);tone(600,.12,'sine',.08,.12,2);
 }
 let catchBook={};for(const k of Object.keys(FISH))catchBook[k]=0;try{const c=JSON.parse(localStorage.getItem('kunos-fang')||'null');if(c)catchBook=Object.assign(catchBook,c);}catch(e){}
@@ -80,11 +81,11 @@ function fmtLen(m){return m<1?Math.round(m*100)+' cm':m.toFixed(2).replace('.','
 function showCatch(type,len){
   lastCatch={type,len};catchBook[type]++;const rec=!catchRec[type]||len>catchRec[type];if(rec)catchRec[type]=len;
   try{localStorage.setItem('kunos-fang',JSON.stringify(catchBook));localStorage.setItem('kunos-fang-rekord',JSON.stringify(catchRec));}catch(e){}
-  if(game.curCat==='fang')renderItems();
-  refreshAquariums();game.aqShown=undefined;
+  emit('fang:geaendert',{type});
   const S=FISH[type];
   $('#catchImg').src=thumbs['F_'+type]||'';$('#catchImg').hidden=!thumbs['F_'+type];
-  $('#catchTitle').textContent=S.wow?'Wow, ein '+S.label+'!':(type==='wels'&&len>2)?'Wow, ein Riesen-Wels!':'Du hast '+(S.art||'einen')+' '+S.label+' gefangen!';
+  const big=FISH_BY_ID[type].bigCatch;
+  $('#catchTitle').textContent=S.wow?'Wow, ein '+S.label+'!':(big&&len>big.from)?big.title:'Du hast '+(S.art||'einen')+' '+S.label+' gefangen!';
   $('#catchSub').textContent='Er ist '+fmtLen(len)+' lang.'+(rec&&catchBook[type]>1?' Neuer Rekord!':'');
   $('#catchBook').textContent='Dein Fang: '+Object.keys(FISH).filter(k=>catchBook[k]).map(k=>catchBook[k]+' '+(catchBook[k]===1?FISH[k].label:FISH[k].plural)).join(', ');
   $('#catch').hidden=false;
@@ -99,7 +100,7 @@ function mergeFang(f){
   for(const k of Object.keys(FISH)){const n=+((f.c||{})[k])||0;if(n>(catchBook[k]||0)){catchBook[k]=n;ch=true;}const r=+((f.r||{})[k])||0;if(r>(catchRec[k]||0)){catchRec[k]=r;ch=true;}}
   for(const k of Object.keys(WHALE)){const n=+((f.w||{})[k])||0;if(n>(whaleBook[k]||0)){whaleBook[k]=n;ch=true;}}
   if(ch){try{localStorage.setItem('kunos-fang',JSON.stringify(catchBook));localStorage.setItem('kunos-fang-rekord',JSON.stringify(catchRec));localStorage.setItem('kunos-wale',JSON.stringify(whaleBook));}catch(e){}
-    refreshAquariums();game.aqShown=undefined;if(game.curCat==='fang')renderItems();}
+    emit('fang:geaendert',{});}
   return ch;
 }
 

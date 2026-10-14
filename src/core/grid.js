@@ -1,5 +1,4 @@
 // Das Feld-Raster der Welt: Feldgröße, Weltgröße, Umrechnung Feld <-> Weltkoordinate, Richtungen.
-import './util.js'; // Ladereihenfolge: dieses Modul läuft nach core/util.js
 import { game } from './state.js';
 
 const TILE=4, START_N=20, MAX_N=60, GROW=5;

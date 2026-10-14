@@ -1,5 +1,5 @@
 // Katalog aller baubaren Dinge (ITEMS) und der Inventar-Kategorien (CATS).
-import '../core/grid.js'; // Ladereihenfolge: dieses Modul läuft nach core/grid.js
+import { FISH_LIST } from './fish/index.js';
 
 // ---------- Katalog ----------
 const ITEMS={
@@ -22,12 +22,11 @@ const ITEMS={
   tunnel:{kind:'ground',label:'Tunnel'}, zug:{kind:'train',label:'Regionalzug',speed:5.5}, ice:{kind:'train',label:'Schnellzug',speed:8.5},
   anleger:{kind:'ground',label:'Anleger'}, seetor:{kind:'ground',label:'Seetor'}, faehre:{kind:'ferry',label:'Fähre'},
   meer:{kind:'ground',label:'Meer',paint:true}, boot:{kind:'car',label:'Fischerboot',speed:3,max:9,boat:true}, uboot:{kind:'car',label:'U-Boot',speed:3,max:8,boat:true,sub:true},
-  fx_barsch:{kind:'fish',fish:'barsch',label:'Barsch'}, fx_hecht:{kind:'fish',fish:'hecht',label:'Hecht'}, fx_karpfen:{kind:'fish',fish:'karpfen',label:'Karpfen'},
-  fx_wels:{kind:'fish',fish:'wels',label:'Wels'}, fx_stoer:{kind:'fish',fish:'stoer',label:'Stör'}, fx_thunfisch:{kind:'fish',fish:'thunfisch',label:'Thunfisch'}, fx_hai:{kind:'fish',fish:'hai',label:'Hai'},
-  fx_makrele:{kind:'fish',fish:'makrele',label:'Makrele'}, fx_bonito:{kind:'fish',fish:'bonito',label:'Bonito'}, fx_mahimahi:{kind:'fish',fish:'mahimahi',label:'Mahi-Mahi'}, fx_barrakuda:{kind:'fish',fish:'barrakuda',label:'Barrakuda'}, fx_schwertfisch:{kind:'fish',fish:'schwertfisch',label:'Schwertfisch'}, fx_marlin:{kind:'fish',fish:'marlin',label:'Marlin'}, fx_mondfisch:{kind:'fish',fish:'mondfisch',label:'Mondfisch'},
   hund:{kind:'animal',label:'Hund',speed:1.7}, kuh:{kind:'animal',label:'Kuh',speed:.55},
   pferd:{kind:'animal',label:'Pferd',speed:1.1}, huhn:{kind:'animal',label:'Huhn',speed:.8}
 };
+// Fische zum Aussetzen: ein Eintrag je Art aus content/fish/
+for(const f of FISH_LIST)ITEMS['fx_'+f.id]={kind:'fish',fish:f.id,label:f.label};
 const CATS=[
   {id:'land',label:'Land',icon:'strasse',items:['strasse','gras','sand','wasser','groesser']},
   {id:'natur',label:'Natur',icon:'baum',items:['baum','tanne','blumen','berg']},
@@ -36,7 +35,7 @@ const CATS=[
   {id:'auto',label:'Autos',icon:'lambo',items:['lambo','ferrari','polizei','feuerwehrauto','bus']},
   {id:'bahn',label:'Bahn',icon:'zug',items:['schiene','bahnhof','uebergang','tunnel','zug','ice']},
   {id:'see',label:'Wasser',icon:'boot',items:['meer','wasser','boot','uboot','anleger','faehre','seetor']},
-  {id:'fische',label:'Fische',icon:'fx_karpfen',items:['fx_barsch','fx_hecht','fx_karpfen','fx_wels','fx_stoer','fx_thunfisch','fx_hai','fx_makrele','fx_bonito','fx_mahimahi','fx_barrakuda','fx_schwertfisch','fx_marlin','fx_mondfisch']},
+  {id:'fische',label:'Fische',icon:'fx_karpfen',items:FISH_LIST.map(f=>'fx_'+f.id)},
   {id:'fang',label:'Mein Fang',icon:'F_thunfisch',special:'fang',items:[]},
   {id:'tier',label:'Tiere',icon:'hund',items:['hund','kuh','pferd','huhn']}
 ];

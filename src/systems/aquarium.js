@@ -1,5 +1,5 @@
 // Aquarium: gefangene Fische schwimmen im runden Becken, Panel beim Betreten.
-import './underwater.js'; // Ladereihenfolge: dieses Modul läuft nach systems/underwater.js
+import './underwater.js'; // Ladereihenfolge: läuft nach systems/underwater.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { $ } from '../core/util.js';
 import { scene } from '../render/renderer.js';
@@ -12,6 +12,7 @@ import { pl } from './player.js';
 import { FISH, fishModel } from '../content/fish.js';
 import { catchBook } from './fishing.js';
 import { thumbs } from '../ui/inventory.js';
+import { on } from '../core/events.js';
 
 // ---------- Aquarium-Becken ----------
 function clearAquarium(aq){for(const f of aq.fish){scene.remove(f.m);disposeGroup(f.m);}aq.fish=[];}
@@ -61,5 +62,8 @@ function updateAquaUI(){
     const d=document.createElement('div');d.className='aqF';d.innerHTML=`${thumbs['F_'+k]?`<img alt="" src="${thumbs['F_'+k]}">`:''}<span><b>${n}</b> ${n===1?FISH[k].label:FISH[k].plural}</span>`;L.appendChild(d);}
   P.hidden=false;tone(660,.12,'sine',.06);tone(880,.16,'sine',.06,.1);
 }
+
+// Neuer Fang oder eingefügter Code: Becken neu füllen, Panel beim nächsten Bild neu aufbauen
+on('fang:geaendert',()=>{refreshAquariums();game.aqShown=undefined;});
 
 export { clearAquarium, fillAquarium, refreshAquariums, updateAquaUI, updateAquariums };

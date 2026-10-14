@@ -1,5 +1,5 @@
 // Tiere laufen herum.
-import './ferries.js'; // Ladereihenfolge: dieses Modul läuft nach systems/ferries.js
+import './ferries.js'; // Ladereihenfolge: läuft nach systems/ferries.js (siehe docs/ARCHITEKTUR.md)
 import { I, tileAt } from '../core/grid.js';
 import { ITEMS } from '../content/catalog.js';
 import { scene } from '../render/renderer.js';

@@ -1,5 +1,5 @@
 // Blöcke der Bauwerkstatt und das Zusammensetzen selbst gebauter Häuser.
-import './animals.js'; // Ladereihenfolge: dieses Modul läuft nach content/models/animals.js
+import './buildings.js'; // Ladereihenfolge: läuft nach content/models/buildings.js (siehe docs/ARCHITEKTUR.md)
 import { nightMat } from '../../render/materials.js';
 import { MODELS } from './buildings.js';
 import { rot } from '../../core/world.js';

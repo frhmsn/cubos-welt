@@ -1,5 +1,5 @@
 // Weltreise: durch Tunnel und Seetor in andere Welten.
-import './aquarium.js'; // Ladereihenfolge: dieses Modul läuft nach systems/aquarium.js
+import './aquarium.js'; // Ladereihenfolge: läuft nach systems/aquarium.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { $ } from '../core/util.js';
 import { DIRS, I, inb } from '../core/grid.js';

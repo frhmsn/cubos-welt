@@ -1,5 +1,5 @@
 // Autos: Fahrzeuge anlegen und auf Straßen selbst fahren lassen.
-import '../core/collision.js'; // Ladereihenfolge: dieses Modul läuft nach core/collision.js
+import '../core/collision.js'; // Ladereihenfolge: läuft nach core/collision.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { DIRS, TILE, center, rightOf, tileAt } from '../core/grid.js';
 import { ITEMS } from '../content/catalog.js';

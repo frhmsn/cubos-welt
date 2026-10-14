@@ -1,5 +1,5 @@
 // Menü Meine Welten: speichern, öffnen, löschen, Codes kopieren und einfügen.
-import '../core/world-codes.js'; // Ladereihenfolge: dieses Modul läuft nach core/world-codes.js
+import '../systems/travel.js'; // Ladereihenfolge: läuft nach systems/travel.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { $ } from '../core/util.js';
 import { buildCam, renderer, scene } from '../render/renderer.js';
