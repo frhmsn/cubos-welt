@@ -18,155 +18,155 @@
     "fishes": [
      [
       "makrele",
-      21.96,
-      -23.221,
-      false
-     ],
-     [
-      "makrele",
-      -27.49,
-      -34.059,
+      -27.063,
+      -6.642,
       false
      ],
      [
       "thunfisch",
-      -11.337,
-      -28.838,
+      5.68,
+      -5.93,
+      false
+     ],
+     [
+      "kalmar",
+      -22.925,
+      -4.285,
+      false
+     ],
+     [
+      "stoer",
+      33.588,
+      -9.812,
       false
      ],
      [
       "hai",
-      -0.847,
-      -21.625,
-      false
-     ],
-     [
-      "barrakuda",
-      -7.524,
-      -14.744,
-      false
-     ],
-     [
-      "barrakuda",
-      -16.421,
-      -5.745,
+      -8.04,
+      0.17,
       false
      ],
      [
       "mahimahi",
-      25.203,
-      -22.417,
+      5.711,
+      -19.334,
       false
      ],
      [
-      "barrakuda",
-      -4.505,
-      -37.146,
+      "schwertfisch",
+      33.165,
+      -9.903,
       false
      ],
      [
-      "barsch",
-      27.456,
-      -21.194,
-      false
-     ],
-     [
-      "thunfisch",
-      5.527,
-      -29.376,
-      false
-     ],
-     [
-      "barrakuda",
-      -34.749,
-      -18.556,
+      "rochen",
+      -23.728,
+      -28.433,
       false
      ],
      [
       "makrele",
-      -19.859,
-      0.528,
+      -14.188,
+      -13.749,
+      false
+     ],
+     [
+      "mondfisch",
+      12.687,
+      -1.69,
+      false
+     ],
+     [
+      "barrakuda",
+      15.226,
+      -28.324,
+      false
+     ],
+     [
+      "rochen",
+      -28.674,
+      -32.963,
+      false
+     ],
+     [
+      "thunfisch",
+      -29.551,
+      -35.534,
+      false
+     ],
+     [
+      "makrele",
+      -29.852,
+      -22.814,
+      false
+     ],
+     [
+      "hai",
+      22.273,
+      -30.428,
       false
      ],
      [
       "bonito",
-      3.938,
-      -19.63,
+      27.963,
+      -24.498,
       false
      ],
      [
       "barsch",
-      39.037,
-      -33.476,
+      22.334,
+      -6.385,
+      false
+     ],
+     [
+      "thunfisch",
+      -5.113,
+      1.563,
+      false
+     ],
+     [
+      "bonito",
+      -13.153,
+      -5.678,
       false
      ],
      [
       "mahimahi",
-      -2.57,
-      -20.622,
+      -3.641,
+      -26.01,
       false
      ],
      [
-      "thunfisch",
-      34.578,
-      -39.991,
+      "marlin",
+      2.083,
+      5.246,
       false
      ],
      [
-      "barsch",
-      12.805,
-      -15.013,
-      false
-     ],
-     [
-      "thunfisch",
-      27.486,
-      -5.794,
-      false
-     ],
-     [
-      "thunfisch",
-      -32.611,
-      -16.144,
-      false
-     ],
-     [
-      "thunfisch",
-      -37.323,
-      -13.376,
-      false
-     ],
-     [
-      "barsch",
-      -38.682,
-      -1.778,
-      false
-     ],
-     [
-      "hai",
-      14.127,
-      7.436,
+      "mondfisch",
+      -21.024,
+      -10.698,
       false
      ]
     ],
     "whales": [
      [
-      "pottwal",
-      "swim",
-      -11.315,
-      -19.328
-     ],
-     [
       "orca",
       "swim",
-      18.199,
-      -2.903
+      18.087,
+      -14.109
      ],
      [
       "buckelwal",
       "swim",
-      30.024,
-      -17.019
+      -25.494,
+      -15.45
+     ],
+     [
+      "pottwal",
+      "swim",
+      -19.337,
+      -24.105
      ]
     ],
     "animals": [],
@@ -178,7 +178,7 @@
     "driving": null,
     "riding": false,
     "fishing": null,
-    "catchBook": "{\"barsch\":0,\"hecht\":0,\"karpfen\":0,\"wels\":0,\"stoer\":0,\"thunfisch\":0,\"hai\":0,\"makrele\":0,\"bonito\":0,\"mahimahi\":0,\"barrakuda\":0,\"schwertfisch\":0,\"marlin\":0,\"mondfisch\":0}",
+    "catchBook": "{\"barsch\":0,\"hecht\":0,\"karpfen\":0,\"wels\":0,\"stoer\":0,\"thunfisch\":0,\"hai\":0,\"makrele\":0,\"bonito\":0,\"mahimahi\":0,\"barrakuda\":0,\"schwertfisch\":0,\"marlin\":0,\"schwarzermarlin\":0,\"gestreiftermarlin\":0,\"mondfisch\":0,\"rochen\":0,\"kalmar\":0}",
     "whaleBook": "{\"buckelwal\":1,\"pottwal\":1,\"orca\":1}",
     "aquarium": [],
     "ui": {

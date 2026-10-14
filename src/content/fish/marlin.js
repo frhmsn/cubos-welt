@@ -1,10 +1,10 @@
-// Marlin. Werte siehe content/fish/README.md.
+// Blauer Marlin. Die ID bleibt 'marlin', damit bisherige Fänge erhalten bleiben. Werte siehe content/fish/README.md.
 export default {
   id: 'marlin',
-  label: 'Marlin', plural: 'Marline',
+  label: 'Blauer Marlin', plural: 'Blaue Marline',
   length: [1.5, 4], // Meter, zufällig beim Fang
   habitat: ['meer'],
-  spawn: { meer: .04 }, // Häufigkeit je Gewässer
+  spawn: { meer: .02 }, // Häufigkeit je Gewässer
   speed: 1.7, jumps: true,
   scale: { shadow: 2.4, underwater: .95, aquarium: .23, rod: .8, jump: 1.1 },
   wow: true, // besonderer Fang: "Wow, ein ...!"

@@ -4,7 +4,7 @@ export default {
   label: 'Thunfisch', plural: 'Thunfische',
   length: [.8, 2.2], // Meter, zufällig beim Fang
   habitat: ['meer'],
-  spawn: { meer: .2 }, // Häufigkeit je Gewässer
+  spawn: { meer: .18 }, // Häufigkeit je Gewässer
   speed: 1.6, jumps: true,
   scale: { shadow: 1.5, underwater: 1.3, aquarium: .36, rod: 1.1, jump: 1.1 },
   model({ g, body, box, mesh, M, finGeo, fl }) {

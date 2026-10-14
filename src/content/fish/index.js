@@ -13,9 +13,13 @@ import mahimahi from './mahimahi.js';
 import barrakuda from './barrakuda.js';
 import schwertfisch from './schwertfisch.js';
 import marlin from './marlin.js';
+import schwarzermarlin from './schwarzermarlin.js';
+import gestreiftermarlin from './gestreiftermarlin.js';
 import mondfisch from './mondfisch.js';
+import rochen from './rochen.js';
+import kalmar from './kalmar.js';
 
-export const FISH_LIST = [barsch, hecht, karpfen, wels, stoer, thunfisch, hai, makrele, bonito, mahimahi, barrakuda, schwertfisch, marlin, mondfisch];
+export const FISH_LIST = [barsch, hecht, karpfen, wels, stoer, thunfisch, hai, makrele, bonito, mahimahi, barrakuda, schwertfisch, marlin, schwarzermarlin, gestreiftermarlin, mondfisch, rochen, kalmar];
 
 const WATER = { see: 'wasser', meer: 'meer' }; // Habitat -> Bodenart im Raster
 const whereText = (h) => (h.includes('see') && h.includes('meer') ? 'in Seen und im Meer' : h.includes('meer') ? 'im Meer' : 'in Seen');

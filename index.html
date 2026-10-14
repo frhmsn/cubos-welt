@@ -454,7 +454,7 @@ const barsch = {
   length: [0.18, 0.45],
   // Meter, zufällig beim Fang
   habitat: ["see", "meer"],
-  spawn: { see: 0.3, meer: 0.1 },
+  spawn: { see: 0.3, meer: 0.09 },
   // Häufigkeit je Gewässer
   speed: 0.8,
   jumps: true,
@@ -585,7 +585,7 @@ const thunfisch = {
   length: [0.8, 2.2],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
-  spawn: { meer: 0.2 },
+  spawn: { meer: 0.18 },
   // Häufigkeit je Gewässer
   speed: 1.6,
   jumps: true,
@@ -608,7 +608,7 @@ const hai = {
   length: [1.5, 3.5],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
-  spawn: { meer: 0.1 },
+  spawn: { meer: 0.09 },
   // Häufigkeit je Gewässer
   speed: 1.2,
   jumps: false,
@@ -642,7 +642,7 @@ const makrele = {
   length: [0.25, 0.5],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
-  spawn: { meer: 0.14 },
+  spawn: { meer: 0.12 },
   // Häufigkeit je Gewässer
   speed: 1.4,
   jumps: true,
@@ -669,7 +669,7 @@ const bonito = {
   length: [0.4, 0.8],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
-  spawn: { meer: 0.1 },
+  spawn: { meer: 0.09 },
   // Häufigkeit je Gewässer
   speed: 1.5,
   jumps: true,
@@ -774,12 +774,12 @@ const schwertfisch = {
 };
 const marlin = {
   id: "marlin",
-  label: "Marlin",
-  plural: "Marline",
+  label: "Blauer Marlin",
+  plural: "Blaue Marline",
   length: [1.5, 4],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
-  spawn: { meer: 0.04 },
+  spawn: { meer: 0.02 },
   // Häufigkeit je Gewässer
   speed: 1.7,
   jumps: true,
@@ -800,6 +800,63 @@ const marlin = {
     box2(g, "#151515", 0.34, 0.07, 0.07, 0, 0.06, 0.64, false);
   }
 };
+const schwarzermarlin = {
+  id: "schwarzermarlin",
+  label: "Schwarzer Marlin",
+  plural: "Schwarze Marline",
+  length: [1.6, 4.5],
+  // Meter, zufällig beim Fang
+  habitat: ["meer"],
+  spawn: { meer: 0.01 },
+  // Häufigkeit je Gewässer, sehr selten
+  speed: 1.6,
+  jumps: true,
+  scale: { shadow: 2.5, underwater: 0.95, aquarium: 0.23, rod: 0.78, jump: 1.1 },
+  wow: true,
+  model({ g, body, box: box2 }) {
+    body("#2B2F36", 0.36, 0.42, 1.6, 0, 0);
+    body("#C9CED6", 0.3, 0.2, 1.4, -0.14, 0);
+    box2(g, "#1C1F24", 0.06, 0.06, 0.9, 0, 0.02, 1.2);
+    box2(g, "#1C1F24", 0.04, 0.34, 0.7, 0, 0.36, 0.1);
+    for (const x of [-1, 1]) {
+      const f = box2(g, "#1C1F24", 0.5, 0.04, 0.2, x * 0.36, -0.1, 0.3);
+      f.rotation.z = x * -0.15;
+    }
+    const t1 = box2(g, "#1C1F24", 0.04, 0.72, 0.12, 0, 0.29, -0.92);
+    t1.rotation.x = -0.7;
+    const t2 = box2(g, "#1C1F24", 0.04, 0.72, 0.12, 0, -0.29, -0.92);
+    t2.rotation.x = 0.7;
+    box2(g, "#151515", 0.38, 0.07, 0.07, 0, 0.06, 0.64, false);
+  }
+};
+const gestreiftermarlin = {
+  id: "gestreiftermarlin",
+  label: "Gestreifter Marlin",
+  plural: "Gestreifte Marline",
+  length: [1.4, 3.5],
+  // Meter, zufällig beim Fang
+  habitat: ["meer"],
+  spawn: { meer: 0.01 },
+  // Häufigkeit je Gewässer, sehr selten
+  speed: 1.8,
+  jumps: true,
+  scale: { shadow: 2.2, underwater: 1, aquarium: 0.25, rod: 0.82, jump: 1.1 },
+  wow: true,
+  model({ g, body, box: box2 }) {
+    body("#3F7FB8", 0.3, 0.36, 1.55, 0, 0);
+    body("#F2F5F8", 0.26, 0.18, 1.35, -0.12, 0);
+    for (let k = 0; k < 6; k++) box2(g, "#D2C2FF", 0.31, 0.3, 0.08, 0, 0.03, -0.55 + k * 0.2, false);
+    box2(g, "#21456E", 0.06, 0.06, 0.9, 0, 0.02, 1.18);
+    const d = box2(g, "#6A4FC8", 0.04, 0.95, 0.45, 0, 0.6, 0.32);
+    d.rotation.x = 0.3;
+    box2(g, "#2A63B8", 0.04, 0.2, 0.8, 0, 0.3, -0.25);
+    const t1 = box2(g, "#21456E", 0.04, 0.7, 0.12, 0, 0.28, -0.9);
+    t1.rotation.x = -0.7;
+    const t2 = box2(g, "#21456E", 0.04, 0.7, 0.12, 0, -0.28, -0.9);
+    t2.rotation.x = 0.7;
+    box2(g, "#151515", 0.32, 0.07, 0.07, 0, 0.06, 0.62, false);
+  }
+};
 const mondfisch = {
   id: "mondfisch",
   label: "Mondfisch",
@@ -807,7 +864,7 @@ const mondfisch = {
   length: [1, 3],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
-  spawn: { meer: 0.06 },
+  spawn: { meer: 0.05 },
   // Häufigkeit je Gewässer
   speed: 0.3,
   jumps: false,
@@ -824,7 +881,60 @@ const mondfisch = {
     box2(g, "#151515", 0.26, 0.08, 0.08, 0, 0.18, 0.34, false);
   }
 };
-const FISH_LIST = [barsch, hecht, karpfen, wels, stoer, thunfisch, hai, makrele, bonito, mahimahi, barrakuda, schwertfisch, marlin, mondfisch];
+const rochen = {
+  id: "rochen",
+  label: "Rochen",
+  plural: "Rochen",
+  length: [0.5, 2],
+  // Meter, zufällig beim Fang
+  habitat: ["meer"],
+  spawn: { meer: 0.05 },
+  // Häufigkeit je Gewässer
+  speed: 0.7,
+  jumps: false,
+  scale: { shadow: 1.4, underwater: 1.3, aquarium: 0.4, rod: 1.1, jump: 1.1 },
+  model({ g, body, box: box2 }) {
+    box2(g, "#8A7458", 1.05, 0.1, 1.05, 0, 0, 0).rotation.y = Math.PI / 4;
+    box2(g, "#EDE6D8", 0.98, 0.04, 0.98, 0, -0.07, 0, false).rotation.y = Math.PI / 4;
+    body("#7A6650", 0.5, 0.16, 0.7, 0.04, 0.05);
+    for (const [x, z] of [[0.3, 0.1], [-0.35, 0], [0.12, -0.25], [-0.15, 0.3], [0.45, -0.12], [-0.5, -0.1]]) box2(g, "#5E4E3A", 0.08, 0.02, 0.08, x, 0.065, z, false);
+    const t = box2(g, "#6E5C44", 0.08, 0.08, 1.3, 0, 0.02, -1.25);
+    t.rotation.x = 0.05;
+    box2(g, "#151515", 0.07, 0.07, 0.07, 0.13, 0.12, 0.32, false);
+    box2(g, "#151515", 0.07, 0.07, 0.07, -0.13, 0.12, 0.32, false);
+  }
+};
+const kalmar = {
+  id: "kalmar",
+  label: "Kalmar",
+  plural: "Kalmare",
+  length: [0.3, 1.2],
+  // Meter, zufällig beim Fang
+  habitat: ["meer"],
+  spawn: { meer: 0.03 },
+  // Häufigkeit je Gewässer
+  speed: 1.1,
+  jumps: false,
+  scale: { shadow: 0.8, underwater: 1.5, aquarium: 0.5, rod: 1.3, jump: 1.1 },
+  model({ g, body, box: box2 }) {
+    body("#E58A7A", 0.3, 0.3, 1.1, 0.02, 0.25);
+    body("#F2B3A6", 0.26, 0.22, 0.6, -0.04, -0.1);
+    for (const x of [-1, 1]) {
+      const f = box2(g, "#D9705F", 0.32, 0.03, 0.28, x * 0.18, 0.02, 0.65);
+      f.rotation.y = x * 0.5;
+    }
+    for (const x of [-1, 1]) box2(g, "#151515", 0.05, 0.09, 0.09, x * 0.13, 0.04, -0.18, false);
+    for (let k = 0; k < 8; k++) {
+      const a = k / 8 * Math.PI * 2, t = box2(g, "#E07D6C", 0.04, 0.04, 0.55, Math.cos(a) * 0.08, Math.sin(a) * 0.08, -0.6);
+      t.rotation.set(Math.sin(a) * 0.25, Math.cos(a) * 0.25, 0);
+    }
+    for (const x of [-1, 1]) {
+      const t = box2(g, "#E07D6C", 0.035, 0.035, 0.95, x * 0.05, 0, -0.8);
+      t.rotation.y = x * 0.08;
+    }
+  }
+};
+const FISH_LIST = [barsch, hecht, karpfen, wels, stoer, thunfisch, hai, makrele, bonito, mahimahi, barrakuda, schwertfisch, marlin, schwarzermarlin, gestreiftermarlin, mondfisch, rochen, kalmar];
 const WATER = { see: "wasser", meer: "meer" };
 const whereText = (h) => h.includes("see") && h.includes("meer") ? "in Seen und im Meer" : h.includes("meer") ? "im Meer" : "in Seen";
 function check(f) {
@@ -6812,7 +6922,22 @@ function setGround(i, j, g) {
     }
   }
 }
+const shown = [];
+function lineup(ids, size = 1.6) {
+  for (const m of shown.splice(0)) scene.remove(m);
+  const gap = size * 1.7;
+  ids.forEach((id, k) => {
+    const m = id.startsWith("wal:") ? whaleModel(id.slice(4)) : fishModel(id);
+    if (id.startsWith("wal:")) m.scale.setScalar(size / 6);
+    else m.scale.setScalar(size);
+    m.position.set(bc.x + (k - (ids.length - 1) / 2) * gap, 2.5, bc.z + 4);
+    m.rotation.y = Math.PI / 2;
+    scene.add(m);
+    shown.push(m);
+  });
+}
 if (window.__CUBO_DEBUG) window.__cubo = {
+  lineup,
   frames: (n) => window.__frames(n),
   sel: (id) => select(id),
   tap: (i, j) => apply(i, j, false),
@@ -6873,7 +6998,7 @@ if (window.__CUBO_DEBUG) window.__cubo = {
       pl: [r(pl.x), r(pl.z), r(pl.yaw)],
       driving: game.driveCar ? game.driveCar.type : null,
       riding: !!game.rideTrain,
-      fishing: fishing ? fishing.st || "on" : null,
+      fishing: fishing ? fishing.phase : null,
       catchBook: JSON.stringify(catchBook),
       whaleBook: JSON.stringify(whaleBook),
       aquarium: [...aquariums.values()].map((a) => a.fish.length),

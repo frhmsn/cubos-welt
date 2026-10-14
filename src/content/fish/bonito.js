@@ -4,7 +4,7 @@ export default {
   label: 'Bonito', plural: 'Bonitos',
   length: [.4, .8], // Meter, zufällig beim Fang
   habitat: ['meer'],
-  spawn: { meer: .1 }, // Häufigkeit je Gewässer
+  spawn: { meer: .09 }, // Häufigkeit je Gewässer
   speed: 1.5, jumps: true,
   scale: { shadow: .9, underwater: 1.6, aquarium: .45, rod: 1.3, jump: 1.1 },
   model({ g, body, box, mesh, M, finGeo, fl }) {

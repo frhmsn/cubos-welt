@@ -109,8 +109,13 @@ export const scenarios = {
     await frames(page, 30);
     await snap('im-boot');
     await click(page, '#btnFish');
-    await frames(page, 400);
+    await frames(page, 100);
     await snap('angel-draussen');
+    // Warten, bis ein Fisch beißt (zufällig, spätestens nach einigen Sekunden), dann einholen
+    for (let k = 0; k < 60; k++) {
+      if ((await page.evaluate(() => window.__cubo.fp().fishing)) === 'bite') break;
+      await frames(page, 10);
+    }
     await click(page, '#btnFish');
     await frames(page, 300);
     await snap('nach-einholen');

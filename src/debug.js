@@ -6,7 +6,9 @@ import { bc } from './render/build-camera.js';
 import { apply } from './systems/build.js';
 import { nearestCar, pl } from './systems/player.js';
 import { enterCar, exitCar, setMode, startRide, startWalk } from './ui/modes.js';
-import { fishes } from './content/fish.js';
+import { fishes, fishModel } from './content/fish.js';
+import { whaleModel } from './content/whales.js';
+import { scene } from './render/renderer.js';
 import { whaleBook, whales } from './systems/whales.js';
 import { catchBook, fishing } from './systems/fishing.js';
 import { refreshAquariums } from './systems/aquarium.js';
@@ -15,7 +17,24 @@ import { emptyWorld, serialize } from './core/save.js';
 import { sampleWorld } from './content/sample-world.js';
 
 // ---------- Test-Schnittstelle ----------
+// Modelle zum Anschauen nebeneinander vor die Baukamera stellen (für neue Arten).
+// Beispiel im Test: __cubo.lineup(['rochen','kalmar'])  Wale mit Präfix 'wal:'.
+const shown = [];
+function lineup(ids, size = 1.6) {
+  for (const m of shown.splice(0)) scene.remove(m);
+  const gap = size * 1.7;
+  ids.forEach((id, k) => {
+    const m = id.startsWith('wal:') ? whaleModel(id.slice(4)) : fishModel(id);
+    if (id.startsWith('wal:')) m.scale.setScalar(size / 6);
+    else m.scale.setScalar(size);
+    m.position.set(bc.x + (k - (ids.length - 1) / 2) * gap, 2.5, bc.z + 4);
+    m.rotation.y = Math.PI / 2;
+    scene.add(m); shown.push(m);
+  });
+}
+
 if (window.__CUBO_DEBUG) window.__cubo = {
+  lineup,
   frames: (n) => window.__frames(n),
   sel: (id) => select(id),
   tap: (i, j) => apply(i, j, false),
@@ -47,7 +66,7 @@ if (window.__CUBO_DEBUG) window.__cubo = {
       pl: [r(pl.x), r(pl.z), r(pl.yaw)],
       driving: game.driveCar ? game.driveCar.type : null,
       riding: !!game.rideTrain,
-      fishing: fishing ? fishing.st || 'on' : null,
+      fishing: fishing ? fishing.phase : null,
       catchBook: JSON.stringify(catchBook),
       whaleBook: JSON.stringify(whaleBook),
       aquarium: [...aquariums.values()].map((a) => a.fish.length),
