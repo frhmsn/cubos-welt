@@ -47,7 +47,7 @@ describe('Aufgaben-Logik', () => {
     expect(q.isUnlocked('stadt')).toBe(false);
     ev.emit('hupen', { mode: 'drive' });
     expect(q.isUnlocked('stadt')).toBe(true);
-    expect(got).toEqual([{ chapter: 'stadt', bonus: { item: 'goldlambo', text: 'ein goldener Lamborghini' } }]);
+    expect(got).toEqual([{ chapter: 'stadt', bonus: { item: 'goldlambo', text: 'ein goldener Lamborghini', akk: 'einen goldenen Lamborghini' } }]);
     expect(q.currentChapter().id).toBe('bahn');
   });
   it('führt Fortschritt aus einem Welt-Code zusammen', async () => {

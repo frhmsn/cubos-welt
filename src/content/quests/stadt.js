@@ -4,7 +4,7 @@ export default {
   id: 'stadt',
   title: 'Erste Stadt',
   icon: 'haus',
-  bonus: { item: 'goldlambo', text: 'ein goldener Lamborghini' },
+  bonus: { item: 'goldlambo', text: 'ein goldener Lamborghini', akk: 'einen goldenen Lamborghini' },
   tasks: [
     { id: 'stadt-strasse', text: 'Bau eine Straße aus drei Stücken.', tip: 'Tippe unten auf Land, dann auf Straße. Dann tippe dreimal nebeneinander in die Wiese.', on: 'gebaut', when: (d) => d.id === 'strasse', count: 3 },
     { id: 'stadt-haus', text: 'Bau ein Haus.', tip: 'Tippe unten auf Häuser und such dir ein Haus aus. Neben einer Straße zeigt die Tür zur Straße.', on: 'gebaut', when: (d) => ['haus', 'villa', 'hochhaus', 'feuerwache', 'garage'].includes(d.id) },

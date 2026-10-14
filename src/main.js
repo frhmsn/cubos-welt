@@ -24,5 +24,5 @@ select('hand');
 renderCats(); renderItems();
 requestAnimationFrame(frame);
 renderEditTray();
-setTimeout(()=>{makeThumbs();renderCats();renderItems();renderEditTray();{const t=nextTask();hint(stars()===0&&t?'Oben links ist dein Aufgabenbuch. Deine erste Aufgabe: '+t.text:'Wähle unten etwas aus und tippe in die Welt. Oben rechts das Männchen: selbst durch die Stadt laufen!',6500);}},60);
+setTimeout(()=>{makeThumbs();renderCats();renderItems();renderEditTray();{const t=nextTask();hint(stars()===0&&t?'Oben links ist dein Aufgabenbuch. Deine erste Aufgabe: '+t.text:'Wähle unten etwas aus und tippe in die Welt. Oben rechts ist das Männchen. Damit läufst du selbst durch die Stadt!',6500);}},60);
 document.addEventListener('visibilitychange',()=>{if(document.hidden){save();if(game.worldDirty&&game.curWorld&&game.mode!=='edit')saveWorld(false,true);}});

@@ -12,7 +12,8 @@ Grundidee: Aufgaben führen durchs Spiel und bringen es bei, sperren aber nichts
 | 4 | Traumfilter | Miniatur-Unschärfe, sanftes Leuchten, Pastellfarben, Himmelsverlauf, Pollen und Glühwürmchen; abschaltbar, schaltet bei schwachen Geräten selbst ab | erledigt |
 
 Später:
-- Auf dem iPad prüfen: Stimme (welche deutsche Stimme klingt am besten), Traumfilter-Leistung, Lesbarkeit der Aufgaben
+- Auf dem iPad prüfen: Erzählerstimme (Tempo, Lautstärke neben den Tönen), Traumfilter-Leistung, Lesbarkeit der Aufgaben
+- Vorlesen für Zahlen ("3 Barsche gefangen", Fischlänge): Sätze mit Zahlen 1 bis 20 vorab sprechen
 - Feine Streifen auf großen Wiesen (Schatten-Akne, durch die Unschärfe sichtbarer)
 - Bonus-Dinge für weitere Kapitel (z. B. Leuchtturm, Regenbogen-Boot)
 - Weltkarte: alle Welten als Inseln auf einer Seekarte, antippen und hinreisen

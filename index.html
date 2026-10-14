@@ -2387,6 +2387,17 @@ function whaleModel(type) {
   WHALE_BY_ID[type].model({ g, ell, fluke, box });
   return bake(g);
 }
+function splitSpeech(text) {
+  return String(text || "").replace(/\s+/g, " ").trim().split(/(?<=[.!?:])\s+/).map((s) => s.trim()).filter(Boolean);
+}
+function voiceKey(sentence) {
+  let h = 2166136261;
+  for (const ch of sentence) {
+    h ^= ch.codePointAt(0);
+    h = Math.imul(h, 16777619) >>> 0;
+  }
+  return h.toString(16).padStart(8, "0");
+}
 const KEY$3 = "cubos-vorlesen";
 const synth = typeof window !== "undefined" ? window.speechSynthesis : null;
 let enabled$1 = true;
@@ -2395,6 +2406,68 @@ try {
 } catch (e) {
 }
 let voice = null, lastText = "";
+let clips = null;
+const canFetch = typeof fetch === "function" && typeof location !== "undefined" && /^https?:$/.test(location.protocol);
+const manifest = canFetch ? fetch("voice/manifest.json", { cache: "no-cache" }).then((r) => r.ok ? r.json() : null).then((m) => {
+  clips = new Set(m && m.clips || []);
+}).catch(() => {
+  clips = /* @__PURE__ */ new Set();
+}) : Promise.resolve().then(() => {
+  clips = /* @__PURE__ */ new Set();
+});
+const buffers = /* @__PURE__ */ new Map();
+let playing = [], token = 0;
+function decode(a, data) {
+  return new Promise((res, rej) => {
+    const p = a.decodeAudioData(data, res, rej);
+    if (p && p.then) p.then(res, rej);
+  });
+}
+function loadClip(a, key) {
+  if (!buffers.has(key)) {
+    const p = fetch("voice/clips/" + key + ".mp3").then((r) => {
+      if (!r.ok) throw new Error(r.status);
+      return r.arrayBuffer();
+    }).then((d) => decode(a, d));
+    p.catch(() => buffers.delete(key));
+    buffers.set(key, p);
+  }
+  return buffers.get(key);
+}
+function stopClips() {
+  token++;
+  for (const s of playing) {
+    try {
+      s.stop();
+    } catch (e) {
+    }
+  }
+  playing = [];
+}
+async function playClips(keys2, my) {
+  const a = ac();
+  if (!a) return false;
+  let bufs;
+  try {
+    bufs = await Promise.all(keys2.map((k) => loadClip(a, k)));
+  } catch (e) {
+    return false;
+  }
+  if (my !== token) return true;
+  let t2 = a.currentTime + 0.05;
+  for (const b of bufs) {
+    const s = a.createBufferSource();
+    s.buffer = b;
+    s.connect(a.destination);
+    s.start(t2);
+    s.onended = () => {
+      playing = playing.filter((x) => x !== s);
+    };
+    playing.push(s);
+    t2 += b.duration + 0.18;
+  }
+  return true;
+}
 function pickVoice() {
   if (!synth) return;
   const de = synth.getVoices().filter((v) => /^de(-|_|$)/i.test(v.lang));
@@ -2406,7 +2479,20 @@ if (synth) {
   pickVoice();
   synth.addEventListener?.("voiceschanged", pickVoice);
 }
+function speakDevice(text) {
+  if (!synth) return;
+  try {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "de-DE";
+    u.rate = 0.9;
+    u.pitch = 1;
+    if (voice) u.voice = voice;
+    synth.speak(u);
+  } catch (e) {
+  }
+}
 if (typeof window !== "undefined") window.addEventListener("pointerdown", () => {
+  ac();
   if (synth) {
     try {
       synth.speak(new SpeechSynthesisUtterance(""));
@@ -2417,17 +2503,20 @@ if (typeof window !== "undefined") window.addEventListener("pointerdown", () => 
 function speak(text, { force = false } = {}) {
   if (!text) return;
   lastText = text;
-  if (!synth || !enabled$1 && !force) return;
+  if (!enabled$1 && !force) return;
+  stopClips();
   try {
-    synth.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = "de-DE";
-    u.rate = 0.9;
-    u.pitch = 1;
-    if (voice) u.voice = voice;
-    synth.speak(u);
+    synth && synth.cancel();
   } catch (e) {
   }
+  const my = token, keys2 = splitSpeech(text).map(voiceKey);
+  const go = async () => {
+    if (my !== token) return;
+    if (clips && clips.size && keys2.every((k) => clips.has(k)) && await playClips(keys2, my)) return;
+    if (my === token) speakDevice(text);
+  };
+  if (clips) go();
+  else Promise.race([manifest, new Promise((r) => setTimeout(r, 1500))]).then(go);
 }
 const repeatSpeech = () => speak(lastText, { force: true });
 function setSpeech(on2) {
@@ -2436,10 +2525,16 @@ function setSpeech(on2) {
     localStorage.setItem(KEY$3, on2 ? "1" : "0");
   } catch (e) {
   }
-  if (!on2 && synth) synth.cancel();
+  if (!on2) {
+    stopClips();
+    try {
+      synth && synth.cancel();
+    } catch (e) {
+    }
+  }
 }
 const speechOn = () => enabled$1;
-const speechAvailable = () => !!synth;
+const speechAvailable = () => !!synth || typeof AudioContext !== "undefined" || typeof webkitAudioContext !== "undefined";
 let hintT = null;
 function hint(txt, ms, { silent = false } = {}) {
   const h = $("#hint");
@@ -4921,7 +5016,7 @@ function startWalk() {
   pl.x = p.x;
   pl.z = p.z;
   setMode("walk");
-  hint("Links: laufen. Rechts: umschauen. Geh durch die Tür ins Haus!");
+  hint("Links läufst du, rechts schaust du dich um. Geh durch die Tür ins Haus!");
 }
 function enterCar(car) {
   game.driveCar = car;
@@ -5440,7 +5535,7 @@ function showCatch(type, len) {
   const big = FISH_BY_ID[type].bigCatch;
   $("#catchTitle").textContent = S.wow ? "Wow, ein " + S.label + "!" : big && len > big.from ? big.title : "Du hast " + (S.art || "einen") + " " + S.label + " gefangen!";
   $("#catchSub").textContent = "Er ist " + fmtLen(len) + " lang." + (rec && catchBook[type] > 1 ? " Neuer Rekord!" : "");
-  speak($("#catchTitle").textContent + " " + $("#catchSub").textContent);
+  speak($("#catchTitle").textContent + (rec && catchBook[type] > 1 ? " Neuer Rekord!" : ""));
   $("#catchBook").textContent = "Dein Fang: " + Object.keys(FISH).filter((k) => catchBook[k]).map((k) => catchBook[k] + " " + (catchBook[k] === 1 ? FISH[k].label : FISH[k].plural)).join(", ");
   $("#catch").hidden = false;
   tone(523, 0.15, "sine", 0.09);
@@ -6117,7 +6212,7 @@ async function saveWorld(asNew, silent) {
     }
     return w;
   } catch (e) {
-    if (!silent) hint("Speichern hat nicht geklappt. Vielleicht ist der Speicher voll: lösche eine alte Welt im Menü.", 5e3);
+    if (!silent) hint("Speichern hat nicht geklappt. Vielleicht ist der Speicher voll. Lösche eine alte Welt im Menü.", 5e3);
     return null;
   } finally {
     game.saving = false;
@@ -6447,7 +6542,7 @@ const stadt = {
   id: "stadt",
   title: "Erste Stadt",
   icon: "haus",
-  bonus: { item: "goldlambo", text: "ein goldener Lamborghini" },
+  bonus: { item: "goldlambo", text: "ein goldener Lamborghini", akk: "einen goldenen Lamborghini" },
   tasks: [
     { id: "stadt-strasse", text: "Bau eine Straße aus drei Stücken.", tip: "Tippe unten auf Land, dann auf Straße. Dann tippe dreimal nebeneinander in die Wiese.", on: "gebaut", when: (d) => d.id === "strasse", count: 3 },
     { id: "stadt-haus", text: "Bau ein Haus.", tip: "Tippe unten auf Häuser und such dir ein Haus aus. Neben einer Straße zeigt die Tür zur Straße.", on: "gebaut", when: (d) => ["haus", "villa", "hochhaus", "feuerwache", "garage"].includes(d.id) },
@@ -8038,7 +8133,7 @@ function renderBook() {
   if (ch.bonus) {
     const un = isUnlocked(ch.id), it = ITEMS[ch.bonus.item];
     bo.className = un ? "" : "locked";
-    bo.innerHTML = `${thumbs[ch.bonus.item] ? `<img alt="" src="${thumbs[ch.bonus.item]}">` : ""}<span>${un ? `Geschafft! Du hast ${ch.bonus.text}. Er steht bei ${it && it.kind === "car" ? "den Autos" : "deinen Sachen"}.` : `Schaff alle Aufgaben in diesem Kapitel, dann bekommst du ${ch.bonus.text}!`}</span>`;
+    bo.innerHTML = `${thumbs[ch.bonus.item] ? `<img alt="" src="${thumbs[ch.bonus.item]}">` : ""}<span>${un ? `Geschafft! Du hast ${ch.bonus.akk || ch.bonus.text}. Er steht bei ${it && it.kind === "car" ? "den Autos" : "deinen Sachen"}.` : `Schaff alle Aufgaben in diesem Kapitel, dann bekommst du ${ch.bonus.akk || ch.bonus.text}!`}</span>`;
   } else bo.innerHTML = "";
 }
 function openBook() {
@@ -8093,7 +8188,7 @@ on("kapitel:geschafft", (d) => {
   const c = CHAPTERS.find((x) => x.id === d.chapter);
   const sub = d.bonus ? `Dein Geschenk: ${d.bonus.text}!` : "Ein ganzes Kapitel!";
   toast(`Kapitel „${c.title}“ geschafft!`, sub, 4500, true);
-  setTimeout(() => speak(`Toll! Das Kapitel ${c.title} ist geschafft. ${d.bonus ? "Du bekommst " + d.bonus.text + "!" : ""}`), 3300);
+  setTimeout(() => speak(`Toll! Das Kapitel ${c.title} ist geschafft. ${d.bonus ? "Du bekommst " + (d.bonus.akk || d.bonus.text) + "!" : ""}`), 3300);
   tone(523, 0.15, "sine", 0.09, 0.4);
   tone(659, 0.15, "sine", 0.09, 0.55);
   tone(784, 0.15, "sine", 0.09, 0.7);
@@ -8120,7 +8215,7 @@ setTimeout(() => {
   renderEditTray();
   {
     const t2 = nextTask();
-    hint(stars() === 0 && t2 ? "Oben links ist dein Aufgabenbuch. Deine erste Aufgabe: " + t2.text : "Wähle unten etwas aus und tippe in die Welt. Oben rechts das Männchen: selbst durch die Stadt laufen!", 6500);
+    hint(stars() === 0 && t2 ? "Oben links ist dein Aufgabenbuch. Deine erste Aufgabe: " + t2.text : "Wähle unten etwas aus und tippe in die Welt. Oben rechts ist das Männchen. Damit läufst du selbst durch die Stadt!", 6500);
   }
 }, 60);
 document.addEventListener("visibilitychange", () => {

@@ -16,6 +16,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
+      - name: Prüfungen (Importe, Gedankenstriche, Vorlese-Texte)
+        run: npm run lint
       - name: Logik-Tests
         run: npm test
       - name: Build

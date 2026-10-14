@@ -78,6 +78,16 @@ Schritt für Schritt für die häufigsten Erweiterungen. Nach jedem Rezept: `npm
 2. `npm run deps` zeigt den Zyklus-Kern und Module, die nie geladen werden.
 3. `node tools/rechain.mjs` pflegt die Ladereihenfolge. Ein neues Kern-Modul mit `--insert <modul> --after <modul>` einordnen.
 
+## Vorlese-Texte (Erzählerstimme)
+
+Gesprochen wird mit fertigen MP3-Dateien der Piper-Stimme "Thorsten". Fehlt für einen Satz die Datei, liest die Stimme des Geräts den ganzen Text.
+
+1. Text im Spiel ändern oder neu schreiben. Jeder Satz endet mit `.`, `!`, `?` oder `:` und wird einzeln gesprochen. Feste Sätze in `hint(...)` und `speak(...)` werden automatisch gefunden. Sätze mit Namen aus Inhaltsdateien (Fische, Wale, Aufgaben, Stile) setzt `tools/voice-texts.mjs` zusammen; neue Muster dort ergänzen.
+2. `npm run voice` schreibt `voice/texts.json`. Mit committen und pushen.
+3. Die Action "Erzählerstimme" (`.github/workflows/voice.yml`) spricht nur neue Sätze, löscht alte Dateien und committet `voice/`. Danach `git pull --rebase`.
+4. Stimme oder Tempo ändern: `VOICE` in `voice.yml` oder `LENGTH_SCALE` in `tools/voice_build.py`, Ordner `voice/clips/` löschen, pushen. Dann wird alles neu gesprochen.
+5. Von Hand anstoßen: auf GitHub unter Actions, "Erzählerstimme", "Run workflow".
+
 ## Veröffentlichen
 
 1. `npm run check` grün.

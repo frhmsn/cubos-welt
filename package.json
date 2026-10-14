@@ -9,7 +9,8 @@
     "test:baseline": "node tools/save-baseline.mjs",
     "check": "npm run lint && npm run deps && npm test && npm run build && npm run test:e2e",
     "deps": "node tools/deps.mjs",
-    "lint": "node tools/lint.mjs"
+    "lint": "node tools/lint.mjs && node tools/voice-texts.mjs --check",
+    "voice": "node tools/voice-texts.mjs"
   },
   "devDependencies": {
     "acorn": "^8.19.0",

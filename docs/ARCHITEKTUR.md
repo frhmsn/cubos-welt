@@ -43,7 +43,9 @@ src/
     travel.js       Reise in andere Welten
     editor.js       Bauwerkstatt
     audio.js        Töne, Zughorn
-    speech.js       Vorlesen (Web Speech), Schalter im Menü
+    speech.js       Vorlesen: fertige Sprachdateien (voice/clips), sonst Gerätestimme; Schalter im Menü
+    voice-split.js  Sätze teilen und Dateinamen, auch für tools/voice-texts.mjs
+    audio-ctx.js    der eine AudioContext
     quests.js       Aufgaben-Logik: zählt Ereignisse, Sterne, Boni (ohne Oberfläche, in Node getestet)
   ui/               Bedienoberfläche: hint.js (liest vor), quest-book.js (Stern-Knopf, Buch, Feier), modes.js, inventory.js, worlds-menu.js, build-input.js, station-panel.js, fullscreen.js
 ```
@@ -63,6 +65,8 @@ src/
 **Inhalte als Daten.** Fische, Wale, Fahrzeuge, Tiere und Gebäude sind je eine Datei mit Werten und einer `model()`-Funktion. Die Helfer zum Bauen bekommt `model()` als Parameter, deshalb importieren die Dateien nichts und lassen sich ohne Browser testen. Katalog, Inventar, Spawn-Tabellen und Sonderregeln werden daraus abgeleitet. Noch im alten Stil: Bodenarten, Gleise, Züge, Fähre.
 
 **Spielstand mit Version.** `serialize()` schreibt `v: SAVE_VERSION`. `applyData()` ruft zuerst `migrate()`. Stände einer neueren Version werden nicht geladen statt kaputt gemacht.
+
+**Erzählerstimme vorab erzeugt.** Gute deutsche Stimmen gibt es auf dem iPad nur, wenn man sie in den Einstellungen lädt. Deshalb spricht Piper (Stimme Thorsten) jeden bekannten Satz einmal in einer GitHub Action, und das Spiel spielt die MP3s ab. `voice/texts.json` ist die Liste, `voice/manifest.json` sagt, welche Dateien es gibt. Ein Text wird nur dann mit Dateien gesprochen, wenn alle seine Sätze da sind; sonst liest die Gerätestimme alles, damit die Stimme nicht mitten im Text wechselt. Der Service Worker legt gespielte Dateien in den Zwischenspeicher.
 
 ## Speicher
 

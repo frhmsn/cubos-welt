@@ -1,0 +1,53 @@
+# Erzählerstimme: spricht alle Sätze aus voice/texts.json mit Piper (Stimme Thorsten) und legt sie
+# als voice/clips/<key>.mp3 ab. Läuft, wenn sich die Liste ändert, oder von Hand (Actions > Erzählerstimme > Run).
+# Die Stimme kommt von Hugging Face; deshalb läuft das hier und nicht auf dem eigenen Rechner.
+name: Erzählerstimme
+on:
+  push:
+    branches: [main]
+    paths: [voice/texts.json, tools/voice_build.py, .github/workflows/voice.yml]
+  workflow_dispatch:
+concurrency:
+  group: voice
+  cancel-in-progress: false
+permissions:
+  contents: write
+  pages: write
+jobs:
+  voice:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      VOICE: de_DE-thorsten-high
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Piper installieren
+        run: pip install piper-tts==1.8.0
+      - name: Stimme aus dem Zwischenspeicher
+        uses: actions/cache@v4
+        with:
+          path: ~/.piper
+          key: piper-${{ env.VOICE }}
+      - name: Stimme laden
+        run: test -f ~/.piper/$VOICE.onnx || python -m piper.download_voices --data-dir ~/.piper $VOICE
+      - name: ffmpeg
+        run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+      - name: Sätze sprechen
+        run: python tools/voice_build.py ~/.piper/$VOICE.onnx
+      - name: Dateien einchecken
+        run: |
+          git add voice
+          if git diff --cached --quiet; then echo "Nichts Neues."; exit 0; fi
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -m "Erzählerstimme: Sprachdateien aktualisiert"
+          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep 5; done
+          exit 1
+      - name: Seite neu veröffentlichen
+        # Ein Push dieser Action stößt GitHub Pages nicht immer selbst an.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST repos/${{ github.repository }}/pages/builds

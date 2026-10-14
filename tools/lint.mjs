@@ -7,7 +7,7 @@ import * as acorn from 'acorn';
 import * as eslintScope from 'eslint-scope';
 
 // Namen, die im Browser global sind und ohne Import benutzt werden dürfen
-const GLOBALS = new Set(('window document navigator location localStorage sessionStorage performance console setTimeout clearTimeout setInterval clearInterval requestAnimationFrame cancelAnimationFrame '
+const GLOBALS = new Set(('window document navigator location localStorage sessionStorage fetch AudioContext webkitAudioContext SpeechSynthesisUtterance performance console setTimeout clearTimeout setInterval clearInterval requestAnimationFrame cancelAnimationFrame '
   + 'addEventListener matchMedia devicePixelRatio innerWidth innerHeight THREE Math JSON Date Array Object Number String Boolean Map Set WeakMap Promise Error TypeError Symbol '
   + 'Uint8Array Float32Array Uint16Array Int16Array Int32Array Uint32Array Float64Array ArrayBuffer Blob Response TextEncoder TextDecoder CompressionStream DecompressionStream btoa atob globalThis '
   + 'Infinity NaN isNaN isFinite parseInt parseFloat AudioContext webkitAudioContext Image structuredClone undefined SpeechSynthesisUtterance').split(/\s+/));

@@ -13,6 +13,7 @@ npm run test:e2e       # Browser-Rundgang (16 Szenarien) + Vergleich mit tests/b
 npm run check          # alles zusammen, vor jedem Commit
 npm run test:baseline  # aktuellen Lauf als neue Referenz übernehmen (nur bei gewollten Änderungen)
 npm run deps           # Import-Zyklen anzeigen
+npm run voice          # Liste der Vorlese-Sätze (voice/texts.json) neu schreiben
 ```
 
 ## Regeln
@@ -35,10 +36,11 @@ npm run deps           # Import-Zyklen anzeigen
 - Keine Gedankenstriche (—, –) in Texten, Kommentaren oder Commit-Texten.
 - Keine Gewalt, kein Grusel. Wale werden nur beobachtet, nicht gefangen.
 - Alles, was über `hint()` angezeigt wird, wird auch vorgelesen. Hinweise deshalb so schreiben, dass sie gesprochen gut klingen (keine Abkürzungen, keine Zeichen wie ×).
+- Vorgelesen wird mit fertigen Sprachdateien (Erzählerstimme). Nach jeder Textänderung `npm run voice` und `voice/texts.json` mit committen (`npm run lint` meldet es sonst). Ganze Sätze mit Großbuchstaben am Anfang schreiben, Teile mit Variablen in eigene Sätze; sonst liest die Gerätestimme.
 
 ## Veröffentlichen
 
-Nur über GitHub: `npm run check`, committen (mit den erzeugten Dateien), auf `main` pushen. GitHub Pages liefert das Wurzelverzeichnis aus: https://frhmsn.github.io/cubos-welt/ . Die App lädt das Update beim übernächsten Start (Service Worker, Version = Hash von index.html). Das frühere Claude-Artifact wird nicht mehr weiterentwickelt.
+Nur über GitHub: `npm run check`, committen (mit den erzeugten Dateien), auf `main` pushen. Die Action "Erzählerstimme" committet selbst Sprachdateien nach `voice/`; deshalb vor dem Push `git pull --rebase`. GitHub Pages liefert das Wurzelverzeichnis aus: https://frhmsn.github.io/cubos-welt/ . Die App lädt das Update beim übernächsten Start (Service Worker, Version = Hash von index.html). Das frühere Claude-Artifact wird nicht mehr weiterentwickelt.
 
 ## Wo was liegt
 

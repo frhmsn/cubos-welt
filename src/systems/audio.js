@@ -1,9 +1,8 @@
 // Töne und Geräusche (Web Audio).
 import { ITEMS } from '../content/catalog.js';
+import { ac } from './audio-ctx.js';
 
 // ---------- Sound ----------
-let AC=null;
-function ac(){if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)();}catch(e){AC=null;}}if(AC&&AC.state==='suspended')AC.resume();return AC;}
 function tone(f,d,type,vol,at,slide){const a=ac();if(!a)return;const t0=a.currentTime+(at||0),o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,t0);if(slide)o.frequency.exponentialRampToValueAtTime(f*slide,t0+d);g.gain.setValueAtTime(vol||.1,t0);g.gain.exponentialRampToValueAtTime(.0005,t0+d+.04);o.connect(g).connect(a.destination);o.start(t0);o.stop(t0+d+.06);}
 const plop=()=>tone(420,.09,'sine',.14,0,1.8);
 const nopeSnd=()=>tone(180,.14,'triangle',.12,0,.7);

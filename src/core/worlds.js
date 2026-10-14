@@ -38,7 +38,7 @@ async function saveWorld(asNew,silent){
     if(!silent){hint('Gespeichert: '+name,2500);tone(523,.1,'sine',.1);tone(784,.16,'sine',.1,.1);}
     return w;
   }catch(e){
-    if(!silent)hint('Speichern hat nicht geklappt. Vielleicht ist der Speicher voll: lösche eine alte Welt im Menü.',5000);
+    if(!silent)hint('Speichern hat nicht geklappt. Vielleicht ist der Speicher voll. Lösche eine alte Welt im Menü.',5000);
     return null;
   }finally{game.saving=false;}
 }

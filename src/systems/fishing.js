@@ -81,7 +81,7 @@ function showCatch(type,len){
   const big=FISH_BY_ID[type].bigCatch;
   $('#catchTitle').textContent=S.wow?'Wow, ein '+S.label+'!':(big&&len>big.from)?big.title:'Du hast '+(S.art||'einen')+' '+S.label+' gefangen!';
   $('#catchSub').textContent='Er ist '+fmtLen(len)+' lang.'+(rec&&catchBook[type]>1?' Neuer Rekord!':'');
-  speak($('#catchTitle').textContent+' '+$('#catchSub').textContent);
+  speak($('#catchTitle').textContent+(rec&&catchBook[type]>1?' Neuer Rekord!':''));
   $('#catchBook').textContent='Dein Fang: '+Object.keys(FISH).filter(k=>catchBook[k]).map(k=>catchBook[k]+' '+(catchBook[k]===1?FISH[k].label:FISH[k].plural)).join(', ');
   $('#catch').hidden=false;
   tone(523,.15,'sine',.09);tone(659,.15,'sine',.09,.15);tone(784,.15,'sine',.09,.3);tone(1047,.35,'sine',.09,.45);

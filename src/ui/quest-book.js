@@ -47,7 +47,7 @@ function renderBook() {
   if (ch.bonus) {
     const un = isUnlocked(ch.id), it = ITEMS[ch.bonus.item];
     bo.className = un ? '' : 'locked';
-    bo.innerHTML = `${thumbs[ch.bonus.item] ? `<img alt="" src="${thumbs[ch.bonus.item]}">` : ''}<span>${un ? `Geschafft! Du hast ${ch.bonus.text}. Er steht bei ${it && it.kind === 'car' ? 'den Autos' : 'deinen Sachen'}.` : `Schaff alle Aufgaben in diesem Kapitel, dann bekommst du ${ch.bonus.text}!`}</span>`;
+    bo.innerHTML = `${thumbs[ch.bonus.item] ? `<img alt="" src="${thumbs[ch.bonus.item]}">` : ''}<span>${un ? `Geschafft! Du hast ${ch.bonus.akk || ch.bonus.text}. Er steht bei ${it && it.kind === 'car' ? 'den Autos' : 'deinen Sachen'}.` : `Schaff alle Aufgaben in diesem Kapitel, dann bekommst du ${ch.bonus.akk || ch.bonus.text}!`}</span>`;
   } else bo.innerHTML = '';
 }
 
@@ -79,7 +79,7 @@ on('kapitel:geschafft', (d) => {
   const c = CHAPTERS.find((x) => x.id === d.chapter);
   const sub = d.bonus ? `Dein Geschenk: ${d.bonus.text}!` : 'Ein ganzes Kapitel!';
   toast(`Kapitel „${c.title}“ geschafft!`, sub, 4500, true);
-  setTimeout(() => speak(`Toll! Das Kapitel ${c.title} ist geschafft. ${d.bonus ? 'Du bekommst ' + d.bonus.text + '!' : ''}`), 3300);
+  setTimeout(() => speak(`Toll! Das Kapitel ${c.title} ist geschafft. ${d.bonus ? 'Du bekommst ' + (d.bonus.akk || d.bonus.text) + '!' : ''}`), 3300);
   tone(523, .15, 'sine', .09, .4); tone(659, .15, 'sine', .09, .55); tone(784, .15, 'sine', .09, .7); tone(1047, .4, 'sine', .09, .85);
 });
 on('aufgaben:geladen', () => { updateDock(); if (!$('#questBook').hidden) renderBook(); });
