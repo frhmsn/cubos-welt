@@ -1,5 +1,7 @@
 // Katalog aller baubaren Dinge (ITEMS) und der Inventar-Kategorien (CATS).
 import { FISH_LIST } from './fish/index.js';
+import { VEHICLE_LIST, vehicleItem } from './vehicles/index.js';
+import { ANIMAL_LIST, animalItem } from './animals/index.js';
 
 // ---------- Katalog ----------
 const ITEMS={
@@ -15,16 +17,14 @@ const ITEMS={
   eigen:{kind:'obj',label:'Selbst bauen',house:true}, garage:{kind:'obj',label:'Garage',house:true}, aquarium:{kind:'obj',label:'Aquarium',house:true,big:true}, teil:{kind:'part',label:'',house:true},
   haus:{kind:'obj',label:'Haus',house:true}, villa:{kind:'obj',label:'Villa',house:true},
   hochhaus:{kind:'obj',label:'Hochhaus',house:true}, feuerwache:{kind:'obj',label:'Feuerwache',house:true},
-  lambo:{kind:'car',label:'Lamborghini',speed:6.5,max:17}, ferrari:{kind:'car',label:'Ferrari',speed:6,max:16},
-  polizei:{kind:'car',label:'Polizei',speed:5,max:14,siren:true}, feuerwehrauto:{kind:'car',label:'Löschauto',speed:4.2,max:11,siren:true},
-  bus:{kind:'car',label:'Bus',speed:3.4,max:9},
   schiene:{kind:'ground',label:'Gleis',paint:true}, bahnhof:{kind:'ground',label:'Bahnhof'}, uebergang:{kind:'ground',label:'Bahnübergang'},
   tunnel:{kind:'ground',label:'Tunnel'}, zug:{kind:'train',label:'Regionalzug',speed:5.5}, ice:{kind:'train',label:'Schnellzug',speed:8.5},
   anleger:{kind:'ground',label:'Anleger'}, seetor:{kind:'ground',label:'Seetor'}, faehre:{kind:'ferry',label:'Fähre'},
-  meer:{kind:'ground',label:'Meer',paint:true}, boot:{kind:'car',label:'Fischerboot',speed:3,max:9,boat:true}, uboot:{kind:'car',label:'U-Boot',speed:3,max:8,boat:true,sub:true},
-  hund:{kind:'animal',label:'Hund',speed:1.7}, kuh:{kind:'animal',label:'Kuh',speed:.55},
-  pferd:{kind:'animal',label:'Pferd',speed:1.1}, huhn:{kind:'animal',label:'Huhn',speed:.8}
+  meer:{kind:'ground',label:'Meer',paint:true},
 };
+// Fahrzeuge und Tiere: ein Eintrag je Datei aus content/vehicles/ und content/animals/
+for(const v of VEHICLE_LIST)ITEMS[v.id]=vehicleItem(v);
+for(const a of ANIMAL_LIST)ITEMS[a.id]=animalItem(a);
 // Fische zum Aussetzen: ein Eintrag je Art aus content/fish/
 for(const f of FISH_LIST)ITEMS['fx_'+f.id]={kind:'fish',fish:f.id,label:f.label};
 const CATS=[
@@ -32,12 +32,12 @@ const CATS=[
   {id:'natur',label:'Natur',icon:'baum',items:['baum','tanne','blumen','berg']},
   {id:'licht',label:'Licht',icon:'laterne',items:['laterne','gartenlampe','lichterkette','flutlicht','lagerfeuer']},
   {id:'haus',label:'Häuser',icon:'haus',items:['eigen','haus','villa','hochhaus','feuerwache','garage','aquarium']},
-  {id:'auto',label:'Autos',icon:'lambo',items:['lambo','ferrari','polizei','feuerwehrauto','bus']},
+  {id:'auto',label:'Autos',icon:'lambo',items:VEHICLE_LIST.filter(v=>v.category==='auto').map(v=>v.id)},
   {id:'bahn',label:'Bahn',icon:'zug',items:['schiene','bahnhof','uebergang','tunnel','zug','ice']},
-  {id:'see',label:'Wasser',icon:'boot',items:['meer','wasser','boot','uboot','anleger','faehre','seetor']},
+  {id:'see',label:'Wasser',icon:'boot',items:['meer','wasser',...VEHICLE_LIST.filter(v=>v.category==='see').map(v=>v.id),'anleger','faehre','seetor']},
   {id:'fische',label:'Fische',icon:'fx_karpfen',items:FISH_LIST.map(f=>'fx_'+f.id)},
   {id:'fang',label:'Mein Fang',icon:'F_thunfisch',special:'fang',items:[]},
-  {id:'tier',label:'Tiere',icon:'hund',items:['hund','kuh','pferd','huhn']}
+  {id:'tier',label:'Tiere',icon:'hund',items:ANIMAL_LIST.map(a=>a.id)}
 ];
 
 export { CATS, ITEMS };

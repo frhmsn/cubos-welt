@@ -597,6 +597,293 @@ const FISH = Object.fromEntries(FISH_LIST.map((f) => [f.id, {
 }]));
 const LAKE_FISH = FISH_LIST.filter((f) => f.spawn.see).map((f) => [f.id, f.spawn.see]);
 const SEA_FISH = FISH_LIST.filter((f) => f.spawn.meer).map((f) => [f.id, f.spawn.meer]);
+const lambo = {
+  id: "lambo",
+  label: "Lamborghini",
+  category: "auto",
+  // Inventar-Kategorie: 'auto' oder 'see'
+  speed: 6.5,
+  max: 17,
+  // Beschleunigung und Höchstgeschwindigkeit
+  // Fahrzeug schaut nach +z. Rückgabe optional: fertige Gruppe (sonst wird g zusammengefasst).
+  model({ g, M: M2, box: box2, mesh: mesh2, prof: prof2, wheels: wheels2, lights: lights2, glassMat: glassMat2 }) {
+    const b = M2("#F5C211", { roughness: 0.35, metalness: 0.35 });
+    mesh2(prof2("lb", [[-1.1, 0.18], [1.12, 0.18], [1.12, 0.32], [0.55, 0.46], [-1.1, 0.52]], 0.96), b, 0, 0, 0, g);
+    mesh2(prof2("lbc", [[0.55, 0.45], [0.1, 0.72], [-0.55, 0.7], [-0.88, 0.5]], 0.84), glassMat2, 0, 0, 0, g);
+    box2(g, "#1E1E1E", 0.92, 0.04, 0.24, 0, 0.78, -0.96);
+    box2(g, "#1E1E1E", 0.05, 0.26, 0.05, -0.33, 0.64, -0.96);
+    box2(g, "#1E1E1E", 0.05, 0.26, 0.05, 0.33, 0.64, -0.96);
+    box2(g, "#1E1E1E", 0.02, 0.12, 0.35, 0.485, 0.32, -0.2);
+    box2(g, "#1E1E1E", 0.02, 0.12, 0.35, -0.485, 0.32, -0.2);
+    wheels2(g, [-0.46, 0.46], [-0.7, 0.72], 0.22);
+    lights2(g, 0.34, 1.12, -1.12, [-0.3, 0.3]);
+  }
+};
+const ferrari = {
+  id: "ferrari",
+  label: "Ferrari",
+  category: "auto",
+  // Inventar-Kategorie: 'auto' oder 'see'
+  speed: 6,
+  max: 16,
+  // Beschleunigung und Höchstgeschwindigkeit
+  // Fahrzeug schaut nach +z. Rückgabe optional: fertige Gruppe (sonst wird g zusammengefasst).
+  model({ g, M: M2, box: box2, mesh: mesh2, prof: prof2, wheels: wheels2, lights: lights2, glassMat: glassMat2 }) {
+    const b = M2("#D10F1A", { roughness: 0.3, metalness: 0.35 });
+    mesh2(prof2("fr", [[-1.12, 0.2], [1.12, 0.2], [1.15, 0.33], [0.75, 0.43], [-1.05, 0.5], [-1.13, 0.42]], 0.96), b, 0, 0, 0, g);
+    mesh2(prof2("frc", [[0.42, 0.44], [0.02, 0.75], [-0.48, 0.75], [-0.82, 0.48]], 0.82), glassMat2, 0, 0, 0, g);
+    box2(g, "#FFD23F", 0.12, 0.04, 0.12, 0, 0.43, 0.95);
+    box2(g, "#1E1E1E", 0.02, 0.14, 0.4, 0.485, 0.33, -0.25);
+    box2(g, "#1E1E1E", 0.02, 0.14, 0.4, -0.485, 0.33, -0.25);
+    wheels2(g, [-0.46, 0.46], [-0.7, 0.72], 0.22);
+    lights2(g, 0.35, 1.14, -1.13, [-0.3, 0.3]);
+  }
+};
+const polizei = {
+  id: "polizei",
+  label: "Polizei",
+  category: "auto",
+  // Inventar-Kategorie: 'auto' oder 'see'
+  speed: 5,
+  max: 14,
+  // Beschleunigung und Höchstgeschwindigkeit
+  siren: true,
+  // Blaulicht und Martinshorn
+  // Fahrzeug schaut nach +z. Rückgabe optional: fertige Gruppe (sonst wird g zusammengefasst).
+  model({ g, M: M2, BX: BX2, box: box2, mesh: mesh2, prof: prof2, wheels: wheels2, lights: lights2, glassMat: glassMat2, polBlue: polBlue2, polRed: polRed2 }) {
+    const b = M2("#F4F6F8", { roughness: 0.4, metalness: 0.2 });
+    mesh2(prof2("po", [[-1.1, 0.22], [1.1, 0.22], [1.1, 0.56], [-1.1, 0.6]], 0.98), b, 0, 0, 0, g);
+    mesh2(prof2("poc", [[0.56, 0.56], [0.28, 0.92], [-0.55, 0.92], [-0.82, 0.6]], 0.88), glassMat2, 0, 0, 0, g);
+    box2(g, "#F4F6F8", 0.86, 0.05, 0.82, 0, 0.94, -0.13);
+    box2(g, "#1E5AA8", 1, 0.11, 1.95, 0, 0.42, 0);
+    mesh2(BX2(0.32, 0.11, 0.2), polBlue2, -0.17, 1.02, -0.12, g, false);
+    mesh2(BX2(0.32, 0.11, 0.2), polRed2, 0.17, 1.02, -0.12, g, false);
+    wheels2(g, [-0.47, 0.47], [-0.68, 0.7], 0.23);
+    lights2(g, 0.44, 1.11, -1.11, [-0.32, 0.32]);
+  }
+};
+const feuerwehrauto = {
+  id: "feuerwehrauto",
+  label: "Löschauto",
+  category: "auto",
+  // Inventar-Kategorie: 'auto' oder 'see'
+  speed: 4.2,
+  max: 11,
+  // Beschleunigung und Höchstgeschwindigkeit
+  siren: true,
+  // Blaulicht und Martinshorn
+  // Fahrzeug schaut nach +z. Rückgabe optional: fertige Gruppe (sonst wird g zusammengefasst).
+  model({ g, M: M2, BX: BX2, box: box2, mesh: mesh2, wheels: wheels2, lights: lights2, glassMat: glassMat2, polBlue: polBlue2 }) {
+    const b = M2("#D7261E", { roughness: 0.45, metalness: 0.2 });
+    box2(g, b, 1.12, 1, 0.95, 0, 0.82, 1.02);
+    box2(g, glassMat2, 1, 0.42, 0.04, 0, 1.05, 1.5);
+    box2(g, b, 1.12, 1.15, 2.05, 0, 0.88, -0.5);
+    box2(g, "#F2F2F2", 1.14, 0.12, 2.06, 0, 0.62, -0.5);
+    box2(g, "#C9CDD2", 0.08, 0.08, 2.4, -0.3, 1.55, -0.3);
+    box2(g, "#C9CDD2", 0.08, 0.08, 2.4, 0.3, 1.55, -0.3);
+    for (let k = 0; k < 7; k++) box2(g, "#C9CDD2", 0.6, 0.05, 0.05, 0, 1.55, -1.4 + k * 0.36);
+    mesh2(BX2(0.5, 0.12, 0.2), polBlue2, 0, 1.38, 1.1, g, false);
+    wheels2(g, [-0.5, 0.5], [-1, 1], 0.3);
+    lights2(g, 0.5, 1.5, -1.53, [-0.35, 0.35]);
+  }
+};
+const bus = {
+  id: "bus",
+  label: "Bus",
+  category: "auto",
+  // Inventar-Kategorie: 'auto' oder 'see'
+  speed: 3.4,
+  max: 9,
+  // Beschleunigung und Höchstgeschwindigkeit
+  // Fahrzeug schaut nach +z. Rückgabe optional: fertige Gruppe (sonst wird g zusammengefasst).
+  model({ g, M: M2, box: box2, wheels: wheels2, lights: lights2, glassMat: glassMat2 }) {
+    const b = M2("#E4572E", { roughness: 0.5 });
+    box2(g, b, 1.22, 1.3, 3.3, 0, 0.95, 0);
+    box2(g, glassMat2, 1.24, 0.46, 3.05, 0, 1.2, -0.05);
+    box2(g, glassMat2, 1.05, 0.6, 0.04, 0, 1.15, 1.66);
+    box2(g, "#F7F3EA", 1.22, 0.08, 3.3, 0, 1.64, 0);
+    box2(g, "#3A3F46", 0.05, 0.9, 0.7, 0.62, 0.75, 0.6);
+    wheels2(g, [-0.55, 0.55], [-1.1, 1.1], 0.3);
+    lights2(g, 0.5, 1.66, -1.66, [-0.4, 0.4]);
+  }
+};
+const boot = {
+  id: "boot",
+  label: "Fischerboot",
+  category: "see",
+  // Inventar-Kategorie: 'auto' oder 'see'
+  speed: 3,
+  max: 9,
+  // Beschleunigung und Höchstgeschwindigkeit
+  boat: true,
+  // fährt nur auf Wasser, man kann damit angeln
+  // Fahrzeug schaut nach +z. Rückgabe optional: fertige Gruppe (sonst wird g zusammengefasst).
+  model({ g, M: M2, G: G2, BX: BX2, bake: bake2, box: box2, mesh: mesh2, glassMat: glassMat2, headMat: headMat2 }) {
+    const hull = M2("#F4F4F2", { roughness: 0.5 });
+    box2(g, hull, 1.4, 0.5, 2.4, 0, 0.05, -0.15);
+    const bow = box2(g, hull, 1, 0.5, 1, 0, 0.05, 1);
+    bow.rotation.y = Math.PI / 4;
+    bow.scale.set(1, 1, 1);
+    box2(g, "#2F5E9E", 1.42, 0.12, 2.42, 0, 0.22, -0.15, false);
+    const bs = box2(g, "#2F5E9E", 1.02, 0.12, 1.02, 0, 0.22, 1, false);
+    bs.rotation.y = Math.PI / 4;
+    box2(g, "#9B7650", 1.2, 0.05, 2.2, 0, 0.3, -0.15, false);
+    box2(g, "#F4F4F2", 0.9, 0.75, 0.8, 0, 0.7, -0.55);
+    box2(g, glassMat2, 0.92, 0.28, 0.82, 0, 0.86, -0.55, false);
+    box2(g, "#D7261E", 1.05, 0.1, 0.95, 0, 1.12, -0.55);
+    mesh2(G2("mast", () => new THREE.CylinderGeometry(0.04, 0.04, 1.3, 6)), "#5A4630", 0, 1.5, -0.55, g);
+    const rod = mesh2(G2("rod", () => new THREE.CylinderGeometry(0.025, 0.035, 1.7, 6)), "#3A2A1A", 0.45, 1, 0.55, g);
+    rod.rotation.x = 0.9;
+    for (const z of [-1.1, -0.85]) box2(g, "#F28C28", 0.3, 0.18, 0.18, -0.45, 0.42, z, false);
+    box2(g, "#6E737A", 0.35, 0.25, 0.35, 0.4, 0.45, -1.05);
+    mesh2(BX2(0.12, 0.08, 0.12), headMat2, 0, 1.22, -0.2, g, false);
+    return bake2(g);
+  }
+};
+const uboot = {
+  id: "uboot",
+  label: "U-Boot",
+  category: "see",
+  // Inventar-Kategorie: 'auto' oder 'see'
+  speed: 3,
+  max: 8,
+  // Beschleunigung und Höchstgeschwindigkeit
+  boat: true,
+  sub: true,
+  // kann abtauchen
+  // Fahrzeug schaut nach +z. Rückgabe optional: fertige Gruppe (sonst wird g zusammengefasst).
+  model({ g, M: M2, G: G2, BX: BX2, bake: bake2, box: box2, mesh: mesh2, headMat: headMat2, winMat: winMat2 }) {
+    const y = M2("#F5C211", { roughness: 0.4, metalness: 0.25 }), dk = M2("#2A2D31");
+    mesh2(G2("subbody", () => {
+      const c = new THREE.CylinderGeometry(0.55, 0.55, 2.3, 16);
+      c.rotateX(Math.PI / 2);
+      return c;
+    }), y, 0, 0.2, 0, g);
+    for (const z of [-1.15, 1.15]) {
+      const e = mesh2(G2("subend", () => new THREE.SphereGeometry(0.55, 16, 10)), y, 0, 0.2, z, g);
+      e.scale.set(1, 1, z > 0 ? 1.25 : 0.9);
+    }
+    box2(g, y, 0.5, 0.6, 0.95, 0, 0.85, -0.1);
+    box2(g, dk, 0.52, 0.14, 0.97, 0, 1.08, -0.1, false);
+    mesh2(G2("peri", () => new THREE.CylinderGeometry(0.04, 0.04, 0.6, 6)), "#5A6168", 0.12, 1.4, 0.15, g);
+    box2(g, "#5A6168", 0.08, 0.08, 0.22, 0.12, 1.68, 0.24);
+    for (const z of [-0.6, 0, 0.6]) for (const x of [-1, 1]) {
+      const w = mesh2(G2("port", () => {
+        const c = new THREE.CylinderGeometry(0.13, 0.13, 0.06, 12);
+        c.rotateZ(Math.PI / 2);
+        return c;
+      }), winMat2, x * 0.54, 0.32, z, g, false);
+    }
+    box2(g, y, 1.5, 0.06, 0.35, 0, 0.2, -1.3);
+    box2(g, y, 0.06, 0.7, 0.35, 0, 0.25, -1.3);
+    mesh2(BX2(0.22, 0.14, 0.06), headMat2, 0, 0.25, 1.83, g, false);
+    const pr = new THREE.Group();
+    pr.position.set(0, 0.2, -1.68);
+    g.add(pr);
+    for (const a of [0, Math.PI / 2]) {
+      const bl = box2(pr, "#C9A227", 0.08, 0.6, 0.05, 0, 0, 0);
+      bl.rotation.z = a;
+    }
+    pr.children.forEach((m) => {
+      m.userData.keep = true;
+      m.userData.prop = 1;
+    });
+    const out = bake2(g);
+    out.userData.props = out.children.filter((m) => m.userData.prop);
+    return out;
+  }
+};
+const VEHICLE_LIST = [lambo, ferrari, polizei, feuerwehrauto, bus, boot, uboot];
+const VEHICLE_BY_ID = Object.fromEntries(VEHICLE_LIST.map((v) => [v.id, v]));
+const vehicleItem = (v) => ({ kind: "car", label: v.label, speed: v.speed, max: v.max, ...v.siren ? { siren: true } : {}, ...v.boat ? { boat: true } : {}, ...v.sub ? { sub: true } : {} });
+const hund = {
+  id: "hund",
+  label: "Hund",
+  speed: 1.7,
+  // Laufgeschwindigkeit
+  // Tier schaut nach +z. Beine mit leg(g, legs, breite, höhe, x, y, z, farbe, phase) anlegen, dann wackeln sie beim Laufen.
+  model({ g, box: box2, leg: leg2, legs }) {
+    const c = "#A0673A";
+    box2(g, c, 0.32, 0.3, 0.72, 0, 0.47, 0);
+    box2(g, c, 0.3, 0.28, 0.32, 0, 0.66, 0.46);
+    box2(g, "#7A4A28", 0.16, 0.13, 0.16, 0, 0.6, 0.66);
+    box2(g, "#151515", 0.07, 0.06, 0.04, 0, 0.63, 0.75);
+    box2(g, "#6B3F20", 0.08, 0.16, 0.1, -0.13, 0.78, 0.42);
+    box2(g, "#6B3F20", 0.08, 0.16, 0.1, 0.13, 0.78, 0.42);
+    const t = box2(g, c, 0.07, 0.07, 0.32, 0, 0.62, -0.46);
+    t.rotation.x = -0.6;
+    leg2(g, legs, 0.09, 0.33, -0.1, 0.34, 0.26, c, 0);
+    leg2(g, legs, 0.09, 0.33, 0.1, 0.34, 0.26, c, Math.PI);
+    leg2(g, legs, 0.09, 0.33, -0.1, 0.34, -0.26, c, Math.PI);
+    leg2(g, legs, 0.09, 0.33, 0.1, 0.34, -0.26, c, 0);
+  }
+};
+const kuh = {
+  id: "kuh",
+  label: "Kuh",
+  speed: 0.55,
+  // Laufgeschwindigkeit
+  // Tier schaut nach +z. Beine mit leg(g, legs, breite, höhe, x, y, z, farbe, phase) anlegen, dann wackeln sie beim Laufen.
+  model({ g, box: box2, leg: leg2, legs }) {
+    const c = "#F7F7F2", p = "#1D1D1D";
+    box2(g, c, 0.72, 0.66, 1.32, 0, 1.02, 0);
+    box2(g, p, 0.74, 0.32, 0.36, 0, 1.1, 0.15);
+    box2(g, p, 0.4, 0.04, 0.4, 0.1, 1.36, -0.35);
+    box2(g, p, 0.74, 0.25, 0.25, 0, 0.92, -0.4);
+    box2(g, c, 0.42, 0.42, 0.46, 0, 1.18, 0.84);
+    box2(g, "#F2A7A7", 0.36, 0.2, 0.12, 0, 1.06, 1.1);
+    box2(g, "#EDE3C8", 0.08, 0.14, 0.08, -0.18, 1.45, 0.8);
+    box2(g, "#EDE3C8", 0.08, 0.14, 0.08, 0.18, 1.45, 0.8);
+    box2(g, "#F2A7A7", 0.3, 0.14, 0.3, 0, 0.66, -0.3);
+    leg2(g, legs, 0.15, 0.7, -0.23, 0.72, 0.45, c, 0);
+    leg2(g, legs, 0.15, 0.7, 0.23, 0.72, 0.45, c, Math.PI);
+    leg2(g, legs, 0.15, 0.7, -0.23, 0.72, -0.45, c, Math.PI);
+    leg2(g, legs, 0.15, 0.7, 0.23, 0.72, -0.45, c, 0);
+  }
+};
+const pferd = {
+  id: "pferd",
+  label: "Pferd",
+  speed: 1.1,
+  // Laufgeschwindigkeit
+  // Tier schaut nach +z. Beine mit leg(g, legs, breite, höhe, x, y, z, farbe, phase) anlegen, dann wackeln sie beim Laufen.
+  model({ g, box: box2, leg: leg2, legs }) {
+    const c = "#8B5A2B", m = "#3A2414";
+    box2(g, c, 0.52, 0.56, 1.34, 0, 1.3, 0);
+    const nk = box2(g, c, 0.3, 0.75, 0.32, 0, 1.68, 0.62);
+    nk.rotation.x = 0.55;
+    const hd = box2(g, c, 0.28, 0.28, 0.58, 0, 2, 0.92);
+    hd.rotation.x = 0.35;
+    const mn = box2(g, m, 0.08, 0.7, 0.14, 0, 1.75, 0.5);
+    mn.rotation.x = 0.55;
+    const tl = box2(g, m, 0.1, 0.6, 0.12, 0, 1.15, -0.72);
+    tl.rotation.x = -0.35;
+    leg2(g, legs, 0.13, 1.02, -0.17, 1.05, 0.5, c, 0);
+    leg2(g, legs, 0.13, 1.02, 0.17, 1.05, 0.5, c, Math.PI);
+    leg2(g, legs, 0.13, 1.02, -0.17, 1.05, -0.5, c, Math.PI);
+    leg2(g, legs, 0.13, 1.02, 0.17, 1.05, -0.5, c, 0);
+  }
+};
+const huhn = {
+  id: "huhn",
+  label: "Huhn",
+  speed: 0.8,
+  // Laufgeschwindigkeit
+  // Tier schaut nach +z. Beine mit leg(g, legs, breite, höhe, x, y, z, farbe, phase) anlegen, dann wackeln sie beim Laufen.
+  model({ g, box: box2, leg: leg2, legs }) {
+    box2(g, "#FBFBF7", 0.28, 0.28, 0.36, 0, 0.33, 0);
+    box2(g, "#FBFBF7", 0.17, 0.2, 0.17, 0, 0.55, 0.17);
+    box2(g, "#E23B2E", 0.05, 0.1, 0.14, 0, 0.7, 0.17);
+    box2(g, "#F5A623", 0.07, 0.05, 0.1, 0, 0.55, 0.29);
+    box2(g, "#E23B2E", 0.05, 0.08, 0.04, 0, 0.47, 0.27);
+    box2(g, "#EDEDE6", 0.05, 0.2, 0.16, 0, 0.45, -0.2);
+    leg2(g, legs, 0.04, 0.2, -0.07, 0.2, 0, "#F5A623", 0);
+    leg2(g, legs, 0.04, 0.2, 0.07, 0.2, 0, "#F5A623", Math.PI);
+  }
+};
+const ANIMAL_LIST = [hund, kuh, pferd, huhn];
+const ANIMAL_BY_ID = Object.fromEntries(ANIMAL_LIST.map((a) => [a.id, a]));
+const animalItem = (a) => ({ kind: "animal", label: a.label, speed: a.speed });
 const ITEMS = {
   hand: { kind: "tool", label: "Schauen" },
   radierer: { kind: "tool", label: "Weg damit", paint: true },
@@ -622,11 +909,6 @@ const ITEMS = {
   villa: { kind: "obj", label: "Villa", house: true },
   hochhaus: { kind: "obj", label: "Hochhaus", house: true },
   feuerwache: { kind: "obj", label: "Feuerwache", house: true },
-  lambo: { kind: "car", label: "Lamborghini", speed: 6.5, max: 17 },
-  ferrari: { kind: "car", label: "Ferrari", speed: 6, max: 16 },
-  polizei: { kind: "car", label: "Polizei", speed: 5, max: 14, siren: true },
-  feuerwehrauto: { kind: "car", label: "Löschauto", speed: 4.2, max: 11, siren: true },
-  bus: { kind: "car", label: "Bus", speed: 3.4, max: 9 },
   schiene: { kind: "ground", label: "Gleis", paint: true },
   bahnhof: { kind: "ground", label: "Bahnhof" },
   uebergang: { kind: "ground", label: "Bahnübergang" },
@@ -636,26 +918,22 @@ const ITEMS = {
   anleger: { kind: "ground", label: "Anleger" },
   seetor: { kind: "ground", label: "Seetor" },
   faehre: { kind: "ferry", label: "Fähre" },
-  meer: { kind: "ground", label: "Meer", paint: true },
-  boot: { kind: "car", label: "Fischerboot", speed: 3, max: 9, boat: true },
-  uboot: { kind: "car", label: "U-Boot", speed: 3, max: 8, boat: true, sub: true },
-  hund: { kind: "animal", label: "Hund", speed: 1.7 },
-  kuh: { kind: "animal", label: "Kuh", speed: 0.55 },
-  pferd: { kind: "animal", label: "Pferd", speed: 1.1 },
-  huhn: { kind: "animal", label: "Huhn", speed: 0.8 }
+  meer: { kind: "ground", label: "Meer", paint: true }
 };
+for (const v of VEHICLE_LIST) ITEMS[v.id] = vehicleItem(v);
+for (const a of ANIMAL_LIST) ITEMS[a.id] = animalItem(a);
 for (const f of FISH_LIST) ITEMS["fx_" + f.id] = { kind: "fish", fish: f.id, label: f.label };
 const CATS = [
   { id: "land", label: "Land", icon: "strasse", items: ["strasse", "gras", "sand", "wasser", "groesser"] },
   { id: "natur", label: "Natur", icon: "baum", items: ["baum", "tanne", "blumen", "berg"] },
   { id: "licht", label: "Licht", icon: "laterne", items: ["laterne", "gartenlampe", "lichterkette", "flutlicht", "lagerfeuer"] },
   { id: "haus", label: "Häuser", icon: "haus", items: ["eigen", "haus", "villa", "hochhaus", "feuerwache", "garage", "aquarium"] },
-  { id: "auto", label: "Autos", icon: "lambo", items: ["lambo", "ferrari", "polizei", "feuerwehrauto", "bus"] },
+  { id: "auto", label: "Autos", icon: "lambo", items: VEHICLE_LIST.filter((v) => v.category === "auto").map((v) => v.id) },
   { id: "bahn", label: "Bahn", icon: "zug", items: ["schiene", "bahnhof", "uebergang", "tunnel", "zug", "ice"] },
-  { id: "see", label: "Wasser", icon: "boot", items: ["meer", "wasser", "boot", "uboot", "anleger", "faehre", "seetor"] },
+  { id: "see", label: "Wasser", icon: "boot", items: ["meer", "wasser", ...VEHICLE_LIST.filter((v) => v.category === "see").map((v) => v.id), "anleger", "faehre", "seetor"] },
   { id: "fische", label: "Fische", icon: "fx_karpfen", items: FISH_LIST.map((f) => "fx_" + f.id) },
   { id: "fang", label: "Mein Fang", icon: "F_thunfisch", special: "fang", items: [] },
-  { id: "tier", label: "Tiere", icon: "hund", items: ["hund", "kuh", "pferd", "huhn"] }
+  { id: "tier", label: "Tiere", icon: "hund", items: ANIMAL_LIST.map((a) => a.id) }
 ];
 const $ = (s) => document.querySelector(s);
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -2540,120 +2818,8 @@ function lights(g, y, zf, zb, xs) {
 }
 function carModel(type) {
   const g = new THREE.Group();
-  if (type === "uboot") {
-    const y = M("#F5C211", { roughness: 0.4, metalness: 0.25 }), dk = M("#2A2D31");
-    mesh(G("subbody", () => {
-      const c = new THREE.CylinderGeometry(0.55, 0.55, 2.3, 16);
-      c.rotateX(Math.PI / 2);
-      return c;
-    }), y, 0, 0.2, 0, g);
-    for (const z of [-1.15, 1.15]) {
-      const e = mesh(G("subend", () => new THREE.SphereGeometry(0.55, 16, 10)), y, 0, 0.2, z, g);
-      e.scale.set(1, 1, z > 0 ? 1.25 : 0.9);
-    }
-    box(g, y, 0.5, 0.6, 0.95, 0, 0.85, -0.1);
-    box(g, dk, 0.52, 0.14, 0.97, 0, 1.08, -0.1, false);
-    mesh(G("peri", () => new THREE.CylinderGeometry(0.04, 0.04, 0.6, 6)), "#5A6168", 0.12, 1.4, 0.15, g);
-    box(g, "#5A6168", 0.08, 0.08, 0.22, 0.12, 1.68, 0.24);
-    for (const z of [-0.6, 0, 0.6]) for (const x of [-1, 1]) {
-      const w = mesh(G("port", () => {
-        const c = new THREE.CylinderGeometry(0.13, 0.13, 0.06, 12);
-        c.rotateZ(Math.PI / 2);
-        return c;
-      }), winMat, x * 0.54, 0.32, z, g, false);
-    }
-    box(g, y, 1.5, 0.06, 0.35, 0, 0.2, -1.3);
-    box(g, y, 0.06, 0.7, 0.35, 0, 0.25, -1.3);
-    mesh(BX(0.22, 0.14, 0.06), headMat, 0, 0.25, 1.83, g, false);
-    const pr = new THREE.Group();
-    pr.position.set(0, 0.2, -1.68);
-    g.add(pr);
-    for (const a of [0, Math.PI / 2]) {
-      const bl = box(pr, "#C9A227", 0.08, 0.6, 0.05, 0, 0, 0);
-      bl.rotation.z = a;
-    }
-    pr.children.forEach((m) => {
-      m.userData.keep = true;
-      m.userData.prop = 1;
-    });
-    const out = bake(g);
-    out.userData.props = out.children.filter((m) => m.userData.prop);
-    return out;
-  }
-  if (type === "boot") {
-    const hull = M("#F4F4F2", { roughness: 0.5 });
-    box(g, hull, 1.4, 0.5, 2.4, 0, 0.05, -0.15);
-    const bow = box(g, hull, 1, 0.5, 1, 0, 0.05, 1);
-    bow.rotation.y = Math.PI / 4;
-    bow.scale.set(1, 1, 1);
-    box(g, "#2F5E9E", 1.42, 0.12, 2.42, 0, 0.22, -0.15, false);
-    const bs = box(g, "#2F5E9E", 1.02, 0.12, 1.02, 0, 0.22, 1, false);
-    bs.rotation.y = Math.PI / 4;
-    box(g, "#9B7650", 1.2, 0.05, 2.2, 0, 0.3, -0.15, false);
-    box(g, "#F4F4F2", 0.9, 0.75, 0.8, 0, 0.7, -0.55);
-    box(g, glassMat, 0.92, 0.28, 0.82, 0, 0.86, -0.55, false);
-    box(g, "#D7261E", 1.05, 0.1, 0.95, 0, 1.12, -0.55);
-    mesh(G("mast", () => new THREE.CylinderGeometry(0.04, 0.04, 1.3, 6)), "#5A4630", 0, 1.5, -0.55, g);
-    const rod = mesh(G("rod", () => new THREE.CylinderGeometry(0.025, 0.035, 1.7, 6)), "#3A2A1A", 0.45, 1, 0.55, g);
-    rod.rotation.x = 0.9;
-    for (const z of [-1.1, -0.85]) box(g, "#F28C28", 0.3, 0.18, 0.18, -0.45, 0.42, z, false);
-    box(g, "#6E737A", 0.35, 0.25, 0.35, 0.4, 0.45, -1.05);
-    mesh(BX(0.12, 0.08, 0.12), headMat, 0, 1.22, -0.2, g, false);
-    return bake(g);
-  }
-  if (type === "lambo") {
-    const b = M("#F5C211", { roughness: 0.35, metalness: 0.35 });
-    mesh(prof("lb", [[-1.1, 0.18], [1.12, 0.18], [1.12, 0.32], [0.55, 0.46], [-1.1, 0.52]], 0.96), b, 0, 0, 0, g);
-    mesh(prof("lbc", [[0.55, 0.45], [0.1, 0.72], [-0.55, 0.7], [-0.88, 0.5]], 0.84), glassMat, 0, 0, 0, g);
-    box(g, "#1E1E1E", 0.92, 0.04, 0.24, 0, 0.78, -0.96);
-    box(g, "#1E1E1E", 0.05, 0.26, 0.05, -0.33, 0.64, -0.96);
-    box(g, "#1E1E1E", 0.05, 0.26, 0.05, 0.33, 0.64, -0.96);
-    box(g, "#1E1E1E", 0.02, 0.12, 0.35, 0.485, 0.32, -0.2);
-    box(g, "#1E1E1E", 0.02, 0.12, 0.35, -0.485, 0.32, -0.2);
-    wheels(g, [-0.46, 0.46], [-0.7, 0.72], 0.22);
-    lights(g, 0.34, 1.12, -1.12, [-0.3, 0.3]);
-  } else if (type === "ferrari") {
-    const b = M("#D10F1A", { roughness: 0.3, metalness: 0.35 });
-    mesh(prof("fr", [[-1.12, 0.2], [1.12, 0.2], [1.15, 0.33], [0.75, 0.43], [-1.05, 0.5], [-1.13, 0.42]], 0.96), b, 0, 0, 0, g);
-    mesh(prof("frc", [[0.42, 0.44], [0.02, 0.75], [-0.48, 0.75], [-0.82, 0.48]], 0.82), glassMat, 0, 0, 0, g);
-    box(g, "#FFD23F", 0.12, 0.04, 0.12, 0, 0.43, 0.95);
-    box(g, "#1E1E1E", 0.02, 0.14, 0.4, 0.485, 0.33, -0.25);
-    box(g, "#1E1E1E", 0.02, 0.14, 0.4, -0.485, 0.33, -0.25);
-    wheels(g, [-0.46, 0.46], [-0.7, 0.72], 0.22);
-    lights(g, 0.35, 1.14, -1.13, [-0.3, 0.3]);
-  } else if (type === "polizei") {
-    const b = M("#F4F6F8", { roughness: 0.4, metalness: 0.2 });
-    mesh(prof("po", [[-1.1, 0.22], [1.1, 0.22], [1.1, 0.56], [-1.1, 0.6]], 0.98), b, 0, 0, 0, g);
-    mesh(prof("poc", [[0.56, 0.56], [0.28, 0.92], [-0.55, 0.92], [-0.82, 0.6]], 0.88), glassMat, 0, 0, 0, g);
-    box(g, "#F4F6F8", 0.86, 0.05, 0.82, 0, 0.94, -0.13);
-    box(g, "#1E5AA8", 1, 0.11, 1.95, 0, 0.42, 0);
-    mesh(BX(0.32, 0.11, 0.2), polBlue, -0.17, 1.02, -0.12, g, false);
-    mesh(BX(0.32, 0.11, 0.2), polRed, 0.17, 1.02, -0.12, g, false);
-    wheels(g, [-0.47, 0.47], [-0.68, 0.7], 0.23);
-    lights(g, 0.44, 1.11, -1.11, [-0.32, 0.32]);
-  } else if (type === "feuerwehrauto") {
-    const b = M("#D7261E", { roughness: 0.45, metalness: 0.2 });
-    box(g, b, 1.12, 1, 0.95, 0, 0.82, 1.02);
-    box(g, glassMat, 1, 0.42, 0.04, 0, 1.05, 1.5);
-    box(g, b, 1.12, 1.15, 2.05, 0, 0.88, -0.5);
-    box(g, "#F2F2F2", 1.14, 0.12, 2.06, 0, 0.62, -0.5);
-    box(g, "#C9CDD2", 0.08, 0.08, 2.4, -0.3, 1.55, -0.3);
-    box(g, "#C9CDD2", 0.08, 0.08, 2.4, 0.3, 1.55, -0.3);
-    for (let k = 0; k < 7; k++) box(g, "#C9CDD2", 0.6, 0.05, 0.05, 0, 1.55, -1.4 + k * 0.36);
-    mesh(BX(0.5, 0.12, 0.2), polBlue, 0, 1.38, 1.1, g, false);
-    wheels(g, [-0.5, 0.5], [-1, 1], 0.3);
-    lights(g, 0.5, 1.5, -1.53, [-0.35, 0.35]);
-  } else {
-    const b = M("#E4572E", { roughness: 0.5 });
-    box(g, b, 1.22, 1.3, 3.3, 0, 0.95, 0);
-    box(g, glassMat, 1.24, 0.46, 3.05, 0, 1.2, -0.05);
-    box(g, glassMat, 1.05, 0.6, 0.04, 0, 1.15, 1.66);
-    box(g, "#F7F3EA", 1.22, 0.08, 3.3, 0, 1.64, 0);
-    box(g, "#3A3F46", 0.05, 0.9, 0.7, 0.62, 0.75, 0.6);
-    wheels(g, [-0.55, 0.55], [-1.1, 1.1], 0.3);
-    lights(g, 0.5, 1.66, -1.66, [-0.4, 0.4]);
-  }
-  return bake(g);
+  const out = VEHICLE_BY_ID[type].model({ g, M, G, BX, bake, box, mesh, prof, wheels, lights, glassMat, headMat, tailMat, polBlue, polRed, winMat });
+  return out || bake(g);
 }
 function addCar(type, x, z, h, ai) {
   const g = carModel(type);
@@ -3379,60 +3545,7 @@ function leg(g, legs, w, h, x, y, z, col, phase) {
 }
 function animalModel(type) {
   const g = new THREE.Group(), legs = [];
-  if (type === "hund") {
-    const c = "#A0673A";
-    box(g, c, 0.32, 0.3, 0.72, 0, 0.47, 0);
-    box(g, c, 0.3, 0.28, 0.32, 0, 0.66, 0.46);
-    box(g, "#7A4A28", 0.16, 0.13, 0.16, 0, 0.6, 0.66);
-    box(g, "#151515", 0.07, 0.06, 0.04, 0, 0.63, 0.75);
-    box(g, "#6B3F20", 0.08, 0.16, 0.1, -0.13, 0.78, 0.42);
-    box(g, "#6B3F20", 0.08, 0.16, 0.1, 0.13, 0.78, 0.42);
-    const t = box(g, c, 0.07, 0.07, 0.32, 0, 0.62, -0.46);
-    t.rotation.x = -0.6;
-    leg(g, legs, 0.09, 0.33, -0.1, 0.34, 0.26, c, 0);
-    leg(g, legs, 0.09, 0.33, 0.1, 0.34, 0.26, c, Math.PI);
-    leg(g, legs, 0.09, 0.33, -0.1, 0.34, -0.26, c, Math.PI);
-    leg(g, legs, 0.09, 0.33, 0.1, 0.34, -0.26, c, 0);
-  } else if (type === "kuh") {
-    const c = "#F7F7F2", p = "#1D1D1D";
-    box(g, c, 0.72, 0.66, 1.32, 0, 1.02, 0);
-    box(g, p, 0.74, 0.32, 0.36, 0, 1.1, 0.15);
-    box(g, p, 0.4, 0.04, 0.4, 0.1, 1.36, -0.35);
-    box(g, p, 0.74, 0.25, 0.25, 0, 0.92, -0.4);
-    box(g, c, 0.42, 0.42, 0.46, 0, 1.18, 0.84);
-    box(g, "#F2A7A7", 0.36, 0.2, 0.12, 0, 1.06, 1.1);
-    box(g, "#EDE3C8", 0.08, 0.14, 0.08, -0.18, 1.45, 0.8);
-    box(g, "#EDE3C8", 0.08, 0.14, 0.08, 0.18, 1.45, 0.8);
-    box(g, "#F2A7A7", 0.3, 0.14, 0.3, 0, 0.66, -0.3);
-    leg(g, legs, 0.15, 0.7, -0.23, 0.72, 0.45, c, 0);
-    leg(g, legs, 0.15, 0.7, 0.23, 0.72, 0.45, c, Math.PI);
-    leg(g, legs, 0.15, 0.7, -0.23, 0.72, -0.45, c, Math.PI);
-    leg(g, legs, 0.15, 0.7, 0.23, 0.72, -0.45, c, 0);
-  } else if (type === "pferd") {
-    const c = "#8B5A2B", m = "#3A2414";
-    box(g, c, 0.52, 0.56, 1.34, 0, 1.3, 0);
-    const nk = box(g, c, 0.3, 0.75, 0.32, 0, 1.68, 0.62);
-    nk.rotation.x = 0.55;
-    const hd = box(g, c, 0.28, 0.28, 0.58, 0, 2, 0.92);
-    hd.rotation.x = 0.35;
-    const mn = box(g, m, 0.08, 0.7, 0.14, 0, 1.75, 0.5);
-    mn.rotation.x = 0.55;
-    const tl = box(g, m, 0.1, 0.6, 0.12, 0, 1.15, -0.72);
-    tl.rotation.x = -0.35;
-    leg(g, legs, 0.13, 1.02, -0.17, 1.05, 0.5, c, 0);
-    leg(g, legs, 0.13, 1.02, 0.17, 1.05, 0.5, c, Math.PI);
-    leg(g, legs, 0.13, 1.02, -0.17, 1.05, -0.5, c, Math.PI);
-    leg(g, legs, 0.13, 1.02, 0.17, 1.05, -0.5, c, 0);
-  } else {
-    box(g, "#FBFBF7", 0.28, 0.28, 0.36, 0, 0.33, 0);
-    box(g, "#FBFBF7", 0.17, 0.2, 0.17, 0, 0.55, 0.17);
-    box(g, "#E23B2E", 0.05, 0.1, 0.14, 0, 0.7, 0.17);
-    box(g, "#F5A623", 0.07, 0.05, 0.1, 0, 0.55, 0.29);
-    box(g, "#E23B2E", 0.05, 0.08, 0.04, 0, 0.47, 0.27);
-    box(g, "#EDEDE6", 0.05, 0.2, 0.16, 0, 0.45, -0.2);
-    leg(g, legs, 0.04, 0.2, -0.07, 0.2, 0, "#F5A623", 0);
-    leg(g, legs, 0.04, 0.2, 0.07, 0.2, 0, "#F5A623", Math.PI);
-  }
+  ANIMAL_BY_ID[type].model({ g, box, mesh, M, G, leg, legs });
   const out = bake(g);
   out.userData.legs = out.children.filter((o) => o.userData.keep);
   return out;

@@ -39,3 +39,25 @@ describe('Wale', () => {
     for (const w of WHALE_LIST) { expect(typeof w.model).toBe('function'); expect(w.scale.sea).toBeGreaterThan(0); }
   });
 });
+
+import { VEHICLE_LIST } from '../../src/content/vehicles/index.js';
+import { ANIMAL_LIST } from '../../src/content/animals/index.js';
+
+describe('Fahrzeuge und Tiere', () => {
+  it('Fahrzeuge haben eindeutige IDs, Kategorie und Tempo', () => {
+    const ids = VEHICLE_LIST.map((v) => v.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    for (const v of VEHICLE_LIST) {
+      expect(['auto', 'see'], v.id).toContain(v.category);
+      expect(v.speed, v.id).toBeGreaterThan(0);
+      expect(v.max, v.id).toBeGreaterThan(v.speed);
+      expect(typeof v.model, v.id).toBe('function');
+      if (v.sub) expect(v.boat, v.id + ': U-Boote sind auch Boote').toBe(true);
+    }
+  });
+  it('Tiere haben eindeutige IDs und Tempo', () => {
+    const ids = ANIMAL_LIST.map((a) => a.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    for (const a of ANIMAL_LIST) { expect(a.speed, a.id).toBeGreaterThan(0); expect(typeof a.model).toBe('function'); }
+  });
+});
