@@ -10,6 +10,7 @@ import { fangData, mergeFang } from '../systems/catch-book.js';
 import { freshWorld, newId, openWorld, saveWorld } from '../core/worlds.js';
 import { setSpeech, speak, speechAvailable, speechOn } from '../systems/speech.js';
 import { mergeQuests, questData } from '../systems/quests.js';
+import { dreamOn, setDream } from '../render/dream.js';
 
 let codeMode='export';
 $('#mExportAll').addEventListener('click',async()=>{
@@ -108,6 +109,9 @@ $('#btnSave').addEventListener('click',()=>{ac();saveWorld(false,false);});
 // ---------- Einstellungen ----------
 const updSpeechBtn=()=>{$('#mSpeech').textContent='Vorlesen: '+(speechOn()?'an':'aus');$('#mSpeech').hidden=!speechAvailable();};
 updSpeechBtn();
+const updDreamBtn=()=>{$('#mDream').textContent='Traumfilter: '+(dreamOn()?'an':'aus');};
+updDreamBtn();
+$('#mDream').addEventListener('click',()=>{ac();setDream(!dreamOn());updDreamBtn();});
 $('#mSpeech').addEventListener('click',()=>{ac();setSpeech(!speechOn());updSpeechBtn();if(speechOn())speak('Ich lese dir jetzt alles vor.');});
 
 export { renderWorlds };

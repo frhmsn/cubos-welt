@@ -13,9 +13,10 @@ scene.fog=new THREE.Fog(0x8fd3ff,95,260);
 const buildCam=new THREE.PerspectiveCamera(45,1,1,900);
 const walkCam=new THREE.PerspectiveCamera(70,1,.05,600); walkCam.rotation.order='YXZ';
 game.cam = buildCam;
-const hemi=new THREE.HemisphereLight(0xdff2ff,0xb8a88a,.6); scene.add(hemi);
+// Boden-Licht leicht lila: weichere, freundlichere Schatten
+const hemi=new THREE.HemisphereLight(0xdff2ff,0xbfb2cf,.6); scene.add(hemi);
 const fill=new THREE.AmbientLight(0xfff4e6,.18); scene.add(fill);
-const sun=new THREE.DirectionalLight(0xfff1d6,1); sun.castShadow=true;
+const sun=new THREE.DirectionalLight(0xffecc8,1); sun.castShadow=true;
 sun.shadow.mapSize.set(2048,2048);
 Object.assign(sun.shadow.camera,{left:-42,right:42,top:42,bottom:-42,near:1,far:220});
 sun.shadow.bias=-.0006; sun.shadow.normalBias=.03;

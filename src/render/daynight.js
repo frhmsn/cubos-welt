@@ -11,6 +11,13 @@ const cNight=new THREE.Color(0x0d1838),cDay=new THREE.Color(0x8fd3ff),cDusk=new 
 const hDay=new THREE.Color(0xdff2ff),hNight=new THREE.Color(0x4a5a9a);
 const ICON_SUN='<svg viewBox="0 0 24 24" fill="none" stroke="#E8A400" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4.6" fill="#FFC21A"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>';
 const ICON_MOON='<svg viewBox="0 0 24 24" fill="#5B6CC9" stroke="#3E4C9E" stroke-width="1.8" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>';
+// Himmel als Verlauf: oben kräftiger, zum Horizont heller und wärmer (wirkt weicher als eine Farbe)
+const skyTop=new THREE.Color(),skyHor=new THREE.Color(),cWhite=new THREE.Color(0xfff6ea),cDeep=new THREE.Color(0x3d7fd6);
+const skyDome=new THREE.Mesh(new THREE.SphereGeometry(450,24,12),new THREE.ShaderMaterial({
+  uniforms:{uTop:{value:skyTop},uHor:{value:skyHor}},side:THREE.BackSide,depthWrite:false,depthTest:false,fog:false,
+  vertexShader:'varying vec3 vP;void main(){vP=normalize(position);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+  fragmentShader:'uniform vec3 uTop,uHor;varying vec3 vP;void main(){float h=clamp(vP.y,0.,1.);gl_FragColor=vec4(mix(uHor,uTop,pow(h,.55)),1.);}'}));
+skyDome.renderOrder=-1000;skyDome.frustumCulled=false;scene.add(skyDome);
 const _sd=new THREE.Vector3(),_sr=new THREE.Vector3(),_su=new THREE.Vector3(),_sf=new THREE.Vector3(),_up=new THREE.Vector3(0,1,0);
 function updateDay(dt,focus){
   if(game.dayTarget!==null){const diff=(game.dayTarget-game.dayT+1)%1,step=dt*.3;if(diff<=step){game.dayT=game.dayTarget;game.dayTarget=null;}else game.dayT=(game.dayT+step)%1;}
@@ -19,7 +26,10 @@ function updateDay(dt,focus){
   const sd=_sd.set(Math.cos(ang),elev,.35).normalize();
   const x=clamp((elev+.12)/.34,0,1),dayF=x*x*(3-2*x),night=1-dayF;
   sky.copy(cNight).lerp(cDay,dayF); const dusk=Math.max(0,1-Math.abs(elev-.03)/.2); sky.lerp(cDusk,dusk*.55);
-  renderer.setClearColor(sky); scene.fog.color.copy(sky);
+  renderer.setClearColor(sky);
+  skyTop.copy(sky).lerp(cDeep,.28*dayF); skyHor.copy(sky).lerp(cWhite,.45*dayF+.08); skyHor.lerp(cDusk,dusk*.35);
+  scene.fog.color.copy(skyHor);
+  skyDome.position.copy(game.cam.position);
   sun.intensity=.92*dayF; sun.visible=dayF>.02;
   const sh=game.mode==='build'?clamp(bc.d*.9,30,110):34;
   if(Math.abs(sh-sun.shadow.camera.right)>2){const c=sun.shadow.camera;c.left=c.bottom=-sh;c.right=c.top=sh;c.far=Math.max(220,sh*3);c.updateProjectionMatrix();}
@@ -30,7 +40,7 @@ function updateDay(dt,focus){
   sun.position.copy(_sf).addScaledVector(sd,70); sun.target.position.copy(_sf);
   moon.intensity=.34*night; moon.position.copy(focus).addScaledVector(sd,-70); moon.target.position.copy(focus);
   moon.visible=night>.03;
-  hemi.intensity=.32+.28*dayF; hemi.color.copy(hNight).lerp(hDay,dayF); fill.intensity=.12-.06*dayF;
+  hemi.intensity=.32+.28*dayF; hemi.color.copy(hNight).lerp(hDay,dayF); fill.intensity=.17-.06*dayF;
   for(const n of nightMats)n.m.emissiveIntensity=n.base+n.k*night;
   stars.material.opacity=night*.9; stars.position.copy(focus);
   sunBall.position.copy(focus).addScaledVector(sd,320); sunBall.visible=elev>-.15;

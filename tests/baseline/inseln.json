@@ -86,7 +86,6 @@
     },
     "ui": {
      "book": false,
-     "toast": false,
      "travel": false,
      "st": false,
      "aq": false,
@@ -129,7 +128,6 @@
     },
     "ui": {
      "book": false,
-     "toast": true,
      "travel": false,
      "st": false,
      "aq": false,

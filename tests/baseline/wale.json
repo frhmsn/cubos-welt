@@ -187,7 +187,6 @@
     },
     "ui": {
      "book": false,
-     "toast": false,
      "travel": false,
      "st": false,
      "aq": false,

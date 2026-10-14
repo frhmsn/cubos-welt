@@ -24,6 +24,8 @@ import { editCam, editScene, placeEditCam } from '../systems/editor.js';
 import { animals, cars, ferries, pops, tiles } from './world-data.js';
 import { focus } from './focus.js';
 import { saveWorld } from './worlds.js';
+import { dreamAutoOff, renderDream } from '../render/dream.js';
+import { updateSparkles } from '../render/sparkles.js';
 
 // ---------- Schleife ----------
 function resize(){
@@ -41,13 +43,15 @@ function frame(now){
   perf.cool-=raw;
   if(perf.n>=50){const avg=perf.acc/perf.n;perf.acc=perf.n=0;
     if(perf.cool<=0&&game.mode!=='edit'){
-      if(avg>23&&game.dpr>1){if(perf.raised)game.dprLock=true;game.dpr=Math.max(1,+(game.dpr-.25).toFixed(2));perf.raised=false;renderer.setPixelRatio(game.dpr);resize();perf.cool=2500;}
+      if(avg>26&&game.dpr<=1&&dreamAutoOff()){perf.cool=4000;}
+      else if(avg>23&&game.dpr>1){if(perf.raised)game.dprLock=true;game.dpr=Math.max(1,+(game.dpr-.25).toFixed(2));perf.raised=false;renderer.setPixelRatio(game.dpr);resize();perf.cool=2500;}
       else if(avg<18&&game.dpr<dprMax&&!game.dprLock){game.dpr=Math.min(dprMax,+(game.dpr+.25).toFixed(2));perf.raised=true;renderer.setPixelRatio(game.dpr);resize();perf.cool=5000;}
       else perf.raised=false;
     }}
   if(game.mode==='build'||game.mode==='edit')placeBuildCam(); else if(!game.traveling){if(game.mode==='walk')updateWalk(dt); else if(game.mode==='drive')updateDrive(dt);}
   if(game.mode==='build'||game.mode==='edit')focus.set(bc.x,0,bc.z); else if(game.mode==='walk')focus.set(pl.x,0,pl.z); else if(game.mode==='drive'&&game.driveCar)focus.set(game.driveCar.x,0,game.driveCar.z); else if(game.mode==='ride'&&game.rideTrain)focus.set(game.rideTrain.x,0,game.rideTrain.z);
   const night=updateDay(dt,focus);
+  updateSparkles(dt,focus,night,game.mode!=='edit'&&!subUnder());
   updateLights(dt,night); updateGarages(dt);
   if(!game.traveling){
     updateTrains(dt);
@@ -70,14 +74,14 @@ function frame(now){
   if(game.mode==='edit'){
     placeEditCam(); renderer.setClearColor(0xbfe6ff);
     for(const n of nightMats)n.m.emissiveIntensity=n.base;
-    renderer.render(editScene,editCam);
+    renderDream(editScene,editCam,{tilt:.35,night:0});
   } else {
     const uw=subUnder();
     if(uw!==game.wasUnder){game.wasUnder=uw;const fd=$('#fade');fd.classList.add('on');requestAnimationFrame(()=>requestAnimationFrame(()=>fd.classList.remove('on')));
       const c=game.driveCar;if(uw&&c.g.parent===scene){scene.remove(c.g);underScene.add(c.g);}else if(!uw&&c&&c.g.parent===underScene){underScene.remove(c.g);scene.add(c.g);}
       if(!uw&&c&&!c.diving)destroyUnderwater();}
-    if(uw){const nt=updateDay.lastNight||0;uHemi.intensity=.95-.6*nt;uSun.intensity=.55-.45*nt;renderer.render(underScene,walkCam);}
-    else renderer.render(scene,game.cam);
+    if(uw){const nt=updateDay.lastNight||0;uHemi.intensity=.95-.6*nt;uSun.intensity=.55-.45*nt;renderDream(underScene,walkCam,{tilt:0,night:nt});}
+    else renderDream(scene,game.cam,{tilt:game.mode==='build'?1:.22,night});
   }
   requestAnimationFrame(frame);
 }
