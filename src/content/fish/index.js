@@ -22,7 +22,7 @@ import kalmar from './kalmar.js';
 export const FISH_LIST = [barsch, hecht, karpfen, wels, stoer, thunfisch, hai, makrele, bonito, mahimahi, barrakuda, schwertfisch, marlin, schwarzermarlin, gestreiftermarlin, mondfisch, rochen, kalmar];
 
 const WATER = { see: 'wasser', meer: 'meer' }; // Habitat -> Bodenart im Raster
-const whereText = (h) => (h.includes('see') && h.includes('meer') ? 'in Seen und im Meer' : h.includes('meer') ? 'im Meer' : 'in Seen');
+const whereText = (h) => (h.includes('see') && h.includes('meer') ? 'in Seen, Flüssen und im Meer' : h.includes('meer') ? 'im Meer' : 'in Seen und Flüssen');
 
 /** Prüft eine Fischdatei beim Start, damit Tippfehler sofort auffallen. */
 function check(f) {

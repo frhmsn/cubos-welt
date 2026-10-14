@@ -4,7 +4,7 @@ export default {
   label: 'Kalmar', plural: 'Kalmare',
   length: [.3, 1.2], // Meter, zufällig beim Fang
   habitat: ['meer'],
-  spawn: { meer: .03 }, // Häufigkeit je Gewässer
+  spawn: { meer: .04 }, // Häufigkeit je Gewässer
   speed: 1.1, jumps: false,
   scale: { shadow: .8, underwater: 1.5, aquarium: .5, rod: 1.3, jump: 1.1 },
   model({ g, body, box }) {

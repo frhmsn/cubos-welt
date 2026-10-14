@@ -4,7 +4,7 @@ export default {
   label: 'Rochen', plural: 'Rochen',
   length: [.5, 2], // Meter, zufällig beim Fang
   habitat: ['meer'],
-  spawn: { meer: .05 }, // Häufigkeit je Gewässer
+  spawn: { meer: .06 }, // Häufigkeit je Gewässer
   speed: .7, jumps: false,
   scale: { shadow: 1.4, underwater: 1.3, aquarium: .4, rod: 1.1, jump: 1.1 },
   model({ g, body, box }) {

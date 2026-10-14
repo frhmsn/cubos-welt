@@ -1,23 +1,29 @@
 # Backlog
 
-Technische Baustellen, die beim Umbau aufgefallen sind. Spiel-Wünsche gehören als Issue auf GitHub.
+Technische Baustellen. Spiel-Wünsche gehören als Issue auf GitHub.
+
+## Erledigt (Oktober 2026)
+
+- Zyklus-Kern von 28 auf 18 Module verkleinert (world-data, hint, focus, autosave, catch-book als Blatt-Module).
+- Fahrzeuge, Tiere, Gebäude als Datendateien wie Fische und Wale.
+- Weltverwaltung (core/worlds.js) von der Oberfläche getrennt.
+- Startwerte des geteilten Zustands zentral in core/state.js.
+- Luftblasen unter Wasser rund und nicht mehr riesig vor der Kamera.
+- Test-Szenarien für Bauwerkstatt und Weltreise.
+- Vollbild-Knopf wieder verdrahtet (war seit Umbau Phase 2 ohne Funktion), Prüfung auf nie geladene Module.
 
 ## Architektur
 
-- **Zyklus-Kern verkleinern.** 28 Module hängen gegenseitig voneinander ab (`npm run deps`). Größte Verursacher: `ui/modes.js` (hint, setMode) wird von fast allem importiert, `systems/player.js` (pl, mode) ebenso. Weg: `hint` in ein eigenes, zyklusfreies Modul; Modus-Wechsel als Ereignis.
-- **Gebäude, Fahrzeuge, Tiere als Datendateien** wie bei Fischen (`content/buildings/<id>.js` mit Katalog-Eintrag + Modell). `carModel()` ist noch ein großer if-Block.
-- **`ui/worlds-menu.js` trennen:** saveWorld/openWorld sind Logik und gehören nach `core/`.
-- **Startwerte der `game`-Felder** stehen verstreut in den Modulen. Besser zentral in `core/state.js` mit Kommentar je Feld.
-- Altnamen: localStorage-Schlüssel und Welt-Code-Präfix heißen noch `kunos`. Bleibt so (Spielstände), aber neue Schlüssel mit `cubos-`.
+- **Zyklus-Kern weiter verkleinern.** Größte Verursacher: `core/world.js` ruft Systeme auf (removeTrain, clearAquarium ...). Weg: Ereignis 'feld:geleert', auf das die Systeme selbst reagieren.
+- **Bodenarten, Gleise, Züge und Fähre als Datendateien.**
+- Altnamen: localStorage-Schlüssel und Welt-Code-Präfix heißen noch `kunos`. Bleibt so (Spielstände), neue Schlüssel mit `cubos-`.
 
 ## Grafik und Spielgefühl
 
-- Luftblasen unter Wasser sind Quadrate und werden direkt vor der Kamera riesig (gut sichtbar im Screenshot `uboot-02-getaucht`). Runde Textur und Größenbegrenzung.
-- Fangfenster blendet per CSS ein, auf Screenshots halb durchsichtig. Kein Fehler, aber Tests können den Moment nicht sicher zeigen.
-- Three.js r128 ist von 2021. Update erst, wenn es einen konkreten Grund gibt (Leistung, neue Effekte).
+- Welt-Vorschaubilder im Menü zeigen manchmal eine große gelbe Scheibe (Sonne vor der Kamera beim Vorschaubild).
+- Fangfenster blendet per CSS ein, auf Screenshots halb durchsichtig. Kein Fehler.
+- Three.js r128 ist von 2021. Update erst mit konkretem Grund.
 
 ## Tests
 
-- Szenario für die Bauwerkstatt (Haus Stein für Stein) fehlt.
-- Szenario für Weltreise (Tunnel, Seetor) fehlt.
-- Leistungsmessung (Bilder pro Sekunde auf dem iPad) gibt es nur manuell.
+- Leistungsmessung (Bilder pro Sekunde) geht im Test-Browser nicht sinnvoll (Software-Grafik). Auf dem iPad von Hand prüfen.

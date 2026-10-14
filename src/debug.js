@@ -16,6 +16,7 @@ import { emptyWorld, serialize } from './core/save.js';
 import { sampleWorld } from './content/sample-world.js';
 import { animals, aquariums, cars, ferries, trains } from './core/world-data.js';
 import { catchBook, whaleBook } from './systems/catch-book.js';
+import { closeEditor, editTap, openEditor } from './systems/editor.js';
 
 // ---------- Test-Schnittstelle ----------
 // Modelle zum Anschauen nebeneinander vor die Baukamera stellen (für neue Arten).
@@ -36,6 +37,9 @@ function lineup(ids, size = 1.6) {
 
 if (window.__CUBO_DEBUG) window.__cubo = {
   lineup,
+  openEditor: (i, j) => openEditor(i, j),
+  closeEditor: () => closeEditor(),
+  editTap: (x, y) => editTap(x, y),
   frames: (n) => window.__frames(n),
   sel: (id) => select(id),
   tap: (i, j) => apply(i, j, false),
@@ -71,7 +75,7 @@ if (window.__CUBO_DEBUG) window.__cubo = {
       catchBook: JSON.stringify(catchBook),
       whaleBook: JSON.stringify(whaleBook),
       aquarium: [...aquariums.values()].map((a) => a.fish.length),
-      ui: { st: vis('stPanel'), aq: vis('aqPanel'), dive: vis('btnDive'), fish: vis('btnFish'), menu: vis('menu'), catch: vis('catch') },
+      ui: { travel: vis('travel'), st: vis('stPanel'), aq: vis('aqPanel'), dive: vis('btnDive'), fish: vis('btnFish'), menu: vis('menu'), catch: vis('catch') },
     };
   },
 };

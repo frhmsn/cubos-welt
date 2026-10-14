@@ -20,15 +20,17 @@ describe('Fische', () => {
       expect(f.plural, f.id).not.toBe('');
     }
   });
+  it('Meer und Süßwasser sind getrennt (Wunsch: im Meer nur Meeresbewohner)', () => {
+    for (const f of FISH_LIST) expect(f.habitat.length, f.id).toBe(1);
+  });
   it('Häufigkeiten ergeben je Gewässer zusammen 1', () => {
     expect(sum(LAKE_FISH)).toBeCloseTo(1, 5);
     expect(sum(SEA_FISH)).toBeCloseTo(1, 5);
   });
   it('Kurzform FISH hat alle Arten', () => {
     expect(Object.keys(FISH)).toEqual(FISH_LIST.map((f) => f.id));
-    expect(FISH.barsch.where).toBe('in Seen und im Meer');
     expect(FISH.hai.where).toBe('im Meer');
-    expect(FISH.hecht.where).toBe('in Seen');
+    expect(FISH.hecht.where).toBe('in Seen und Flüssen');
   });
 });
 

@@ -4,7 +4,7 @@ export default {
   label: 'Barrakuda', plural: 'Barrakudas',
   length: [.6, 1.8], // Meter, zufällig beim Fang
   habitat: ['meer'],
-  spawn: { meer: .07 }, // Häufigkeit je Gewässer
+  spawn: { meer: .08 }, // Häufigkeit je Gewässer
   speed: 1.4, jumps: false,
   scale: { shadow: 1.2, underwater: 1.2, aquarium: .32, rod: 1, jump: 1.1 },
   model({ g, body, box, mesh, M, finGeo, fl }) {

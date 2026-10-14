@@ -88,8 +88,8 @@ const barsch = {
   plural: "Barsche",
   length: [0.18, 0.45],
   // Meter, zufällig beim Fang
-  habitat: ["see", "meer"],
-  spawn: { see: 0.3, meer: 0.09 },
+  habitat: ["see"],
+  spawn: { see: 0.3 },
   // Häufigkeit je Gewässer
   speed: 0.8,
   jumps: true,
@@ -187,8 +187,9 @@ const stoer = {
   plural: "Störe",
   length: [0.8, 2.5],
   // Meter, zufällig beim Fang
-  habitat: ["see", "meer"],
-  spawn: { see: 0.1, meer: 0.06 },
+  habitat: ["see"],
+  // lebt im Fluss und laicht dort
+  spawn: { see: 0.1 },
   // Häufigkeit je Gewässer
   speed: 0.6,
   jumps: false,
@@ -220,7 +221,7 @@ const thunfisch = {
   length: [0.8, 2.2],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
-  spawn: { meer: 0.18 },
+  spawn: { meer: 0.23 },
   // Häufigkeit je Gewässer
   speed: 1.6,
   jumps: true,
@@ -277,7 +278,7 @@ const makrele = {
   length: [0.25, 0.5],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
-  spawn: { meer: 0.12 },
+  spawn: { meer: 0.16 },
   // Häufigkeit je Gewässer
   speed: 1.4,
   jumps: true,
@@ -304,7 +305,7 @@ const bonito = {
   length: [0.4, 0.8],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
-  spawn: { meer: 0.09 },
+  spawn: { meer: 0.11 },
   // Häufigkeit je Gewässer
   speed: 1.5,
   jumps: true,
@@ -331,7 +332,7 @@ const mahimahi = {
   length: [0.6, 1.6],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
-  spawn: { meer: 0.08 },
+  spawn: { meer: 0.09 },
   // Häufigkeit je Gewässer
   speed: 1.3,
   jumps: true,
@@ -356,7 +357,7 @@ const barrakuda = {
   length: [0.6, 1.8],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
-  spawn: { meer: 0.07 },
+  spawn: { meer: 0.08 },
   // Häufigkeit je Gewässer
   speed: 1.4,
   jumps: false,
@@ -523,7 +524,7 @@ const rochen = {
   length: [0.5, 2],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
-  spawn: { meer: 0.05 },
+  spawn: { meer: 0.06 },
   // Häufigkeit je Gewässer
   speed: 0.7,
   jumps: false,
@@ -546,7 +547,7 @@ const kalmar = {
   length: [0.3, 1.2],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
-  spawn: { meer: 0.03 },
+  spawn: { meer: 0.04 },
   // Häufigkeit je Gewässer
   speed: 1.1,
   jumps: false,
@@ -571,7 +572,7 @@ const kalmar = {
 };
 const FISH_LIST = [barsch, hecht, karpfen, wels, stoer, thunfisch, hai, makrele, bonito, mahimahi, barrakuda, schwertfisch, marlin, schwarzermarlin, gestreiftermarlin, mondfisch, rochen, kalmar];
 const WATER = { see: "wasser", meer: "meer" };
-const whereText = (h) => h.includes("see") && h.includes("meer") ? "in Seen und im Meer" : h.includes("meer") ? "im Meer" : "in Seen";
+const whereText = (h) => h.includes("see") && h.includes("meer") ? "in Seen, Flüssen und im Meer" : h.includes("meer") ? "im Meer" : "in Seen und Flüssen";
 function check(f) {
   const need = ["id", "label", "plural", "length", "habitat", "spawn", "speed", "scale", "model"];
   for (const k of need) if (f[k] == null) throw new Error(`Fisch ${f.id || "?"}: Feld "${k}" fehlt`);
@@ -6736,6 +6737,9 @@ function lineup(ids, size = 1.6) {
 }
 if (window.__CUBO_DEBUG) window.__cubo = {
   lineup,
+  openEditor: (i, j) => openEditor(i, j),
+  closeEditor: () => closeEditor(),
+  editTap: (x, y) => editTap(x, y),
   frames: (n) => window.__frames(n),
   sel: (id) => select(id),
   tap: (i, j) => apply(i, j, false),
@@ -6800,7 +6804,7 @@ if (window.__CUBO_DEBUG) window.__cubo = {
       catchBook: JSON.stringify(catchBook),
       whaleBook: JSON.stringify(whaleBook),
       aquarium: [...aquariums.values()].map((a) => a.fish.length),
-      ui: { st: vis("stPanel"), aq: vis("aqPanel"), dive: vis("btnDive"), fish: vis("btnFish"), menu: vis("menu"), catch: vis("catch") }
+      ui: { travel: vis("travel"), st: vis("stPanel"), aq: vis("aqPanel"), dive: vis("btnDive"), fish: vis("btnFish"), menu: vis("menu"), catch: vis("catch") }
     };
   }
 };

@@ -3,8 +3,8 @@ export default {
   id: 'barsch',
   label: 'Barsch', plural: 'Barsche',
   length: [.18, .45], // Meter, zufällig beim Fang
-  habitat: ['see', 'meer'],
-  spawn: { see: .3, meer: .09 }, // Häufigkeit je Gewässer
+  habitat: ['see'],
+  spawn: { see: .3 }, // Häufigkeit je Gewässer
   speed: .8, jumps: true,
   scale: { shadow: .75, underwater: 1.8, aquarium: .55, rod: 1.6, jump: 1.4 },
   model({ g, body, box, mesh, M, finGeo, fl }) {

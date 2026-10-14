@@ -90,9 +90,9 @@
       false
      ],
      [
-      "makrele",
-      2.021,
-      29.751,
+      "bonito",
+      2.007,
+      29.782,
       false
      ]
     ],
@@ -153,6 +153,7 @@
     "whaleBook": "{\"buckelwal\":0,\"pottwal\":0,\"orca\":0}",
     "aquarium": [],
     "ui": {
+     "travel": false,
      "st": false,
      "aq": false,
      "dive": false,
@@ -249,21 +250,21 @@
       false
      ],
      [
-      "makrele",
-      1.609,
-      34.519,
+      "bonito",
+      0.189,
+      33.408,
       false
      ],
      [
-      "thunfisch",
-      3.063,
-      33.105,
+      "hai",
+      2.553,
+      33.307,
       false
      ],
      [
-      "rochen",
-      -35.51,
-      29.46,
+      "kalmar",
+      -35.469,
+      29.919,
       false
      ]
     ],
@@ -324,6 +325,7 @@
     "whaleBook": "{\"buckelwal\":0,\"pottwal\":0,\"orca\":0}",
     "aquarium": [],
     "ui": {
+     "travel": false,
      "st": false,
      "aq": false,
      "dive": false,

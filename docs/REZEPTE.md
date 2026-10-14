@@ -8,7 +8,7 @@ Schritt für Schritt für die häufigsten Erweiterungen. Nach jedem Rezept: `npm
 2. Werte anpassen:
    - `label`, `plural`, optional `article: 'eine'` (für "Du hast eine Makrele gefangen")
    - `length: [min, max]` in Metern
-   - `habitat: ['see']`, `['meer']` oder beide
+   - `habitat: ['see']` (Seen und Flüsse) oder `['meer']`. Regel: nur eins von beiden, im Meer leben nur Meeresbewohner (der Unit-Test prüft das).
    - `spawn: { see: 0.1 }` Häufigkeit je Gewässer. **Die Summe aller Arten je Gewässer muss 1 bleiben**, also andere Arten etwas verringern (der Unit-Test prüft das).
    - `speed`, `jumps`, `scale` (shadow = Schatten im Wasser, underwater, aquarium, rod = an der Angel, jump = beim Springen)
    - optional: `wow: true` (besonderer Fang), `bigCatch`, `maxCount`, `dorsalFin`
@@ -22,21 +22,24 @@ Schritt für Schritt für die häufigsten Erweiterungen. Nach jedem Rezept: `npm
 1. `src/content/whales/orca.js` kopieren, `id`, `label`, `plural`, `scale` und `model({ g, ell, fluke, box })` anpassen. Der Wal schaut nach +z, Länge etwa 10.
 2. In `src/content/whales/index.js` eintragen.
 
-## Neues Gebäude oder Objekt
+## Neues Gebäude, Pflanze oder Licht
 
-(Noch im alten Stil, siehe Backlog.)
-
-1. In `src/content/catalog.js` bei `ITEMS` eintragen: `turm:{kind:'obj',label:'Turm',house:true}`. `house:true` heißt: man kann hineingehen, Straßen-Ausrichtung zur Tür. Weitere Schalter: `walkable` (Spielfigur läuft durch), `rot` (drehbar), `paint` (mit dem Finger malen), `big` (3x3 Felder).
-2. In `src/content/models/buildings.js` bei `MODELS` eine Funktion `turm(seed){ ... return {g, cols, lights}; }` anlegen. Ein Feld ist 4x4 Einheiten, Mitte bei 0. `shell(g, cols, {...})` baut Wände mit Tür und Kollision. `cols` sind Kollisionsformen: `['b', x0, x1, z0, z1]` (Rechteck) oder `['c', x, z, r]` (Kreis). `lights`: `[x, y, z, farbe, stärke, reichweite]`.
-3. In `CATS` die ID in die passende Kategorie eintragen (`haus`, `natur`, `licht` ...).
-4. Vorschaubild entsteht automatisch (`ui/inventory.js`, `makeThumbs`).
-5. Szenario `bauen` in `tests/e2e/scenarios.mjs` um das neue Objekt ergänzen.
+1. `src/content/buildings/haus.js` nach `src/content/buildings/<id>.js` kopieren.
+2. `label`, `category` (`haus`, `natur` oder `licht`) und Schalter setzen: `house` (begehbar, Tür zur Straße), `walkable` (Spielfigur läuft hindurch), `rot` (drehbar), `paint` (mit dem Finger malen), `big` (3x3 Felder).
+3. `model(seed, o, { ... })` gestalten. Ein Feld ist 4x4 Einheiten, Mitte bei 0, Tür nach +z. Die Helfer im dritten Parameter (`box`, `mesh`, `shell`, `gable`, `glow`, Materialien ...) kommen aus `content/models/buildings.js`. Rückgabe `{ g, cols, lights }`: `cols` sind Kollisionsformen `['b', x0, x1, z0, z1]` oder `['c', x, z, r]`, `lights` sind `[x, y, z, farbe, stärke, reichweite]`.
+4. In `src/content/buildings/index.js` eintragen. Katalog, Inventar und Vorschaubild entstehen automatisch.
+5. Szenario `bauen` in `tests/e2e/scenarios.mjs` um das neue Ding ergänzen.
 
 ## Neues Fahrzeug
 
-1. `ITEMS`: `traktor:{kind:'car',label:'Traktor',speed:2.5,max:7}` (Boote: `boat:true`).
-2. `src/content/models/vehicles.js`, Funktion `carModel(type)`: Zweig für das Modell. Fahrzeug schaut nach +z.
-3. In `CATS` (`auto` oder `see`) eintragen.
+1. `src/content/vehicles/lambo.js` kopieren. `category` ist `auto` oder `see`, dazu `speed`, `max`, optional `siren`, `boat`, `sub`.
+2. `model({ g, box, wheels, lights, ... })`: Fahrzeug schaut nach +z. `wheels(g, xs, zs, r)` und `lights(g, y, zVorne, zHinten, xs)` helfen.
+3. In `src/content/vehicles/index.js` eintragen.
+
+## Neues Tier
+
+1. `src/content/animals/hund.js` kopieren, `label`, `speed` und `model({ g, box, leg, legs })` anpassen. Beine mit `leg(...)` anlegen, dann wackeln sie beim Laufen.
+2. In `src/content/animals/index.js` eintragen.
 
 ## Neues Ereignis
 
@@ -55,6 +58,16 @@ Schritt für Schritt für die häufigsten Erweiterungen. Nach jedem Rezept: `npm
 1. In `tests/e2e/scenarios.mjs` eine Funktion ergänzen. Werkzeuge: `api(page, 'sel', id)`, `place(page, id, [[i, j], ...])`, `frames(page, n)` (1 Bild = 20 ms), `snap('name')`.
 2. Braucht das Szenario neue Zugriffe ins Spiel, `src/debug.js` erweitern.
 3. `npm run build && npm run test:e2e`, Screenshots ansehen, `npm run test:baseline`.
+
+## Modell ansehen
+
+`npm run build && node tests/e2e/look.mjs rochen kalmar` legt die Modelle nebeneinander und speichert `tests/output/look.png`. Wale mit `wal:orca`.
+
+## Code verschoben, Import-Zyklus geändert
+
+1. `npm run lint -- --fix` entfernt ungenutzte Importe, `npm run lint` meldet fehlende.
+2. `npm run deps` zeigt den Zyklus-Kern und Module, die nie geladen werden.
+3. `node tools/rechain.mjs` pflegt die Ladereihenfolge. Ein neues Kern-Modul mit `--insert <modul> --after <modul>` einordnen.
 
 ## Veröffentlichen
 

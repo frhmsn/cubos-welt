@@ -92,6 +92,40 @@ export const scenarios = {
     await snap('mitfahren');
   },
 
+  async werkstatt({ page, snap }) {
+    await api(page, 'emptyWorld');
+    await place(page, 'strasse', line(2, 17, 11));
+    await place(page, 'eigen', [[9, 10]]);
+    await api(page, 'openEditor', 9, 10);
+    await frames(page, 10);
+    for (const [x, y] of [[590, 420], [590, 380], [640, 420], [540, 420], [590, 340]]) { await api(page, 'editTap', x, y); await frames(page, 2); }
+    await frames(page, 10);
+    await snap('in-der-werkstatt');
+    await api(page, 'closeEditor');
+    await frames(page, 30);
+    await cam(page, 9, 10, 26);
+    await frames(page, 30);
+    await snap('haus-in-der-welt');
+  },
+
+  async reise({ page, snap }) {
+    await api(page, 'emptyWorld');
+    await place(page, 'schiene', line(2, 12, 10));
+    await place(page, 'bahnhof', [[4, 10]]);
+    await place(page, 'tunnel', [[13, 10]]);
+    await place(page, 'zug', [[6, 10]]);
+    await frames(page, 30);
+    await api(page, 'rideFirstTrain');
+    for (let k = 0; k < 80; k++) {
+      if ((await page.evaluate(() => window.__cubo.fp().ui.travel))) break;
+      await frames(page, 15);
+    }
+    await snap('am-tunnel');
+    await click(page, '#tvNewEmpty');
+    await frames(page, 120);
+    await snap('neue-welt');
+  },
+
   async faehre({ page, snap }) {
     await place(page, 'faehre', [[10, 18]]);
     await frames(page, 60);

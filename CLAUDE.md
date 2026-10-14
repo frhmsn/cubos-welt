@@ -9,7 +9,7 @@ Ein Vater-Sohn-Projekt. Die Wünsche des Kindes sind die Produkt-Roadmap.
 npm ci                 # einmalig
 npm test               # Logik-Tests (vitest, Sekunden)
 npm run build          # src/ -> App-Dateien im Repo-Wurzelverzeichnis (GitHub Pages)
-npm run test:e2e       # Browser-Rundgang (12 Szenarien) + Vergleich mit tests/baseline (~2 Min.)
+npm run test:e2e       # Browser-Rundgang (14 Szenarien) + Vergleich mit tests/baseline (~2 Min.)
 npm run check          # alles zusammen, vor jedem Commit
 npm run test:baseline  # aktuellen Lauf als neue Referenz übernehmen (nur bei gewollten Änderungen)
 npm run deps           # Import-Zyklen anzeigen

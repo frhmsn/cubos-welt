@@ -4,7 +4,7 @@ export default {
   label: 'Mahi-Mahi', plural: 'Mahi-Mahis',
   length: [.6, 1.6], // Meter, zufällig beim Fang
   habitat: ['meer'],
-  spawn: { meer: .08 }, // Häufigkeit je Gewässer
+  spawn: { meer: .09 }, // Häufigkeit je Gewässer
   speed: 1.3, jumps: true,
   scale: { shadow: 1.2, underwater: 1.3, aquarium: .36, rod: 1.1, jump: 1.1 },
   model({ g, body, box, mesh, M, finGeo, fl }) {

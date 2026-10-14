@@ -3,8 +3,8 @@ export default {
   id: 'stoer',
   label: 'Stör', plural: 'Störe',
   length: [.8, 2.5], // Meter, zufällig beim Fang
-  habitat: ['see', 'meer'],
-  spawn: { see: .1, meer: .06 }, // Häufigkeit je Gewässer
+  habitat: ['see'], // lebt im Fluss und laicht dort
+  spawn: { see: .1 }, // Häufigkeit je Gewässer
   speed: .6, jumps: false,
   scale: { shadow: 1.7, underwater: 1.2, aquarium: .28, rod: .9, jump: 1.1 },
   model({ g, body, box, mesh, M, finGeo, fl }) {

@@ -125,4 +125,4 @@ $('#eUndo').addEventListener('click',()=>{ac();if(edit&&edit.undo.length){edit.v
 $('#eTemplate').addEventListener('click',()=>{ac();if(!edit)return;pushUndo();edit.v=TEMPLATE.split('');refreshVox();plop();});
 $('#eClear').addEventListener('click',()=>{ac();if(!edit)return;pushUndo();edit.v=new Array(VX*VX*VY).fill('.');refreshVox();tone(200,.25,'sawtooth',.06,0,.5);hint('Alles weg. Mit dem Pfeil oben holst du es zurück.',3000);});
 
-export { ec, editCam, editScene, editTap, openEditor, placeEditCam, renderEditTray };
+export { closeEditor, ec, editCam, editScene, editTap, openEditor, placeEditCam, renderEditTray };
