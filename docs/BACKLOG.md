@@ -14,7 +14,6 @@ Grundidee: Aufgaben führen durchs Spiel und bringen es bei, sperren aber nichts
 Später:
 - Auf dem iPad prüfen: Erzählerstimme (Tempo, Lautstärke neben den Tönen), Traumfilter-Leistung, Lesbarkeit der Aufgaben
 - Vorlesen für Zahlen ("3 Barsche gefangen", Fischlänge): Sätze mit Zahlen 1 bis 20 vorab sprechen
-- Feine Streifen auf großen Wiesen (Schatten-Akne, durch die Unschärfe sichtbarer)
 - Bonus-Dinge für weitere Kapitel (z. B. Leuchtturm, Regenbogen-Boot)
 - Weltkarte: alle Welten als Inseln auf einer Seekarte, antippen und hinreisen
 - Wolkenschatten, die über die Landschaft ziehen
@@ -29,6 +28,8 @@ Später:
 - Startwerte des geteilten Zustands zentral in core/state.js.
 - Luftblasen unter Wasser rund und nicht mehr riesig vor der Kamera.
 - Test-Szenarien für Bauwerkstatt und Weltreise.
+- Streifen beim Herauszoomen behoben: das Bild des Traumfilters hatte nur 16 Bit Tiefe (Three.js r128), jetzt 24 Bit. Prüfen mit `node tests/e2e/zoom.mjs`.
+- Unschärfe in allen Stilen etwa halbiert, Spielzeug ist der Standard-Stil.
 - Vollbild-Knopf wieder verdrahtet (war seit Umbau Phase 2 ohne Funktion), Prüfung auf nie geladene Module.
 
 ## Architektur

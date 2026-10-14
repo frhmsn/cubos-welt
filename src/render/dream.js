@@ -2,7 +2,7 @@
 //   Miniatur-Unschärfe oben und unten (Tilt-Shift), sanftes Leuchten (Bloom),
 //   Pastellfarben mit leicht aufgehellten, lila Schatten, weiche Vignette.
 // Leistung: Szene einmal in voller Auflösung (mit Kantenglättung), Unschärfe in halber Auflösung (3 kleine Durchgänge).
-// Stile (Bilderbuch, Spielzeug, Märchenbuch, Abendgold, Klar) im Menü wählbar; schaltet sich selbst ab, wenn das Gerät zu langsam ist (core/loop.js).
+// Stile (Spielzeug als Standard, Bilderbuch, Märchenbuch, Abendgold, Pastell, Klar) im Menü wählbar; schaltet sich selbst ab, wenn das Gerät zu langsam ist (core/loop.js).
 import { renderer } from './renderer.js';
 
 const KEY = 'cubos-traumfilter';
@@ -36,18 +36,18 @@ const blurMat = new THREE.ShaderMaterial({
 // Jeder Stil ist nur ein Satz Zahlen für denselben Abschluss-Shader. Neuer Stil: Eintrag hier ergänzen.
 const STYLES = {
   klar:       { label: 'Klar',        tilt: 0,   focusW: .1,  bloom: 0,   sat: 1,    contrast: 1,    lift: [0, 0, 0],         warm: [1, 1, 1],          vig: 0,   grain: 0,   ink: 0 },
-  bilderbuch: { label: 'Bilderbuch',  tilt: 1,   focusW: .1,  bloom: 1,   sat: .86,  contrast: .93,  lift: [.05, .04, .065],  warm: [1.03, 1, .965],    vig: .5,  grain: 0,   ink: 0 },
-  diorama:    { label: 'Spielzeug',   tilt: 1.8, focusW: .02, bloom: .7,  sat: 1.3,  contrast: 1.12, lift: [0, 0, .01],       warm: [1.05, 1.02, .97],  vig: .25, grain: 0,   ink: 0,
+  bilderbuch: { label: 'Bilderbuch',  tilt: .5,  focusW: .14, bloom: 1,   sat: .86,  contrast: .93,  lift: [.05, .04, .065],  warm: [1.03, 1, .965],    vig: .5,  grain: 0,   ink: 0 },
+  diorama:    { label: 'Spielzeug',   tilt: .6,  focusW: .12, bloom: .7,  sat: 1.3,  contrast: 1.12, lift: [0, 0, .01],       warm: [1.05, 1.02, .97],  vig: .25, grain: 0,   ink: 0,
     light: { sun: 0xfff6e0, sunK: 1.15, skyTop: 0x2f8cff, skyHor: 0xbfe8ff, skyMix: .8 } },
-  maerchen:   { label: 'Märchenbuch', tilt: .35, focusW: .12, bloom: 1.1, sat: .62,  contrast: .88,  lift: [.1, .085, .055],  warm: [1.06, 1.01, .9],   vig: .75, grain: .2,  ink: 1.6,
+  maerchen:   { label: 'Märchenbuch', tilt: .2,  focusW: .12, bloom: 1.1, sat: .62,  contrast: .88,  lift: [.1, .085, .055],  warm: [1.06, 1.01, .9],   vig: .75, grain: .2,  ink: 1.6,
     light: { sun: 0xfff0d0, sunK: .95, skyTop: 0x9fc6e8, skyHor: 0xf6ead2, skyMix: .85, ground: 0xc8b8a8 } },
-  abendgold:  { label: 'Abendgold',   tilt: .8,  focusW: .1,  bloom: 1.9, sat: 1.05, contrast: .95,  lift: [.07, .03, .02],   warm: [1.18, .97, .78],   vig: .8,  grain: 0,   ink: 0,
+  abendgold:  { label: 'Abendgold',   tilt: .4,  focusW: .14, bloom: 1.9, sat: 1.05, contrast: .95,  lift: [.07, .03, .02],   warm: [1.18, .97, .78],   vig: .8,  grain: 0,   ink: 0,
     light: { sun: 0xffb46a, sunK: 1.05, skyTop: 0x6d7fd0, skyHor: 0xffc58a, skyMix: .9, ground: 0xc79a8a } },
-  pastell:    { label: 'Pastell',     tilt: .9,  focusW: .1,  bloom: 1.3, sat: .55,  contrast: .82,  lift: [.15, .12, .17],   warm: [1.02, .98, 1.04],  vig: .35, grain: .04, ink: 0,
+  pastell:    { label: 'Pastell',     tilt: .45, focusW: .14, bloom: 1.3, sat: .55,  contrast: .82,  lift: [.15, .12, .17],   warm: [1.02, .98, 1.04],  vig: .35, grain: .04, ink: 0,
     light: { sun: 0xfff0f6, sunK: .95, skyTop: 0xb9b2f0, skyHor: 0xffd9ec, skyMix: .85, ground: 0xd8c0e8 } },
 };
 const STYLE_KEY = 'cubos-stil';
-let style = 'bilderbuch';
+let style = 'diorama';
 try { const v = localStorage.getItem(STYLE_KEY); if (v && STYLES[v]) style = v; else if (localStorage.getItem(KEY) === '0') style = 'klar'; } catch (e) {}
 
 const compMat = new THREE.ShaderMaterial({
@@ -97,7 +97,10 @@ function ensureTargets() {
   if (rtScene && rtScene.width === w && rtScene.height === h) return;
   for (const r of [rtScene, rtA, rtB]) if (r) r.dispose();
   const ms = renderer.capabilities.isWebGL2 && THREE.WebGLMultisampleRenderTarget;
-  rtScene = ms ? new THREE.WebGLMultisampleRenderTarget(w, h) : new THREE.WebGLRenderTarget(w, h);
+  // Mit Stencil bekommt das Bild einen 24-Bit-Tiefenpuffer. Ohne nimmt Three.js r128 nur 16 Bit,
+  // und weit herausgezoomt flimmern Wiese und Boden dann in Streifen durcheinander.
+  const opt = { stencilBuffer: true };
+  rtScene = ms ? new THREE.WebGLMultisampleRenderTarget(w, h, opt) : new THREE.WebGLRenderTarget(w, h, opt);
   if (ms) rtScene.samples = 4;
   const hw = Math.max(1, w >> 1), hh = Math.max(1, h >> 1);
   rtA = new THREE.WebGLRenderTarget(hw, hh, { depthBuffer: false });

@@ -4656,11 +4656,11 @@ const blurMat = new THREE.ShaderMaterial({
 });
 const STYLES = {
   klar: { label: "Klar", tilt: 0, focusW: 0.1, bloom: 0, sat: 1, contrast: 1, lift: [0, 0, 0], warm: [1, 1, 1], vig: 0, grain: 0, ink: 0 },
-  bilderbuch: { label: "Bilderbuch", tilt: 1, focusW: 0.1, bloom: 1, sat: 0.86, contrast: 0.93, lift: [0.05, 0.04, 0.065], warm: [1.03, 1, 0.965], vig: 0.5, grain: 0, ink: 0 },
+  bilderbuch: { label: "Bilderbuch", tilt: 0.5, focusW: 0.14, bloom: 1, sat: 0.86, contrast: 0.93, lift: [0.05, 0.04, 0.065], warm: [1.03, 1, 0.965], vig: 0.5, grain: 0, ink: 0 },
   diorama: {
     label: "Spielzeug",
-    tilt: 1.8,
-    focusW: 0.02,
+    tilt: 0.6,
+    focusW: 0.12,
     bloom: 0.7,
     sat: 1.3,
     contrast: 1.12,
@@ -4673,7 +4673,7 @@ const STYLES = {
   },
   maerchen: {
     label: "Märchenbuch",
-    tilt: 0.35,
+    tilt: 0.2,
     focusW: 0.12,
     bloom: 1.1,
     sat: 0.62,
@@ -4687,8 +4687,8 @@ const STYLES = {
   },
   abendgold: {
     label: "Abendgold",
-    tilt: 0.8,
-    focusW: 0.1,
+    tilt: 0.4,
+    focusW: 0.14,
     bloom: 1.9,
     sat: 1.05,
     contrast: 0.95,
@@ -4701,8 +4701,8 @@ const STYLES = {
   },
   pastell: {
     label: "Pastell",
-    tilt: 0.9,
-    focusW: 0.1,
+    tilt: 0.45,
+    focusW: 0.14,
     bloom: 1.3,
     sat: 0.55,
     contrast: 0.82,
@@ -4715,7 +4715,7 @@ const STYLES = {
   }
 };
 const STYLE_KEY = "cubos-stil";
-let style = "bilderbuch";
+let style = "diorama";
 try {
   const v = localStorage.getItem(STYLE_KEY);
   if (v && STYLES[v]) style = v;
@@ -4779,7 +4779,8 @@ function ensureTargets() {
   if (rtScene && rtScene.width === w && rtScene.height === h) return;
   for (const r of [rtScene, rtA, rtB]) if (r) r.dispose();
   const ms = renderer.capabilities.isWebGL2 && THREE.WebGLMultisampleRenderTarget;
-  rtScene = ms ? new THREE.WebGLMultisampleRenderTarget(w, h) : new THREE.WebGLRenderTarget(w, h);
+  const opt = { stencilBuffer: true };
+  rtScene = ms ? new THREE.WebGLMultisampleRenderTarget(w, h, opt) : new THREE.WebGLRenderTarget(w, h, opt);
   if (ms) rtScene.samples = 4;
   const hw = Math.max(1, w >> 1), hh = Math.max(1, h >> 1);
   rtA = new THREE.WebGLRenderTarget(hw, hh, { depthBuffer: false });
@@ -8548,7 +8549,7 @@ button:focus-visible{outline:3px solid var(--sun-deep);outline-offset:2px;}
     <div class="mrow"><button class="mb" id="mExport">Welt-Code kopieren</button><button class="mb" id="mExportAll">Alle Welten kopieren</button></div>
     <div class="mrow"><button class="mb" id="mImport">Code einfügen</button></div>
     <h3 class="msub">Einstellungen</h3>
-    <div class="mrow"><button class="mb" id="mSpeech">Vorlesen: an</button><button class="mb" id="mDream">Stil: Bilderbuch</button></div>
+    <div class="mrow"><button class="mb" id="mSpeech">Vorlesen: an</button><button class="mb" id="mDream">Stil: Spielzeug</button></div>
     <div id="codeBox" hidden>
       <p id="codeInfo"></p>
       <textarea id="codeTxt" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>

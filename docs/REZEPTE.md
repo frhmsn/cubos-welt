@@ -72,6 +72,8 @@ Schritt für Schritt für die häufigsten Erweiterungen. Nach jedem Rezept: `npm
 
 `npm run build && node tests/e2e/look.mjs rochen kalmar` legt die Modelle nebeneinander und speichert `tests/output/look.png`. Wale mit `wal:orca`.
 
+Bildstile vergleichen: `node tests/e2e/styles.mjs` (alle Stile) und `node tests/e2e/zoom.mjs <stil>` (nah, weit, ganz weit; zeigt Streifen und Unschärfe).
+
 ## Code verschoben, Import-Zyklus geändert
 
 1. `npm run lint -- --fix` entfernt ungenutzte Importe, `npm run lint` meldet fehlende.
