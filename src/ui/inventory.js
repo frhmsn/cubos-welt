@@ -1,5 +1,5 @@
 // Inventar: Kategorien, Gegenstände, Vorschaubilder.
-import './worlds-menu.js'; // Ladereihenfolge: läuft nach ui/worlds-menu.js (siehe docs/ARCHITEKTUR.md)
+import '../core/worlds.js'; // Ladereihenfolge: läuft nach core/worlds.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { $ } from '../core/util.js';
 import { CATS, ITEMS } from '../content/catalog.js';

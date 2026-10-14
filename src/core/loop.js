@@ -19,11 +19,11 @@ import { updateWhales } from '../systems/whales.js';
 import { updateFishing } from '../systems/fishing.js';
 import { destroyUnderwater, subUnder, uHemi, uSun, underScene } from '../systems/underwater.js';
 import { updateAquaUI, updateAquariums } from '../systems/aquarium.js';
-import { saveWorld } from '../ui/worlds-menu.js';
 import { save } from './save.js';
 import { editCam, editScene, placeEditCam } from '../systems/editor.js';
 import { animals, cars, ferries, pops } from './world-data.js';
 import { focus } from './focus.js';
+import { saveWorld } from './worlds.js';
 
 // ---------- Schleife ----------
 function resize(){

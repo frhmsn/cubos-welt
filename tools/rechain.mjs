@@ -1,6 +1,8 @@
 // Pflegt die Ladereihenfolge-Imports im Zyklus-Kern (siehe docs/ARCHITEKTUR.md).
 // Aufrufen, nachdem Code verschoben wurde und `npm run deps` einen kleineren Kern zeigt:
 //   node tools/rechain.mjs
+// Neues Modul im Kern? Stelle angeben, an der sein Code früher lief:
+//   node tools/rechain.mjs --insert core/worlds.js --after systems/travel.js
 // Was es tut: liest die bisherige Kette (jedes Kern-Modul importiert zuerst seinen Vorgänger),
 // entfernt Module, die nicht mehr im Zyklus stecken, und verknüpft die übrigen in alter Reihenfolge neu.
 import fs from 'node:fs';
@@ -19,6 +21,12 @@ for (const f of files) {
 const tail = [...prevOf.keys()].find((f) => !hasNext.has(f));
 const order = [];
 for (let f = tail; f; f = prevOf.get(f)) order.unshift(f);
+const arg = (k) => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : null; };
+if (arg('--insert')) {
+  const at = order.indexOf(arg('--after'));
+  if (at < 0) { console.error('Unbekannt: ' + arg('--after')); process.exit(1); }
+  order.splice(at + 1, 0, arg('--insert'));
+}
 const out = execSync('node tools/deps.mjs', { cwd: path.resolve('.') }).toString();
 const core = new Set(out.includes('Modulen: ') ? out.split('Modulen: ')[1].trim().split(', ') : []);
 let prev = null, changed = 0;
@@ -49,4 +57,4 @@ for (const f of order) {
 const inCore = order.filter((f) => core.has(f));
 console.log(`Kette: ${inCore.length} Module (${changed} Dateien geändert). Letztes Kern-Modul: ${prev}`);
 const missing = [...core].filter((f) => !order.includes(f));
-if (missing.length) console.log('ACHTUNG, im Kern aber nicht in der Kette: ' + missing.join(', '));
+if (missing.length) { console.log('ACHTUNG, im Kern aber nicht in der Kette: ' + missing.join(', ') + '\nMit --insert <modul> --after <modul> einordnen.'); process.exitCode = 1; }

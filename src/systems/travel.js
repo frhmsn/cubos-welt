@@ -14,11 +14,11 @@ import { bc } from '../render/build-camera.js';
 import { inTile } from './build.js';
 import { enterCar, setMode, startRide } from '../ui/modes.js';
 import { CKEY, store } from '../core/storage.js';
-import { saveWorld } from '../ui/worlds-menu.js';
 import { applyData, emptyWorld, save } from '../core/save.js';
 import { sampleWorld } from '../content/sample-world.js';
 import { hint } from '../ui/hint.js';
 import { animals, cars, groundM, isRail, isWater, tiles } from '../core/world-data.js';
+import { saveWorld } from '../core/worlds.js';
 
 // ---------- Weltreise ----------
 function startTravel(info){

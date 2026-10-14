@@ -1,17 +1,13 @@
 // Menü Meine Welten: speichern, öffnen, löschen, Codes kopieren und einfügen.
-import '../systems/travel.js'; // Ladereihenfolge: läuft nach systems/travel.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { $ } from '../core/util.js';
-import { buildCam, renderer, scene } from '../render/renderer.js';
-import { ac, nopeSnd, plop, tone } from '../systems/audio.js';
-import { bc, placeBuildCam } from '../render/build-camera.js';
-import { exitCar, setMode } from './modes.js';
-import { CKEY, localStore, store } from '../core/storage.js';
+import { ac, nopeSnd } from '../systems/audio.js';
+import { CKEY, store } from '../core/storage.js';
 import { decodeWorld, encodeWorld } from '../core/world-codes.js';
-import { applyData, emptyWorld, save, serialize } from '../core/save.js';
-import { sampleWorld } from '../content/sample-world.js';
+import { serialize } from '../core/save.js';
 import { hint } from './hint.js';
 import { fangData, mergeFang } from '../systems/catch-book.js';
+import { freshWorld, newId, openWorld, saveWorld } from '../core/worlds.js';
 
 let codeMode='export';
 $('#mExportAll').addEventListener('click',async()=>{
@@ -60,52 +56,6 @@ $('#codeGo').addEventListener('click',async()=>{
   if(typeof renderWorlds==='function')try{renderWorlds();}catch(e){}
 });
 
-function snapThumb(){
-  try{
-    placeBuildCam(); renderer.render(scene,buildCam);
-    const src=renderer.domElement,c=document.createElement('canvas');c.width=240;c.height=150;
-    const sw=src.width,sh=src.height,ar=240/150;let w=sw,h=sw/ar;if(h>sh){h=sh;w=sh*ar;}
-    c.getContext('2d').drawImage(src,(sw-w)/2,(sh-h)/2,w,h,0,0,240,150);
-    return c.toDataURL('image/jpeg',.72);
-  }catch(e){return '';}
-}
-function newId(){return 'w_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
-async function saveWorld(asNew,silent){
-  if(game.saving)return null; game.saving=true;
-  try{
-    let list=[]; try{list=await store.list();}catch(e){list=[];}
-    const existing=(!asNew&&game.curWorld)?list.find(w=>w.id===game.curWorld):null;
-    let id,name;
-    if(existing){id=existing.id;name=existing.name;}
-    else{id=newId();const names=new Set(list.map(w=>w.name));let n=list.length+1;while(names.has('Welt '+n))n++;name='Welt '+n;}
-    const w={id,name,updated:Date.now(),thumb:snapThumb(),data:JSON.stringify(serialize())};
-    try{await store.put(w);}catch(e){if(store!==localStore){await localStore.put(w);}else throw e;}
-    game.curWorld=id; try{localStorage.setItem(CKEY,id);}catch(e){}
-    game.worldDirty=false;
-    if(!silent){hint('Gespeichert: '+name,2500);tone(523,.1,'sine',.1);tone(784,.16,'sine',.1,.1);}
-    return w;
-  }catch(e){
-    if(!silent)hint('Speichern hat nicht geklappt. Vielleicht ist der Speicher voll: lösche eine alte Welt im Menü.',5000);
-    return null;
-  }finally{game.saving=false;}
-}
-async function keepCurrent(){if(game.worldDirty)await saveWorld(false,true);}
-function toBuild(){if(game.driveCar)exitCar(true);game.rideTrain=null;if(game.mode!=='build')setMode('build');}
-async function openWorld(w){
-  await keepCurrent(); toBuild();
-  let d=null; try{d=JSON.parse(w.data);}catch(e){d=null;}
-  if(!d||!applyData(d)){hint('Diese Welt konnte nicht geladen werden.',3500);return;}
-  game.curWorld=w.id; try{localStorage.setItem(CKEY,w.id);}catch(e){}
-  game.worldDirty=false; bc.x=0;bc.z=3;bc.d=48; save();
-  $('#menu').hidden=true; plop(); hint('Willkommen in '+w.name+'!',2500);
-}
-async function freshWorld(kind){
-  await keepCurrent(); toBuild();
-  if(kind==='sample')sampleWorld();else emptyWorld();
-  game.curWorld=null; try{localStorage.removeItem(CKEY);}catch(e){}
-  game.worldDirty=false; save(); $('#menu').hidden=true; plop();
-  hint('Neue Welt! Mit der Wolke oben speicherst du sie.',3500);
-}
 const fmtDate=t=>{try{const d=new Date(t);return d.toLocaleDateString('de-DE',{day:'numeric',month:'short'})+', '+d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})+' Uhr';}catch(e){return '';}};
 const ICO_PEN='<svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg>';
 const ICO_BIN='<svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 13h9l1-13"/></svg>';
@@ -152,4 +102,4 @@ $('#mSample').addEventListener('click',()=>freshWorld('sample'));
 $('#mEmpty').addEventListener('click',()=>freshWorld('empty'));
 $('#btnSave').addEventListener('click',()=>{ac();saveWorld(false,false);});
 
-export { renderWorlds, saveWorld };
+export { renderWorlds };
