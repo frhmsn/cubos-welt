@@ -6,7 +6,9 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const ROOT = path.resolve(HERE, '../..');
-const CHROME = process.env.CHROME_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+// Eigener Chromium-Pfad über CHROME_PATH, sonst der vorinstallierte (Cloud-Umgebung) oder der von Playwright (CI).
+const LOCAL = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+const CHROME = process.env.CHROME_PATH || (fs.existsSync(LOCAL) ? LOCAL : undefined);
 const THREE = path.join(ROOT, 'node_modules/three/build/three.min.js');
 
 /** Liefert den Pfad der Testseite für ein Ziel: 'legacy' oder 'dist'. */

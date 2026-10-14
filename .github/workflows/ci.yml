@@ -1,0 +1,33 @@
+# Prüft jeden Push und jeden Pull Request: Logik-Tests, Build, Browser-Rundgang.
+name: Prüfen
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Logik-Tests
+        run: npm test
+      - name: Build
+        run: npm run build
+      - name: Ist die App im Repo aktuell gebaut?
+        run: git diff --exit-code -- index.html sw.js manifest.webmanifest || (echo "Bitte npm run build ausführen und die erzeugten Dateien mit committen." && exit 1)
+      - name: Browser-Rundgang mit Vergleich zur Referenz
+        run: npm run test:e2e
+      - name: Screenshots aufheben
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: tests/output/aktuell
+          retention-days: 7

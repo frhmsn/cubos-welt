@@ -94,7 +94,7 @@ function canStand(x,z){
   return false;
 }
 function removeCar(c){const k=cars.indexOf(c);if(k<0)return;scene.remove(c.g);disposeGroup(c.g);cars.splice(k,1);}
-/* Zughorn: zwei tiefe, kräftige Töne wie beim echten Zug ("Dööö – düt") */
+/* Zughorn: zwei tiefe, kräftige Töne wie beim echten Zug ("Dööö, düt") */
 function hornNote(a,out,f,t0,dur,vol){
   const g=a.createGain(),lp=a.createBiquadFilter(),bp=a.createBiquadFilter();
   lp.type='lowpass';lp.frequency.value=f*5;lp.Q.value=.7;
