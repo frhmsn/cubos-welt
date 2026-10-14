@@ -1,6 +1,5 @@
-// Baut beide Auslieferungen aus dist/index.html (vorher: vite build):
-//   dist/artifact.html  Claude-Artifact, lädt Three.js vom CDN
-//   App für den Home-Bildschirm (GitHub Pages) direkt ins Repo-Wurzelverzeichnis:
+// Baut die App aus dist/index.html (vorher: vite build) für GitHub Pages
+// direkt ins Repo-Wurzelverzeichnis:
 //   index.html, three.min.js, sw.js, manifest.webmanifest, icon-*.png
 // Die Dateien im Wurzelverzeichnis sind erzeugt. Nie von Hand ändern, sondern src/ ändern und neu bauen.
 import fs from 'node:fs';
@@ -14,9 +13,6 @@ const NAME = 'Cubos Welten entdecken', SHORT = 'Cubos Welt';
 
 const built = fs.readFileSync(path.join(ROOT, 'dist/index.html'), 'utf8');
 if (!built.includes(CDN)) throw new Error('Three.js-Einbindung nicht gefunden');
-
-// ---------- Artifact ----------
-fs.writeFileSync(path.join(ROOT, 'dist/artifact.html'), built.replace(/<!-- APP-(HEAD|BODY) -->\n?/g, ''));
 
 // ---------- App ----------
 const appHead = `<meta name="apple-mobile-web-app-capable" content="yes">
@@ -57,4 +53,4 @@ self.addEventListener('fetch',e=>{
     .catch(()=>caches.match(e.request).then(r=>r||caches.match('index.html'))));
 });
 `);
-console.log(`gebaut: dist/artifact.html (${(fs.statSync(path.join(ROOT, 'dist/artifact.html')).size / 1024).toFixed(0)} KB), App-Version ${version}`);
+console.log(`gebaut: index.html (${(Buffer.byteLength(app) / 1024).toFixed(0)} KB), App-Version ${version}`);

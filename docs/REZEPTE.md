@@ -60,4 +60,3 @@ Schritt für Schritt für die häufigsten Erweiterungen. Nach jedem Rezept: `npm
 
 1. `npm run check` grün.
 2. Commit mit erzeugten Dateien, Push auf `main`. GitHub Pages aktualisiert sich nach 1 bis 2 Minuten.
-3. Artifact: `dist/artifact.html` auf derselben Artifact-URL veröffentlichen (siehe CLAUDE.md).

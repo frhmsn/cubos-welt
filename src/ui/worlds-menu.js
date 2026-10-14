@@ -109,7 +109,7 @@ const fmtDate=t=>{try{const d=new Date(t);return d.toLocaleDateString('de-DE',{d
 const ICO_PEN='<svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg>';
 const ICO_BIN='<svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 13h9l1-13"/></svg>';
 async function renderWorlds(){
-  $('#mStore').textContent=store.kind==='db'?'Deine Welten liegen in deinem Claude-Konto. So siehst du sie auf iPhone und iPad.':'Deine Welten liegen nur auf diesem Gerät.';
+  $('#mStore').textContent='Deine Welten liegen auf diesem Gerät. Mit „Alle Welten kopieren“ nimmst du sie mit.';
   let list=[]; try{list=await store.list();}catch(e){list=[];}
   list.sort((a,b)=>(b.updated||0)-(a.updated||0)); game.worldCache=list;
   const el=$('#worlds'); el.innerHTML='';

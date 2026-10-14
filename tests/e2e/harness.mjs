@@ -11,7 +11,7 @@ const LOCAL = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
 const CHROME = process.env.CHROME_PATH || (fs.existsSync(LOCAL) ? LOCAL : undefined);
 const THREE = path.join(ROOT, 'node_modules/three/build/three.min.js');
 
-/** Liefert den Pfad der Testseite für ein Ziel: 'legacy' oder 'dist'. */
+/** Liefert den Pfad der Testseite für ein Ziel: 'legacy' (alter Einzeldatei-Stand) oder 'dist' (die gebaute App). */
 export function pageFor(target) {
   const out = path.join(ROOT, 'tests/output');
   fs.mkdirSync(out, { recursive: true });
@@ -24,7 +24,7 @@ export function pageFor(target) {
     fs.writeFileSync(f, s);
     return f;
   }
-  return path.join(ROOT, 'dist/artifact.html');
+  return path.join(ROOT, 'index.html'); // die ausgelieferte App
 }
 
 export async function launch() {

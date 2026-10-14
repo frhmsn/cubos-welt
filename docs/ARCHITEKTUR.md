@@ -19,7 +19,7 @@ src/
     collision.js    Kollision
     save.js         serialize/applyData, Beispielwelt laden
     save-schema.js  Version des Spielstands + Umwandlung alter Stände
-    storage.js      Speicherort: Claude-Speicher (Artifact) oder localStorage (App)
+    storage.js      Speicherort der Welten (localStorage)
     world-codes.js  Welten als Text-Code (gzip + base64)
     loop.js         Spielschleife: alle Systeme je Bild, adaptive Auflösung
   render/           Three.js
@@ -53,7 +53,7 @@ src/
 
 ## Wichtige Entscheidungen
 
-**Eine HTML-Datei als Ergebnis.** Vite baut alles in `dist/index.html` (vite-plugin-singlefile). `tools/build.mjs` macht daraus das Artifact (`dist/artifact.html`, Three.js vom CDN) und die App im Wurzelverzeichnis (Three.js lokal, Manifest, Service Worker). Kein Server nötig.
+**Eine HTML-Datei als Ergebnis.** Vite baut alles in `dist/index.html` (vite-plugin-singlefile). `tools/build.mjs` macht daraus die App im Wurzelverzeichnis (Three.js lokal, Manifest, Service Worker). Kein Server nötig. Bis Oktober 2026 gab es zusätzlich ein Claude-Artifact, das ist eingestellt.
 
 **Three.js r128 global.** Kein Import, `THREE` kommt aus dem Script-Tag. Ein Update auf eine neuere Version wäre ein eigenes Projekt (Licht-Einheiten und Farbräume haben sich geändert).
 
@@ -72,7 +72,7 @@ src/
 | Was | Wo | Schlüssel |
 |---|---|---|
 | Aktuelle Welt (Autosave) | localStorage | `kunos-welt-1` |
-| Gespeicherte Welten | Artifact: Claude-Speicher `data/users/<uid>`, App: localStorage | `kunos-welten` |
+| Gespeicherte Welten | localStorage | `kunos-welten` |
 | Fangbuch, Rekorde, Wale | localStorage | `kunos-fang`, `kunos-fang-rekord`, `kunos-wale` |
 
 Schlüssel tragen noch den alten Namen. Nicht umbenennen, sonst sind die Welten weg.

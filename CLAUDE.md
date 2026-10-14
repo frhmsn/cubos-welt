@@ -8,7 +8,7 @@ Ein Vater-Sohn-Projekt. Die Wünsche des Kindes sind die Produkt-Roadmap.
 ```
 npm ci                 # einmalig
 npm test               # Logik-Tests (vitest, Sekunden)
-npm run build          # src/ -> dist/artifact.html + App-Dateien im Repo-Wurzelverzeichnis
+npm run build          # src/ -> App-Dateien im Repo-Wurzelverzeichnis (GitHub Pages)
 npm run test:e2e       # Browser-Rundgang (12 Szenarien) + Vergleich mit tests/baseline (~2 Min.)
 npm run check          # alles zusammen, vor jedem Commit
 npm run test:baseline  # aktuellen Lauf als neue Referenz übernehmen (nur bei gewollten Änderungen)
@@ -25,7 +25,7 @@ npm run deps           # Import-Zyklen anzeigen
 6. **Geteilter, veränderlicher Zustand** liegt in `game` (`core/state.js`). Nur dort, wo mehrere Module schreiben. Sonst Modul-Variable.
 7. **Ladereihenfolge:** Module im Zyklus-Kern haben als ersten Import `import './vorgaenger.js'; // Ladereihenfolge`. Nicht entfernen oder umsortieren. Neue Module möglichst ohne Zyklus bauen (nur importieren, nicht importiert werden von Kern-Modulen beim Laden). Details: `docs/ARCHITEKTUR.md`.
 8. **Zufall nur über `Math.random()`**, keine eigene Uhr: Tests machen Zufall und Zeit vorhersagbar (`tests/e2e/env.js`).
-9. **Kein Tree-Shaking, keine neuen Laufzeit-Abhängigkeiten.** Three.js bleibt r128 als globales `THREE` (CDN im Artifact, lokal in der App).
+9. **Kein Tree-Shaking, keine neuen Laufzeit-Abhängigkeiten.** Three.js bleibt r128 als globales `THREE` (lokale Datei `three.min.js`).
 
 ## Texte im Spiel
 
@@ -35,8 +35,7 @@ npm run deps           # Import-Zyklen anzeigen
 
 ## Veröffentlichen
 
-- **App (iPad/iPhone-Home-Bildschirm):** `npm run build`, committen, auf `main` pushen. GitHub Pages liefert das Wurzelverzeichnis aus: https://frhmsn.github.io/cubos-welt/ . Die App lädt das Update beim übernächsten Start (Service Worker, Version = Hash von index.html).
-- **Claude-Artifact:** `dist/artifact.html` mit dem Artifact-Werkzeug auf https://claude.ai/artifact/DL2AwYK9Xyf7SwP8mKEkv8 veröffentlichen (gleiche URL behalten). Das Artifact speichert Welten im Claude-Speicher (`core/storage.js`), die App in localStorage.
+Nur über GitHub: `npm run check`, committen (mit den erzeugten Dateien), auf `main` pushen. GitHub Pages liefert das Wurzelverzeichnis aus: https://frhmsn.github.io/cubos-welt/ . Die App lädt das Update beim übernächsten Start (Service Worker, Version = Hash von index.html). Das frühere Claude-Artifact wird nicht mehr weiterentwickelt.
 
 ## Wo was liegt
 

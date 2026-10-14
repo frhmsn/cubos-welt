@@ -16,7 +16,7 @@ Ein 3D-Bauspiel für Kinder: Straßen, Häuser, Bahn, Fähren, Meer, Angeln, U-B
 
 ```
 npm ci
-npm run build      # baut die App und das Claude-Artifact
+npm run build      # baut die App
 npm run check      # Tests + Build + Browser-Rundgang
 ```
 
