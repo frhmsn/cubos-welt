@@ -13,8 +13,12 @@ let voice = null, lastText = '';
 function pickVoice() {
   if (!synth) return;
   const de = synth.getVoices().filter((v) => /^de(-|_|$)/i.test(v.lang));
-  const fav = ['Anna', 'Petra', 'Helena', 'Marlene', 'Vicki', 'Google Deutsch'];
-  voice = fav.map((n) => de.find((v) => v.name.includes(n))).find(Boolean) || de.find((v) => v.localService) || de[0] || null;
+  // Hochwertige Stimmen zuerst: auf dem iPad unter Einstellungen > Bedienungshilfen > Gesprochene Inhalte > Stimmen
+  // lassen sich "Premium" oder "Erweitert" laden. Danach bekannte deutsche Namen, dann irgendeine deutsche Stimme.
+  const good = de.filter((v) => /premium|erweitert|enhanced|neural|natural/i.test(v.name));
+  const fav = ['Anna', 'Helena', 'Petra', 'Martin', 'Marlene', 'Vicki', 'Google Deutsch'];
+  voice = fav.map((n) => good.find((v) => v.name.includes(n))).find(Boolean) || good[0]
+    || fav.map((n) => de.find((v) => v.name.includes(n))).find(Boolean) || de.find((v) => v.localService) || de[0] || null;
 }
 if (synth) { pickVoice(); synth.addEventListener?.('voiceschanged', pickVoice); }
 
@@ -29,7 +33,7 @@ function speak(text, { force = false } = {}) {
   try {
     synth.cancel();
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'de-DE'; u.rate = 0.95; u.pitch = 1.1;
+    u.lang = 'de-DE'; u.rate = 0.9; u.pitch = 1;
     if (voice) u.voice = voice;
     synth.speak(u);
   } catch (e) {}

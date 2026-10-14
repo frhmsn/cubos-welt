@@ -4,6 +4,7 @@ import { $, clamp } from '../core/util.js';
 import { fill, hemi, moon, moonBall, renderer, scene, stars, sun, sunBall } from './renderer.js';
 import { glowWarm, nightMats } from './materials.js';
 import { bc } from './build-camera.js';
+import { styleLight } from './dream.js';
 
 // ---------- Tag und Nacht ----------
 let wasDay=null; const DAY_LEN=300;
@@ -12,7 +13,7 @@ const hDay=new THREE.Color(0xdff2ff),hNight=new THREE.Color(0x4a5a9a);
 const ICON_SUN='<svg viewBox="0 0 24 24" fill="none" stroke="#E8A400" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4.6" fill="#FFC21A"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>';
 const ICON_MOON='<svg viewBox="0 0 24 24" fill="#5B6CC9" stroke="#3E4C9E" stroke-width="1.8" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>';
 // Himmel als Verlauf: oben kräftiger, zum Horizont heller und wärmer (wirkt weicher als eine Farbe)
-const skyTop=new THREE.Color(),skyHor=new THREE.Color(),cWhite=new THREE.Color(0xfff6ea),cDeep=new THREE.Color(0x3d7fd6);
+const _c1=new THREE.Color(),skyTop=new THREE.Color(),skyHor=new THREE.Color(),cWhite=new THREE.Color(0xfff6ea),cDeep=new THREE.Color(0x3d7fd6);
 const skyDome=new THREE.Mesh(new THREE.SphereGeometry(450,24,12),new THREE.ShaderMaterial({
   uniforms:{uTop:{value:skyTop},uHor:{value:skyHor}},side:THREE.BackSide,depthWrite:false,depthTest:false,fog:false,
   vertexShader:'varying vec3 vP;void main(){vP=normalize(position);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
@@ -28,9 +29,12 @@ function updateDay(dt,focus){
   sky.copy(cNight).lerp(cDay,dayF); const dusk=Math.max(0,1-Math.abs(elev-.03)/.2); sky.lerp(cDusk,dusk*.55);
   renderer.setClearColor(sky);
   skyTop.copy(sky).lerp(cDeep,.28*dayF); skyHor.copy(sky).lerp(cWhite,.45*dayF+.08); skyHor.lerp(cDusk,dusk*.35);
+  const sl=styleLight();
+  if(sl){const k=sl.skyMix*dayF;skyTop.lerp(_c1.set(sl.skyTop),k);skyHor.lerp(_c1.set(sl.skyHor),k);}
   scene.fog.color.copy(skyHor);
   skyDome.position.copy(game.cam.position);
-  sun.intensity=.92*dayF; sun.visible=dayF>.02;
+  sun.intensity=.92*dayF*(sl?sl.sunK:1); sun.visible=dayF>.02; sun.color.set(sl?sl.sun:0xffecc8);
+  hemi.groundColor.set(sl&&sl.ground?sl.ground:0xbfb2cf);
   const sh=game.mode==='build'?clamp(bc.d*.9,30,110):34;
   if(Math.abs(sh-sun.shadow.camera.right)>2){const c=sun.shadow.camera;c.left=c.bottom=-sh;c.right=c.top=sh;c.far=Math.max(220,sh*3);c.updateProjectionMatrix();}
   const tx=2*sun.shadow.camera.right/sun.shadow.mapSize.x;

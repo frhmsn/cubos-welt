@@ -2398,8 +2398,9 @@ let voice = null, lastText = "";
 function pickVoice() {
   if (!synth) return;
   const de = synth.getVoices().filter((v) => /^de(-|_|$)/i.test(v.lang));
-  const fav = ["Anna", "Petra", "Helena", "Marlene", "Vicki", "Google Deutsch"];
-  voice = fav.map((n) => de.find((v) => v.name.includes(n))).find(Boolean) || de.find((v) => v.localService) || de[0] || null;
+  const good = de.filter((v) => /premium|erweitert|enhanced|neural|natural/i.test(v.name));
+  const fav = ["Anna", "Helena", "Petra", "Martin", "Marlene", "Vicki", "Google Deutsch"];
+  voice = fav.map((n) => good.find((v) => v.name.includes(n))).find(Boolean) || good[0] || fav.map((n) => de.find((v) => v.name.includes(n))).find(Boolean) || de.find((v) => v.localService) || de[0] || null;
 }
 if (synth) {
   pickVoice();
@@ -2421,8 +2422,8 @@ function speak(text, { force = false } = {}) {
     synth.cancel();
     const u = new SpeechSynthesisUtterance(text);
     u.lang = "de-DE";
-    u.rate = 0.95;
-    u.pitch = 1.1;
+    u.rate = 0.9;
+    u.pitch = 1;
     if (voice) u.voice = voice;
     synth.speak(u);
   } catch (e) {
@@ -4527,13 +4528,247 @@ $("#stAlt").addEventListener("click", () => {
     showStation("");
   }
 });
+const KEY$2 = "cubos-traumfilter";
+let enabled = true, autoOff = false;
+try {
+  enabled = localStorage.getItem(KEY$2) !== "0";
+} catch (e) {
+}
+const quadCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+const quadScene = new THREE.Scene();
+const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), null);
+quad.frustumCulled = false;
+quadScene.add(quad);
+const VERT = "varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}";
+const downMat = new THREE.ShaderMaterial({
+  uniforms: { tSrc: { value: null }, uTexel: { value: new THREE.Vector2() } },
+  vertexShader: VERT,
+  fragmentShader: `uniform sampler2D tSrc;uniform vec2 uTexel;varying vec2 vUv;
+    void main(){vec2 o=uTexel*.75;gl_FragColor=.25*(texture2D(tSrc,vUv+vec2(-o.x,-o.y))+texture2D(tSrc,vUv+vec2(o.x,-o.y))+texture2D(tSrc,vUv+vec2(-o.x,o.y))+texture2D(tSrc,vUv+vec2(o.x,o.y)));}`,
+  depthTest: false,
+  depthWrite: false
+});
+const blurMat = new THREE.ShaderMaterial({
+  uniforms: { tSrc: { value: null }, uDir: { value: new THREE.Vector2() } },
+  vertexShader: VERT,
+  fragmentShader: `uniform sampler2D tSrc;uniform vec2 uDir;varying vec2 vUv;
+    void main(){vec4 c=texture2D(tSrc,vUv)*.227;
+      c+=(texture2D(tSrc,vUv+uDir*1.385)+texture2D(tSrc,vUv-uDir*1.385))*.316;
+      c+=(texture2D(tSrc,vUv+uDir*3.231)+texture2D(tSrc,vUv-uDir*3.231))*.0703;
+      gl_FragColor=c;}`,
+  depthTest: false,
+  depthWrite: false
+});
+const STYLES = {
+  klar: { label: "Klar", tilt: 0, focusW: 0.1, bloom: 0, sat: 1, contrast: 1, lift: [0, 0, 0], warm: [1, 1, 1], vig: 0, grain: 0, ink: 0 },
+  bilderbuch: { label: "Bilderbuch", tilt: 1, focusW: 0.1, bloom: 1, sat: 0.86, contrast: 0.93, lift: [0.05, 0.04, 0.065], warm: [1.03, 1, 0.965], vig: 0.5, grain: 0, ink: 0 },
+  diorama: {
+    label: "Spielzeug",
+    tilt: 1.8,
+    focusW: 0.02,
+    bloom: 0.7,
+    sat: 1.3,
+    contrast: 1.12,
+    lift: [0, 0, 0.01],
+    warm: [1.05, 1.02, 0.97],
+    vig: 0.25,
+    grain: 0,
+    ink: 0,
+    light: { sun: 16774880, sunK: 1.15, skyTop: 3116287, skyHor: 12577023, skyMix: 0.8 }
+  },
+  maerchen: {
+    label: "Märchenbuch",
+    tilt: 0.35,
+    focusW: 0.12,
+    bloom: 1.1,
+    sat: 0.62,
+    contrast: 0.88,
+    lift: [0.1, 0.085, 0.055],
+    warm: [1.06, 1.01, 0.9],
+    vig: 0.75,
+    grain: 0.2,
+    ink: 1.6,
+    light: { sun: 16773328, sunK: 0.95, skyTop: 10471144, skyHor: 16181970, skyMix: 0.85, ground: 13154472 }
+  },
+  abendgold: {
+    label: "Abendgold",
+    tilt: 0.8,
+    focusW: 0.1,
+    bloom: 1.9,
+    sat: 1.05,
+    contrast: 0.95,
+    lift: [0.07, 0.03, 0.02],
+    warm: [1.18, 0.97, 0.78],
+    vig: 0.8,
+    grain: 0,
+    ink: 0,
+    light: { sun: 16757866, sunK: 1.05, skyTop: 7176144, skyHor: 16762250, skyMix: 0.9, ground: 13081226 }
+  },
+  pastell: {
+    label: "Pastell",
+    tilt: 0.9,
+    focusW: 0.1,
+    bloom: 1.3,
+    sat: 0.55,
+    contrast: 0.82,
+    lift: [0.15, 0.12, 0.17],
+    warm: [1.02, 0.98, 1.04],
+    vig: 0.35,
+    grain: 0.04,
+    ink: 0,
+    light: { sun: 16773366, sunK: 0.95, skyTop: 12169968, skyHor: 16767468, skyMix: 0.85, ground: 14205160 }
+  }
+};
+const STYLE_KEY = "cubos-stil";
+let style = "bilderbuch";
+try {
+  const v = localStorage.getItem(STYLE_KEY);
+  if (v && STYLES[v]) style = v;
+  else if (localStorage.getItem(KEY$2) === "0") style = "klar";
+} catch (e) {
+}
+const compMat = new THREE.ShaderMaterial({
+  uniforms: {
+    tScene: { value: null },
+    tBlur: { value: null },
+    uTexel: { value: new THREE.Vector2() },
+    uTilt: { value: 1 },
+    uFocus: { value: 0.5 },
+    uFocusW: { value: 0.1 },
+    uBloom: { value: 1 },
+    uNight: { value: 0 },
+    uSat: { value: 0.86 },
+    uContrast: { value: 0.93 },
+    uLift: { value: new THREE.Vector3() },
+    uWarm: { value: new THREE.Vector3(1, 1, 1) },
+    uVig: { value: 0.5 },
+    uGrain: { value: 0 },
+    uInk: { value: 0 }
+  },
+  vertexShader: VERT,
+  fragmentShader: `uniform sampler2D tScene,tBlur;uniform vec2 uTexel;uniform float uTilt,uFocus,uFocusW,uBloom,uNight,uSat,uContrast,uVig,uGrain,uInk;uniform vec3 uLift,uWarm;varying vec2 vUv;
+    float h(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
+    float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
+    float lum(vec3 c){return dot(c,vec3(.299,.587,.114));}
+    void main(){
+      vec3 c=texture2D(tScene,vUv).rgb,b=texture2D(tBlur,vUv).rgb;
+      if(uInk>0.){
+        vec2 t=uTexel*(1.2+uInk*.6);
+        float l00=lum(texture2D(tScene,vUv+vec2(-t.x,-t.y)).rgb),l10=lum(texture2D(tScene,vUv+vec2(t.x,-t.y)).rgb);
+        float l01=lum(texture2D(tScene,vUv+vec2(-t.x,t.y)).rgb),l11=lum(texture2D(tScene,vUv+vec2(t.x,t.y)).rgb);
+        float e=length(vec2(l00+l01-l10-l11,l00+l10-l01-l11));
+        c*=1.-smoothstep(.06,.3,e)*min(uInk,1.)*.75;
+        c=mix(c,b,.18*uInk);
+      }
+      float tt=smoothstep(uFocusW,.46,abs(vUv.y-uFocus))*min(uTilt,1.);
+      c=mix(c,b,tt);
+      if(uTilt>1.)c=mix(c,b,smoothstep(.3,.5,abs(vUv.y-uFocus))*(uTilt-1.));
+      float bl=max(lum(b)-mix(.74,.42,uNight),0.)/.26;
+      c+=b*bl*uBloom*(.35+uNight*.5);
+      float l=lum(c);
+      c=mix(vec3(l),c,uSat);
+      c=(c-.5)*uContrast+.5;
+      c=c+uLift*(1.-uNight*.5);
+      c*=uWarm;
+      if(uGrain>0.){vec2 fp=gl_FragCoord.xy;float n=vn(fp*.012)*.6+vn(fp*.05)*.3+h(fp)*.1;c*=1.-uGrain*(n-.5);}
+      vec2 q=vUv-.5;c*=1.-dot(q,q)*uVig;
+      gl_FragColor=vec4(c,1.);}`,
+  depthTest: false,
+  depthWrite: false
+});
+let rtScene = null, rtA = null, rtB = null;
+const size = new THREE.Vector2();
+function ensureTargets() {
+  renderer.getDrawingBufferSize(size);
+  const w = Math.max(1, size.x | 0), h = Math.max(1, size.y | 0);
+  if (rtScene && rtScene.width === w && rtScene.height === h) return;
+  for (const r of [rtScene, rtA, rtB]) if (r) r.dispose();
+  const ms = renderer.capabilities.isWebGL2 && THREE.WebGLMultisampleRenderTarget;
+  rtScene = ms ? new THREE.WebGLMultisampleRenderTarget(w, h) : new THREE.WebGLRenderTarget(w, h);
+  if (ms) rtScene.samples = 4;
+  const hw = Math.max(1, w >> 1), hh = Math.max(1, h >> 1);
+  rtA = new THREE.WebGLRenderTarget(hw, hh, { depthBuffer: false });
+  rtB = new THREE.WebGLRenderTarget(hw, hh, { depthBuffer: false });
+}
+function pass(mat2, target) {
+  quad.material = mat2;
+  renderer.setRenderTarget(target);
+  renderer.render(quadScene, quadCam);
+}
+function renderDream(scene2, cam, { tilt = 1, night = 0 } = {}) {
+  if (!enabled || autoOff || style === "klar") {
+    renderer.setRenderTarget(null);
+    renderer.render(scene2, cam);
+    return;
+  }
+  ensureTargets();
+  renderer.setRenderTarget(rtScene);
+  renderer.render(scene2, cam);
+  downMat.uniforms.tSrc.value = rtScene.texture;
+  downMat.uniforms.uTexel.value.set(1 / rtScene.width, 1 / rtScene.height);
+  pass(downMat, rtA);
+  blurMat.uniforms.tSrc.value = rtA.texture;
+  blurMat.uniforms.uDir.value.set(1.6 / rtA.width, 0);
+  pass(blurMat, rtB);
+  blurMat.uniforms.tSrc.value = rtB.texture;
+  blurMat.uniforms.uDir.value.set(0, 1.6 / rtA.height);
+  pass(blurMat, rtA);
+  const u = compMat.uniforms;
+  const st = STYLES[style];
+  u.tScene.value = rtScene.texture;
+  u.tBlur.value = rtA.texture;
+  u.uTexel.value.set(1 / rtScene.width, 1 / rtScene.height);
+  u.uTilt.value = tilt * st.tilt;
+  u.uFocusW.value = st.focusW;
+  u.uNight.value = night;
+  u.uBloom.value = st.bloom;
+  u.uSat.value = st.sat;
+  u.uContrast.value = st.contrast;
+  u.uLift.value.fromArray(st.lift);
+  u.uWarm.value.fromArray(st.warm);
+  u.uVig.value = st.vig;
+  u.uGrain.value = st.grain;
+  u.uInk.value = st.ink;
+  pass(compMat, null);
+}
+function setStyle(id) {
+  if (!STYLES[id]) return;
+  style = id;
+  enabled = true;
+  autoOff = false;
+  try {
+    localStorage.setItem(STYLE_KEY, id);
+    localStorage.setItem(KEY$2, "1");
+  } catch (e) {
+  }
+}
+const styleId = () => style;
+const styleLight = () => enabled && !autoOff && STYLES[style].light || null;
+const STYLE_ORDER = Object.keys(STYLES);
+const styleLabel = (id = style) => STYLES[id].label;
+function setDream(on2) {
+  enabled = !!on2;
+  autoOff = false;
+  try {
+    localStorage.setItem(KEY$2, on2 ? "1" : "0");
+  } catch (e) {
+  }
+}
+const dreamOn = () => enabled && !autoOff;
+function dreamAutoOff() {
+  if (enabled && !autoOff) {
+    autoOff = true;
+    return true;
+  }
+  return false;
+}
 let wasDay = null;
 const DAY_LEN = 300;
 const cNight = new THREE.Color(858168), cDay = new THREE.Color(9425919), cDusk = new THREE.Color(15899243), sky = new THREE.Color();
 const hDay = new THREE.Color(14676735), hNight = new THREE.Color(4872858);
 const ICON_SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="#E8A400" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4.6" fill="#FFC21A"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>';
 const ICON_MOON = '<svg viewBox="0 0 24 24" fill="#5B6CC9" stroke="#3E4C9E" stroke-width="1.8" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>';
-const skyTop = new THREE.Color(), skyHor = new THREE.Color(), cWhite = new THREE.Color(16774890), cDeep = new THREE.Color(4030422);
+const _c1 = new THREE.Color(), skyTop = new THREE.Color(), skyHor = new THREE.Color(), cWhite = new THREE.Color(16774890), cDeep = new THREE.Color(4030422);
 const skyDome = new THREE.Mesh(new THREE.SphereGeometry(450, 24, 12), new THREE.ShaderMaterial({
   uniforms: { uTop: { value: skyTop }, uHor: { value: skyHor } },
   side: THREE.BackSide,
@@ -4565,10 +4800,18 @@ function updateDay(dt, focus2) {
   skyTop.copy(sky).lerp(cDeep, 0.28 * dayF);
   skyHor.copy(sky).lerp(cWhite, 0.45 * dayF + 0.08);
   skyHor.lerp(cDusk, dusk * 0.35);
+  const sl = styleLight();
+  if (sl) {
+    const k = sl.skyMix * dayF;
+    skyTop.lerp(_c1.set(sl.skyTop), k);
+    skyHor.lerp(_c1.set(sl.skyHor), k);
+  }
   scene.fog.color.copy(skyHor);
   skyDome.position.copy(game.cam.position);
-  sun.intensity = 0.92 * dayF;
+  sun.intensity = 0.92 * dayF * (sl ? sl.sunK : 1);
   sun.visible = dayF > 0.02;
+  sun.color.set(sl ? sl.sun : 16772296);
+  hemi.groundColor.set(sl && sl.ground ? sl.ground : 12563151);
   const sh = game.mode === "build" ? clamp(bc.d * 0.9, 30, 110) : 34;
   if (Math.abs(sh - sun.shadow.camera.right) > 2) {
     const c = sun.shadow.camera;
@@ -6269,16 +6512,16 @@ const inseln = {
 const CHAPTERS = [stadt, bahn, meer, entdecker, inseln];
 const QUEST_EVENTS = ["gebaut", "insel:gemalt", "modus", "eingestiegen", "mitfahren", "hupen", "tageszeit", "tauchen", "aquarium:betreten", "reise", "werkstatt:fertig", "welt:gespeichert", "fang:geaendert", "wal:gesehen"];
 const ALL_TASKS = CHAPTERS.flatMap((c) => c.tasks.map((t2) => ({ ...t2, chapter: c.id })));
-const KEY$2 = "cubos-aufgaben";
+const KEY$1 = "cubos-aufgaben";
 let state = { done: {}, cnt: {} };
 try {
-  const s = JSON.parse(localStorage.getItem(KEY$2) || "null");
+  const s = JSON.parse(localStorage.getItem(KEY$1) || "null");
   if (s && s.done) state = { done: s.done, cnt: s.cnt || {} };
 } catch (e) {
 }
 const persist = () => {
   try {
-    localStorage.setItem(KEY$2, JSON.stringify(state));
+    localStorage.setItem(KEY$1, JSON.stringify(state));
   } catch (e) {
   }
 };
@@ -6525,11 +6768,11 @@ function migrate(d) {
   }
   return d;
 }
-const KEY$1 = "kunos-welt-1";
+const KEY = "kunos-welt-1";
 setSaver(save);
 function save() {
   try {
-    localStorage.setItem(KEY$1, JSON.stringify(serialize()));
+    localStorage.setItem(KEY, JSON.stringify(serialize()));
   } catch (e) {
   }
 }
@@ -6549,7 +6792,7 @@ function serialize() {
 function load() {
   let d = null;
   try {
-    d = JSON.parse(localStorage.getItem(KEY$1) || "null");
+    d = JSON.parse(localStorage.getItem(KEY) || "null");
   } catch (e) {
     d = null;
   }
@@ -7089,116 +7332,6 @@ $("#eClear").addEventListener("click", () => {
   tone(200, 0.25, "sawtooth", 0.06, 0, 0.5);
   hint("Alles weg. Mit dem Pfeil oben holst du es zurück.", 3e3);
 });
-const KEY = "cubos-traumfilter";
-let enabled = true, autoOff = false;
-try {
-  enabled = localStorage.getItem(KEY) !== "0";
-} catch (e) {
-}
-const quadCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-const quadScene = new THREE.Scene();
-const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), null);
-quad.frustumCulled = false;
-quadScene.add(quad);
-const VERT = "varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}";
-const downMat = new THREE.ShaderMaterial({
-  uniforms: { tSrc: { value: null }, uTexel: { value: new THREE.Vector2() } },
-  vertexShader: VERT,
-  fragmentShader: `uniform sampler2D tSrc;uniform vec2 uTexel;varying vec2 vUv;
-    void main(){vec2 o=uTexel*.75;gl_FragColor=.25*(texture2D(tSrc,vUv+vec2(-o.x,-o.y))+texture2D(tSrc,vUv+vec2(o.x,-o.y))+texture2D(tSrc,vUv+vec2(-o.x,o.y))+texture2D(tSrc,vUv+vec2(o.x,o.y)));}`,
-  depthTest: false,
-  depthWrite: false
-});
-const blurMat = new THREE.ShaderMaterial({
-  uniforms: { tSrc: { value: null }, uDir: { value: new THREE.Vector2() } },
-  vertexShader: VERT,
-  fragmentShader: `uniform sampler2D tSrc;uniform vec2 uDir;varying vec2 vUv;
-    void main(){vec4 c=texture2D(tSrc,vUv)*.227;
-      c+=(texture2D(tSrc,vUv+uDir*1.385)+texture2D(tSrc,vUv-uDir*1.385))*.316;
-      c+=(texture2D(tSrc,vUv+uDir*3.231)+texture2D(tSrc,vUv-uDir*3.231))*.0703;
-      gl_FragColor=c;}`,
-  depthTest: false,
-  depthWrite: false
-});
-const compMat = new THREE.ShaderMaterial({
-  uniforms: { tScene: { value: null }, tBlur: { value: null }, uTilt: { value: 1 }, uFocus: { value: 0.5 }, uBloom: { value: 1 }, uNight: { value: 0 } },
-  vertexShader: VERT,
-  fragmentShader: `uniform sampler2D tScene,tBlur;uniform float uTilt,uFocus,uBloom,uNight;varying vec2 vUv;
-    void main(){
-      vec3 c=texture2D(tScene,vUv).rgb,b=texture2D(tBlur,vUv).rgb;
-      float t=smoothstep(.1,.46,abs(vUv.y-uFocus))*uTilt;
-      c=mix(c,b,t);
-      float bl=max(dot(b,vec3(.299,.587,.114))-mix(.74,.42,uNight),0.)/.26;
-      c+=b*bl*uBloom*(.35+uNight*.5);
-      float l=dot(c,vec3(.299,.587,.114));
-      c=mix(vec3(l),c,.86);
-      c=c*.93+vec3(.05,.04,.065)*(1.-uNight*.5);
-      c*=vec3(1.03,1.,.965);
-      vec2 q=vUv-.5;c*=1.-dot(q,q)*.5;
-      gl_FragColor=vec4(c,1.);}`,
-  depthTest: false,
-  depthWrite: false
-});
-let rtScene = null, rtA = null, rtB = null;
-const size = new THREE.Vector2();
-function ensureTargets() {
-  renderer.getDrawingBufferSize(size);
-  const w = Math.max(1, size.x | 0), h = Math.max(1, size.y | 0);
-  if (rtScene && rtScene.width === w && rtScene.height === h) return;
-  for (const r of [rtScene, rtA, rtB]) if (r) r.dispose();
-  const ms = renderer.capabilities.isWebGL2 && THREE.WebGLMultisampleRenderTarget;
-  rtScene = ms ? new THREE.WebGLMultisampleRenderTarget(w, h) : new THREE.WebGLRenderTarget(w, h);
-  if (ms) rtScene.samples = 4;
-  const hw = Math.max(1, w >> 1), hh = Math.max(1, h >> 1);
-  rtA = new THREE.WebGLRenderTarget(hw, hh, { depthBuffer: false });
-  rtB = new THREE.WebGLRenderTarget(hw, hh, { depthBuffer: false });
-}
-function pass(mat2, target) {
-  quad.material = mat2;
-  renderer.setRenderTarget(target);
-  renderer.render(quadScene, quadCam);
-}
-function renderDream(scene2, cam, { tilt = 1, night = 0 } = {}) {
-  if (!enabled || autoOff) {
-    renderer.setRenderTarget(null);
-    renderer.render(scene2, cam);
-    return;
-  }
-  ensureTargets();
-  renderer.setRenderTarget(rtScene);
-  renderer.render(scene2, cam);
-  downMat.uniforms.tSrc.value = rtScene.texture;
-  downMat.uniforms.uTexel.value.set(1 / rtScene.width, 1 / rtScene.height);
-  pass(downMat, rtA);
-  blurMat.uniforms.tSrc.value = rtA.texture;
-  blurMat.uniforms.uDir.value.set(1.6 / rtA.width, 0);
-  pass(blurMat, rtB);
-  blurMat.uniforms.tSrc.value = rtB.texture;
-  blurMat.uniforms.uDir.value.set(0, 1.6 / rtA.height);
-  pass(blurMat, rtA);
-  const u = compMat.uniforms;
-  u.tScene.value = rtScene.texture;
-  u.tBlur.value = rtA.texture;
-  u.uTilt.value = tilt;
-  u.uNight.value = night;
-  pass(compMat, null);
-}
-function setDream(on2) {
-  enabled = !!on2;
-  autoOff = false;
-  try {
-    localStorage.setItem(KEY, on2 ? "1" : "0");
-  } catch (e) {
-  }
-}
-const dreamOn = () => enabled && !autoOff;
-function dreamAutoOff() {
-  if (enabled && !autoOff) {
-    autoOff = true;
-    return true;
-  }
-  return false;
-}
 const shown = [];
 function lineup(ids, size2 = 1.6) {
   for (const m of shown.splice(0)) scene.remove(m);
@@ -7216,6 +7349,7 @@ function lineup(ids, size2 = 1.6) {
 if (window.__CUBO_DEBUG) window.__cubo = {
   lineup,
   dream: (on2) => setDream(on2),
+  style: (id) => setStyle(id),
   openEditor: (i, j) => openEditor(i, j),
   closeEditor: () => closeEditor(),
   editTap: (x, y) => editTap(x, y),
@@ -7622,13 +7756,15 @@ const updSpeechBtn = () => {
 };
 updSpeechBtn();
 const updDreamBtn = () => {
-  $("#mDream").textContent = "Traumfilter: " + (dreamOn() ? "an" : "aus");
+  $("#mDream").textContent = "Stil: " + styleLabel();
 };
 updDreamBtn();
 $("#mDream").addEventListener("click", () => {
   ac();
-  setDream(!dreamOn());
+  const k = STYLE_ORDER.indexOf(styleId());
+  setStyle(STYLE_ORDER[(k + 1) % STYLE_ORDER.length]);
   updDreamBtn();
+  speak("Stil " + styleLabel());
 });
 $("#mSpeech").addEventListener("click", () => {
   ac();
@@ -8317,7 +8453,7 @@ button:focus-visible{outline:3px solid var(--sun-deep);outline-offset:2px;}
     <div class="mrow"><button class="mb" id="mExport">Welt-Code kopieren</button><button class="mb" id="mExportAll">Alle Welten kopieren</button></div>
     <div class="mrow"><button class="mb" id="mImport">Code einfügen</button></div>
     <h3 class="msub">Einstellungen</h3>
-    <div class="mrow"><button class="mb" id="mSpeech">Vorlesen: an</button><button class="mb" id="mDream">Traumfilter: an</button></div>
+    <div class="mrow"><button class="mb" id="mSpeech">Vorlesen: an</button><button class="mb" id="mDream">Stil: Bilderbuch</button></div>
     <div id="codeBox" hidden>
       <p id="codeInfo"></p>
       <textarea id="codeTxt" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>

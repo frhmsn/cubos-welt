@@ -10,7 +10,7 @@ import { fangData, mergeFang } from '../systems/catch-book.js';
 import { freshWorld, newId, openWorld, saveWorld } from '../core/worlds.js';
 import { setSpeech, speak, speechAvailable, speechOn } from '../systems/speech.js';
 import { mergeQuests, questData } from '../systems/quests.js';
-import { dreamOn, setDream } from '../render/dream.js';
+import { STYLE_ORDER, setStyle, styleId, styleLabel } from '../render/dream.js';
 
 let codeMode='export';
 $('#mExportAll').addEventListener('click',async()=>{
@@ -109,9 +109,10 @@ $('#btnSave').addEventListener('click',()=>{ac();saveWorld(false,false);});
 // ---------- Einstellungen ----------
 const updSpeechBtn=()=>{$('#mSpeech').textContent='Vorlesen: '+(speechOn()?'an':'aus');$('#mSpeech').hidden=!speechAvailable();};
 updSpeechBtn();
-const updDreamBtn=()=>{$('#mDream').textContent='Traumfilter: '+(dreamOn()?'an':'aus');};
+const updDreamBtn=()=>{$('#mDream').textContent='Stil: '+styleLabel();};
 updDreamBtn();
-$('#mDream').addEventListener('click',()=>{ac();setDream(!dreamOn());updDreamBtn();});
+// Stil-Knopf: tippen schaltet zum nächsten Stil weiter
+$('#mDream').addEventListener('click',()=>{ac();const k=STYLE_ORDER.indexOf(styleId());setStyle(STYLE_ORDER[(k+1)%STYLE_ORDER.length]);updDreamBtn();speak('Stil '+styleLabel());});
 $('#mSpeech').addEventListener('click',()=>{ac();setSpeech(!speechOn());updSpeechBtn();if(speechOn())speak('Ich lese dir jetzt alles vor.');});
 
 export { renderWorlds };

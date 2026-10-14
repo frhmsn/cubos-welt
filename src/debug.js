@@ -18,7 +18,7 @@ import { animals, aquariums, cars, ferries, trains } from './core/world-data.js'
 import { catchBook, whaleBook } from './systems/catch-book.js';
 import { closeEditor, editTap, openEditor } from './systems/editor.js';
 import { nextTask, stars } from './systems/quests.js';
-import { setDream } from './render/dream.js';
+import { setDream, setStyle } from './render/dream.js';
 
 // ---------- Test-Schnittstelle ----------
 // Modelle zum Anschauen nebeneinander vor die Baukamera stellen (für neue Arten).
@@ -40,6 +40,7 @@ function lineup(ids, size = 1.6) {
 if (window.__CUBO_DEBUG) window.__cubo = {
   lineup,
   dream: (on) => setDream(on),
+  style: (id) => setStyle(id),
   openEditor: (i, j) => openEditor(i, j),
   closeEditor: () => closeEditor(),
   editTap: (x, y) => editTap(x, y),
