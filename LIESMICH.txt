@@ -16,9 +16,10 @@ So kommt das Spiel auf den Home-Bildschirm:
    ohne Browserleiste.
 
 Welten mitnehmen:
-- In der Claude-Version: Menü (drei Punkte) > "Welt-Code kopieren".
-- In der App: Menü > "Welt-Code einfügen", Code einfügen, "Welt laden".
-- Das geht auch in die andere Richtung.
+- Menü (drei Punkte) > "Alle Welten kopieren". Der Code enthält alle Welten,
+  das Fangbuch und damit auch die Fische fürs Aquarium.
+- Auf dem anderen Gerät: Menü > "Code einfügen", Code einfügen, "Laden".
+- Welten, die schon da sind, werden nicht doppelt gespeichert.
 
 Wichtig: Die App speichert ihre Welten auf dem iPad selbst. Safari und das
 Home-Bildschirm-Symbol haben getrennte Speicher. Also immer übers Symbol
