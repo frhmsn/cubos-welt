@@ -28,7 +28,14 @@ function pickTile(cx,cy){
 }
 function nope(){nopeSnd();const b=document.querySelector('.it.on');if(b){b.classList.remove('nope');void b.offsetWidth;b.classList.add('nope');}}
 function inTile(e,i,j){const t=tileAt(e.x,e.z);return t&&t.i===i&&t.j===j;}
+/** Tippen mit dem gewählten Ding auf Feld (i, j). Meldet 'gebaut', wenn sich die Welt geändert hat. */
 function apply(i,j,painting){
+  const was=game.dirty;game.dirty=false;
+  applyTool(i,j,painting);
+  const did=game.dirty;game.dirty=did||was;
+  if(did)emit('gebaut',{id:game.sel,kind:ITEMS[game.sel]&&ITEMS[game.sel].kind,i,j,painting:!!painting});
+}
+function applyTool(i,j,painting){
   const it=ITEMS[game.sel],t=tiles[I(i,j)];
   if(game.sel==='hand')return;
   if(game.sel==='eigen'){openEditor(i,j);return;}

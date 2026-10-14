@@ -8,7 +8,7 @@ import { AQ_R } from '../content/models/buildings.js';
 import { ac, plop, tone } from './audio.js';
 import { FISH, fishModel } from '../content/fish.js';
 import { thumbs } from '../ui/inventory.js';
-import { on } from '../core/events.js';
+import { emit, on } from '../core/events.js';
 import { aquariums } from '../core/world-data.js';
 import { nearFocus } from '../core/focus.js';
 import { catchBook } from './catch-book.js';
@@ -59,7 +59,7 @@ function updateAquaUI(){
   const L=$('#aqList');L.innerHTML='';
   for(const k of Object.keys(FISH)){const n=catchBook[k]||0;if(!n)continue;
     const d=document.createElement('div');d.className='aqF';d.innerHTML=`${thumbs['F_'+k]?`<img alt="" src="${thumbs['F_'+k]}">`:''}<span><b>${n}</b> ${n===1?FISH[k].label:FISH[k].plural}</span>`;L.appendChild(d);}
-  P.hidden=false;tone(660,.12,'sine',.06);tone(880,.16,'sine',.06,.1);
+  P.hidden=false;emit('aquarium:betreten',{});tone(660,.12,'sine',.06);tone(880,.16,'sine',.06,.1);
 }
 
 // Neuer Fang oder eingefügter Code: Becken neu füllen, Panel beim nächsten Bild neu aufbauen

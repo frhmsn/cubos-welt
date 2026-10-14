@@ -18,6 +18,7 @@ import { WHALE, whaleModel } from '../content/whales.js';
 import { on } from '../core/events.js';
 import { hint } from './hint.js';
 import { catchBook, catchRec, fmtLen, whaleBook } from '../systems/catch-book.js';
+import { isUnlocked } from '../systems/quests.js';
 
 let thumbs={};
 function select(id){
@@ -57,6 +58,7 @@ function renderItems(){
     return;
   }
   for(const id of cat.items){
+    if(ITEMS[id].bonus&&!isUnlocked(ITEMS[id].bonus))continue; // Bonus erst nach geschafftem Kapitel
     const b=document.createElement('button'); b.className='it'+(game.sel===id?' on':''); b.dataset.id=id;
     b.innerHTML=`<span class="ball">${thumbs[id]?`<img alt="" src="${thumbs[id]}">`:(ITEMS[id].icon||'')}</span><span>${ITEMS[id].label}</span>`;
     b.addEventListener('click',()=>{ac();if(ITEMS[id].kind!=='action')plop();select(id);});
@@ -115,5 +117,7 @@ function makeThumbs(){
 const refreshFang=()=>{if(game.curCat==='fang')renderItems();};
 on('fang:geaendert',refreshFang);
 on('wal:gesehen',refreshFang);
+on('kapitel:geschafft',()=>renderItems());
+on('aufgaben:geladen',()=>renderItems());
 
 export { makeThumbs, renderCats, renderItems, select, thumbs };

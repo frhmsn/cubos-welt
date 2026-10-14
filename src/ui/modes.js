@@ -22,6 +22,7 @@ import { editCam } from '../systems/editor.js';
 import { hint } from './hint.js';
 import { freeAt, groundM, isWater, tiles } from '../core/world-data.js';
 import { saveSoon } from '../core/autosave.js';
+import { emit } from '../core/events.js';
 
 // ---------- UI ----------
 const ICON_WALK='<svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.8" r="2.2" fill="#FFC21A"/><path d="M12 8.2v6m0 0-3.5 6.3M12 14.2l3.5 6.3M6.8 11.2 12 9l5.2 2.2"/></svg>';
@@ -40,6 +41,7 @@ function setMode(m){
   $('#btnView').innerHTML=m==='build'?ICON_WALK:ICON_BUILD;
   game.cam=m==='build'?buildCam:m==='edit'?editCam:walkCam;
   ptrs.clear(); game.gest=null;
+  emit('modus',{mode:m});
 }
 function startWalk(){
   pl.x=bc.x; pl.z=bc.z; pl.yaw=bc.yaw; pl.pitch=-.05;
@@ -61,6 +63,7 @@ function enterCar(car){
   if(ITEMS[car.type].sub){car.diving=false;car.dive=0;updDiveBtn(car);$('#btnDive').hidden=false;hint('Tippe auf Abtauchen und fahr unter Wasser zu den Fischen!',4000);}
   else if(ITEMS[car.type].boat){$('#btnFish').hidden=false;hint(fishes.length?'Fahr zu den Schatten im Wasser. Das sind Fische! Dann tippe auf Angeln.':'Fische gibt es im Meer. Mal mit dem Feld „Meer" ein großes Meer.',4500);}
   else hint('Links lenken und Gas geben. Brumm!');
+  emit('eingestiegen',{type:car.type});
 }
 function exitCar(toBuild){
   const car=game.driveCar; if(!car)return;
@@ -84,6 +87,7 @@ function startRide(tr){
   walkCam.position.set(q.x-fx*7+Math.cos(c0.th)*3.4,4.4,q.z-fz*7-Math.sin(c0.th)*3.4); walkCam.lookAt(q.x+fx*4,1.1,q.z+fz*4);
   tr.go=true; tr.wait=Math.min(tr.wait,1.2);
   setMode('ride'); whistle(tr.type); hint('Du fährst mit! Am nächsten Bahnhof kannst du aussteigen.',3500);
+  emit('mitfahren',{type:tr.type});
 }
 function exitTrain(toBuild){
   const tr=game.rideTrain; if(!tr)return;
@@ -107,11 +111,11 @@ $('#btnView').addEventListener('click',()=>{
   else if(game.mode==='ride')exitTrain(true);
   else{bc.x=pl.x;bc.z=pl.z;bc.yaw=bc.yawT=pl.yaw;bc.d=Math.min(bc.d,36);setMode('build');}
 });
-$('#btnTime').addEventListener('click',()=>{ac();tone(wasDay?300:600,.2,'sine',.1,0,wasDay?.6:1.6);game.dayTarget=wasDay?.0:.3;});
+$('#btnTime').addEventListener('click',()=>{ac();tone(wasDay?300:600,.2,'sine',.1,0,wasDay?.6:1.6);game.dayTarget=wasDay?.0:.3;emit('tageszeit',{nacht:wasDay});});
 $('#btnRot').addEventListener('click',()=>{ac();plop();bc.yawT+=Math.PI/4;});
 $('#btnEnter').addEventListener('click',()=>{const v=nearestVehicle();if(!v)return;if(v.train)startRide(v.train);else enterCar(v.car);});
 $('#btnExit').addEventListener('click',()=>{if(game.mode==='ride')exitTrain(false);else exitCar(false);});
-$('#btnHonk').addEventListener('click',()=>{if(game.mode==='ride'&&game.rideTrain)whistle(game.rideTrain.type);else if(game.driveCar)honk(game.driveCar.type);});
+$('#btnHonk').addEventListener('click',()=>{if(game.mode==='ride'&&game.rideTrain)whistle(game.rideTrain.type);else if(game.driveCar)honk(game.driveCar.type);emit('hupen',{mode:game.mode});});
 $('#btnSail').addEventListener('click',()=>{ac();const f=game.mode==='drive'&&game.driveCar?onDeck(game.driveCar.x,game.driveCar.z):onDeck(pl.x,pl.z);if(f&&f.state==='dock'){f.wait=0;tone(130,.7,'sawtooth',.05);}});
 
 export { enterCar, exitCar, exitTrain, setMode, startRide, startWalk, updateRide };

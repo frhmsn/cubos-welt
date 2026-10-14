@@ -794,9 +794,35 @@ const uboot = {
     return out;
   }
 };
-const VEHICLE_LIST = [lambo, ferrari, polizei, feuerwehrauto, bus, boot, uboot];
+const goldlambo = {
+  id: "goldlambo",
+  label: "Gold-Lambo",
+  category: "auto",
+  // Inventar-Kategorie: 'auto' oder 'see'
+  bonus: "stadt",
+  // erscheint erst, wenn dieses Kapitel geschafft ist
+  speed: 7,
+  max: 18,
+  // Beschleunigung und Höchstgeschwindigkeit
+  model({ g, M: M2, mesh: mesh2, box: box2, prof: prof2, wheels: wheels2, lights: lights2, glassMat: glassMat2 }) {
+    const b = M2("#FFCF33", { roughness: 0.2, metalness: 0.45, emissive: "#8A5A00", emissiveIntensity: 0.4 });
+    mesh2(prof2("glb", [[-1.1, 0.18], [1.12, 0.18], [1.12, 0.32], [0.55, 0.46], [-1.1, 0.52]], 0.96), b, 0, 0, 0, g);
+    mesh2(prof2("glbc", [[0.55, 0.45], [0.1, 0.72], [-0.55, 0.7], [-0.88, 0.5]], 0.84), glassMat2, 0, 0, 0, g);
+    box2(g, "#7A5A10", 0.92, 0.04, 0.24, 0, 0.78, -0.96);
+    box2(g, "#7A5A10", 0.05, 0.26, 0.05, -0.33, 0.64, -0.96);
+    box2(g, "#7A5A10", 0.05, 0.26, 0.05, 0.33, 0.64, -0.96);
+    for (const x of [-0.12, 0.12]) box2(g, "#FFFFFF", 0.08, 0.02, 2.2, x, 0.53, 0, false);
+    for (const z of [0.55, -0.2, -0.75]) {
+      const st = box2(g, "#FFFFFF", 0.2, 0.03, 0.2, 0, 0.56, z, false);
+      st.rotation.y = Math.PI / 4;
+    }
+    wheels2(g, [-0.46, 0.46], [-0.7, 0.72], 0.22);
+    lights2(g, 0.34, 1.12, -1.12, [-0.3, 0.3]);
+  }
+};
+const VEHICLE_LIST = [lambo, goldlambo, ferrari, polizei, feuerwehrauto, bus, boot, uboot];
 const VEHICLE_BY_ID = Object.fromEntries(VEHICLE_LIST.map((v) => [v.id, v]));
-const vehicleItem = (v) => ({ kind: "car", label: v.label, speed: v.speed, max: v.max, ...v.siren ? { siren: true } : {}, ...v.boat ? { boat: true } : {}, ...v.sub ? { sub: true } : {} });
+const vehicleItem = (v) => ({ kind: "car", label: v.label, speed: v.speed, max: v.max, ...v.siren ? { siren: true } : {}, ...v.boat ? { boat: true } : {}, ...v.sub ? { sub: true } : {}, ...v.bonus ? { bonus: v.bonus } : {} });
 const hund = {
   id: "hund",
   label: "Hund",
@@ -1416,7 +1442,7 @@ scene.add(outer);
 const sunBall = new THREE.Mesh(new THREE.SphereGeometry(12, 20, 14), new THREE.MeshBasicMaterial({ color: 16773808, fog: false }));
 const moonBall = new THREE.Mesh(new THREE.SphereGeometry(8, 20, 14), new THREE.MeshBasicMaterial({ color: 15265023, fog: false }));
 scene.add(sunBall, moonBall);
-const stars = (() => {
+const stars$1 = (() => {
   const n = 500, p = new Float32Array(n * 3);
   for (let k = 0; k < n; k++) {
     const a = Math.random() * Math.PI * 2, e = Math.random() * 1.2 + 0.08, r = 380;
@@ -2361,11 +2387,11 @@ function whaleModel(type) {
   WHALE_BY_ID[type].model({ g, ell, fluke, box });
   return bake(g);
 }
-const KEY$1 = "cubos-vorlesen";
+const KEY$2 = "cubos-vorlesen";
 const synth = typeof window !== "undefined" ? window.speechSynthesis : null;
 let enabled = true;
 try {
-  enabled = localStorage.getItem(KEY$1) !== "0";
+  enabled = localStorage.getItem(KEY$2) !== "0";
 } catch (e) {
 }
 let voice = null, lastText = "";
@@ -2406,7 +2432,7 @@ const repeatSpeech = () => speak(lastText, { force: true });
 function setSpeech(on2) {
   enabled = !!on2;
   try {
-    localStorage.setItem(KEY$1, on2 ? "1" : "0");
+    localStorage.setItem(KEY$2, on2 ? "1" : "0");
   } catch (e) {
   }
   if (!on2 && synth) synth.cancel();
@@ -3819,6 +3845,14 @@ function inTile(e, i, j) {
   return t && t.i === i && t.j === j;
 }
 function apply(i, j, painting) {
+  const was = game.dirty;
+  game.dirty = false;
+  applyTool(i, j, painting);
+  const did = game.dirty;
+  game.dirty = did || was;
+  if (did) emit("gebaut", { id: game.sel, kind: ITEMS[game.sel] && ITEMS[game.sel].kind, i, j, painting: !!painting });
+}
+function applyTool(i, j, painting) {
   const it = ITEMS[game.sel], t = tiles[I(i, j)];
   if (game.sel === "hand") return;
   if (game.sel === "eigen") {
@@ -4421,11 +4455,11 @@ function stationNear() {
   return -1;
 }
 const trainAt = (k) => trains.find((tr) => tr.state === "halt" && tr.atStation && tr.stopK === k);
-function showStation(state, title, sub, go, alt) {
-  if (state === game.stState) return;
-  game.stState = state;
+function showStation(state2, title, sub, go, alt) {
+  if (state2 === game.stState) return;
+  game.stState = state2;
   const P = $("#stPanel");
-  if (!state) {
+  if (!state2) {
     P.hidden = true;
     return;
   }
@@ -4436,7 +4470,7 @@ function showStation(state, title, sub, go, alt) {
   if (go) $("#stGo").textContent = go;
   $("#stAlt").hidden = !alt;
   if (alt) $("#stAlt").textContent = alt;
-  if (state === "here" || state === "ridestop") tone(988, 0.12, "sine", 0.07);
+  if (state2 === "here" || state2 === "ridestop") tone(988, 0.12, "sine", 0.07);
 }
 function updateStationUI() {
   if (game.traveling) {
@@ -4543,8 +4577,8 @@ function updateDay(dt, focus2) {
   hemi.color.copy(hNight).lerp(hDay, dayF);
   fill.intensity = 0.12 - 0.06 * dayF;
   for (const n of nightMats) n.m.emissiveIntensity = n.base + n.k * night;
-  stars.material.opacity = night * 0.9;
-  stars.position.copy(focus2);
+  stars$1.material.opacity = night * 0.9;
+  stars$1.position.copy(focus2);
   sunBall.position.copy(focus2).addScaledVector(sd, 320);
   sunBall.visible = elev > -0.15;
   moonBall.position.copy(focus2).addScaledVector(sd, -320);
@@ -4590,6 +4624,7 @@ function setMode(m) {
   game.cam = m === "build" ? buildCam : m === "edit" ? editCam : walkCam;
   ptrs.clear();
   game.gest = null;
+  emit("modus", { mode: m });
 }
 function startWalk() {
   pl.x = bc.x;
@@ -4648,6 +4683,7 @@ function enterCar(car) {
     $("#btnFish").hidden = false;
     hint(fishes.length ? "Fahr zu den Schatten im Wasser. Das sind Fische! Dann tippe auf Angeln." : 'Fische gibt es im Meer. Mal mit dem Feld „Meer" ein großes Meer.', 4500);
   } else hint("Links lenken und Gas geben. Brumm!");
+  emit("eingestiegen", { type: car.type });
 }
 function exitCar(toBuild2) {
   const car = game.driveCar;
@@ -4710,6 +4746,7 @@ function startRide(tr) {
   setMode("ride");
   whistle(tr.type);
   hint("Du fährst mit! Am nächsten Bahnhof kannst du aussteigen.", 3500);
+  emit("mitfahren", { type: tr.type });
 }
 function exitTrain(toBuild2) {
   const tr = game.rideTrain;
@@ -4766,6 +4803,7 @@ $("#btnTime").addEventListener("click", () => {
   ac();
   tone(wasDay ? 300 : 600, 0.2, "sine", 0.1, 0, wasDay ? 0.6 : 1.6);
   game.dayTarget = wasDay ? 0 : 0.3;
+  emit("tageszeit", { nacht: wasDay });
 });
 $("#btnRot").addEventListener("click", () => {
   ac();
@@ -4785,6 +4823,7 @@ $("#btnExit").addEventListener("click", () => {
 $("#btnHonk").addEventListener("click", () => {
   if (game.mode === "ride" && game.rideTrain) whistle(game.rideTrain.type);
   else if (game.driveCar) honk(game.driveCar.type);
+  emit("hupen", { mode: game.mode });
 });
 $("#btnSail").addEventListener("click", () => {
   ac();
@@ -5373,6 +5412,7 @@ function setDive(car, on2) {
     tone(180, 0.8, "sine", 0.06, 0, 1.8);
   }
   updDiveBtn(car);
+  if (on2) emit("tauchen", {});
 }
 function updDiveBtn(car) {
   $("#diveTxt").textContent = car && car.diving ? "Auftauchen" : "Abtauchen";
@@ -5488,6 +5528,7 @@ function updateAquaUI() {
     L.appendChild(d);
   }
   P.hidden = false;
+  emit("aquarium:betreten", {});
   tone(660, 0.12, "sine", 0.06);
   tone(880, 0.16, "sine", 0.06, 0.1);
 }
@@ -5729,6 +5770,7 @@ async function doTravel(dest) {
   await saveWorld(false, true);
   $("#travel").hidden = true;
   game.traveling = null;
+  emit("reise", { kind: info.kind, neu: typeof dest === "string" ? dest : null });
   setTimeout(() => hint("Willkommen in " + (name || "der neuen Welt") + "!", 3500), 300);
   tone(523, 0.15, "sine", 0.08);
   tone(659, 0.15, "sine", 0.08, 0.15);
@@ -5772,6 +5814,7 @@ function newId() {
   return "w_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
 }
 async function saveWorld(asNew, silent) {
+  if (!silent) emit("welt:gespeichert", {});
   if (game.saving) return null;
   game.saving = true;
   try {
@@ -6140,6 +6183,142 @@ MODELS.eigen = (seed, o) => {
   }
   return { g: meshVoxels(v), cols: voxCols(v), lights: lights2 };
 };
+const stadt = {
+  id: "stadt",
+  title: "Erste Stadt",
+  icon: "haus",
+  bonus: { item: "goldlambo", text: "ein goldener Lamborghini" },
+  tasks: [
+    { id: "stadt-strasse", text: "Bau eine Straße aus drei Stücken.", tip: "Tippe unten auf Land, dann auf Straße. Dann tippe dreimal nebeneinander in die Wiese.", on: "gebaut", when: (d) => d.id === "strasse", count: 3 },
+    { id: "stadt-haus", text: "Bau ein Haus.", tip: "Tippe unten auf Häuser und such dir ein Haus aus. Neben einer Straße zeigt die Tür zur Straße.", on: "gebaut", when: (d) => ["haus", "villa", "hochhaus", "feuerwache", "garage"].includes(d.id) },
+    { id: "stadt-baum", text: "Pflanz zwei Bäume.", tip: "Unter Natur gibt es Bäume und Tannen.", on: "gebaut", when: (d) => d.id === "baum" || d.id === "tanne", count: 2 },
+    { id: "stadt-auto", text: "Stell ein Auto auf die Straße.", tip: "Unter Autos ein Auto aussuchen und auf die Straße tippen.", on: "gebaut", when: (d) => d.kind === "car" && !["boot", "uboot"].includes(d.id) },
+    { id: "stadt-laufen", text: "Lauf selbst durch deine Stadt.", tip: "Tippe oben rechts auf das Männchen.", on: "modus", when: (d) => d.mode === "walk" },
+    { id: "stadt-fahren", text: "Steig in ein Auto und fahr los.", tip: "Lauf zu einem Auto und tippe auf Einsteigen.", on: "eingestiegen", when: (d) => !["boot", "uboot"].includes(d.type) },
+    { id: "stadt-hupen", text: "Drück im Auto auf die Hupe.", tip: "Beim Fahren ist unten rechts der Hupen-Knopf.", on: "hupen", when: (d) => d.mode === "drive" }
+  ]
+};
+const bahn = {
+  id: "bahn",
+  title: "Eisenbahn",
+  icon: "zug",
+  tasks: [
+    { id: "bahn-gleis", text: "Bau ein Gleis aus fünf Stücken.", tip: "Unter Bahn findest du das Gleis. Du kannst mit dem Finger malen.", on: "gebaut", when: (d) => d.id === "schiene", count: 5 },
+    { id: "bahn-bahnhof", text: "Bau einen Bahnhof auf das Gleis.", tip: "Den Bahnhof direkt auf ein Gleis-Stück setzen.", on: "gebaut", when: (d) => d.id === "bahnhof" },
+    { id: "bahn-zug", text: "Stell einen Zug auf das Gleis.", tip: "Regionalzug oder Schnellzug auf ein Gleis tippen.", on: "gebaut", when: (d) => d.kind === "train" },
+    { id: "bahn-mitfahren", text: "Fahr mit dem Zug mit.", tip: "Lauf zum Bahnhof. Wenn der Zug hält, tippe auf Einsteigen.", on: "mitfahren" },
+    { id: "bahn-pfeifen", text: "Lass den Zug pfeifen.", tip: "Im Zug unten rechts auf Pfeifen tippen.", on: "hupen", when: (d) => d.mode === "ride" }
+  ]
+};
+const meer = {
+  id: "meer",
+  title: "Am Meer",
+  icon: "boot",
+  tasks: [
+    { id: "meer-malen", text: "Mal ein Meer aus zehn Feldern.", tip: "Unter Wasser das Meer wählen und mit dem Finger malen.", on: "gebaut", when: (d) => d.id === "meer", count: 10 },
+    { id: "meer-boot", text: "Setz ein Fischerboot ins Meer.", tip: "Das Fischerboot findest du unter Wasser.", on: "gebaut", when: (d) => d.id === "boot" },
+    { id: "meer-einsteigen", text: "Steig ins Fischerboot.", tip: "Lauf ans Ufer zum Boot und tippe auf Einsteigen.", on: "eingestiegen", when: (d) => d.type === "boot" },
+    { id: "meer-fisch", text: "Fang einen Fisch.", tip: "Fahr zu einem Schatten im Wasser und tippe auf Angeln. Wenn es spritzt, schnell noch einmal tippen!", on: "fang:geaendert", when: (d) => !!d.type },
+    { id: "meer-drei", text: "Fang drei Fische.", tip: "Im Meer gibt es andere Fische als im See.", on: "fang:geaendert", when: (d) => !!d.type, count: 3 },
+    { id: "meer-aussetzen", text: "Setz einen Fisch in einen See.", tip: "Unter Fische einen Fisch wählen und ins Wasser tippen.", on: "gebaut", when: (d) => d.kind === "fish" }
+  ]
+};
+const entdecker = {
+  id: "entdecker",
+  title: "Entdecker",
+  icon: "uboot",
+  tasks: [
+    { id: "entd-uboot", text: "Steig in ein U-Boot.", tip: "Das U-Boot findest du unter Wasser. Es braucht Meer.", on: "eingestiegen", when: (d) => d.type === "uboot" },
+    { id: "entd-tauchen", text: "Tauch mit dem U-Boot ab.", tip: "Im U-Boot unten rechts auf Abtauchen tippen.", on: "tauchen" },
+    { id: "entd-wal", text: "Entdecke einen Wal.", tip: "Wale leben in einem großen Meer. Halte Ausschau nach der Fontäne!", on: "wal:gesehen" },
+    { id: "entd-aquarium", text: "Bau ein Aquarium.", tip: "Unter Häuser ist das Aquarium. Es braucht drei mal drei Felder.", on: "gebaut", when: (d) => d.id === "aquarium" },
+    { id: "entd-hinein", text: "Geh ins Aquarium hinein.", tip: "Lauf mit dem Männchen durch die Tür.", on: "aquarium:betreten" },
+    { id: "entd-nacht", text: "Mach es Nacht.", tip: "Oben rechts auf die Sonne tippen.", on: "tageszeit", when: (d) => d.nacht },
+    { id: "entd-werkstatt", text: "Bau ein Haus Stein für Stein.", tip: "Unter Häuser auf Selbst bauen tippen, dann auf die Wiese.", on: "werkstatt:fertig" }
+  ]
+};
+const inseln = {
+  id: "inseln",
+  title: "Inselwelt",
+  icon: "faehre",
+  tasks: [
+    { id: "insel-pinsel", text: "Mal eine Insel ins Meer.", tip: "Mit dem Insel-Pinsel ins Meer malen. Der Strand kommt von allein.", on: "insel:gemalt", count: 6 },
+    { id: "insel-anleger", text: "Bau einen Anleger am Ufer.", tip: "Den Anleger ins Wasser direkt neben das Land setzen.", on: "gebaut", when: (d) => d.id === "anleger" },
+    { id: "insel-faehre", text: "Setz eine Fähre ins Wasser.", tip: "Die Fähre fährt von Anleger zu Anleger.", on: "gebaut", when: (d) => d.id === "faehre" },
+    { id: "insel-reise", text: "Reise in eine andere Welt.", tip: "Fahr mit der Fähre durch das Seetor oder mit dem Zug durch den Tunnel.", on: "reise" },
+    { id: "insel-speichern", text: "Speichere deine Welt.", tip: "Oben rechts auf die Wolke tippen.", on: "welt:gespeichert" }
+  ]
+};
+const CHAPTERS = [stadt, bahn, meer, entdecker, inseln];
+const QUEST_EVENTS = ["gebaut", "insel:gemalt", "modus", "eingestiegen", "mitfahren", "hupen", "tageszeit", "tauchen", "aquarium:betreten", "reise", "werkstatt:fertig", "welt:gespeichert", "fang:geaendert", "wal:gesehen"];
+const ALL_TASKS = CHAPTERS.flatMap((c) => c.tasks.map((t) => ({ ...t, chapter: c.id })));
+const KEY$1 = "cubos-aufgaben";
+let state = { done: {}, cnt: {} };
+try {
+  const s = JSON.parse(localStorage.getItem(KEY$1) || "null");
+  if (s && s.done) state = { done: s.done, cnt: s.cnt || {} };
+} catch (e) {
+}
+const persist = () => {
+  try {
+    localStorage.setItem(KEY$1, JSON.stringify(state));
+  } catch (e) {
+  }
+};
+const chapterDone = (c) => c.tasks.every((t) => state.done[t.id]);
+const stars = () => ALL_TASKS.filter((t) => state.done[t.id]).length;
+const totalStars = () => ALL_TASKS.length;
+const isUnlocked = (chapterId) => {
+  const c = CHAPTERS.find((x) => x.id === chapterId);
+  return !!c && chapterDone(c);
+};
+const currentChapter = () => CHAPTERS.find((c) => !chapterDone(c)) || CHAPTERS[CHAPTERS.length - 1];
+const nextTask = () => {
+  const c = currentChapter();
+  const t = c.tasks.find((x) => !state.done[x.id]);
+  return t ? { ...t, chapter: c.id } : null;
+};
+const isDone = (taskId) => !!state.done[taskId];
+const progressOf = (task) => Math.min(state.cnt[task.id] || 0, task.count || 1);
+function complete(task) {
+  state.done[task.id] = true;
+  persist();
+  const c = CHAPTERS.find((x) => x.id === task.chapter);
+  emit("aufgabe:geschafft", { chapter: c.id, task: task.id, stars: stars() });
+  if (chapterDone(c)) emit("kapitel:geschafft", { chapter: c.id, bonus: c.bonus || null });
+}
+for (const ev of new Set(ALL_TASKS.map((t) => t.on))) {
+  on(ev, (d = {}) => {
+    for (const t of ALL_TASKS) {
+      if (t.on !== ev || state.done[t.id]) continue;
+      if (t.when && !t.when(d)) continue;
+      state.cnt[t.id] = (state.cnt[t.id] || 0) + 1;
+      if (state.cnt[t.id] >= (t.count || 1)) complete(t);
+      else persist();
+    }
+  });
+}
+const questData = () => ({ done: state.done, cnt: state.cnt });
+function mergeQuests(q) {
+  if (!q || typeof q !== "object") return false;
+  let ch = false;
+  for (const t of ALL_TASKS) {
+    if (q.done && q.done[t.id] && !state.done[t.id]) {
+      state.done[t.id] = true;
+      ch = true;
+    }
+    const n = +(q.cnt || {})[t.id] || 0;
+    if (n > (state.cnt[t.id] || 0)) {
+      state.cnt[t.id] = n;
+      ch = true;
+    }
+  }
+  if (ch) {
+    persist();
+    emit("aufgaben:geladen", {});
+  }
+  return ch;
+}
 let thumbs = {};
 function select(id) {
   if (ITEMS[id] && ITEMS[id].kind === "action") {
@@ -6207,6 +6386,7 @@ function renderItems() {
     return;
   }
   for (const id of cat.items) {
+    if (ITEMS[id].bonus && !isUnlocked(ITEMS[id].bonus)) continue;
     const b = document.createElement("button");
     b.className = "it" + (game.sel === id ? " on" : "");
     b.dataset.id = id;
@@ -6311,6 +6491,8 @@ const refreshFang = () => {
 };
 on("fang:geaendert", refreshFang);
 on("wal:gesehen", refreshFang);
+on("kapitel:geschafft", () => renderItems());
+on("aufgaben:geladen", () => renderItems());
 const SAVE_VERSION = 1;
 const MIGRATIONS = {};
 function migrate(d) {
@@ -6731,6 +6913,7 @@ function closeEditor() {
   save();
   game.worldDirty = true;
   plop();
+  emit("werkstatt:fertig", {});
 }
 function pushUndo() {
   edit.undo.push(edit.v.join(""));
@@ -6973,7 +7156,8 @@ if (window.__CUBO_DEBUG) window.__cubo = {
       catchBook: JSON.stringify(catchBook),
       whaleBook: JSON.stringify(whaleBook),
       aquarium: [...aquariums.values()].map((a) => a.fish.length),
-      ui: { travel: vis("travel"), st: vis("stPanel"), aq: vis("aqPanel"), dive: vis("btnDive"), fish: vis("btnFish"), menu: vis("menu"), catch: vis("catch") }
+      quests: { stars: stars(), next: (nextTask() || {}).id || null },
+      ui: { book: vis("questBook"), toast: vis("questToast"), travel: vis("travel"), st: vis("stPanel"), aq: vis("aqPanel"), dive: vis("btnDive"), fish: vis("btnFish"), menu: vis("menu"), catch: vis("catch") }
     };
   }
 };
@@ -7025,7 +7209,7 @@ $("#mExportAll").addEventListener("click", async () => {
   l.sort((a, b) => (a.updated || 0) - (b.updated || 0));
   const worlds = l.map((w) => ({ name: w.name, data: w.id === game.curWorld ? JSON.stringify(serialize()) : w.data })).filter((w) => w.data);
   if (game.curWorld == null || !l.some((w) => w.id === game.curWorld)) worlds.push({ name: "Mitgebrachte Welt", data: JSON.stringify(serialize()) });
-  const code = await encodeWorld({ v: 2, worlds, fang: fangData() });
+  const code = await encodeWorld({ v: 2, worlds, fang: fangData(), aufgaben: questData() });
   $("#codeTxt").value = code;
   $("#codeInfo").textContent = worlds.length + (worlds.length === 1 ? " Welt" : " Welten") + ' plus Fangbuch und Aquarium als ein Code. Kopiere ihn und füge ihn auf dem anderen Gerät mit „Code einfügen" ein.';
 });
@@ -7043,7 +7227,7 @@ $("#mExport").addEventListener("click", async () => {
     if (w) name = w.name;
   } catch (e) {
   }
-  const code = await encodeWorld({ v: 1, name, data: JSON.stringify(serialize()), fang: fangData() });
+  const code = await encodeWorld({ v: 1, name, data: JSON.stringify(serialize()), fang: fangData(), aufgaben: questData() });
   $("#codeTxt").value = code;
   $("#codeInfo").textContent = "Das ist „" + name + '" als Code. Kopiere ihn und füge ihn auf dem anderen Gerät mit „Code einfügen" ein.';
 });
@@ -7097,7 +7281,7 @@ $("#codeGo").addEventListener("click", async () => {
       return false;
     }
   });
-  const fangNew = mergeFang(obj.fang);
+  const fangNew = mergeFang(obj.fang) | mergeQuests(obj.aufgaben);
   if (!ok.length) {
     if (fangNew) {
       $("#codeBox").hidden = true;
@@ -7483,6 +7667,118 @@ $("#btnFull").addEventListener("click", () => {
     no();
   }
 });
+const SPEAKER = '<svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z" fill="#FFC21A"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>';
+let shownChapter = null;
+function updateDock() {
+  $("#questStars").textContent = stars();
+  const t = nextTask();
+  $("#questPill").hidden = !t || game.mode === "edit";
+  $("#questDock").hidden = game.mode === "edit";
+  if (t) $("#questPillTxt").textContent = t.text;
+}
+function renderBook() {
+  const cur = shownChapter || currentChapter().id;
+  $("#qbStars").textContent = `Du hast ${stars()} von ${totalStars()} Sternen gesammelt.`;
+  const chs = $("#qbChapters");
+  chs.innerHTML = "";
+  for (const c of CHAPTERS) {
+    const n = c.tasks.filter((t) => isDone(t.id)).length, b = document.createElement("button");
+    b.className = "qch" + (c.id === cur ? " on" : "") + (n === c.tasks.length ? " done" : "");
+    b.innerHTML = `${thumbs[c.icon] ? `<img alt="" src="${thumbs[c.icon]}">` : ""}<span>${c.title}</span><small>${n}/${c.tasks.length}</small>`;
+    b.addEventListener("click", () => {
+      ac();
+      plop();
+      shownChapter = c.id;
+      renderBook();
+      speak(c.title);
+    });
+    chs.appendChild(b);
+  }
+  const ch = CHAPTERS.find((c) => c.id === cur), next = nextTask();
+  const list = $("#qbTasks");
+  list.innerHTML = "";
+  for (const t of ch.tasks) {
+    const ok = isDone(t.id), el = document.createElement("div");
+    el.className = "qt" + (ok ? " ok" : "") + (next && next.id === t.id ? " next" : "");
+    const cnt = t.count && !ok ? `<small>${progressOf(t)} von ${t.count}</small>` : "";
+    el.innerHTML = `<div class="ck">${ok ? "✓" : ""}</div><div class="tx"><b>${t.text}</b>${ok ? "" : `<span>${t.tip}</span>`}${cnt}</div><button class="say" aria-label="Vorlesen">${SPEAKER}</button><div class="st" aria-hidden="true">★</div>`;
+    el.querySelector(".say").addEventListener("click", () => {
+      ac();
+      speak(ok ? t.text + " Geschafft!" : t.text + " " + t.tip, { force: true });
+    });
+    list.appendChild(el);
+  }
+  const bo = $("#qbBonus");
+  if (ch.bonus) {
+    const un = isUnlocked(ch.id), it = ITEMS[ch.bonus.item];
+    bo.className = un ? "" : "locked";
+    bo.innerHTML = `${thumbs[ch.bonus.item] ? `<img alt="" src="${thumbs[ch.bonus.item]}">` : ""}<span>${un ? `Geschafft! Du hast ${ch.bonus.text}. Er steht bei ${it && it.kind === "car" ? "den Autos" : "deinen Sachen"}.` : `Schaff alle Aufgaben in diesem Kapitel, dann bekommst du ${ch.bonus.text}!`}</span>`;
+  } else bo.innerHTML = "";
+}
+function openBook() {
+  ac();
+  plop();
+  shownChapter = null;
+  renderBook();
+  $("#questBook").hidden = false;
+  const t = nextTask();
+  if (t) speak("Deine nächste Aufgabe: " + t.text);
+}
+$("#btnQuest").addEventListener("click", openBook);
+$("#questPill").addEventListener("click", () => {
+  ac();
+  const t = nextTask();
+  if (t) speak(t.text + " " + t.tip, { force: true });
+});
+$("#qbClose").addEventListener("click", () => {
+  $("#questBook").hidden = true;
+});
+$("#questBook").addEventListener("click", (e) => {
+  if (e.target.id === "questBook") $("#questBook").hidden = true;
+});
+let toastT = 0, bigUntil = 0;
+function toast(title, sub, ms, big = false) {
+  const now = performance.now();
+  if (!big && now < bigUntil) return;
+  if (big) bigUntil = now + ms;
+  $("#questToastTitle").textContent = title;
+  $("#questToastSub").textContent = sub;
+  const el = $("#questToast");
+  el.hidden = false;
+  el.style.animation = "none";
+  void el.offsetWidth;
+  el.style.animation = "";
+  clearTimeout(toastT);
+  toastT = setTimeout(() => {
+    el.hidden = true;
+  }, ms);
+}
+on("aufgabe:geschafft", () => {
+  tone(523, 0.12, "sine", 0.09);
+  tone(784, 0.12, "sine", 0.09, 0.12);
+  tone(1047, 0.3, "sine", 0.09, 0.24);
+  const t = nextTask();
+  toast("Super, ein Stern!", t ? "Nächste Aufgabe: " + t.text : "Du hast alle Aufgaben geschafft!", 3200);
+  speak("Super! Du hast einen Stern bekommen." + (t ? " Nächste Aufgabe: " + t.text : ""));
+  updateDock();
+  if (!$("#questBook").hidden) renderBook();
+});
+on("kapitel:geschafft", (d) => {
+  const c = CHAPTERS.find((x) => x.id === d.chapter);
+  const sub = d.bonus ? `Dein Geschenk: ${d.bonus.text}!` : "Ein ganzes Kapitel!";
+  toast(`Kapitel „${c.title}“ geschafft!`, sub, 4500, true);
+  setTimeout(() => speak(`Toll! Das Kapitel ${c.title} ist geschafft. ${d.bonus ? "Du bekommst " + d.bonus.text + "!" : ""}`), 3300);
+  tone(523, 0.15, "sine", 0.09, 0.4);
+  tone(659, 0.15, "sine", 0.09, 0.55);
+  tone(784, 0.15, "sine", 0.09, 0.7);
+  tone(1047, 0.4, "sine", 0.09, 0.85);
+});
+on("aufgaben:geladen", () => {
+  updateDock();
+  if (!$("#questBook").hidden) renderBook();
+});
+on("modus", updateDock);
+updateDock();
 resize();
 if (!load()) sampleWorld();
 setMode("build");
@@ -7496,7 +7792,10 @@ setTimeout(() => {
   renderCats();
   renderItems();
   renderEditTray();
-  hint("Wähle unten etwas aus und tippe in die Welt. Oben rechts das Männchen: selbst durch die Stadt laufen!", 6500);
+  {
+    const t = nextTask();
+    hint(stars() === 0 && t ? "Oben links ist dein Aufgabenbuch. Deine erste Aufgabe: " + t.text : "Wähle unten etwas aus und tippe in die Welt. Oben rechts das Männchen: selbst durch die Stadt laufen!", 6500);
+  }
 }, 60);
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) {
@@ -7677,11 +7976,74 @@ button:focus-visible{outline:3px solid var(--sun-deep);outline-offset:2px;}
 #btnExit.hot{background:var(--sun);box-shadow:inset 0 -4px 0 var(--sun-deep),0 8px 18px rgba(20,40,60,.2);}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
 
-#menuCard .msub{margin:14px 0 6px;font-size:16px;font-weight:600;color:#4A5563;}</style>
+#menuCard .msub{margin:14px 0 6px;font-size:16px;font-weight:600;color:#4A5563;}
+
+/* ---------- Aufgabenbuch ---------- */
+#questDock{position:fixed;left:calc(env(safe-area-inset-left,0px) + 12px);top:calc(env(safe-area-inset-top,0px) + 12px);z-index:5;display:flex;align-items:center;gap:10px;max-width:calc(100vw - 460px);}
+#btnQuest{position:relative;flex:0 0 auto;}
+#btnQuest .badge{position:absolute;right:-6px;bottom:-4px;min-width:24px;height:24px;padding:0 6px;box-sizing:border-box;border-radius:12px;background:var(--sun);
+  box-shadow:inset 0 -2px 0 var(--sun-deep);font-weight:700;font-size:14px;line-height:24px;text-align:center;font-variant-numeric:tabular-nums;color:var(--ink);}
+#questPill{display:flex;align-items:center;gap:8px;min-width:0;height:44px;padding:0 16px 0 10px;border:none;border-radius:22px;background:var(--tray-solid);
+  box-shadow:0 2px 0 rgba(31,42,55,.08),0 4px 12px rgba(31,42,55,.12);font:600 15px var(--f-display);color:var(--ink);cursor:pointer;}
+#questPill[hidden]{display:none!important;}
+#questPill .qp-star{color:var(--sun-deep);font-size:20px;line-height:1;}
+#questPill span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
+@media (max-width:760px){#questPill{display:none!important;}#questDock{max-width:none;}}
+#questToast{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);z-index:12;background:var(--tray-solid);border-radius:28px;padding:18px 28px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 12px 40px rgba(20,40,60,.3);text-align:center;max-width:min(86vw,420px);animation:qtIn .5s cubic-bezier(.2,1.6,.4,1);}
+#questToast .qt-star{font-size:64px;line-height:1;color:var(--sun);text-shadow:0 3px 0 var(--sun-deep);animation:qtSpin 1s ease-out;}
+#questToast b{font-size:22px;}
+#questToast span{font-size:15px;color:#4A5563;}
+@keyframes qtIn{from{transform:translate(-50%,-50%) scale(.4);opacity:0;}to{transform:translate(-50%,-50%) scale(1);opacity:1;}}
+@keyframes qtSpin{from{transform:rotate(-180deg) scale(.3);}to{transform:rotate(0) scale(1);}}
+#questBook{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:rgba(15,25,40,.35);padding-inline:16px;}
+#questCard{background:var(--tray-solid);border-radius:26px;padding:18px;width:min(100%,560px);max-height:86vh;overflow-y:auto;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;}
+#questCard h2{margin:0;font-size:24px;font-weight:700;}
+#questCard .mh{display:flex;align-items:center;justify-content:space-between;}
+#qbStars{margin:0;font-size:15px;color:#4A5563;}
+#qbChapters{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;}
+.qch{flex:0 0 auto;display:flex;align-items:center;gap:6px;height:48px;padding:0 14px 0 6px;border:none;border-radius:24px;background:var(--chip);font:600 15px var(--f-display);color:var(--ink);}
+.qch img{width:36px;height:36px;border-radius:50%;background:#fff;}
+.qch small{font-size:12px;color:#6A7280;font-variant-numeric:tabular-nums;}
+.qch.on{background:var(--sun);box-shadow:inset 0 -3px 0 var(--sun-deep);}
+.qch.on small{color:var(--ink);}
+.qch.done::after{content:'✓';margin-left:2px;color:#2E8B57;font-weight:700;}
+#qbTasks{display:flex;flex-direction:column;gap:8px;}
+.qt{display:flex;align-items:flex-start;gap:12px;background:#fff;border-radius:18px;padding:12px;box-shadow:0 2px 0 rgba(31,42,55,.06);}
+.qt.next{box-shadow:0 0 0 3px var(--sun),0 4px 12px rgba(232,164,0,.25);}
+.qt .ck{flex:0 0 auto;width:34px;height:34px;border-radius:50%;border:3px solid #CBD2D9;display:grid;place-items:center;font-weight:700;font-size:18px;color:#fff;box-sizing:border-box;}
+.qt.ok .ck{background:#3BAA5C;border-color:#3BAA5C;}
+.qt .tx{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:3px;}
+.qt .tx b{font-size:17px;line-height:1.25;}
+.qt.ok .tx b{color:#6A7280;}
+.qt .tx span{font-size:14px;line-height:1.35;color:#4A5563;}
+.qt .tx small{font-size:13px;color:var(--sun-deep);font-weight:600;font-variant-numeric:tabular-nums;}
+.qt .say{flex:0 0 auto;width:40px;height:40px;border-radius:50%;border:none;background:var(--chip);display:grid;place-items:center;padding:0;}
+.qt .say svg{width:22px;height:22px;}
+.qt .st{flex:0 0 auto;font-size:22px;color:#D6DBE0;line-height:34px;}
+.qt.ok .st{color:var(--sun);}
+#qbBonus{background:#FFF4CC;border-radius:18px;padding:12px 14px;display:flex;align-items:center;gap:12px;font-size:15px;line-height:1.35;}
+#qbBonus:empty{display:none;}
+#qbBonus img{width:56px;height:56px;border-radius:50%;background:#fff;flex:0 0 auto;}
+#qbBonus.locked img{filter:grayscale(1) brightness(.7);}</style>
 </head>
 <body>
 <canvas id="c"></canvas>
 
+<div id="questDock">
+  <button class="rb" id="btnQuest" aria-label="Aufgabenbuch"><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M12 2.8l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.6l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z" fill="#FFC21A" stroke="#C98A00" stroke-width="1.6"/></svg><span class="badge" id="questStars">0</span></button>
+  <button id="questPill" hidden><span class="qp-star" aria-hidden="true">★</span><span id="questPillTxt"></span></button>
+</div>
+<div id="questToast" hidden><div class="qt-star">★</div><b id="questToastTitle"></b><span id="questToastSub"></span></div>
+<div id="questBook" hidden>
+  <div id="questCard">
+    <div class="mh"><h2>Aufgabenbuch</h2><button class="rb" id="qbClose" aria-label="Schließen"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <p id="qbStars"></p>
+    <div id="qbChapters"></div>
+    <div id="qbTasks"></div>
+    <div id="qbBonus"></div>
+  </div>
+</div>
 <div id="top">
   <button class="rb" id="btnFull" aria-label="Vollbild"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button>
   <button class="rb" id="btnSave" aria-label="Welt speichern"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18.5h10.5a4 4 0 0 0 .6-7.96A6 6 0 0 0 6.6 9.1 4.7 4.7 0 0 0 7 18.5z" fill="#CFEAFF"/><path d="m9.2 13.6 2.2 2.2 4-4.2" stroke-width="2.4"/></svg></button>

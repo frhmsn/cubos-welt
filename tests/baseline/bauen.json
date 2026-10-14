@@ -76,7 +76,13 @@
     "aquarium": [
      0
     ],
+    "quests": {
+     "stars": 6,
+     "next": "stadt-laufen"
+    },
     "ui": {
+     "book": false,
+     "toast": true,
      "travel": false,
      "st": false,
      "aq": false,
@@ -160,7 +166,13 @@
     "aquarium": [
      0
     ],
+    "quests": {
+     "stars": 6,
+     "next": "stadt-laufen"
+    },
     "ui": {
+     "book": false,
+     "toast": true,
      "travel": false,
      "st": false,
      "aq": false,

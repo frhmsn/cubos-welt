@@ -10,6 +10,7 @@ import { $ } from './util.js';
 import { CKEY, localStore, store } from './storage.js';
 import { game } from './state.js';
 import { applyData, emptyWorld, save, serialize } from './save.js';
+import { emit } from './events.js';
 
 function snapThumb(){
   try{
@@ -22,6 +23,7 @@ function snapThumb(){
 }
 function newId(){return 'w_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
 async function saveWorld(asNew,silent){
+  if(!silent)emit('welt:gespeichert',{});
   if(game.saving)return null; game.saving=true;
   try{
     let list=[]; try{list=await store.list();}catch(e){list=[];}

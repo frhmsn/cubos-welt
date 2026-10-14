@@ -15,6 +15,7 @@ import { select, thumbs } from '../ui/inventory.js';
 import { save } from '../core/save.js';
 import { hint } from '../ui/hint.js';
 import { animals, orient, tiles } from '../core/world-data.js';
+import { emit } from '../core/events.js';
 
 // ---------- Bauwerkstatt ----------
 const editScene=new THREE.Scene();
@@ -68,6 +69,7 @@ function closeEditor(){
   }
   const c=center(i,j); bc.x=c.x; bc.z=c.z; bc.d=Math.min(bc.d,30);
   edit=null; setMode('build'); select('hand'); save(); game.worldDirty=true; plop();
+  emit('werkstatt:fertig',{});
 }
 function pushUndo(){edit.undo.push(edit.v.join(''));if(edit.undo.length>80)edit.undo.shift();}
 function towardCamDir(){const fx=Math.sin(ec.yaw),fz=Math.cos(ec.yaw);let best=0,bv=-9;for(let d=0;d<4;d++){const v=DIRS[d][0]*fx+DIRS[d][1]*fz;if(v>bv){bv=v;best=d;}}return best;}

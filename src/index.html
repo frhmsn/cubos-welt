@@ -14,6 +14,20 @@
 <body>
 <canvas id="c"></canvas>
 
+<div id="questDock">
+  <button class="rb" id="btnQuest" aria-label="Aufgabenbuch"><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M12 2.8l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.6l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z" fill="#FFC21A" stroke="#C98A00" stroke-width="1.6"/></svg><span class="badge" id="questStars">0</span></button>
+  <button id="questPill" hidden><span class="qp-star" aria-hidden="true">★</span><span id="questPillTxt"></span></button>
+</div>
+<div id="questToast" hidden><div class="qt-star">★</div><b id="questToastTitle"></b><span id="questToastSub"></span></div>
+<div id="questBook" hidden>
+  <div id="questCard">
+    <div class="mh"><h2>Aufgabenbuch</h2><button class="rb" id="qbClose" aria-label="Schließen"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <p id="qbStars"></p>
+    <div id="qbChapters"></div>
+    <div id="qbTasks"></div>
+    <div id="qbBonus"></div>
+  </div>
+</div>
 <div id="top">
   <button class="rb" id="btnFull" aria-label="Vollbild"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button>
   <button class="rb" id="btnSave" aria-label="Welt speichern"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18.5h10.5a4 4 0 0 0 .6-7.96A6 6 0 0 0 6.6 9.1 4.7 4.7 0 0 0 7 18.5z" fill="#CFEAFF"/><path d="m9.2 13.6 2.2 2.2 4-4.2" stroke-width="2.4"/></svg></button>

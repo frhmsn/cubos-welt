@@ -19,6 +19,7 @@ import { islandWorld, sampleWorld } from '../content/sample-world.js';
 import { hint } from '../ui/hint.js';
 import { animals, cars, groundM, isRail, isWater, tiles } from '../core/world-data.js';
 import { saveWorld } from '../core/worlds.js';
+import { emit } from '../core/events.js';
 
 // ---------- Weltreise ----------
 function startTravel(info){
@@ -93,6 +94,7 @@ async function doTravel(dest){
   bc.x=0;bc.z=3;
   game.worldDirty=true;save();await saveWorld(false,true);
   $('#travel').hidden=true;game.traveling=null;
+  emit('reise',{kind:info.kind,neu:typeof dest==='string'?dest:null});
   setTimeout(()=>hint('Willkommen in '+(name||'der neuen Welt')+'!',3500),300);
   tone(523,.15,'sine',.08);tone(659,.15,'sine',.08,.15);tone(784,.3,'sine',.08,.3);
 }

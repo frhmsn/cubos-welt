@@ -17,6 +17,7 @@ import { islandWorld, sampleWorld } from './content/sample-world.js';
 import { animals, aquariums, cars, ferries, trains } from './core/world-data.js';
 import { catchBook, whaleBook } from './systems/catch-book.js';
 import { closeEditor, editTap, openEditor } from './systems/editor.js';
+import { nextTask, stars } from './systems/quests.js';
 
 // ---------- Test-Schnittstelle ----------
 // Modelle zum Anschauen nebeneinander vor die Baukamera stellen (für neue Arten).
@@ -76,7 +77,8 @@ if (window.__CUBO_DEBUG) window.__cubo = {
       catchBook: JSON.stringify(catchBook),
       whaleBook: JSON.stringify(whaleBook),
       aquarium: [...aquariums.values()].map((a) => a.fish.length),
-      ui: { travel: vis('travel'), st: vis('stPanel'), aq: vis('aqPanel'), dive: vis('btnDive'), fish: vis('btnFish'), menu: vis('menu'), catch: vis('catch') },
+      quests: { stars: stars(), next: (nextTask() || {}).id || null },
+      ui: { book: vis('questBook'), toast: vis('questToast'), travel: vis('travel'), st: vis('stPanel'), aq: vis('aqPanel'), dive: vis('btnDive'), fish: vis('btnFish'), menu: vis('menu'), catch: vis('catch') },
     };
   },
 };

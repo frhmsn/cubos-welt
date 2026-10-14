@@ -138,6 +138,35 @@ export const scenarios = {
     await snap('mit-pinsel-gemalt');
   },
 
+  async aufgaben({ page, snap }) {
+    await api(page, 'emptyWorld');
+    await frames(page, 10);
+    await snap('start');
+    await place(page, 'strasse', line(4, 12, 9));
+    await place(page, 'haus', [[6, 8]]);
+    await frames(page, 20);
+    await snap('zwei-sterne');
+    await place(page, 'baum', [[3, 3], [4, 3]]);
+    await place(page, 'lambo', [[8, 9]]);
+    await api(page, 'startWalk');
+    await frames(page, 10);
+    await api(page, 'enterCar', 'lambo');
+    await frames(page, 10);
+    await click(page, '#btnHonk');
+    await frames(page, 10);
+    await snap('kapitel-geschafft');
+    await api(page, 'exitCar');
+    await api(page, 'setMode', 'build');
+    await page.evaluate(() => document.querySelector('#questToast').hidden = true);
+    await click(page, '#btnQuest');
+    await frames(page, 5);
+    await snap('aufgabenbuch');
+    await click(page, '#qbClose');
+    await page.evaluate(() => { const b = [...document.querySelectorAll('#cats button')].find((x) => /Autos/.test(x.textContent)); b && b.click(); });
+    await frames(page, 5);
+    await snap('gold-lambo-im-inventar');
+  },
+
   async faehre({ page, snap }) {
     await place(page, 'faehre', [[10, 18]]);
     await frames(page, 60);

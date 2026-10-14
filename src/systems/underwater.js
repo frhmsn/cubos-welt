@@ -15,6 +15,7 @@ import { whales } from './whales.js';
 import { hint } from '../ui/hint.js';
 import { gAt, isWater } from '../core/world-data.js';
 import { markWhaleSeen } from './catch-book.js';
+import { emit } from '../core/events.js';
 
 // ---------- Unterwasserwelt ----------
 const underScene=new THREE.Scene();
@@ -92,6 +93,7 @@ function setDive(car,on){
   if(on&&!car.diving){buildUnderwater();car.diving=true;tone(220,.8,'sine',.06,0,.5);hint('Abtauchen! Blubb blubb.',2000);}
   else if(!on&&car.diving){car.diving=false;tone(180,.8,'sine',.06,0,1.8);}
   updDiveBtn(car);
+  if(on)emit('tauchen',{});
 }
 function updDiveBtn(car){$('#diveTxt').textContent=car&&car.diving?'Auftauchen':'Abtauchen';}
 function subUnder(){return game.mode==='drive'&&game.driveCar&&ITEMS[game.driveCar.type].sub&&(game.driveCar.dive||0)>.45;}
