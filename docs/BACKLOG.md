@@ -6,12 +6,14 @@ Grundidee: Aufgaben führen durchs Spiel und bringen es bei, sperren aber nichts
 
 | # | Paket | Inhalt | Stand |
 |---|---|---|---|
-| 1 | Vorlesen | Hinweise und Aufgaben mit deutscher Stimme vorlesen (Web Speech), Schalter im Menü | offen |
-| 2 | Inseln | Insel-Pinsel (Land ins Meer malen, Strand entsteht von selbst), Startvorlage Inselwelt | offen |
-| 3 | Aufgabenbuch | Kapitel (Erste Stadt, Bahn, Meer, Entdecker, Inselwelt), Haken pro Aufgabe, ein Stern pro Aufgabe, goldener Lamborghini als Bonus für Kapitel 1 | offen |
-| 4 | Traumfilter | Miniatur-Unschärfe, sanftes Leuchten, Pastellfarben, Himmelsverlauf, Pollen und Glühwürmchen; abschaltbar, schaltet bei schwachen Geräten selbst ab | offen |
+| 1 | Vorlesen | Hinweise und Aufgaben mit deutscher Stimme vorlesen (Web Speech), Schalter im Menü | erledigt |
+| 2 | Inseln | Insel-Pinsel (Land ins Meer malen, Strand entsteht von selbst), Startvorlage Inselwelt | erledigt |
+| 3 | Aufgabenbuch | Kapitel (Erste Stadt, Bahn, Meer, Entdecker, Inselwelt), Haken pro Aufgabe, ein Stern pro Aufgabe, goldener Lamborghini als Bonus für Kapitel 1 | erledigt |
+| 4 | Traumfilter | Miniatur-Unschärfe, sanftes Leuchten, Pastellfarben, Himmelsverlauf, Pollen und Glühwürmchen; abschaltbar, schaltet bei schwachen Geräten selbst ab | erledigt |
 
 Später:
+- Auf dem iPad prüfen: Stimme (welche deutsche Stimme klingt am besten), Traumfilter-Leistung, Lesbarkeit der Aufgaben
+- Feine Streifen auf großen Wiesen (Schatten-Akne, durch die Unschärfe sichtbarer)
 - Bonus-Dinge für weitere Kapitel (z. B. Leuchtturm, Regenbogen-Boot)
 - Weltkarte: alle Welten als Inseln auf einer Seekarte, antippen und hinreisen
 - Wolkenschatten, die über die Landschaft ziehen

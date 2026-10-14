@@ -2945,7 +2945,7 @@ function expandWorld() {
   tone(392, 0.12, "sine", 0.1);
   tone(523, 0.12, "sine", 0.1, 0.1);
   tone(659, 0.2, "sine", 0.1, 0.2);
-  hint("Die Welt ist jetzt " + game.N + " × " + game.N + " Felder groß!", 3e3);
+  hint("Die Welt ist jetzt " + game.N + " mal " + game.N + " Felder groß!", 3e3);
   saveSoon();
 }
 function orientBig(i, j) {
@@ -3947,13 +3947,13 @@ function applyTool(i, j, painting) {
       const a = i + di, b = j + dj;
       if (!inb(a, b)) {
         nope();
-        hint("Zu nah am Rand. Das Aquarium braucht 3 × 3 Felder Platz.", 3e3);
+        hint("Zu nah am Rand. Das Aquarium braucht drei mal drei Felder Platz.", 3e3);
         return;
       }
       const o = tiles[I(a, b)].o;
       if (o && (o.t === "aquarium" || o.t === "teil")) {
         nope();
-        hint("Hier ist kein Platz. Das Aquarium braucht 3 × 3 Felder.", 3e3);
+        hint("Hier ist kein Platz. Das Aquarium braucht drei mal drei Felder.", 3e3);
         return;
       }
       if (game.rideTrain && game.rideTrain.cars.some((c) => inTile(c.g.position, a, b))) {

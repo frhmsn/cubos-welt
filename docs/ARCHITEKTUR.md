@@ -25,11 +25,15 @@ src/
     storage.js      Welten-Speicher (localStorage)
     worlds.js       Meine Welten: speichern, öffnen, neu anlegen
     world-codes.js  Welten als Text-Code (gzip + base64)
+    islands.js      Insel-Pinsel-Regel (Land malen, Strand rundherum)
     loop.js         Spielschleife: alle Systeme je Bild, adaptive Auflösung
-  render/           Three.js: renderer, materials, daynight, lights, build-camera
+  render/           Three.js: renderer, materials, daynight (mit Himmelsverlauf), lights, build-camera
+    dream.js        Traumfilter: Tilt-Shift, Leuchten, Pastell (abschaltbar, schaltet bei Langsamkeit selbst ab)
+    sparkles.js     Pollen am Tag, Glühwürmchen in der Nacht
   content/          Was es gibt (Daten + Aussehen), je Ding eine Datei
     catalog.js      ITEMS und CATS, großteils aus den Listen unten erzeugt
     fish/ whales/ vehicles/ animals/ buildings/   je <id>.js + index.js (Liste, Prüfung)
+    quests/         Aufgabenbuch: ein Kapitel je Datei
     fish.js, whales.js   fishModel(), whaleModel()
     models/         Bau-Helfer und Modell-Funktionen: Boden, Gleise, buildings.js (MODELS), vehicles.js (carModel), animals.js, blocks.js (Bauwerkstatt)
     sample-world.js Beispielstadt
@@ -39,7 +43,9 @@ src/
     travel.js       Reise in andere Welten
     editor.js       Bauwerkstatt
     audio.js        Töne, Zughorn
-  ui/               Bedienoberfläche: hint.js, modes.js, inventory.js, worlds-menu.js, build-input.js, station-panel.js, fullscreen.js
+    speech.js       Vorlesen (Web Speech), Schalter im Menü
+    quests.js       Aufgaben-Logik: zählt Ereignisse, Sterne, Boni (ohne Oberfläche, in Node getestet)
+  ui/               Bedienoberfläche: hint.js (liest vor), quest-book.js (Stern-Knopf, Buch, Feier), modes.js, inventory.js, worlds-menu.js, build-input.js, station-panel.js, fullscreen.js
 ```
 
 ## Wichtige Entscheidungen
@@ -66,6 +72,8 @@ src/
 | Gespeicherte Welten | localStorage | `kunos-welten` |
 | Geöffnete Welt | localStorage | `kunos-welt-cur` |
 | Fangbuch, Rekorde, Wale | localStorage | `kunos-fang`, `kunos-fang-rekord`, `kunos-wale` |
+| Aufgaben | localStorage | `cubos-aufgaben` |
+| Vorlesen, Traumfilter an/aus | localStorage | `cubos-vorlesen`, `cubos-traumfilter` |
 
 Schlüssel tragen noch den alten Namen. Nicht umbenennen, sonst sind die Welten weg.
 
@@ -73,5 +81,5 @@ Schlüssel tragen noch den alten Namen. Nicht umbenennen, sonst sind die Welten 
 
 - **Logik (`tests/unit`, vitest):** Inhaltsdateien, Spielstand-Umwandlung, Welt-Codes, Ereignisse.
 - **Prüfungen (`tools/lint.mjs`, `tools/deps.mjs`):** fehlende und ungenutzte Importe, Gedankenstriche, Import-Zyklen, Module, die nie geladen werden.
-- **Browser (`tests/e2e`):** `env.js` macht Zufall und Zeit vorhersagbar (Zufall aus three.min.js bekommt einen eigenen Strom) und zeichnet nur das letzte Bild eines Blocks. `scenarios.mjs` spielt 14 Abläufe über `window.__cubo` (debug.js). Jeder Schnappschuss speichert einen Fingerabdruck (Welt, Fahrzeuge, Fische, Fangbuch, sichtbare Panels) und einen Screenshot. `compare.mjs` vergleicht mit `tests/baseline` (nur Daten, Bilder bleiben lokal in `tests/output`).
+- **Browser (`tests/e2e`):** `env.js` macht Zufall und Zeit vorhersagbar (Zufall aus three.min.js bekommt einen eigenen Strom) und zeichnet nur das letzte Bild eines Blocks. `scenarios.mjs` spielt 16 Abläufe über `window.__cubo` (debug.js). Jeder Schnappschuss speichert einen Fingerabdruck (Welt, Fahrzeuge, Fische, Fangbuch, sichtbare Panels) und einen Screenshot. `compare.mjs` vergleicht mit `tests/baseline` (nur Daten, Bilder bleiben lokal in `tests/output`). Feier-Karte und Hinweise laufen über die echte Uhr; sie können auf Screenshots zwischen zwei Läufen verschieden sein und gehören deshalb nicht in den Fingerabdruck.
 - `legacy` als Ziel (`node tests/e2e/run.mjs legacy`) spielt dieselben Szenarien mit dem alten Einzeldatei-Stand. Damit wurde der Umbau Pixel für Pixel geprüft.

@@ -61,8 +61,8 @@ function applyTool(i,j,painting){
   if(t.o&&t.o.t==='teil'&&it.kind!=='fish'){if(!painting){nope();hint('Hier steht das Aquarium.',2000);}return;}
   if(game.sel==='aquarium'&&!(t.o&&t.o.t==='aquarium')){
     for(let dj=-1;dj<=1;dj++)for(let di=-1;di<=1;di++){const a=i+di,b=j+dj;
-      if(!inb(a,b)){nope();hint('Zu nah am Rand. Das Aquarium braucht 3 × 3 Felder Platz.',3000);return;}
-      const o=tiles[I(a,b)].o;if(o&&(o.t==='aquarium'||o.t==='teil')){nope();hint('Hier ist kein Platz. Das Aquarium braucht 3 × 3 Felder.',3000);return;}
+      if(!inb(a,b)){nope();hint('Zu nah am Rand. Das Aquarium braucht drei mal drei Felder Platz.',3000);return;}
+      const o=tiles[I(a,b)].o;if(o&&(o.t==='aquarium'||o.t==='teil')){nope();hint('Hier ist kein Platz. Das Aquarium braucht drei mal drei Felder.',3000);return;}
       if(game.rideTrain&&game.rideTrain.cars.some(c=>inTile(c.g.position,a,b))){nope();return;}}
     claimArea(i,j);
     t.o={t:'aquarium',r:orientBig(i,j),s:1};rebuildObj(i,j,true);plop();game.dirty=true;

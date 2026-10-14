@@ -41,6 +41,15 @@ Schritt für Schritt für die häufigsten Erweiterungen. Nach jedem Rezept: `npm
 1. `src/content/animals/hund.js` kopieren, `label`, `speed` und `model({ g, box, leg, legs })` anpassen. Beine mit `leg(...)` anlegen, dann wackeln sie beim Laufen.
 2. In `src/content/animals/index.js` eintragen.
 
+## Neue Aufgabe oder neues Kapitel
+
+1. In `src/content/quests/<kapitel>.js` eine Aufgabe ergänzen: `{ id, text, tip, on, when, count }`.
+   - `text`: kurz, wird vorgelesen (unter 60 Zeichen, der Test prüft das). `tip`: wie es geht, für Kinder.
+   - `on`: ein Ereignis aus `src/core/events.js` (Liste in `QUEST_EVENTS`). `when(d)`: prüft die Ereignis-Daten. `count`: wie oft.
+2. Neues Kapitel: Datei nach Vorlage `bahn.js`, in `src/content/quests/index.js` eintragen. Optional `bonus: { item, text }` und beim Ding `bonus: '<kapitel>'` setzen (Beispiel: Gold-Lambo in `content/vehicles/goldlambo.js`).
+3. Braucht die Aufgabe ein Ereignis, das es noch nicht gibt: im passenden System `emit(...)` aufrufen, in `events.js` dokumentieren und in `QUEST_EVENTS` aufnehmen.
+4. Fortschritt liegt unter `cubos-aufgaben` im Gerät und reist in Welt-Codes mit. IDs von Aufgaben nie umbenennen, sonst verschwinden Haken.
+
 ## Neues Ereignis
 
 1. Oben in `src/core/events.js` mit Namen und Daten dokumentieren. Name: `thema:was-passiert`, deutsch.

@@ -91,7 +91,7 @@ function expandWorld(){
   for(const f of ferries){f.tgt=remap(f.tgt);f.last=remap(f.last);}
   bc.d=Math.min(ZMAX(),bc.d+18);
   tone(392,.12,'sine',.1);tone(523,.12,'sine',.1,.1);tone(659,.2,'sine',.1,.2);
-  hint('Die Welt ist jetzt '+game.N+' × '+game.N+' Felder groß!',3000);
+  hint('Die Welt ist jetzt '+game.N+' mal '+game.N+' Felder groß!',3000);
   saveSoon();
 }
 function orientBig(i,j){for(let d=0;d<4;d++)if(isRoad(i+DIRS[d][0]*2,j+DIRS[d][1]*2))return d;for(let d=0;d<4;d++)if(inb(i+DIRS[d][0]*2,j+DIRS[d][1]*2)&&!(tiles[I(i+DIRS[d][0]*2,j+DIRS[d][1]*2)].o))return d;return 0;}
