@@ -10,7 +10,7 @@ import * as eslintScope from 'eslint-scope';
 const GLOBALS = new Set(('window document navigator location localStorage sessionStorage performance console setTimeout clearTimeout setInterval clearInterval requestAnimationFrame cancelAnimationFrame '
   + 'addEventListener matchMedia devicePixelRatio innerWidth innerHeight THREE Math JSON Date Array Object Number String Boolean Map Set WeakMap Promise Error TypeError Symbol '
   + 'Uint8Array Float32Array Uint16Array Int16Array Int32Array Uint32Array Float64Array ArrayBuffer Blob Response TextEncoder TextDecoder CompressionStream DecompressionStream btoa atob globalThis '
-  + 'Infinity NaN isNaN isFinite parseInt parseFloat AudioContext webkitAudioContext Image structuredClone undefined').split(/\s+/));
+  + 'Infinity NaN isNaN isFinite parseInt parseFloat AudioContext webkitAudioContext Image structuredClone undefined SpeechSynthesisUtterance').split(/\s+/));
 const SRC = path.resolve('src');
 const files = [];
 (function walk(d) { for (const f of fs.readdirSync(d)) { const p = path.join(d, f); if (fs.statSync(p).isDirectory()) walk(p); else if (/\.(js|css|html)$/.test(f)) files.push(p); } })(SRC);

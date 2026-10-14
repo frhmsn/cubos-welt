@@ -8,6 +8,7 @@ import { serialize } from '../core/save.js';
 import { hint } from './hint.js';
 import { fangData, mergeFang } from '../systems/catch-book.js';
 import { freshWorld, newId, openWorld, saveWorld } from '../core/worlds.js';
+import { setSpeech, speak, speechAvailable, speechOn } from '../systems/speech.js';
 
 let codeMode='export';
 $('#mExportAll').addEventListener('click',async()=>{
@@ -101,5 +102,10 @@ $('#mSaveNew').addEventListener('click',async()=>{ac();const w=await saveWorld(t
 $('#mSample').addEventListener('click',()=>freshWorld('sample'));
 $('#mEmpty').addEventListener('click',()=>freshWorld('empty'));
 $('#btnSave').addEventListener('click',()=>{ac();saveWorld(false,false);});
+
+// ---------- Einstellungen ----------
+const updSpeechBtn=()=>{$('#mSpeech').textContent='Vorlesen: '+(speechOn()?'an':'aus');$('#mSpeech').hidden=!speechAvailable();};
+updSpeechBtn();
+$('#mSpeech').addEventListener('click',()=>{ac();setSpeech(!speechOn());updSpeechBtn();if(speechOn())speak('Ich lese dir jetzt alles vor.');});
 
 export { renderWorlds };

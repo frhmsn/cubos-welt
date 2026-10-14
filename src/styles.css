@@ -78,8 +78,8 @@ button:focus-visible{outline:3px solid var(--sun-deep);outline-offset:2px;}
 
 #hint{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 78px);transform:translateX(-50%);z-index:6;max-width:min(88vw,520px);
   background:rgba(31,42,55,.86);color:#FFFBF2;padding:10px 16px;border-radius:18px;font-weight:500;font-size:15px;line-height:1.35;text-align:center;
-  transition:opacity .4s;pointer-events:none;}
-#hint.off{opacity:0;}
+  transition:opacity .4s;pointer-events:auto;cursor:pointer;}
+#hint.off{opacity:0;pointer-events:none;}
 
 #menu{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:rgba(15,25,40,.35);padding-inline:16px;}
 #menuCard{background:var(--tray-solid);border-radius:26px;padding:18px;width:min(100%,540px);max-height:86vh;overflow-y:auto;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;
@@ -170,3 +170,5 @@ button:focus-visible{outline:3px solid var(--sun-deep);outline-offset:2px;}
 @keyframes pulse{to{transform:scale(1.08);}}
 #btnExit.hot{background:var(--sun);box-shadow:inset 0 -4px 0 var(--sun-deep),0 8px 18px rgba(20,40,60,.2);}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
+
+#menuCard .msub{margin:14px 0 6px;font-size:16px;font-weight:600;color:#4A5563;}

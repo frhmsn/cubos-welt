@@ -14,6 +14,7 @@ import { FISH_BY_ID } from '../content/fish/index.js';
 import { hint } from '../ui/hint.js';
 import { gAt, isWater } from '../core/world-data.js';
 import { catchBook, fmtLen, recordCatch } from './catch-book.js';
+import { speak } from './speech.js';
 
 let fishing=null;
 const fishLine=new THREE.Line(new THREE.BufferGeometry().setFromPoints(Array.from({length:12},()=>new THREE.Vector3())),new THREE.LineBasicMaterial({color:0x222222}));
@@ -80,6 +81,7 @@ function showCatch(type,len){
   const big=FISH_BY_ID[type].bigCatch;
   $('#catchTitle').textContent=S.wow?'Wow, ein '+S.label+'!':(big&&len>big.from)?big.title:'Du hast '+(S.art||'einen')+' '+S.label+' gefangen!';
   $('#catchSub').textContent='Er ist '+fmtLen(len)+' lang.'+(rec&&catchBook[type]>1?' Neuer Rekord!':'');
+  speak($('#catchTitle').textContent+' '+$('#catchSub').textContent);
   $('#catchBook').textContent='Dein Fang: '+Object.keys(FISH).filter(k=>catchBook[k]).map(k=>catchBook[k]+' '+(catchBook[k]===1?FISH[k].label:FISH[k].plural)).join(', ');
   $('#catch').hidden=false;
   tone(523,.15,'sine',.09);tone(659,.15,'sine',.09,.15);tone(784,.15,'sine',.09,.3);tone(1047,.35,'sine',.09,.45);

@@ -2353,14 +2353,68 @@ function whaleModel(type) {
   WHALE_BY_ID[type].model({ g, ell, fluke, box });
   return bake(g);
 }
+const KEY$1 = "cubos-vorlesen";
+const synth = typeof window !== "undefined" ? window.speechSynthesis : null;
+let enabled = true;
+try {
+  enabled = localStorage.getItem(KEY$1) !== "0";
+} catch (e) {
+}
+let voice = null, lastText = "";
+function pickVoice() {
+  if (!synth) return;
+  const de = synth.getVoices().filter((v) => /^de(-|_|$)/i.test(v.lang));
+  const fav = ["Anna", "Petra", "Helena", "Marlene", "Vicki", "Google Deutsch"];
+  voice = fav.map((n) => de.find((v) => v.name.includes(n))).find(Boolean) || de.find((v) => v.localService) || de[0] || null;
+}
+if (synth) {
+  pickVoice();
+  synth.addEventListener?.("voiceschanged", pickVoice);
+}
+if (typeof window !== "undefined") window.addEventListener("pointerdown", () => {
+  if (synth) {
+    try {
+      synth.speak(new SpeechSynthesisUtterance(""));
+    } catch (e) {
+    }
+  }
+}, { once: true, capture: true });
+function speak(text, { force = false } = {}) {
+  if (!text) return;
+  lastText = text;
+  if (!synth || !enabled && !force) return;
+  try {
+    synth.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "de-DE";
+    u.rate = 0.95;
+    u.pitch = 1.1;
+    if (voice) u.voice = voice;
+    synth.speak(u);
+  } catch (e) {
+  }
+}
+const repeatSpeech = () => speak(lastText, { force: true });
+function setSpeech(on2) {
+  enabled = !!on2;
+  try {
+    localStorage.setItem(KEY$1, on2 ? "1" : "0");
+  } catch (e) {
+  }
+  if (!on2 && synth) synth.cancel();
+}
+const speechOn = () => enabled;
+const speechAvailable = () => !!synth;
 let hintT = null;
-function hint(txt, ms) {
+function hint(txt, ms, { silent = false } = {}) {
   const h = $("#hint");
   h.textContent = txt;
   h.classList.remove("off");
   clearTimeout(hintT);
-  hintT = setTimeout(() => h.classList.add("off"), ms || 4200);
+  hintT = setTimeout(() => h.classList.add("off"), Math.max(ms || 4200, txt.length * 75));
+  if (!silent) speak(txt);
 }
+$("#hint").addEventListener("click", () => repeatSpeech());
 const focus = new THREE.Vector3();
 function nearFocus(x, z, r) {
   return (x - focus.x) ** 2 + (z - focus.z) ** 2 < r * r;
@@ -5050,6 +5104,7 @@ function showCatch(type, len) {
   const big = FISH_BY_ID[type].bigCatch;
   $("#catchTitle").textContent = S.wow ? "Wow, ein " + S.label + "!" : big && len > big.from ? big.title : "Du hast " + (S.art || "einen") + " " + S.label + " gefangen!";
   $("#catchSub").textContent = "Er ist " + fmtLen(len) + " lang." + (rec && catchBook[type] > 1 ? " Neuer Rekord!" : "");
+  speak($("#catchTitle").textContent + " " + $("#catchSub").textContent);
   $("#catchBook").textContent = "Dein Fang: " + Object.keys(FISH).filter((k) => catchBook[k]).map((k) => catchBook[k] + " " + (catchBook[k] === 1 ? FISH[k].label : FISH[k].plural)).join(", ");
   $("#catch").hidden = false;
   tone(523, 0.15, "sine", 0.09);
@@ -7134,6 +7189,17 @@ $("#btnSave").addEventListener("click", () => {
   ac();
   saveWorld(false, false);
 });
+const updSpeechBtn = () => {
+  $("#mSpeech").textContent = "Vorlesen: " + (speechOn() ? "an" : "aus");
+  $("#mSpeech").hidden = !speechAvailable();
+};
+updSpeechBtn();
+$("#mSpeech").addEventListener("click", () => {
+  ac();
+  setSpeech(!speechOn());
+  updSpeechBtn();
+  if (speechOn()) speak("Ich lese dir jetzt alles vor.");
+});
 function resize() {
   const w = window.innerWidth, h = window.innerHeight;
   renderer.setSize(w, h, false);
@@ -7388,8 +7454,8 @@ button:focus-visible{outline:3px solid var(--sun-deep);outline-offset:2px;}
 
 #hint{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 78px);transform:translateX(-50%);z-index:6;max-width:min(88vw,520px);
   background:rgba(31,42,55,.86);color:#FFFBF2;padding:10px 16px;border-radius:18px;font-weight:500;font-size:15px;line-height:1.35;text-align:center;
-  transition:opacity .4s;pointer-events:none;}
-#hint.off{opacity:0;}
+  transition:opacity .4s;pointer-events:auto;cursor:pointer;}
+#hint.off{opacity:0;pointer-events:none;}
 
 #menu{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:rgba(15,25,40,.35);padding-inline:16px;}
 #menuCard{background:var(--tray-solid);border-radius:26px;padding:18px;width:min(100%,540px);max-height:86vh;overflow-y:auto;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;
@@ -7479,7 +7545,9 @@ button:focus-visible{outline:3px solid var(--sun-deep);outline-offset:2px;}
 #btnFish.hot{animation:pulse .5s infinite alternate;}
 @keyframes pulse{to{transform:scale(1.08);}}
 #btnExit.hot{background:var(--sun);box-shadow:inset 0 -4px 0 var(--sun-deep),0 8px 18px rgba(20,40,60,.2);}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}</style>
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
+
+#menuCard .msub{margin:14px 0 6px;font-size:16px;font-weight:600;color:#4A5563;}</style>
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -7565,6 +7633,8 @@ button:focus-visible{outline:3px solid var(--sun-deep);outline-offset:2px;}
     <div class="mrow"><button class="mb" id="mEmpty">Neue leere Wiese</button><button class="mb" id="mSample">Neue Beispielstadt</button></div>
     <div class="mrow"><button class="mb" id="mExport">Welt-Code kopieren</button><button class="mb" id="mExportAll">Alle Welten kopieren</button></div>
     <div class="mrow"><button class="mb" id="mImport">Code einfügen</button></div>
+    <h3 class="msub">Einstellungen</h3>
+    <div class="mrow"><button class="mb" id="mSpeech">Vorlesen: an</button></div>
     <div id="codeBox" hidden>
       <p id="codeInfo"></p>
       <textarea id="codeTxt" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
