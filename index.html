@@ -5095,7 +5095,24 @@ const SUB_Y = -2.4;
 let under = null;
 const bubbleGeo = new THREE.BufferGeometry();
 bubbleGeo.setAttribute("position", new THREE.BufferAttribute(new Float32Array(40 * 3), 3));
-const bubbles = new THREE.Points(bubbleGeo, new THREE.PointsMaterial({ color: 14677759, size: 0.12, transparent: true, opacity: 0.8, depthWrite: false }));
+const bubbleTex = (() => {
+  const c = document.createElement("canvas");
+  c.width = c.height = 32;
+  const x = c.getContext("2d");
+  x.strokeStyle = "rgba(255,255,255,.95)";
+  x.lineWidth = 3;
+  x.beginPath();
+  x.arc(16, 16, 12, 0, Math.PI * 2);
+  x.stroke();
+  x.fillStyle = "rgba(220,245,255,.35)";
+  x.fill();
+  x.fillStyle = "rgba(255,255,255,.9)";
+  x.beginPath();
+  x.arc(11, 11, 3, 0, Math.PI * 2);
+  x.fill();
+  return new THREE.CanvasTexture(c);
+})();
+const bubbles = new THREE.Points(bubbleGeo, new THREE.PointsMaterial({ color: 16777215, map: bubbleTex, size: 0.14, transparent: true, opacity: 0.9, depthWrite: false, alphaTest: 0.05 }));
 bubbles.frustumCulled = false;
 underScene.add(bubbles);
 const bubbleState = Array.from({ length: 40 }, () => ({ x: 0, y: -99, z: 0, v: 0 }));
@@ -5246,7 +5263,8 @@ function updateUnderwater(dt, car) {
       b.y += b.v * dt;
       b.x += (Math.random() - 0.5) * 0.02;
     }
-    pos.setXYZ(k, b.x, b.y, b.z);
+    const cp = game.cam.position, near = (b.x - cp.x) ** 2 + (b.y - cp.y) ** 2 + (b.z - cp.z) ** 2 < 1.6;
+    pos.setXYZ(k, b.x, near ? -99 : b.y, b.z);
   });
   pos.needsUpdate = true;
 }

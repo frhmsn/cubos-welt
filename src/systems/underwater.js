@@ -26,7 +26,12 @@ const subLamp=new THREE.SpotLight(0xfff2c8,1.6,22,.5,.6,1.2);underScene.add(subL
 const SUB_Y=-2.4;
 let under=null;
 const bubbleGeo=new THREE.BufferGeometry();bubbleGeo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(40*3),3));
-const bubbles=new THREE.Points(bubbleGeo,new THREE.PointsMaterial({color:0xdff6ff,size:.12,transparent:true,opacity:.8,depthWrite:false}));bubbles.frustumCulled=false;underScene.add(bubbles);
+// Runde Blasen: kleine Textur mit hellem Rand statt eckiger Punkte
+const bubbleTex=(()=>{const c=document.createElement('canvas');c.width=c.height=32;const x=c.getContext('2d');
+  x.strokeStyle='rgba(255,255,255,.95)';x.lineWidth=3;x.beginPath();x.arc(16,16,12,0,Math.PI*2);x.stroke();
+  x.fillStyle='rgba(220,245,255,.35)';x.fill();x.fillStyle='rgba(255,255,255,.9)';x.beginPath();x.arc(11,11,3,0,Math.PI*2);x.fill();
+  return new THREE.CanvasTexture(c);})();
+const bubbles=new THREE.Points(bubbleGeo,new THREE.PointsMaterial({color:0xffffff,map:bubbleTex,size:.14,transparent:true,opacity:.9,depthWrite:false,alphaTest:.05}));bubbles.frustumCulled=false;underScene.add(bubbles);
 const bubbleState=Array.from({length:40},()=>({x:0,y:-99,z:0,v:0}));
 function buildUnderwater(){
   if(under)return;
@@ -76,7 +81,10 @@ function updateUnderwater(dt,car){
   subLamp.position.set(car.x+fx*1.9,car.g.position.y+.25,car.z+fz*1.9);subLamp.target.position.set(car.x+fx*10,car.g.position.y-1,car.z+fz*10);
   const pos=bubbleGeo.attributes.position;
   bubbleState.forEach((b,k)=>{if(b.y<-50||b.y>-.05){if(Math.random()<dt*14*(Math.abs(car.v)+.4)){b.x=car.x-fx*1.8+(Math.random()-.5)*.3;b.z=car.z-fz*1.8+(Math.random()-.5)*.3;b.y=car.g.position.y+.2;b.v=.6+Math.random()*.8;}else{b.y=-99;}}
-    else{b.y+=b.v*dt;b.x+=(Math.random()-.5)*.02;}pos.setXYZ(k,b.x,b.y,b.z);});
+    else{b.y+=b.v*dt;b.x+=(Math.random()-.5)*.02;}
+    // Direkt vor der Kamera wäre eine Blase riesig: dort nicht zeichnen
+    const cp=game.cam.position,near=(b.x-cp.x)**2+(b.y-cp.y)**2+(b.z-cp.z)**2<1.6;
+    pos.setXYZ(k,b.x,near?-99:b.y,b.z);});
   pos.needsUpdate=true;
 }
 function setDive(car,on){
