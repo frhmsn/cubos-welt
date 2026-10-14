@@ -17,13 +17,13 @@ $('#mExportAll').addEventListener('click',async()=>{
   const worlds=l.map(w=>({name:w.name,data:w.id===game.curWorld?JSON.stringify(serialize()):w.data})).filter(w=>w.data);
   if(game.curWorld==null||!l.some(w=>w.id===game.curWorld))worlds.push({name:'Mitgebrachte Welt',data:JSON.stringify(serialize())});
   const code=await encodeWorld({v:2,worlds,fang:fangData()});
-  $('#codeTxt').value=code;$('#codeInfo').textContent=worlds.length+(worlds.length===1?' Welt':' Welten')+' plus Fangbuch und Aquarium als ein Code. Kopiere ihn und füge ihn in der anderen Version mit „Code einfügen" ein.';
+  $('#codeTxt').value=code;$('#codeInfo').textContent=worlds.length+(worlds.length===1?' Welt':' Welten')+' plus Fangbuch und Aquarium als ein Code. Kopiere ihn und füge ihn auf dem anderen Gerät mit „Code einfügen" ein.';
 });
 $('#mExport').addEventListener('click',async()=>{
   ac();codeMode='export';$('#codeBox').hidden=false;$('#codeInfo').textContent='Code wird erstellt …';$('#codeTxt').value='';$('#codeGo').textContent='Kopieren';
   let name='Mitgebrachte Welt';try{const l=await store.list();const w=l.find(x=>x.id===game.curWorld);if(w)name=w.name;}catch(e){}
   const code=await encodeWorld({v:1,name,data:JSON.stringify(serialize()),fang:fangData()});
-  $('#codeTxt').value=code;$('#codeInfo').textContent='Das ist „'+name+'" als Code. Kopiere ihn und füge ihn in der anderen Version mit „Welt-Code einfügen" ein.';
+  $('#codeTxt').value=code;$('#codeInfo').textContent='Das ist „'+name+'" als Code. Kopiere ihn und füge ihn auf dem anderen Gerät mit „Code einfügen" ein.';
 });
 $('#mImport').addEventListener('click',()=>{ac();codeMode='import';$('#codeBox').hidden=false;$('#codeInfo').textContent='Füge hier einen Code ein. Welten, Fangbuch und Aquarium werden übernommen. Was schon da ist, wird nicht doppelt gespeichert.';$('#codeTxt').value='';$('#codeGo').textContent='Laden';setTimeout(()=>$('#codeTxt').focus(),50);});
 $('#codeClose').addEventListener('click',()=>{$('#codeBox').hidden=true;});

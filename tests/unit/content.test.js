@@ -61,3 +61,12 @@ describe('Fahrzeuge und Tiere', () => {
     for (const a of ANIMAL_LIST) { expect(a.speed, a.id).toBeGreaterThan(0); expect(typeof a.model).toBe('function'); }
   });
 });
+
+import { BUILDING_LIST } from '../../src/content/buildings/index.js';
+describe('Gebäude', () => {
+  it('haben eindeutige IDs, gültige Kategorie und Modell', () => {
+    const ids = BUILDING_LIST.map((b) => b.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    for (const b of BUILDING_LIST) { expect(['haus', 'natur', 'licht'], b.id).toContain(b.category); expect(typeof b.model).toBe('function'); }
+  });
+});

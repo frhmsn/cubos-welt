@@ -1,5 +1,5 @@
-// Erzeugt von tools/build.mjs. Version f3aacfb1a7
-const C='cubos-welt-f3aacfb1a7';
+// Erzeugt von tools/build.mjs. Version d4b0c90ede
+const C='cubos-welt-d4b0c90ede';
 const F=['./','index.html','three.min.js','manifest.webmanifest','icon-180.png','icon-192.png','icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(F)));self.skipWaiting();});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==C).map(k=>caches.delete(k)))));self.clients.claim();});
