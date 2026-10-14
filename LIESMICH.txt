@@ -1,15 +1,15 @@
-KUNOS WELT als App auf dem iPad (Vollbild)
+CUBOS WELTEN ENTDECKEN als App auf dem iPad (Vollbild)
 
 So kommt das Spiel auf den Home-Bildschirm:
 
 1. Kostenloses Konto auf github.com anlegen (falls noch keins da ist).
-2. Neues Repository anlegen, z. B. "kunos-welt", Sichtbarkeit "Public".
+2. Neues Repository anlegen, z. B. "cubos-welt", Sichtbarkeit "Public".
 3. Im Repository auf "Add file" > "Upload files" tippen und ALLE Dateien
    aus diesem Ordner hochladen (index.html, three.min.js, sw.js,
    manifest.webmanifest und die drei icon-Bilder). "Commit changes".
 4. Settings > Pages: bei "Branch" "main" und "/ (root)" wählen, Save.
    Nach ein bis zwei Minuten steht dort die Adresse,
-   z. B. https://DEIN-NAME.github.io/kunos-welt/
+   z. B. https://DEIN-NAME.github.io/cubos-welt/
 5. Diese Adresse auf dem iPad in Safari öffnen.
 6. Teilen-Knopf > "Zum Home-Bildschirm" > "Hinzufügen".
 7. Ab jetzt immer über das neue Symbol starten. Dann läuft das Spiel randlos
