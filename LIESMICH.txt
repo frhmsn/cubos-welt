@@ -1,0 +1,25 @@
+KUNOS WELT als App auf dem iPad (Vollbild)
+
+So kommt das Spiel auf den Home-Bildschirm:
+
+1. Kostenloses Konto auf github.com anlegen (falls noch keins da ist).
+2. Neues Repository anlegen, z. B. "kunos-welt", Sichtbarkeit "Public".
+3. Im Repository auf "Add file" > "Upload files" tippen und ALLE Dateien
+   aus diesem Ordner hochladen (index.html, three.min.js, sw.js,
+   manifest.webmanifest und die drei icon-Bilder). "Commit changes".
+4. Settings > Pages: bei "Branch" "main" und "/ (root)" wählen, Save.
+   Nach ein bis zwei Minuten steht dort die Adresse,
+   z. B. https://DEIN-NAME.github.io/kunos-welt/
+5. Diese Adresse auf dem iPad in Safari öffnen.
+6. Teilen-Knopf > "Zum Home-Bildschirm" > "Hinzufügen".
+7. Ab jetzt immer über das neue Symbol starten. Dann läuft das Spiel randlos
+   ohne Browserleiste.
+
+Welten mitnehmen:
+- In der Claude-Version: Menü (drei Punkte) > "Welt-Code kopieren".
+- In der App: Menü > "Welt-Code einfügen", Code einfügen, "Welt laden".
+- Das geht auch in die andere Richtung.
+
+Wichtig: Die App speichert ihre Welten auf dem iPad selbst. Safari und das
+Home-Bildschirm-Symbol haben getrennte Speicher. Also immer übers Symbol
+spielen. Lieblingswelten ab und zu als Welt-Code sichern.
