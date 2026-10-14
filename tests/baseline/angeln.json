@@ -11,7 +11,7 @@
     "N": 20,
     "sel": "fx_thunfisch",
     "curCat": "land",
-    "world": "{\"v\":1,\"n\":20,\"dayT\":0.36399999999999955,\"tiles\":[[\"gras\",\"tanne\",0,5],[\"gras\",\"tanne\",3,102],[\"gras\",\"tanne\",2,199],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",2,1751],[\"gras\"],[\"gras\",\"tanne\",1,18],[\"gras\",\"berg\",0,115],[\"gras\",\"tanne\",3,212],[\"schiene\"],[\"schiene\"],[\"bahnhof\"],[\"schiene\"],[\"schiene\"],[\"schiene\"],[\"schiene\"],[\"uebergang\"],[\"schiene\"],[\"schiene\"],[\"bahnhof\"],[\"schiene\"],[\"schiene\"],[\"schiene\"],[\"tunnel\"],[\"gras\"],[\"gras\",\"tanne\",2,1861],[\"gras\",\"tanne\",2,31],[\"gras\",\"tanne\",1,128],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"berg\",0,1777],[\"gras\"],[\"gras\",\"tanne\",3,44],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"haus\",0,529],[\"gras\"],[\"gras\",\"haus\",0,723],[\"gras\"],[\"gras\",\"villa\",0,917],[\"strasse\"],[\"gras\"],[\"gras\",\"haus\",0,1208],[\"gras\"],[\"gras\",\"haus\",0,1402],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",0,1887],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",3,1706],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"haus\",2,555],[\"gras\",\"garage\",2,652],[\"gras\",\"eigen\",2,749],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"hochhaus\",2,1137],[\"gras\"],[\"gras\",\"hochhaus\",2,1331],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"blumen\",1,180],[\"gras\"],[\"gras\",\"laterne\",3,374],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"laterne\",1,956],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"villa\",3,1635],[\"gras\"],[\"gras\",\"baum\",0,1829],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",1,678],[\"gras\",\"blumen\",0,775],[\"gras\",\"baum\",3,872],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",2,303],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"blumen\",2,691],[\"gras\",\"blumen\",1,788],[\"gras\",\"blumen\",0,885],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"tanne\",0,1273],[\"gras\",\"blumen\",3,1370],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",3,704],[\"gras\",\"blumen\",2,801],[\"gras\",\"baum\",1,898],[\"gras\"],[\"strasse\"],[\"gras\",\"baum\",2,1189],[\"gras\",\"lichterkette\",1,1286],[\"gras\"],[\"gras\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",1,232],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"blumen\",2,1299],[\"gras\",\"tanne\",1,1396],[\"gras\"],[\"strasse\"],[\"gras\",\"laterne\",2,1687],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"lagerfeuer\",1,342],[\"gras\",\"laterne\",0,439],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"laterne\",3,1034],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"haus\",3,1713],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",3,368],[\"gras\"],[\"strasse\"],[\"gras\",\"villa\",0,659],[\"gras\",\"gartenlampe\",3,756],[\"gras\",\"haus\",0,853],[\"gras\",\"haus\",0,950],[\"gras\"],[\"strasse\"],[\"gras\",\"haus\",0,1241],[\"gras\",\"villa\",0,1338],[\"gras\"],[\"gras\",\"feuerwache\",0,1532],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",3,1752],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",0,2043],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"strasse\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"strasse\"],[\"sand\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"anleger\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"anleger\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"seetor\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",3,1804],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",0,2095]],\"cars\":[[\"lambo\",-14,-17.7,-3.142,0],[\"boot\",-22,29.4,1.571,1],[\"lambo\",-2.2,-21.1,1.571,1],[\"ferrari\",24.5,-1.1,1.52,1],[\"polizei\",2.9,-4,3.142,1],[\"bus\",-22.9,14.08,0,1],[\"feuerwehrauto\",4.96,17.1,-1.571,1],[\"lambo\",22.9,-4.02,-2.74,1],[\"boot\",-14,34,3.692,0]],\"animals\":[[\"kuh\",30,26],[\"kuh\",34,30],[\"pferd\",30,34],[\"huhn\",-31,14],[\"huhn\",-30,12],[\"huhn\",-27,13],[\"hund\",-13,-15]],\"fish\":[[\"thunfisch\",-10.57,39.24],[\"thunfisch\",-15.3,38.75]],\"trains\":[[\"zug\",12,1,1]],\"ferries\":[[-6,30.25,3.142]]}",
+    "world": "{\"v\":1,\"n\":20,\"dayT\":0.36399999999999955,\"tiles\":[[\"gras\",\"tanne\",0,5],[\"gras\",\"tanne\",3,102],[\"gras\",\"tanne\",2,199],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",2,1751],[\"gras\"],[\"gras\",\"tanne\",1,18],[\"gras\",\"berg\",0,115],[\"gras\",\"tanne\",3,212],[\"schiene\"],[\"schiene\"],[\"bahnhof\"],[\"schiene\"],[\"schiene\"],[\"schiene\"],[\"schiene\"],[\"uebergang\"],[\"schiene\"],[\"schiene\"],[\"bahnhof\"],[\"schiene\"],[\"schiene\"],[\"schiene\"],[\"tunnel\"],[\"gras\"],[\"gras\",\"tanne\",2,1861],[\"gras\",\"tanne\",2,31],[\"gras\",\"tanne\",1,128],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"berg\",0,1777],[\"gras\"],[\"gras\",\"tanne\",3,44],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"haus\",0,529],[\"gras\"],[\"gras\",\"haus\",0,723],[\"gras\"],[\"gras\",\"villa\",0,917],[\"strasse\"],[\"gras\"],[\"gras\",\"haus\",0,1208],[\"gras\"],[\"gras\",\"haus\",0,1402],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",0,1887],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",3,1706],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"haus\",2,555],[\"gras\",\"garage\",2,652],[\"gras\",\"eigen\",2,749],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"hochhaus\",2,1137],[\"gras\"],[\"gras\",\"hochhaus\",2,1331],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"blumen\",1,180],[\"gras\"],[\"gras\",\"laterne\",3,374],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"laterne\",1,956],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"villa\",3,1635],[\"gras\"],[\"gras\",\"baum\",0,1829],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",1,678],[\"gras\",\"blumen\",0,775],[\"gras\",\"baum\",3,872],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",2,303],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"blumen\",2,691],[\"gras\",\"blumen\",1,788],[\"gras\",\"blumen\",0,885],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"tanne\",0,1273],[\"gras\",\"blumen\",3,1370],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",3,704],[\"gras\",\"blumen\",2,801],[\"gras\",\"baum\",1,898],[\"gras\"],[\"strasse\"],[\"gras\",\"baum\",2,1189],[\"gras\",\"lichterkette\",1,1286],[\"gras\"],[\"gras\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",1,232],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"blumen\",2,1299],[\"gras\",\"tanne\",1,1396],[\"gras\"],[\"strasse\"],[\"gras\",\"laterne\",2,1687],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"lagerfeuer\",1,342],[\"gras\",\"laterne\",0,439],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"laterne\",3,1034],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"haus\",3,1713],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",3,368],[\"gras\"],[\"strasse\"],[\"gras\",\"villa\",0,659],[\"gras\",\"gartenlampe\",3,756],[\"gras\",\"haus\",0,853],[\"gras\",\"haus\",0,950],[\"gras\"],[\"strasse\"],[\"gras\",\"haus\",0,1241],[\"gras\",\"villa\",0,1338],[\"gras\"],[\"gras\",\"feuerwache\",0,1532],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",3,1752],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",0,2043],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"strasse\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"strasse\"],[\"sand\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"anleger\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"anleger\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"seetor\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",3,1804],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",0,2095]],\"cars\":[[\"lambo\",-14,-17.7,-3.142,0],[\"boot\",-22,29.4,1.571,1],[\"lambo\",-2.2,-21.1,1.571,1],[\"ferrari\",24.5,-1.1,1.52,1],[\"polizei\",2.9,-4,3.142,1],[\"bus\",-22.9,14.08,0,1],[\"feuerwehrauto\",4.96,17.1,-1.571,1],[\"lambo\",22.2,-2.48,-1.191,1],[\"boot\",-14,34,3.692,0]],\"animals\":[[\"kuh\",30,26],[\"kuh\",34,30],[\"pferd\",30,34],[\"huhn\",-31,14],[\"huhn\",-30,12],[\"huhn\",-27,13],[\"hund\",-13,-15]],\"fish\":[[\"thunfisch\",-16.28,36.58],[\"thunfisch\",-13.88,36.83]],\"trains\":[[\"zug\",12,1,1]],\"ferries\":[[-6,30.25,3.142]]}",
     "cars": [
      [
       "lambo",
@@ -65,9 +65,9 @@
      [
       "lambo",
       "ai",
-      22.9,
-      -4.016,
-      -2.74
+      22.205,
+      -2.475,
+      -1.191
      ],
      [
       "boot",
@@ -92,26 +92,26 @@
     "fishes": [
      [
       "thunfisch",
-      -10.575,
-      39.236,
+      -16.279,
+      36.581,
       true
      ],
      [
       "thunfisch",
-      -15.3,
-      38.753,
+      -13.879,
+      36.834,
       true
      ],
      [
       "thunfisch",
-      -13.022,
-      36.268,
+      7.811,
+      34.033,
       false
      ],
      [
-      "rochen",
-      -33.201,
-      34.175,
+      "bonito",
+      -3.81,
+      38.526,
       false
      ]
     ],
@@ -119,8 +119,8 @@
      [
       "orca",
       "swim",
-      -17.102,
-      34.925
+      -14.22,
+      32.84
      ]
     ],
     "animals": [
@@ -189,7 +189,7 @@
     "N": 20,
     "sel": "fx_thunfisch",
     "curCat": "land",
-    "world": "{\"v\":1,\"n\":20,\"dayT\":0.3706666666666655,\"tiles\":[[\"gras\",\"tanne\",0,5],[\"gras\",\"tanne\",3,102],[\"gras\",\"tanne\",2,199],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",2,1751],[\"gras\"],[\"gras\",\"tanne\",1,18],[\"gras\",\"berg\",0,115],[\"gras\",\"tanne\",3,212],[\"schiene\"],[\"schiene\"],[\"bahnhof\"],[\"schiene\"],[\"schiene\"],[\"schiene\"],[\"schiene\"],[\"uebergang\"],[\"schiene\"],[\"schiene\"],[\"bahnhof\"],[\"schiene\"],[\"schiene\"],[\"schiene\"],[\"tunnel\"],[\"gras\"],[\"gras\",\"tanne\",2,1861],[\"gras\",\"tanne\",2,31],[\"gras\",\"tanne\",1,128],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"berg\",0,1777],[\"gras\"],[\"gras\",\"tanne\",3,44],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"haus\",0,529],[\"gras\"],[\"gras\",\"haus\",0,723],[\"gras\"],[\"gras\",\"villa\",0,917],[\"strasse\"],[\"gras\"],[\"gras\",\"haus\",0,1208],[\"gras\"],[\"gras\",\"haus\",0,1402],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",0,1887],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",3,1706],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"haus\",2,555],[\"gras\",\"garage\",2,652],[\"gras\",\"eigen\",2,749],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"hochhaus\",2,1137],[\"gras\"],[\"gras\",\"hochhaus\",2,1331],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"blumen\",1,180],[\"gras\"],[\"gras\",\"laterne\",3,374],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"laterne\",1,956],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"villa\",3,1635],[\"gras\"],[\"gras\",\"baum\",0,1829],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",1,678],[\"gras\",\"blumen\",0,775],[\"gras\",\"baum\",3,872],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",2,303],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"blumen\",2,691],[\"gras\",\"blumen\",1,788],[\"gras\",\"blumen\",0,885],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"tanne\",0,1273],[\"gras\",\"blumen\",3,1370],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",3,704],[\"gras\",\"blumen\",2,801],[\"gras\",\"baum\",1,898],[\"gras\"],[\"strasse\"],[\"gras\",\"baum\",2,1189],[\"gras\",\"lichterkette\",1,1286],[\"gras\"],[\"gras\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",1,232],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"blumen\",2,1299],[\"gras\",\"tanne\",1,1396],[\"gras\"],[\"strasse\"],[\"gras\",\"laterne\",2,1687],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"lagerfeuer\",1,342],[\"gras\",\"laterne\",0,439],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"laterne\",3,1034],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"haus\",3,1713],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",3,368],[\"gras\"],[\"strasse\"],[\"gras\",\"villa\",0,659],[\"gras\",\"gartenlampe\",3,756],[\"gras\",\"haus\",0,853],[\"gras\",\"haus\",0,950],[\"gras\"],[\"strasse\"],[\"gras\",\"haus\",0,1241],[\"gras\",\"villa\",0,1338],[\"gras\"],[\"gras\",\"feuerwache\",0,1532],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",3,1752],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",0,2043],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"strasse\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"strasse\"],[\"sand\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"anleger\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"anleger\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"seetor\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",3,1804],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",0,2095]],\"cars\":[[\"lambo\",-14,-17.7,-3.142,0],[\"boot\",-22,29.4,1.571,1],[\"lambo\",10.8,-21.1,1.571,1],[\"ferrari\",36.73,-1.33,1.783,1],[\"polizei\",2.9,-14,3.142,1],[\"bus\",-19.82,18.9,1.534,1],[\"feuerwehrauto\",2.9,10.34,-3.142,1],[\"lambo\",22.9,-17.02,-3.142,1],[\"boot\",-14,34,3.692,0]],\"animals\":[[\"kuh\",30,26],[\"kuh\",34,30],[\"pferd\",30,34],[\"huhn\",-31,14],[\"huhn\",-29.52,11.3],[\"huhn\",-27,13],[\"hund\",-13,-15]],\"fish\":[[\"thunfisch\",-7.03,37.59],[\"thunfisch\",-12.39,37.6]],\"trains\":[[\"zug\",14,1,1]],\"ferries\":[[-6,30.25,3.142]]}",
+    "world": "{\"v\":1,\"n\":20,\"dayT\":0.3706666666666655,\"tiles\":[[\"gras\",\"tanne\",0,5],[\"gras\",\"tanne\",3,102],[\"gras\",\"tanne\",2,199],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",2,1751],[\"gras\"],[\"gras\",\"tanne\",1,18],[\"gras\",\"berg\",0,115],[\"gras\",\"tanne\",3,212],[\"schiene\"],[\"schiene\"],[\"bahnhof\"],[\"schiene\"],[\"schiene\"],[\"schiene\"],[\"schiene\"],[\"uebergang\"],[\"schiene\"],[\"schiene\"],[\"bahnhof\"],[\"schiene\"],[\"schiene\"],[\"schiene\"],[\"tunnel\"],[\"gras\"],[\"gras\",\"tanne\",2,1861],[\"gras\",\"tanne\",2,31],[\"gras\",\"tanne\",1,128],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"berg\",0,1777],[\"gras\"],[\"gras\",\"tanne\",3,44],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"haus\",0,529],[\"gras\"],[\"gras\",\"haus\",0,723],[\"gras\"],[\"gras\",\"villa\",0,917],[\"strasse\"],[\"gras\"],[\"gras\",\"haus\",0,1208],[\"gras\"],[\"gras\",\"haus\",0,1402],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",0,1887],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",3,1706],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"haus\",2,555],[\"gras\",\"garage\",2,652],[\"gras\",\"eigen\",2,749],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"hochhaus\",2,1137],[\"gras\"],[\"gras\",\"hochhaus\",2,1331],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"blumen\",1,180],[\"gras\"],[\"gras\",\"laterne\",3,374],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"laterne\",1,956],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"villa\",3,1635],[\"gras\"],[\"gras\",\"baum\",0,1829],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",1,678],[\"gras\",\"blumen\",0,775],[\"gras\",\"baum\",3,872],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",2,303],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"blumen\",2,691],[\"gras\",\"blumen\",1,788],[\"gras\",\"blumen\",0,885],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"tanne\",0,1273],[\"gras\",\"blumen\",3,1370],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",3,704],[\"gras\",\"blumen\",2,801],[\"gras\",\"baum\",1,898],[\"gras\"],[\"strasse\"],[\"gras\",\"baum\",2,1189],[\"gras\",\"lichterkette\",1,1286],[\"gras\"],[\"gras\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",1,232],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"blumen\",2,1299],[\"gras\",\"tanne\",1,1396],[\"gras\"],[\"strasse\"],[\"gras\",\"laterne\",2,1687],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"lagerfeuer\",1,342],[\"gras\",\"laterne\",0,439],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"laterne\",3,1034],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"haus\",3,1713],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",3,368],[\"gras\"],[\"strasse\"],[\"gras\",\"villa\",0,659],[\"gras\",\"gartenlampe\",3,756],[\"gras\",\"haus\",0,853],[\"gras\",\"haus\",0,950],[\"gras\"],[\"strasse\"],[\"gras\",\"haus\",0,1241],[\"gras\",\"villa\",0,1338],[\"gras\"],[\"gras\",\"feuerwache\",0,1532],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",3,1752],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",0,2043],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"strasse\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"strasse\"],[\"sand\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"anleger\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"anleger\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"seetor\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",3,1804],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",0,2095]],\"cars\":[[\"lambo\",-14,-17.7,-3.142,0],[\"boot\",-22,29.4,1.571,1],[\"lambo\",2.9,-30.1,3.142,1],[\"ferrari\",36.73,-1.33,1.783,1],[\"polizei\",2.9,-14,3.142,1],[\"bus\",-19.82,18.9,1.534,1],[\"feuerwehrauto\",2.9,10.34,-3.142,1],[\"lambo\",21.1,10.1,0,1],[\"boot\",-14,34,3.692,0]],\"animals\":[[\"kuh\",30,26],[\"kuh\",34,30],[\"pferd\",30,34],[\"huhn\",-31,14],[\"huhn\",-30,12],[\"huhn\",-26.73,13.53],[\"hund\",-13,-15]],\"fish\":[[\"thunfisch\",-13.92,33.87],[\"thunfisch\",-15.4,33.54]],\"trains\":[[\"zug\",14,1,1]],\"ferries\":[[-6,30.25,3.142]]}",
     "cars": [
      [
       "lambo",
@@ -208,9 +208,9 @@
      [
       "lambo",
       "ai",
-      10.8,
-      -21.1,
-      1.571
+      2.9,
+      -30.097,
+      3.142
      ],
      [
       "ferrari",
@@ -243,9 +243,9 @@
      [
       "lambo",
       "ai",
-      22.9,
-      -17.016,
-      -3.142
+      21.1,
+      10.097,
+      0
      ],
      [
       "boot",
@@ -270,38 +270,38 @@
     "fishes": [
      [
       "thunfisch",
-      -7.026,
-      37.588,
+      -13.921,
+      33.869,
       true
      ],
      [
       "thunfisch",
-      -12.386,
-      37.603,
+      -15.399,
+      33.538,
       true
      ],
      [
       "thunfisch",
-      -15.124,
-      34.06,
+      8.458,
+      32.737,
       false
      ],
      [
-      "rochen",
-      -34.153,
-      33.308,
+      "bonito",
+      -6.184,
+      38.145,
       false
      ],
      [
-      "barsch",
-      -9.725,
-      33.219,
+      "thunfisch",
+      2.966,
+      34.316,
       false
      ],
      [
-      "barrakuda",
-      -32.213,
-      34.787,
+      "makrele",
+      -6.449,
+      33.18,
       false
      ]
     ],
@@ -309,8 +309,8 @@
      [
       "orca",
       "swim",
-      -16.724,
-      35.788
+      -14.154,
+      32.206
      ]
     ],
     "animals": [
@@ -336,13 +336,13 @@
      ],
      [
       "huhn",
-      -29.516,
-      11.304
+      -30,
+      12
      ],
      [
       "huhn",
-      -27,
-      13
+      -26.732,
+      13.528
      ],
      [
       "hund",
@@ -379,7 +379,7 @@
     "N": 20,
     "sel": "fx_thunfisch",
     "curCat": "land",
-    "world": "{\"v\":1,\"n\":20,\"dayT\":0.40133333333332877,\"tiles\":[[\"gras\",\"tanne\",0,5],[\"gras\",\"tanne\",3,102],[\"gras\",\"tanne\",2,199],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",2,1751],[\"gras\"],[\"gras\",\"tanne\",1,18],[\"gras\",\"berg\",0,115],[\"gras\",\"tanne\",3,212],[\"schiene\"],[\"schiene\"],[\"bahnhof\"],[\"schiene\"],[\"schiene\"],[\"schiene\"],[\"schiene\"],[\"uebergang\"],[\"schiene\"],[\"schiene\"],[\"bahnhof\"],[\"schiene\"],[\"schiene\"],[\"schiene\"],[\"tunnel\"],[\"gras\"],[\"gras\",\"tanne\",2,1861],[\"gras\",\"tanne\",2,31],[\"gras\",\"tanne\",1,128],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"berg\",0,1777],[\"gras\"],[\"gras\",\"tanne\",3,44],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"haus\",0,529],[\"gras\"],[\"gras\",\"haus\",0,723],[\"gras\"],[\"gras\",\"villa\",0,917],[\"strasse\"],[\"gras\"],[\"gras\",\"haus\",0,1208],[\"gras\"],[\"gras\",\"haus\",0,1402],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",0,1887],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",3,1706],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"haus\",2,555],[\"gras\",\"garage\",2,652],[\"gras\",\"eigen\",2,749],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"hochhaus\",2,1137],[\"gras\"],[\"gras\",\"hochhaus\",2,1331],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"blumen\",1,180],[\"gras\"],[\"gras\",\"laterne\",3,374],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"laterne\",1,956],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"villa\",3,1635],[\"gras\"],[\"gras\",\"baum\",0,1829],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",1,678],[\"gras\",\"blumen\",0,775],[\"gras\",\"baum\",3,872],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",2,303],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"blumen\",2,691],[\"gras\",\"blumen\",1,788],[\"gras\",\"blumen\",0,885],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"tanne\",0,1273],[\"gras\",\"blumen\",3,1370],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",3,704],[\"gras\",\"blumen\",2,801],[\"gras\",\"baum\",1,898],[\"gras\"],[\"strasse\"],[\"gras\",\"baum\",2,1189],[\"gras\",\"lichterkette\",1,1286],[\"gras\"],[\"gras\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",1,232],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"blumen\",2,1299],[\"gras\",\"tanne\",1,1396],[\"gras\"],[\"strasse\"],[\"gras\",\"laterne\",2,1687],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"lagerfeuer\",1,342],[\"gras\",\"laterne\",0,439],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"laterne\",3,1034],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"haus\",3,1713],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",3,368],[\"gras\"],[\"strasse\"],[\"gras\",\"villa\",0,659],[\"gras\",\"gartenlampe\",3,756],[\"gras\",\"haus\",0,853],[\"gras\",\"haus\",0,950],[\"gras\"],[\"strasse\"],[\"gras\",\"haus\",0,1241],[\"gras\",\"villa\",0,1338],[\"gras\"],[\"gras\",\"feuerwache\",0,1532],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",3,1752],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",0,2043],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"strasse\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"strasse\"],[\"sand\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"anleger\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"anleger\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"seetor\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",3,1804],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",0,2095]],\"cars\":[[\"lambo\",-14,-17.7,-3.142,0],[\"boot\",-22,29.4,1.571,1],[\"lambo\",8.97,17.1,-1.571,1],[\"ferrari\",2.98,-23.49,3.931,1],[\"polizei\",2.9,-32.8,3.142,1],[\"bus\",2.9,9.25,3.142,1],[\"feuerwehrauto\",2.9,-28.3,-3.142,1],[\"lambo\",-22.9,-12.59,0,1],[\"boot\",-14,34,3.692,0]],\"animals\":[[\"kuh\",27.29,25.52],[\"kuh\",36.55,28.25],[\"pferd\",28.89,34.27],[\"huhn\",-31.24,16.34],[\"huhn\",-31.23,8.31],[\"huhn\",-24.71,13.27],[\"hund\",-12.67,-13.9]],\"fish\":[[\"thunfisch\",-8.8,29.73],[\"thunfisch\",-12.88,30.95]],\"trains\":[[\"zug\",16,1,1]],\"ferries\":[[4.5,30,1.572]]}",
+    "world": "{\"v\":1,\"n\":20,\"dayT\":0.3999999999999956,\"tiles\":[[\"gras\",\"tanne\",0,5],[\"gras\",\"tanne\",3,102],[\"gras\",\"tanne\",2,199],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",2,1751],[\"gras\"],[\"gras\",\"tanne\",1,18],[\"gras\",\"berg\",0,115],[\"gras\",\"tanne\",3,212],[\"schiene\"],[\"schiene\"],[\"bahnhof\"],[\"schiene\"],[\"schiene\"],[\"schiene\"],[\"schiene\"],[\"uebergang\"],[\"schiene\"],[\"schiene\"],[\"bahnhof\"],[\"schiene\"],[\"schiene\"],[\"schiene\"],[\"tunnel\"],[\"gras\"],[\"gras\",\"tanne\",2,1861],[\"gras\",\"tanne\",2,31],[\"gras\",\"tanne\",1,128],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"berg\",0,1777],[\"gras\"],[\"gras\",\"tanne\",3,44],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"haus\",0,529],[\"gras\"],[\"gras\",\"haus\",0,723],[\"gras\"],[\"gras\",\"villa\",0,917],[\"strasse\"],[\"gras\"],[\"gras\",\"haus\",0,1208],[\"gras\"],[\"gras\",\"haus\",0,1402],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",0,1887],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",3,1706],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"haus\",2,555],[\"gras\",\"garage\",2,652],[\"gras\",\"eigen\",2,749],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"hochhaus\",2,1137],[\"gras\"],[\"gras\",\"hochhaus\",2,1331],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"blumen\",1,180],[\"gras\"],[\"gras\",\"laterne\",3,374],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"laterne\",1,956],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"villa\",3,1635],[\"gras\"],[\"gras\",\"baum\",0,1829],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",1,678],[\"gras\",\"blumen\",0,775],[\"gras\",\"baum\",3,872],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",2,303],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"blumen\",2,691],[\"gras\",\"blumen\",1,788],[\"gras\",\"blumen\",0,885],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"tanne\",0,1273],[\"gras\",\"blumen\",3,1370],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",3,704],[\"gras\",\"blumen\",2,801],[\"gras\",\"baum\",1,898],[\"gras\"],[\"strasse\"],[\"gras\",\"baum\",2,1189],[\"gras\",\"lichterkette\",1,1286],[\"gras\"],[\"gras\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"gras\"],[\"gras\",\"baum\",1,232],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\",\"blumen\",2,1299],[\"gras\",\"tanne\",1,1396],[\"gras\"],[\"strasse\"],[\"gras\",\"laterne\",2,1687],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"lagerfeuer\",1,342],[\"gras\",\"laterne\",0,439],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"laterne\",3,1034],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\",\"haus\",3,1713],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",3,368],[\"gras\"],[\"strasse\"],[\"gras\",\"villa\",0,659],[\"gras\",\"gartenlampe\",3,756],[\"gras\",\"haus\",0,853],[\"gras\",\"haus\",0,950],[\"gras\"],[\"strasse\"],[\"gras\",\"haus\",0,1241],[\"gras\",\"villa\",0,1338],[\"gras\"],[\"gras\",\"feuerwache\",0,1532],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"strasse\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",3,1752],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",0,2043],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"strasse\"],[\"sand\"],[\"sand\"],[\"sand\"],[\"strasse\"],[\"sand\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"anleger\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"anleger\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"seetor\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"gras\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"meer\"],[\"gras\"],[\"gras\"],[\"gras\",\"baum\",3,1804],[\"gras\"],[\"gras\"],[\"gras\",\"tanne\",0,2095]],\"cars\":[[\"lambo\",-14,-17.7,-3.142,0],[\"boot\",-22,29.4,1.571,1],[\"lambo\",2.9,-31.01,3.142,1],[\"ferrari\",5.09,17.1,4.712,1],[\"polizei\",21.88,-1.78,0.658,1],[\"bus\",10.1,18.9,1.571,1],[\"feuerwehrauto\",2.9,-26.62,-3.142,1],[\"lambo\",2.9,-15.73,-3.142,1],[\"boot\",-14,34,3.692,0]],\"animals\":[[\"kuh\",32.44,27.04],[\"kuh\",31.95,30.15],[\"pferd\",26.68,32.33],[\"huhn\",-31.69,14.82],[\"huhn\",-32.43,13.63],[\"huhn\",-26.63,15.66],[\"hund\",-13.94,-12.95]],\"fish\":[[\"thunfisch\",-11.68,36.01]],\"trains\":[[\"zug\",15,1,1]],\"ferries\":[[3.22,30,1.572]]}",
     "cars": [
      [
       "lambo",
@@ -398,44 +398,44 @@
      [
       "lambo",
       "ai",
-      8.967,
-      17.1,
-      -1.571
+      2.9,
+      -31.007,
+      3.142
      ],
      [
       "ferrari",
       "ai",
-      2.978,
-      -23.491,
-      3.931
+      5.092,
+      17.1,
+      4.712
      ],
      [
       "polizei",
       "ai",
-      2.9,
-      -32.8,
-      3.142
+      21.876,
+      -1.776,
+      0.658
      ],
      [
       "bus",
       "ai",
-      2.9,
-      9.245,
-      3.142
+      10.097,
+      18.9,
+      1.571
      ],
      [
       "feuerwehrauto",
       "ai",
       2.9,
-      -28.296,
+      -26.616,
       -3.142
      ],
      [
       "lambo",
       "ai",
-      -22.9,
-      -12.589,
-      0
+      2.9,
+      -15.73,
+      -3.142
      ],
      [
       "boot",
@@ -448,80 +448,80 @@
     "trains": [
      [
       "zug",
-      30.043
+      28.344
      ]
     ],
     "ferries": [
      [
-      4.5,
-      30.002
+      3.22,
+      30.003
      ]
     ],
     "fishes": [
      [
       "thunfisch",
-      -8.797,
-      29.733,
+      -11.675,
+      36.012,
       true
      ],
      [
       "thunfisch",
-      -12.877,
-      30.955,
-      true
-     ],
-     [
-      "rochen",
-      -28.139,
-      31.711,
-      false
-     ],
-     [
-      "barsch",
-      -12.481,
-      31.614,
-      false
-     ],
-     [
-      "barrakuda",
-      -34.683,
-      32.741,
+      10.52,
+      34.891,
       false
      ],
      [
       "bonito",
-      -7.326,
-      35.227,
+      -5.408,
+      34.839,
+      false
+     ],
+     [
+      "thunfisch",
+      11.606,
+      34.695,
       false
      ],
      [
       "makrele",
-      -36.504,
-      39.899,
+      -5.684,
+      36.258,
       false
      ],
      [
-      "schwertfisch",
-      11.637,
-      38.1,
+      "thunfisch",
+      10.814,
+      35.865,
       false
      ],
      [
       "makrele",
-      -32.799,
-      38.742,
+      2.438,
+      29.455,
       false
      ],
      [
-      "hai",
-      -37.511,
-      36,
+      "mondfisch",
+      -13.36,
+      31.107,
       false
      ],
      [
-      "hai",
-      -31.784,
-      36.843,
+      "makrele",
+      1.859,
+      33.904,
+      false
+     ],
+     [
+      "mahimahi",
+      -30.603,
+      37.432,
+      false
+     ],
+     [
+      "barrakuda",
+      -31.34,
+      38.774,
       false
      ]
     ],
@@ -529,45 +529,45 @@
      [
       "orca",
       "up",
-      -16.731,
-      35.8
+      -14.154,
+      32.206
      ]
     ],
     "animals": [
      [
       "kuh",
-      27.292,
-      25.52
+      32.442,
+      27.042
      ],
      [
       "kuh",
-      36.552,
-      28.254
+      31.952,
+      30.146
      ],
      [
       "pferd",
-      28.887,
-      34.273
+      26.678,
+      32.331
      ],
      [
       "huhn",
-      -31.236,
-      16.345
+      -31.689,
+      14.82
      ],
      [
       "huhn",
-      -31.234,
-      8.307
+      -32.434,
+      13.628
      ],
      [
       "huhn",
-      -24.706,
-      13.268
+      -26.628,
+      15.663
      ],
      [
       "hund",
-      -12.669,
-      -13.902
+      -13.935,
+      -12.945
      ]
     ],
     "pl": [

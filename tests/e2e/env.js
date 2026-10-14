@@ -1,12 +1,14 @@
 // Wird vor dem Spiel in jede Testseite geladen: macht Zufall und Zeit vorhersagbar.
-// Three.js erzeugt IDs mit Math.random; diese Aufrufe bekommen einen eigenen Strom,
-// damit die Spielzufälle nicht davon abhängen, in welcher Reihenfolge Objekte entstehen.
+// Three.js erzeugt IDs mit Math.random; Aufrufe aus three.min.js bekommen einen eigenen Strom,
+// damit die Spielzufälle nicht davon abhängen, wie viele 3D-Objekte entstehen.
 (() => {
   const mk = (seed) => { let s = seed | 0; return () => { s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; };
   const game = mk(12345), lib = mk(999);
+  // Alles, was Three.js selbst zufällig braucht (IDs für Materialien, Texturen ...), kommt aus dem
+  // eigenen Strom. So ändert ein neues Material nicht die Zufallszahlen des Spiels.
   Math.random = function () {
-    const st = new Error().stack || '';
-    return st.includes('generateUUID') ? lib() : game();
+    const caller = (new Error().stack || '').split('\n')[2] || '';
+    return caller.includes('three.min.js') ? lib() : game();
   };
   let now = 1000;
   performance.now = () => now;
