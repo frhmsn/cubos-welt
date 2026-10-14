@@ -1,11 +1,9 @@
 // Echte Lichter: Pool von Punktlichtern für Laternen und Scheinwerfer, Garagentore.
-import '../systems/animals.js'; // Ladereihenfolge: läuft nach systems/animals.js (siehe docs/ARCHITEKTUR.md)
-import { game } from '../core/state.js';
+import { game, pl } from '../core/state.js';
 import { scene, walkCam } from './renderer.js';
 import { glowFire } from './materials.js';
-import { cars, flames, garages, lightMap } from '../core/world.js';
 import { bc } from './build-camera.js';
-import { pl } from '../systems/player.js';
+import { cars, flames, garages, lightMap } from '../core/world-data.js';
 
 // ---------- Echte Lichter ----------
 /* Feste Anzahl Lampen, die immer zu den nächsten Lichtquellen springen. Feste Anzahl, damit nichts neu kompiliert wird. */

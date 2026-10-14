@@ -5,7 +5,7 @@ import { DIRS, MAX_N, START_N, tileAt } from './grid.js';
 import { ITEMS } from '../content/catalog.js';
 import { MODELS } from '../content/models/buildings.js';
 import { VX, VY } from '../content/models/blocks.js';
-import { animals, cars, claimArea, ferries, isRail, isWater, rebuildGround, rebuildObj, resetTiles, tiles, trains } from './world.js';
+import { claimArea, rebuildGround, rebuildObj, resetTiles } from './world.js';
 import { addCar } from '../systems/traffic.js';
 import { spawnTrain } from '../systems/trains.js';
 import { spawnFerry } from '../systems/ferries.js';
@@ -14,10 +14,12 @@ import { bc } from '../render/build-camera.js';
 import { FISH, fishes } from '../content/fish.js';
 import { addFish, anyWater } from '../systems/fish.js';
 import { SAVE_VERSION, migrate } from './save-schema.js';
+import { animals, cars, ferries, isRail, isWater, tiles, trains } from './world-data.js';
+import { setSaver } from './autosave.js';
 
 // ---------- Speichern ----------
-const KEY='kunos-welt-1'; let saveT=null;
-function saveSoon(){clearTimeout(saveT);saveT=setTimeout(save,600);game.dirty=false;game.worldDirty=true;}
+const KEY='kunos-welt-1';
+setSaver(save);
 function save(){try{localStorage.setItem(KEY,JSON.stringify(serialize()));}catch(e){}}
 function serialize(){
   return {v:SAVE_VERSION,n:game.N,dayT: game.dayT,
@@ -54,4 +56,4 @@ function applyData(d){
 function rebuildAll(){for(let j=0;j<game.N;j++)for(let i=0;i<game.N;i++){rebuildGround(i,j);rebuildObj(i,j);}}
 function emptyWorld(){resetTiles(START_N);rebuildAll();bc.x=0;bc.z=3;bc.d=48;}
 
-export { applyData, emptyWorld, load, rebuildAll, save, saveSoon, serialize };
+export { applyData, emptyWorld, load, rebuildAll, save, serialize };

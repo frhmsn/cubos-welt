@@ -6,15 +6,15 @@ import { DIRS, TILE, center } from '../core/grid.js';
 import { ITEMS } from '../content/catalog.js';
 import { scene } from '../render/renderer.js';
 import { G, M, bake, box, disposeGroup, glowTex, mesh, seaTex } from '../render/materials.js';
-import { gAt, isWater } from '../core/world.js';
 import { ac, tone } from './audio.js';
 import { lightTime } from '../render/lights.js';
-import { hint } from '../ui/modes.js';
 import { FISH, fishModel, fishes } from '../content/fish.js';
 import { okF } from './fish.js';
 import { WHALE, whaleModel } from '../content/whales.js';
-import { whaleBook, whales } from './whales.js';
-import { emit } from '../core/events.js';
+import { whales } from './whales.js';
+import { hint } from '../ui/hint.js';
+import { gAt, isWater } from '../core/world-data.js';
+import { markWhaleSeen } from './catch-book.js';
 
 // ---------- Unterwasserwelt ----------
 const underScene=new THREE.Scene();
@@ -69,7 +69,7 @@ function updateUnderwater(dt,car){
   for(const w of whales){let m=under.models.get(w);
     if(!m){m=whaleModel(w.type);m.scale.setScalar(WHALE[w.type].uw);m.traverse(o=>{if(o.isMesh)o.castShadow=false;});underScene.add(m);under.models.set(w,m);}
     seen.add(w);m.position.set(w.x,Math.max(-2.4,Math.min(-1.3,w.y*.5-1.3)),w.z);m.rotation.set(w.pitch*.5,w.h,0,'YXZ');
-    if(!w.seen&&(w.x-car.x)**2+(w.z-car.z)**2<100){w.seen=true;whaleBook[w.type]++;try{localStorage.setItem('kunos-wale',JSON.stringify(whaleBook));}catch(e){}emit('wal:gesehen',{type:w.type});hint('Ein '+WHALE[w.type].label+' direkt neben dir!',3500);tone(160,1.2,'sine',.06,0,.6);}}
+    if(!w.seen&&(w.x-car.x)**2+(w.z-car.z)**2<100){w.seen=true;markWhaleSeen(w.type);hint('Ein '+WHALE[w.type].label+' direkt neben dir!',3500);tone(160,1.2,'sine',.06,0,.6);}}
   for(const [f,m] of under.models)if(!seen.has(f)){underScene.remove(m);disposeGroup(m);under.models.delete(f);}
   under.st.offset.set((lightTime*.01)%1,(lightTime*.006)%1);
   const fx=Math.sin(car.h),fz=Math.cos(car.h);

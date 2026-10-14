@@ -3,13 +3,14 @@ import '../core/save.js'; // Ladereihenfolge: läuft nach core/save.js (siehe do
 import { game } from '../core/state.js';
 import { I, START_N, center } from '../core/grid.js';
 import { ITEMS } from './catalog.js';
-import { orient, resetTiles, rot, tiles } from '../core/world.js';
+import { resetTiles } from '../core/world.js';
 import { addCar, placeCarOn } from '../systems/traffic.js';
 import { spawnTrain } from '../systems/trains.js';
 import { dockPose, spawnFerry } from '../systems/ferries.js';
 import { addAnimal } from '../systems/animals.js';
 import { bc } from '../render/build-camera.js';
 import { rebuildAll } from '../core/save.js';
+import { orient, rot, tiles } from '../core/world-data.js';
 
 function sampleWorld(){
   resetTiles(START_N);

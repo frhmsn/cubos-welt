@@ -1,21 +1,18 @@
 // Wale im Meer: schwimmen, auftauchen, Fontäne, gesehen-Zähler.
-import './fish.js'; // Ladereihenfolge: läuft nach systems/fish.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
-import { clamp } from '../core/util.js';
+import { angDiff, clamp } from '../core/util.js';
 import { center, tileAt } from '../core/grid.js';
 import { scene } from '../render/renderer.js';
 import { disposeGroup } from '../render/materials.js';
-import { gAt, tiles } from '../core/world.js';
-import { nearFocus } from './trains.js';
-import { angDiff } from './ferries.js';
 import { ac } from './audio.js';
 import { lightTime } from '../render/lights.js';
-import { hint } from '../ui/modes.js';
 import { silGeo, silMat } from '../content/fish.js';
 import { WHALE, whaleModel } from '../content/whales.js';
-import { emit } from '../core/events.js';
+import { hint } from '../ui/hint.js';
+import { gAt, tiles } from '../core/world-data.js';
+import { nearFocus } from '../core/focus.js';
+import { markWhaleSeen } from './catch-book.js';
 
-let whaleBook={};for(const k of Object.keys(WHALE))whaleBook[k]=0;try{const c=JSON.parse(localStorage.getItem('kunos-wale')||'null');if(c)whaleBook=Object.assign(whaleBook,c);}catch(e){}
 const whales=[],spouts=[];
 const spoutGeo=new THREE.SphereGeometry(.22,6,5),spoutMat=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.8,depthWrite:false});
 function seaAt(x,z){const t=tileAt(x,z);return !!t&&gAt(t.i,t.j)==='meer';}
@@ -34,8 +31,8 @@ function spout(w){
   for(let q=0;q<16&&spouts.length<60;q++){const m=new THREE.Mesh(spoutGeo,spoutMat.clone());m.position.set(hx,.8,hz);scene.add(m);
     spouts.push({m,vx:(Math.random()-.5)*1.2,vy:5+Math.random()*3,vz:(Math.random()-.5)*1.2,t:0});}
   if(nearFocus(w.x,w.z,40)){blowSound();
-    if(!w.seen){w.seen=true;whaleBook[w.type]++;try{localStorage.setItem('kunos-wale',JSON.stringify(whaleBook));}catch(e){}
-      emit('wal:gesehen',{type:w.type});hint('Ein '+WHALE[w.type].label+'! Pffffff! Schau, wie er pustet.',3500);}}
+    if(!w.seen){w.seen=true;markWhaleSeen(w.type);
+      hint('Ein '+WHALE[w.type].label+'! Pffffff! Schau, wie er pustet.',3500);}}
 }
 function whaleTarget(w){for(let q=0;q<12;q++){const a=Math.random()*6.283,r=8+Math.random()*16,nx=w.x+Math.cos(a)*r,nz=w.z+Math.sin(a)*r;if(whaleOk(nx,nz)){w.tx=nx;w.tz=nz;return;}}w.tx=w.x;w.tz=w.z;}
 let whaleCheck=0;
@@ -72,4 +69,4 @@ function updateWhales(dt){
     if(p.t>1.5||p.m.position.y<0){scene.remove(p.m);p.m.material.dispose();spouts.splice(k,1);}}
 }
 
-export { removeWhale, updateWhales, whaleBook, whales };
+export { removeWhale, updateWhales, whales };

@@ -1,18 +1,17 @@
 // Aquarium: gefangene Fische schwimmen im runden Becken, Panel beim Betreten.
 import './underwater.js'; // Ladereihenfolge: läuft nach systems/underwater.js (siehe docs/ARCHITEKTUR.md)
-import { game } from '../core/state.js';
+import { game, pl } from '../core/state.js';
 import { $ } from '../core/util.js';
 import { scene } from '../render/renderer.js';
 import { disposeGroup } from '../render/materials.js';
 import { AQ_R } from '../content/models/buildings.js';
-import { aquariums } from '../core/world.js';
-import { nearFocus } from './trains.js';
 import { ac, plop, tone } from './audio.js';
-import { pl } from './player.js';
 import { FISH, fishModel } from '../content/fish.js';
-import { catchBook } from './fishing.js';
 import { thumbs } from '../ui/inventory.js';
 import { on } from '../core/events.js';
+import { aquariums } from '../core/world-data.js';
+import { nearFocus } from '../core/focus.js';
+import { catchBook } from './catch-book.js';
 
 // ---------- Aquarium-Becken ----------
 function clearAquarium(aq){for(const f of aq.fish){scene.remove(f.m);disposeGroup(f.m);}aq.fish=[];}

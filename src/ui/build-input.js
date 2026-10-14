@@ -8,8 +8,8 @@ import { canvas } from '../render/renderer.js';
 import { ac } from '../systems/audio.js';
 import { bc, panBy } from '../render/build-camera.js';
 import { apply, pickTile } from '../systems/build.js';
-import { saveSoon } from '../core/save.js';
 import { ec, editTap } from '../systems/editor.js';
+import { saveSoon } from '../core/autosave.js';
 
 // ---------- Eingabe Bauen ----------
 const ptrs=new Map(); game.gest = null; let lastPaint=null;

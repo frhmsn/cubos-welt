@@ -1,5 +1,4 @@
 // Speicherort der Welten: localStorage im Gerät (Schlüssel siehe docs/ARCHITEKTUR.md).
-import '../ui/modes.js'; // Ladereihenfolge: läuft nach ui/modes.js (siehe docs/ARCHITEKTUR.md)
 import { game } from './state.js';
 
 // ---------- Meine Welten ----------

@@ -1,13 +1,15 @@
 // Startpunkt: lädt alle Module in fester Reihenfolge und startet das Spiel.
+import './systems/editor.js'; // Kern zuerst laden, in Kettenreihenfolge (tools/rechain.mjs pflegt diese Zeile)
 import './debug.js'; // Test-Schnittstelle (nur aktiv in Tests)
 import { game } from './core/state.js';
-import { hint, setMode } from './ui/modes.js';
+import { setMode } from './ui/modes.js';
 import { saveWorld } from './ui/worlds-menu.js';
 import { makeThumbs, renderCats, renderItems, select } from './ui/inventory.js';
 import { load, save } from './core/save.js';
 import { sampleWorld } from './content/sample-world.js';
 import { renderEditTray } from './systems/editor.js';
 import { frame, resize } from './core/loop.js';
+import { hint } from './ui/hint.js';
 
 // ---------- Start ----------
 resize();

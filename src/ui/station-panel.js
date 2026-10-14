@@ -1,12 +1,11 @@
 // Bahnhof- und Anleger-Panel: Einsteigen und Aussteigen.
 import '../systems/player.js'; // Ladereihenfolge: läuft nach systems/player.js (siehe docs/ARCHITEKTUR.md)
-import { game } from '../core/state.js';
+import { game, pl } from '../core/state.js';
 import { $ } from '../core/util.js';
 import { I, center, tileAt } from '../core/grid.js';
-import { gAt, groundM, trains } from '../core/world.js';
 import { ac, tone } from '../systems/audio.js';
-import { pl } from '../systems/player.js';
 import { exitTrain, startRide } from './modes.js';
+import { gAt, groundM, trains } from '../core/world-data.js';
 
 function stationNear(){
   const t=tileAt(pl.x,pl.z);if(!t)return -1;

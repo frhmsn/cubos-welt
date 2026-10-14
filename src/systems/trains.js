@@ -1,6 +1,6 @@
 // Eisenbahn: Züge, Fahrt über Gleise, Halt an Bahnhöfen, Mitfahren.
-import './traffic.js'; // Ladereihenfolge: läuft nach systems/traffic.js (siehe docs/ARCHITEKTUR.md)
-import { game } from '../core/state.js';
+import '../core/world.js'; // Ladereihenfolge: läuft nach core/world.js (siehe docs/ARCHITEKTUR.md)
+import { game, pl } from '../core/state.js';
 import { clamp } from '../core/util.js';
 import { DIRS, I, TILE, center, tileAt } from '../core/grid.js';
 import { ITEMS } from '../content/catalog.js';
@@ -8,14 +8,14 @@ import { scene } from '../render/renderer.js';
 import { M, bake, box, disposeGroup, glassMat, headMat, mesh, winMat } from '../render/materials.js';
 import { blinkMat } from '../content/models/rail.js';
 import { wheelGeo } from '../content/models/vehicles.js';
-import { cars, crossings, gAt, isRail, setArms, trains } from '../core/world.js';
+import { setArms } from '../core/world.js';
 import { headingToDir } from './traffic.js';
-import { chime, whistle } from './ferries.js';
 import { lightTime } from '../render/lights.js';
-import { pl } from './player.js';
 import { stationNear } from '../ui/station-panel.js';
 import { startTravel } from './travel.js';
-import { focus } from '../core/loop.js';
+import { cars, crossings, gAt, isRail, trains } from '../core/world-data.js';
+import { nearFocus } from '../core/focus.js';
+import { chime, whistle } from './audio.js';
 
 // ---------- Eisenbahn ----------
 const TCL=3.45,TLEN=3.2,TCARS=3;
@@ -112,7 +112,6 @@ function trainBlocked(tr){
   for(const o of trains){if(o===tr)continue;for(const c of o.cars){const q=c.g.position;if(chk(q.x,q.z,1.4,4.6))return true;}}
   return false;
 }
-function nearFocus(x,z,r){return (x-focus.x)**2+(z-focus.z)**2<r*r;}
 function trainStep(tr,dt,pre){
   if(!isRail(tr.i,tr.j)){tr.v=0;return;}
   const spec=ITEMS[tr.type];let target=spec.speed;
@@ -165,4 +164,4 @@ function updateCrossings(dt){
   blinkMat.emissiveIntensity=any&&Math.floor(lightTime*3)%2?2.4:.08;
 }
 
-export { nearFocus, placeTrainCars, pushTrains, removeTrain, reverseTrain, spawnTrain, trainCarModel, updateCrossings, updateTrains };
+export { placeTrainCars, pushTrains, removeTrain, reverseTrain, spawnTrain, trainCarModel, updateCrossings, updateTrains };

@@ -1,12 +1,11 @@
 // Autos: Fahrzeuge anlegen und auf Straßen selbst fahren lassen.
-import '../core/collision.js'; // Ladereihenfolge: läuft nach core/collision.js (siehe docs/ARCHITEKTUR.md)
-import { game } from '../core/state.js';
+import { game, pl } from '../core/state.js';
 import { DIRS, TILE, center, rightOf, tileAt } from '../core/grid.js';
 import { ITEMS } from '../content/catalog.js';
 import { scene } from '../render/renderer.js';
 import { carModel } from '../content/models/vehicles.js';
-import { cars, crossings, isRoad, trains } from '../core/world.js';
-import { pl } from './player.js';
+import { cars, crossings, isRoad, trains } from '../core/world-data.js';
+import { disposeGroup } from '../render/materials.js';
 
 // ---------- Autos fahren ----------
 function addCar(type,x,z,h,ai){
@@ -65,4 +64,6 @@ function updateCarAI(car,dt){
 }
 function placeCarOn(i,j,type,d){const c=center(i,j),r=rightOf(d);return addCar(type,c.x+r[0]*.9,c.z+r[1]*.9,Math.atan2(DIRS[d][0],DIRS[d][1]),true);}
 
-export { addCar, headingToDir, initAI, placeCarOn, updateCarAI };
+function removeCar(c){const k=cars.indexOf(c);if(k<0)return;scene.remove(c.g);disposeGroup(c.g);cars.splice(k,1);}
+
+export { addCar, headingToDir, initAI, placeCarOn, removeCar, updateCarAI };

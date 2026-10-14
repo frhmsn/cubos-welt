@@ -1,23 +1,24 @@
 // Weltreise: durch Tunnel und Seetor in andere Welten.
 import './aquarium.js'; // Ladereihenfolge: läuft nach systems/aquarium.js (siehe docs/ARCHITEKTUR.md)
-import { game } from '../core/state.js';
+import { game, pl } from '../core/state.js';
 import { $ } from '../core/util.js';
 import { DIRS, I, inb } from '../core/grid.js';
 import { scene } from '../render/renderer.js';
 import { disposeGroup } from '../render/materials.js';
-import { animals, cars, groundM, isRail, isWater, rebuildGround, rebuildObj, tiles } from '../core/world.js';
-import { addCar } from './traffic.js';
+import { rebuildGround, rebuildObj } from '../core/world.js';
+import { addCar, removeCar } from './traffic.js';
 import { placeTrainCars, removeTrain, reverseTrain, spawnTrain } from './trains.js';
-import { dockPose, removeCar, spawnFerry } from './ferries.js';
+import { dockPose, spawnFerry } from './ferries.js';
 import { tone } from './audio.js';
 import { bc } from '../render/build-camera.js';
 import { inTile } from './build.js';
-import { pl } from './player.js';
-import { enterCar, hint, setMode, startRide } from '../ui/modes.js';
+import { enterCar, setMode, startRide } from '../ui/modes.js';
 import { CKEY, store } from '../core/storage.js';
 import { saveWorld } from '../ui/worlds-menu.js';
 import { applyData, emptyWorld, save } from '../core/save.js';
 import { sampleWorld } from '../content/sample-world.js';
+import { hint } from '../ui/hint.js';
+import { animals, cars, groundM, isRail, isWater, tiles } from '../core/world-data.js';
 
 // ---------- Weltreise ----------
 function startTravel(info){

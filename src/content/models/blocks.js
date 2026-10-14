@@ -1,8 +1,7 @@
 // Blöcke der Bauwerkstatt und das Zusammensetzen selbst gebauter Häuser.
-import './buildings.js'; // Ladereihenfolge: läuft nach content/models/buildings.js (siehe docs/ARCHITEKTUR.md)
 import { nightMat } from '../../render/materials.js';
 import { MODELS } from './buildings.js';
-import { rot } from '../../core/world.js';
+import { rot } from '../../core/world-data.js';
 
 // ---------- Selbst bauen: Blöcke ----------
 const VX=8,VY=12,VB=.5,VO=-VX*VB/2;

@@ -1,11 +1,9 @@
 // Spielschleife: jedes Bild alle Systeme aktualisieren und zeichnen, Leistung anpassen.
-import '../systems/editor.js'; // Ladereihenfolge: läuft nach systems/editor.js (siehe docs/ARCHITEKTUR.md)
-import { game } from './state.js';
+import { game, pl } from './state.js';
 import { $ } from './util.js';
 import { buildCam, dprMax, renderer, scene, walkCam } from '../render/renderer.js';
 import { nightMats, polBlue, polRed, seaTex, waterMat } from '../render/materials.js';
 import { portalMat } from '../content/models/rail.js';
-import { animals, cars, ferries, pops } from './world.js';
 import { updateCarAI } from '../systems/traffic.js';
 import { updateCrossings, updateTrains } from '../systems/trains.js';
 import { updateFerry } from '../systems/ferries.js';
@@ -13,7 +11,7 @@ import { updateAnimal } from '../systems/animals.js';
 import { updateDay } from '../render/daynight.js';
 import { updateGarages, updateLights } from '../render/lights.js';
 import { bc, placeBuildCam } from '../render/build-camera.js';
-import { pl, updateDrive, updateWalk } from '../systems/player.js';
+import { updateDrive, updateWalk } from '../systems/player.js';
 import { updateStationUI } from '../ui/station-panel.js';
 import { updateRide } from '../ui/modes.js';
 import { updateFish } from '../systems/fish.js';
@@ -24,6 +22,8 @@ import { updateAquaUI, updateAquariums } from '../systems/aquarium.js';
 import { saveWorld } from '../ui/worlds-menu.js';
 import { save } from './save.js';
 import { editCam, editScene, placeEditCam } from '../systems/editor.js';
+import { animals, cars, ferries, pops } from './world-data.js';
+import { focus } from './focus.js';
 
 // ---------- Schleife ----------
 function resize(){
@@ -32,7 +32,7 @@ function resize(){
 }
 window.addEventListener('resize',resize);
 const perf={acc:0,n:0,cool:3000,raised:false};
-const focus=new THREE.Vector3(); let last=performance.now(),blink=0,autoSave=0,slotSave=0;
+let last=performance.now(),blink=0,autoSave=0,slotSave=0;
 function frame(now){
   const raw=now-last,dt=Math.min(.05,raw/1000); last=now;
   if(raw>0&&raw<250){perf.acc+=raw;perf.n++;}
@@ -79,4 +79,4 @@ function frame(now){
   requestAnimationFrame(frame);
 }
 
-export { focus, frame, resize };
+export { frame, resize };

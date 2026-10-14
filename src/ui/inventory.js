@@ -13,12 +13,11 @@ import { expandWorld } from '../core/world.js';
 import { trainCarModel } from '../systems/trains.js';
 import { ferryModel } from '../systems/ferries.js';
 import { ac, plop, tone } from '../systems/audio.js';
-import { hint } from './modes.js';
 import { FISH, fishModel } from '../content/fish.js';
 import { WHALE, whaleModel } from '../content/whales.js';
-import { whaleBook } from '../systems/whales.js';
-import { catchBook, catchRec, fmtLen } from '../systems/fishing.js';
 import { on } from '../core/events.js';
+import { hint } from './hint.js';
+import { catchBook, catchRec, fmtLen, whaleBook } from '../systems/catch-book.js';
 
 let thumbs={};
 function select(id){

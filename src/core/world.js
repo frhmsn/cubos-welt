@@ -1,5 +1,4 @@
 // Welt-Zustand: Felder, Objekte, Neuaufbau von Boden und Objekten, Welt vergrößern, Großbauten.
-import '../content/models/blocks.js'; // Ladereihenfolge: läuft nach content/models/blocks.js (siehe docs/ARCHITEKTUR.md)
 import { game } from './state.js';
 import { DIRS, GROW, I, MAX_N, TILE, ZMAX, center, inb } from './grid.js';
 import { ITEMS } from '../content/catalog.js';
@@ -13,19 +12,16 @@ import { removeFerry } from '../systems/ferries.js';
 import { tone } from '../systems/audio.js';
 import { bc } from '../render/build-camera.js';
 import { inTile, nope } from '../systems/build.js';
-import { hint } from '../ui/modes.js';
 import { fishes } from '../content/fish.js';
 import { removeFish } from '../systems/fish.js';
 import { removeWhale, whales } from '../systems/whales.js';
 import { clearAquarium, fillAquarium } from '../systems/aquarium.js';
 import { clearTile } from '../systems/travel.js';
-import { saveSoon } from './save.js';
+import { hint } from '../ui/hint.js';
+import { FLAT, animals, aquariums, cars, cols, crossings, ferries, flames, garages, groundM, isRail, isRoad, isWater, lightMap, objM, pops, rot, setWorldArrays, tiles, toWorld, trains } from './world-data.js';
+import { saveSoon } from './autosave.js';
 
 // ---------- Welt-Zustand ----------
-let tiles=[], groundM=[], objM=[], cols=[];
-const cars=[], animals=[], pops=[];
-const lightMap=new Map(), garages=new Map(), flames=new Map(), crossings=new Map(), aquariums=new Map();
-const trains=[], ferries=[];
 function dropObj(grp){if(!grp)return;scene.remove(grp);disposeGroup(grp);lightMap.delete(grp);garages.delete(grp);flames.delete(grp);const aq=aquariums.get(grp);if(aq){clearAquarium(aq);aquariums.delete(grp);}}
 function dropGround(grp){if(!grp)return;scene.remove(grp);disposeGroup(grp);lightMap.delete(grp);crossings.delete(grp);}
 function resetTiles(nn){
@@ -38,16 +34,10 @@ function resetTiles(nn){
   while(whales.length)removeWhale(whales[0]);
   game.rideTrain=null;
   if(nn){game.N=nn;game.HALF=game.N*TILE/2;updateBase();}
-  tiles=Array.from({length:game.N*game.N},()=>({g:'gras',o:null})); groundM=new Array(game.N*game.N).fill(null); objM=new Array(game.N*game.N).fill(null); cols=Array.from({length:game.N*game.N},()=>[]);
+  setWorldArrays(Array.from({length:game.N*game.N},()=>({g:'gras',o:null})),new Array(game.N*game.N).fill(null),new Array(game.N*game.N).fill(null),Array.from({length:game.N*game.N},()=>[]));
   while(cars.length){const c=cars.pop();scene.remove(c.g);disposeGroup(c.g);}
   while(animals.length){const a=animals.pop();scene.remove(a.g);disposeGroup(a.g);}
 }
-const RAILT=new Set(['schiene','bahnhof','uebergang','tunnel']), ROADT=new Set(['strasse','uebergang']), WATT=new Set(['wasser','meer','anleger','seetor']);
-const gAt=(i,j)=>inb(i,j)?tiles[I(i,j)].g:null;
-const isRoad=(i,j)=>ROADT.has(gAt(i,j));
-const isRail=(i,j)=>RAILT.has(gAt(i,j));
-const isWater=(i,j)=>WATT.has(gAt(i,j));
-const FLAT=new Set(['strasse','sand','wasser','meer','schiene','uebergang']);
 function groundConn(i,j){
   const t=tiles[I(i,j)],conn={alt:(i+j)%2===0,dirs:[],rail:[],land:null,water:null,side:null};
   for(let d=0;d<4;d++){const a=i+DIRS[d][0],b=j+DIRS[d][1];if(isRoad(a,b))conn.dirs.push(d);if(isRail(a,b))conn.rail.push(d);}
@@ -74,12 +64,6 @@ function rebuildGround(i,j){
   scene.add(grp); groundM[k]=grp; freeze(grp);
 }
 function freeze(grp){grp.updateMatrix();grp.matrixAutoUpdate=false;for(const m of grp.children){m.updateMatrix();if(!m.userData.keep){m.matrixAutoUpdate=false;}}grp.updateMatrixWorld(true);}
-function rot(x,z,r){switch(r&3){case 0:return[x,z];case 1:return[z,-x];case 2:return[-x,-z];default:return[-z,x];}}
-function toWorld(cl,r,c){
-  if(cl[0]==='c'){const p=rot(cl[1],cl[2],r);return{c:1,x:p[0]+c.x,z:p[1]+c.z,r:cl[3]};}
-  const a=rot(cl[1],cl[3],r),b=rot(cl[2],cl[4],r);
-  return{c:0,x0:Math.min(a[0],b[0])+c.x,x1:Math.max(a[0],b[0])+c.x,z0:Math.min(a[1],b[1])+c.z,z1:Math.max(a[1],b[1])+c.z};
-}
 function rebuildObj(i,j,pop){
   const k=I(i,j); if(objM[k]){dropObj(objM[k]);objM[k]=null;} cols[k]=[];
   const o=tiles[k].o; if(!o)return;
@@ -100,7 +84,7 @@ function expandWorld(){
   const oN=game.N,nN=game.N+2*GROW,len=nN*nN;
   const nt=Array.from({length:len},()=>({g:'gras',o:null})),ng=new Array(len).fill(null),no=new Array(len).fill(null),nc=Array.from({length:len},()=>[]);
   for(let j=0;j<oN;j++)for(let i=0;i<oN;i++){const a=j*oN+i,b=(j+GROW)*nN+(i+GROW);nt[b]=tiles[a];ng[b]=groundM[a];no[b]=objM[a];nc[b]=cols[a];}
-  game.N=nN;game.HALF=game.N*TILE/2;tiles=nt;groundM=ng;objM=no;cols=nc;updateBase();
+  game.N=nN;game.HALF=game.N*TILE/2;setWorldArrays(nt,ng,no,nc);updateBase();
   for(const c of cars)if(c.mode==='ai'){c.i+=GROW;c.j+=GROW;}
   const remap=k=>k==null||k<0?k:(Math.floor(k/oN)+GROW)*nN+(k%oN)+GROW;
   for(const tr of trains){tr.i+=GROW;tr.j+=GROW;tr.lastStop=remap(tr.lastStop);tr.stopK=remap(tr.stopK);}
@@ -123,12 +107,6 @@ function removeBig(i,j){
   for(let dj=-1;dj<=1;dj++)for(let di=-1;di<=1;di++){const a=i+di,b=j+dj;if(!inb(a,b))continue;const o=tiles[I(a,b)].o;
     if(o&&((di||dj)?o.t==='teil':o.t==='aquarium')){tiles[I(a,b)].o=null;rebuildObj(a,b);}}
 }
-function freeAt(i,j){if(!inb(i,j))return false;const o=tiles[I(i,j)].o;return !o||!(ITEMS[o.t].house||o.t==='berg');}
-function orient(i,j){
-  for(let d=0;d<4;d++)if(isRoad(i+DIRS[d][0],j+DIRS[d][1]))return d;
-  for(let d=0;d<4;d++)if(freeAt(i+DIRS[d][0],j+DIRS[d][1]))return d;
-  return 0;
-}
 function setGround(i,j,g){
   const t=tiles[I(i,j)]; t.g=g;
   if(g!=='gras'&&g!=='sand'&&t.o){t.o=null;rebuildObj(i,j);}
@@ -136,4 +114,4 @@ function setGround(i,j,g){
   for(const d of DIRS){const a=i+d[0],b=j+d[1];if(inb(a,b)){const ng=tiles[I(a,b)].g;if(ng!=='gras'&&ng!=='sand')rebuildGround(a,b);}}
 }
 
-export { WATT, animals, aquariums, cars, claimArea, cols, crossings, expandWorld, ferries, flames, freeAt, gAt, garages, groundM, isRail, isRoad, isWater, lightMap, orient, orientBig, pops, rebuildGround, rebuildObj, removeBig, resetTiles, rot, setArms, setGround, tiles, trains };
+export { claimArea, expandWorld, orientBig, rebuildGround, rebuildObj, removeBig, resetTiles, setArms, setGround };

@@ -1,9 +1,8 @@
 // Kollision von Spielfigur und Fahrzeugen mit Gebäuden.
-import './world.js'; // Ladereihenfolge: läuft nach core/world.js (siehe docs/ARCHITEKTUR.md)
 import { game } from './state.js';
 import { clamp } from './util.js';
 import { I, TILE, inb } from './grid.js';
-import { cols, groundM } from './world.js';
+import { cols, groundM } from './world-data.js';
 
 // ---------- Kollision ----------
 function resolve(p,rad){

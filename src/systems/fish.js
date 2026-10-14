@@ -1,17 +1,16 @@
 // Fische im Wasser: erscheinen, schwimmen, fliehen, springen.
-import '../core/storage.js'; // Ladereihenfolge: läuft nach core/storage.js (siehe docs/ARCHITEKTUR.md)
+import '../ui/modes.js'; // Ladereihenfolge: läuft nach ui/modes.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
-import { clamp } from '../core/util.js';
+import { angDiff, clamp } from '../core/util.js';
 import { center, tileAt } from '../core/grid.js';
 import { scene } from '../render/renderer.js';
 import { M, disposeGroup } from '../render/materials.js';
-import { gAt, tiles } from '../core/world.js';
-import { nearFocus } from './trains.js';
-import { angDiff } from './ferries.js';
 import { lightTime } from '../render/lights.js';
 import { FISH_BY_ID, fishGrounds } from '../content/fish/index.js';
 import { FISH, finGeo, fishModel, fishes, pickFish, silGeo, silMat, splashGeo, splashes } from '../content/fish.js';
 import { fishing } from './fishing.js';
+import { gAt, tiles } from '../core/world-data.js';
+import { nearFocus } from '../core/focus.js';
 
 /** Darf diese Art an dieser Stelle schwimmen? (Habitat aus content/fish/<art>.js) */
 function fishOk(type,x,z){const t=tileAt(x,z);if(!t)return false;return fishGrounds(type).includes(gAt(t.i,t.j));}

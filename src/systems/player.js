@@ -1,11 +1,10 @@
 // Spielfigur und Fahren: Joystick, Tastatur, Laufen, Fahren, Boote.
 import '../ui/build-input.js'; // Ladereihenfolge: läuft nach ui/build-input.js (siehe docs/ARCHITEKTUR.md)
-import { game } from '../core/state.js';
+import { game, pl } from '../core/state.js';
 import { $, clamp } from '../core/util.js';
 import { tileAt } from '../core/grid.js';
 import { ITEMS } from '../content/catalog.js';
 import { walkCam } from '../render/renderer.js';
-import { cars, gAt } from '../core/world.js';
 import { resolve } from '../core/collision.js';
 import { pushTrains } from './trains.js';
 import { canStand, onDeck } from './ferries.js';
@@ -13,10 +12,10 @@ import { ac } from './audio.js';
 import { lightTime } from '../render/lights.js';
 import { fishing } from './fishing.js';
 import { SUB_Y, updateUnderwater } from './underwater.js';
+import { cars, gAt } from '../core/world-data.js';
 
 // ---------- Laufen & Fahren ----------
 game.mode = 'build'; game.driveCar = null;
-const pl={x:0,z:0,yaw:0,pitch:0,bob:0};
 const joy={x:0,y:0}; let joyId=null,lookId=null,joyO=null,lookLast=null;
 const keys={};
 const pad=$('#pad'),joyEl=$('#joy'),knob=$('#knob');
@@ -88,4 +87,4 @@ function updateDrive(dt){
   walkCam.lookAt(car.x,1.1,car.z);
 }
 
-export { camFree, nearestCar, nearestVehicle, pl, updateDrive, updateWalk };
+export { camFree, nearestCar, nearestVehicle, updateDrive, updateWalk };

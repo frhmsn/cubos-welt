@@ -1,10 +1,9 @@
 // Tiere laufen herum.
-import './ferries.js'; // Ladereihenfolge: läuft nach systems/ferries.js (siehe docs/ARCHITEKTUR.md)
 import { I, tileAt } from '../core/grid.js';
 import { ITEMS } from '../content/catalog.js';
 import { scene } from '../render/renderer.js';
 import { animalModel } from '../content/models/animals.js';
-import { animals, tiles } from '../core/world.js';
+import { animals, tiles } from '../core/world-data.js';
 
 // ---------- Tiere laufen ----------
 function animalOk(x,z){const t=tileAt(x,z);if(!t)return false;const tt=tiles[I(t.i,t.j)];if(tt.g!=='gras'&&tt.g!=='sand')return false;if(tt.o&&tt.o.t!=='blumen'&&!ITEMS[tt.o.t].walkable)return false;return true;}

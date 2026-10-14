@@ -1,20 +1,21 @@
 // Test-Schnittstelle window.__cubo. Nur aktiv, wenn window.__CUBO_DEBUG gesetzt ist (Tests).
-import { game } from './core/state.js';
+import { game, pl } from './core/state.js';
 import { center } from './core/grid.js';
-import { animals, aquariums, cars, ferries, trains } from './core/world.js';
 import { bc } from './render/build-camera.js';
 import { apply } from './systems/build.js';
-import { nearestCar, pl } from './systems/player.js';
+import { nearestCar } from './systems/player.js';
 import { enterCar, exitCar, setMode, startRide, startWalk } from './ui/modes.js';
 import { fishes, fishModel } from './content/fish.js';
 import { whaleModel } from './content/whales.js';
 import { scene } from './render/renderer.js';
-import { whaleBook, whales } from './systems/whales.js';
-import { catchBook, fishing } from './systems/fishing.js';
+import { whales } from './systems/whales.js';
+import { fishing } from './systems/fishing.js';
 import { refreshAquariums } from './systems/aquarium.js';
 import { select } from './ui/inventory.js';
 import { emptyWorld, serialize } from './core/save.js';
 import { sampleWorld } from './content/sample-world.js';
+import { animals, aquariums, cars, ferries, trains } from './core/world-data.js';
+import { catchBook, whaleBook } from './systems/catch-book.js';
 
 // ---------- Test-Schnittstelle ----------
 // Modelle zum Anschauen nebeneinander vor die Baukamera stellen (für neue Arten).

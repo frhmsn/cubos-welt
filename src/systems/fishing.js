@@ -1,21 +1,19 @@
 // Angeln: Rute, Schnur, Biss, Fang, Fangbuch und Rekorde.
-import './whales.js'; // Ladereihenfolge: läuft nach systems/whales.js (siehe docs/ARCHITEKTUR.md)
+import './fish.js'; // Ladereihenfolge: läuft nach systems/fish.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { $ } from '../core/util.js';
 import { tileAt } from '../core/grid.js';
 import { ITEMS } from '../content/catalog.js';
 import { scene } from '../render/renderer.js';
 import { G, disposeGroup, mesh } from '../render/materials.js';
-import { gAt, isWater } from '../core/world.js';
 import { ac, nopeSnd, plop, tone } from './audio.js';
-import { hint } from '../ui/modes.js';
 import { FISH, fishModel, fishes, pickFish } from '../content/fish.js';
 import { addFish, anyWater, fishOk, okF, removeFish, splash } from './fish.js';
-import { WHALE } from '../content/whales.js';
-import { whaleBook } from './whales.js';
 import { thumbs } from '../ui/inventory.js';
 import { FISH_BY_ID } from '../content/fish/index.js';
-import { emit } from '../core/events.js';
+import { hint } from '../ui/hint.js';
+import { gAt, isWater } from '../core/world-data.js';
+import { catchBook, fmtLen, recordCatch } from './catch-book.js';
 
 let fishing=null;
 const fishLine=new THREE.Line(new THREE.BufferGeometry().setFromPoints(Array.from({length:12},()=>new THREE.Vector3())),new THREE.LineBasicMaterial({color:0x222222}));
@@ -74,14 +72,9 @@ function reelIn(){
   F.model=fishModel(F.type);F.model.scale.setScalar(FISH[F.type].rs);scene.add(F.model);
   splash(F.x,F.z,true);tone(400,.12,'sine',.08,0,2);tone(600,.12,'sine',.08,.12,2);
 }
-let catchBook={};for(const k of Object.keys(FISH))catchBook[k]=0;try{const c=JSON.parse(localStorage.getItem('kunos-fang')||'null');if(c)catchBook=Object.assign(catchBook,c);}catch(e){}
-let catchRec={};try{catchRec=JSON.parse(localStorage.getItem('kunos-fang-rekord')||'{}')||{};}catch(e){catchRec={};}
 let lastCatch=null;
-function fmtLen(m){return m<1?Math.round(m*100)+' cm':m.toFixed(2).replace('.',',')+' m';}
 function showCatch(type,len){
-  lastCatch={type,len};catchBook[type]++;const rec=!catchRec[type]||len>catchRec[type];if(rec)catchRec[type]=len;
-  try{localStorage.setItem('kunos-fang',JSON.stringify(catchBook));localStorage.setItem('kunos-fang-rekord',JSON.stringify(catchRec));}catch(e){}
-  emit('fang:geaendert',{type});
+  lastCatch={type,len};const rec=recordCatch(type,len);
   const S=FISH[type];
   $('#catchImg').src=thumbs['F_'+type]||'';$('#catchImg').hidden=!thumbs['F_'+type];
   const big=FISH_BY_ID[type].bigCatch;
@@ -94,14 +87,4 @@ function showCatch(type,len){
 $('#catchKeep').addEventListener('click',()=>{ac();$('#catch').hidden=true;plop();hint('Ab in den Eimer!',1800);});
 $('#catchFree').addEventListener('click',()=>{ac();$('#catch').hidden=true;if(lastCatch&&game.driveCar){const c=game.driveCar,x=c.x+Math.sin(c.h)*3,z=c.z+Math.cos(c.h)*3;if(anyWater(x,z)){const f=addFish(lastCatch.type,x,z);f.free=!fishOk(lastCatch.type,x,z);f.flee=2.5;splash(x,z,true);}}hint('Tschüss Fisch!',1800);});
 $('#btnFish').addEventListener('click',()=>{ac();if(!fishing)startFishing();else reelIn();});
-function fangData(){return {c:catchBook,r:catchRec,w:whaleBook};}
-function mergeFang(f){
-  if(!f||typeof f!=='object')return false;let ch=false;
-  for(const k of Object.keys(FISH)){const n=+((f.c||{})[k])||0;if(n>(catchBook[k]||0)){catchBook[k]=n;ch=true;}const r=+((f.r||{})[k])||0;if(r>(catchRec[k]||0)){catchRec[k]=r;ch=true;}}
-  for(const k of Object.keys(WHALE)){const n=+((f.w||{})[k])||0;if(n>(whaleBook[k]||0)){whaleBook[k]=n;ch=true;}}
-  if(ch){try{localStorage.setItem('kunos-fang',JSON.stringify(catchBook));localStorage.setItem('kunos-fang-rekord',JSON.stringify(catchRec));localStorage.setItem('kunos-wale',JSON.stringify(whaleBook));}catch(e){}
-    emit('fang:geaendert',{});}
-  return ch;
-}
-
-export { catchBook, catchRec, fangData, fishing, fmtLen, mergeFang, stopFishing, updateFishing };
+export { fishing, stopFishing, updateFishing };

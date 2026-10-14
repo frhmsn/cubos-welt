@@ -28,3 +28,6 @@
  *   worldDirty  (früher in core/storage.js)
  */
 export const game = {};
+
+/** Spielfigur: Position (x, z), Blickrichtung (yaw, pitch) und Wippen beim Laufen. */
+export const pl = {x:0,z:0,yaw:0,pitch:0,bob:0};

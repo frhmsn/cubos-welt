@@ -1,32 +1,31 @@
 // Modus-Wechsel (Bauen, Laufen, Fahren, Mitfahren), Hinweise, Knöpfe oben rechts.
 import './station-panel.js'; // Ladereihenfolge: läuft nach ui/station-panel.js (siehe docs/ARCHITEKTUR.md)
-import { game } from '../core/state.js';
+import { game, pl } from '../core/state.js';
 import { $ } from '../core/util.js';
 import { DIRS, I, center, inb, tileAt } from '../core/grid.js';
 import { ITEMS } from '../content/catalog.js';
 import { buildCam, walkCam } from '../render/renderer.js';
 import { AQ_R } from '../content/models/buildings.js';
-import { freeAt, groundM, isWater, tiles } from '../core/world.js';
 import { resolve } from '../core/collision.js';
 import { initAI } from '../systems/traffic.js';
-import { canStand, onDeck, whistle } from '../systems/ferries.js';
-import { ac, honk, nopeSnd, plop, tone } from '../systems/audio.js';
+import { canStand, onDeck } from '../systems/ferries.js';
+import { ac, honk, nopeSnd, plop, tone, whistle } from '../systems/audio.js';
 import { wasDay } from '../render/daynight.js';
 import { bc } from '../render/build-camera.js';
 import { ptrs } from './build-input.js';
-import { camFree, nearestVehicle, pl } from '../systems/player.js';
+import { camFree, nearestVehicle } from '../systems/player.js';
 import { showStation } from './station-panel.js';
 import { fishes } from '../content/fish.js';
 import { fishing, stopFishing } from '../systems/fishing.js';
 import { forceSurface, updDiveBtn } from '../systems/underwater.js';
-import { saveSoon } from '../core/save.js';
 import { editCam } from '../systems/editor.js';
+import { hint } from './hint.js';
+import { freeAt, groundM, isWater, tiles } from '../core/world-data.js';
+import { saveSoon } from '../core/autosave.js';
 
 // ---------- UI ----------
 const ICON_WALK='<svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.8" r="2.2" fill="#FFC21A"/><path d="M12 8.2v6m0 0-3.5 6.3M12 14.2l3.5 6.3M6.8 11.2 12 9l5.2 2.2"/></svg>';
 const ICON_BUILD='<svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.1" stroke-linejoin="round"><path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20z" fill="#BFE6A8"/><path d="M9 4v13.5M15 6.5V20"/></svg>';
-let hintT=null;
-function hint(txt,ms){const h=$('#hint');h.textContent=txt;h.classList.remove('off');clearTimeout(hintT);hintT=setTimeout(()=>h.classList.add('off'),ms||4200);}
 function setMode(m){
   game.mode=m;
   $('#top').hidden=m==='edit'; $('#editTop').hidden=m!=='edit'; $('#editTray').hidden=m!=='edit';
@@ -115,4 +114,4 @@ $('#btnExit').addEventListener('click',()=>{if(game.mode==='ride')exitTrain(fals
 $('#btnHonk').addEventListener('click',()=>{if(game.mode==='ride'&&game.rideTrain)whistle(game.rideTrain.type);else if(game.driveCar)honk(game.driveCar.type);});
 $('#btnSail').addEventListener('click',()=>{ac();const f=game.mode==='drive'&&game.driveCar?onDeck(game.driveCar.x,game.driveCar.z):onDeck(pl.x,pl.z);if(f&&f.state==='dock'){f.wait=0;tone(130,.7,'sawtooth',.05);}});
 
-export { enterCar, exitCar, exitTrain, hint, setMode, startRide, startWalk, updateRide };
+export { enterCar, exitCar, exitTrain, setMode, startRide, startWalk, updateRide };

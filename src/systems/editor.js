@@ -6,13 +6,15 @@ import { DIRS, I, center } from '../core/grid.js';
 import { canvas } from '../render/renderer.js';
 import { M, box } from '../render/materials.js';
 import { BLOCKS, TEMPLATE, VB, VI, VO, VX, VY, meshVoxels, vin } from '../content/models/blocks.js';
-import { animals, orient, rebuildObj, setGround, tiles } from '../core/world.js';
+import { rebuildObj, setGround } from '../core/world.js';
 import { ac, nopeSnd, plop, tone } from './audio.js';
 import { bc } from '../render/build-camera.js';
 import { inTile, ray } from './build.js';
-import { hint, setMode } from '../ui/modes.js';
+import { setMode } from '../ui/modes.js';
 import { select, thumbs } from '../ui/inventory.js';
 import { save } from '../core/save.js';
+import { hint } from '../ui/hint.js';
+import { animals, orient, tiles } from '../core/world-data.js';
 
 // ---------- Bauwerkstatt ----------
 const editScene=new THREE.Scene();

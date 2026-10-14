@@ -1,7 +1,7 @@
 // 3D-Modelle für Gleise, Bahnhof, Bahnübergang, Tunnel, Anleger und Seetor.
 import { DIRS, TILE } from '../../core/grid.js';
 import { BX, G, M, box, bulbMat, glowTex, mesh, seaMat, waterMat } from '../../render/materials.js';
-import { rot } from '../../core/world.js';
+import { rot } from '../../core/world-data.js';
 
 // ---------- Gleise, Bahnhof, Häfen ----------
 const railMat=M('#9097A0',{metalness:.6,roughness:.35});

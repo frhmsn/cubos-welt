@@ -1,21 +1,22 @@
 // Bauen: Feld antippen, Dinge setzen, abreißen, Regeln für das Platzieren.
-import '../render/lights.js'; // Ladereihenfolge: läuft nach render/lights.js (siehe docs/ARCHITEKTUR.md)
+import './ferries.js'; // Ladereihenfolge: läuft nach systems/ferries.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { DIRS, I, center, inb, tileAt } from '../core/grid.js';
 import { ITEMS } from '../content/catalog.js';
 import { buildCam, canvas, scene } from '../render/renderer.js';
 import { disposeGroup } from '../render/materials.js';
-import { animals, cars, claimArea, ferries, gAt, isRail, isRoad, isWater, orient, orientBig, pops, rebuildObj, removeBig, rot, setGround, tiles, trains } from '../core/world.js';
-import { addCar, placeCarOn } from './traffic.js';
+import { claimArea, orientBig, rebuildObj, removeBig, setGround } from '../core/world.js';
+import { addCar, placeCarOn, removeCar } from './traffic.js';
 import { removeTrain, spawnTrain } from './trains.js';
-import { dockPose, onDeckF, pierTiles, playerAboard, removeCar, removeFerry, spawnFerry, whistle } from './ferries.js';
+import { dockPose, onDeckF, pierTiles, playerAboard, removeFerry, spawnFerry } from './ferries.js';
 import { addAnimal, animalOk } from './animals.js';
-import { nopeSnd, plop, tone } from './audio.js';
+import { nopeSnd, plop, tone, whistle } from './audio.js';
 import { bc } from '../render/build-camera.js';
-import { hint } from '../ui/modes.js';
 import { FISH, fishes } from '../content/fish.js';
 import { addFish, fishOk, splash } from './fish.js';
 import { openEditor } from './editor.js';
+import { hint } from '../ui/hint.js';
+import { animals, cars, ferries, gAt, isRail, isRoad, isWater, orient, pops, rot, tiles, trains } from '../core/world-data.js';
 
 // ---------- Bauen ----------
 game.sel = 'hand'; game.curCat = 'land'; game.dirty = false;

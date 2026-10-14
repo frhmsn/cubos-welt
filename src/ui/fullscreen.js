@@ -1,8 +1,8 @@
 // Vollbild-Knopf.
 import { $ } from '../core/util.js';
 import { ac } from '../systems/audio.js';
-import { hint } from './modes.js';
 import { resize } from '../core/loop.js';
+import { hint } from './hint.js';
 
 const ICON_FULL='<svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>';
 const ICON_SMALL='<svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5"/></svg>';

@@ -5,12 +5,13 @@ import { $ } from '../core/util.js';
 import { buildCam, renderer, scene } from '../render/renderer.js';
 import { ac, nopeSnd, plop, tone } from '../systems/audio.js';
 import { bc, placeBuildCam } from '../render/build-camera.js';
-import { exitCar, hint, setMode } from './modes.js';
+import { exitCar, setMode } from './modes.js';
 import { CKEY, localStore, store } from '../core/storage.js';
-import { fangData, mergeFang } from '../systems/fishing.js';
 import { decodeWorld, encodeWorld } from '../core/world-codes.js';
 import { applyData, emptyWorld, save, serialize } from '../core/save.js';
 import { sampleWorld } from '../content/sample-world.js';
+import { hint } from './hint.js';
+import { fangData, mergeFang } from '../systems/catch-book.js';
 
 let codeMode='export';
 $('#mExportAll').addEventListener('click',async()=>{
