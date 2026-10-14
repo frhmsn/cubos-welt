@@ -571,16 +571,16 @@ const kalmar = {
   }
 };
 const FISH_LIST = [barsch, hecht, karpfen, wels, stoer, thunfisch, hai, makrele, bonito, mahimahi, barrakuda, schwertfisch, marlin, schwarzermarlin, gestreiftermarlin, mondfisch, rochen, kalmar];
-const WATER = { see: "wasser", meer: "meer" };
+const WATER$1 = { see: "wasser", meer: "meer" };
 const whereText = (h) => h.includes("see") && h.includes("meer") ? "in Seen, Flüssen und im Meer" : h.includes("meer") ? "im Meer" : "in Seen und Flüssen";
 function check(f) {
   const need = ["id", "label", "plural", "length", "habitat", "spawn", "speed", "scale", "model"];
   for (const k of need) if (f[k] == null) throw new Error(`Fisch ${f.id || "?"}: Feld "${k}" fehlt`);
-  for (const h of f.habitat) if (!WATER[h]) throw new Error(`Fisch ${f.id}: unbekanntes Habitat "${h}"`);
+  for (const h of f.habitat) if (!WATER$1[h]) throw new Error(`Fisch ${f.id}: unbekanntes Habitat "${h}"`);
   for (const h of Object.keys(f.spawn)) if (!f.habitat.includes(h)) throw new Error(`Fisch ${f.id}: spawn "${h}" passt nicht zum Habitat`);
 }
 FISH_LIST.forEach(check);
-const fishGrounds = (id) => FISH_BY_ID[id].habitat.map((h) => WATER[h]);
+const fishGrounds = (id) => FISH_BY_ID[id].habitat.map((h) => WATER$1[h]);
 const FISH_BY_ID = Object.fromEntries(FISH_LIST.map((f) => [f.id, f]));
 const FISH = Object.fromEntries(FISH_LIST.map((f) => [f.id, {
   label: f.label,
@@ -1351,20 +1351,21 @@ const ITEMS = {
   anleger: { kind: "ground", label: "Anleger" },
   seetor: { kind: "ground", label: "Seetor" },
   faehre: { kind: "ferry", label: "Fähre" },
-  meer: { kind: "ground", label: "Meer", paint: true }
+  meer: { kind: "ground", label: "Meer", paint: true },
+  insel: { kind: "tool", label: "Insel-Pinsel", paint: true, icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18c2.5 1.5 5 1.5 7.5 0s5-1.5 7.5 0 3.5 1 5 0" stroke="#2F7FD0"/><ellipse cx="12" cy="13.5" rx="7.5" ry="3" fill="#F2DFA0" stroke="#C9A65A"/><ellipse cx="12" cy="12.5" rx="5" ry="2.2" fill="#7CC75A" stroke="#4E9A3A"/><path d="M14 12.5V5" stroke="#7A5232"/><path d="M14 5c-2-1.5-4.5-1-5.5.5M14 5c2-1.5 4.5-1 5.5.5M14 5c-.5-2 .5-3.5 2-4" stroke="#3E9B4F" stroke-width="2.2"/></svg>' }
 };
 for (const b of BUILDING_LIST) ITEMS[b.id] = buildingItem(b);
 for (const v of VEHICLE_LIST) ITEMS[v.id] = vehicleItem(v);
 for (const a of ANIMAL_LIST) ITEMS[a.id] = animalItem(a);
 for (const f of FISH_LIST) ITEMS["fx_" + f.id] = { kind: "fish", fish: f.id, label: f.label };
 const CATS = [
-  { id: "land", label: "Land", icon: "strasse", items: ["strasse", "gras", "sand", "wasser", "groesser"] },
+  { id: "land", label: "Land", icon: "strasse", items: ["strasse", "gras", "sand", "wasser", "insel", "groesser"] },
   { id: "natur", label: "Natur", icon: "baum", items: BUILDING_LIST.filter((b) => b.category === "natur").map((b) => b.id) },
   { id: "licht", label: "Licht", icon: "laterne", items: BUILDING_LIST.filter((b) => b.category === "licht").map((b) => b.id) },
   { id: "haus", label: "Häuser", icon: "haus", items: ["eigen", ...BUILDING_LIST.filter((b) => b.category === "haus").map((b) => b.id)] },
   { id: "auto", label: "Autos", icon: "lambo", items: VEHICLE_LIST.filter((v) => v.category === "auto").map((v) => v.id) },
   { id: "bahn", label: "Bahn", icon: "zug", items: ["schiene", "bahnhof", "uebergang", "tunnel", "zug", "ice"] },
-  { id: "see", label: "Wasser", icon: "boot", items: ["meer", "wasser", ...VEHICLE_LIST.filter((v) => v.category === "see").map((v) => v.id), "anleger", "faehre", "seetor"] },
+  { id: "see", label: "Wasser", icon: "boot", items: ["meer", "insel", "wasser", ...VEHICLE_LIST.filter((v) => v.category === "see").map((v) => v.id), "anleger", "faehre", "seetor"] },
   { id: "fische", label: "Fische", icon: "fx_karpfen", items: FISH_LIST.map((f) => "fx_" + f.id) },
   { id: "fang", label: "Mein Fang", icon: "F_thunfisch", special: "fang", items: [] },
   { id: "tier", label: "Tiere", icon: "hund", items: ANIMAL_LIST.map((a) => a.id) }
@@ -1585,6 +1586,13 @@ function disposeGroup(g) {
     if (o.isMesh && o.userData.own) o.geometry.dispose();
   });
 }
+const outerLand = new THREE.MeshStandardMaterial({ color: 6068800, roughness: 1 });
+const outerSea = (() => {
+  const t = seaTex.clone();
+  t.needsUpdate = true;
+  t.repeat.set(250, 250);
+  return new THREE.MeshStandardMaterial({ map: t, roughness: 0.6, metalness: 0 });
+})();
 const baseTex = (() => {
   const c = document.createElement("canvas");
   c.width = c.height = 2;
@@ -3777,6 +3785,19 @@ function updateAnimal(a, dt) {
   a.g.position.set(a.x, 0, a.z);
   a.g.rotation.y = a.h;
 }
+const WATER = /* @__PURE__ */ new Set(["meer", "wasser"]);
+const LANDABLE = /* @__PURE__ */ new Set(["meer", "wasser", "sand", "gras"]);
+const AROUND = [...DIRS, [1, 1], [1, -1], [-1, 1], [-1, -1]];
+function islandStroke(i, j) {
+  const out = [];
+  const g = gAt(i, j);
+  if (g && LANDABLE.has(g) && g !== "gras") out.push([i, j, "gras"]);
+  for (const [di, dj] of AROUND) {
+    const a = i + di, b = j + dj;
+    if (inb(a, b) && WATER.has(gAt(a, b))) out.push([a, b, "sand"]);
+  }
+  return out;
+}
 const ray = new THREE.Raycaster(), plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), hitV = new THREE.Vector3();
 function pickTile(cx, cy) {
   const r = canvas.getBoundingClientRect(), v = new THREE.Vector2((cx - r.left) / r.width * 2 - 1, -((cy - r.top) / r.height) * 2 + 1);
@@ -3848,6 +3869,22 @@ function apply(i, j, painting) {
       plop();
       game.dirty = true;
     }
+    return;
+  }
+  if (game.sel === "insel") {
+    if (t.o && (t.o.t === "teil" || t.o.t === "aquarium")) return;
+    const ch = islandStroke(i, j);
+    if (!ch.length) {
+      if (!painting) {
+        nope();
+        hint("Hier ist schon Land. Mal ins Wasser!", 2500);
+      }
+      return;
+    }
+    for (const [a, b, g] of ch) setGround(a, b, g);
+    plop();
+    game.dirty = true;
+    emit("insel:gemalt", { i, j });
     return;
   }
   if (it.kind === "ground") {
@@ -5633,6 +5670,10 @@ async function doTravel(dest) {
     sampleWorld();
     game.curWorld = null;
     name = "die neue Stadt";
+  } else if (dest === "insel") {
+    islandWorld();
+    game.curWorld = null;
+    name = "die Inselwelt";
   } else {
     let d = null;
     try {
@@ -5706,6 +5747,7 @@ function stayHere() {
 }
 $("#tvNewEmpty").addEventListener("click", () => doTravel("empty"));
 $("#tvNewSample").addEventListener("click", () => doTravel("sample"));
+$("#tvNewIsland").addEventListener("click", () => doTravel("insel"));
 $("#tvStay").addEventListener("click", stayHere);
 function snapThumb() {
   try {
@@ -5817,6 +5859,7 @@ async function freshWorld(kind) {
   await keepCurrent();
   toBuild();
   if (kind === "sample") sampleWorld();
+  else if (kind === "insel") islandWorld();
   else emptyWorld();
   game.curWorld = null;
   try {
@@ -6511,6 +6554,76 @@ function sampleWorld() {
   bc.yaw = bc.yawT = 0.55;
   game.dayT = 0.36;
 }
+function islandWorld() {
+  resetTiles(START_N);
+  const N = game.N, W = (i, j, g) => {
+    if (i >= 0 && j >= 0 && i < N && j < N) tiles[I(i, j)].g = g;
+  }, G2 = (i, j) => i >= 0 && j >= 0 && i < N && j < N ? tiles[I(i, j)].g : null;
+  for (let k = 0; k < N * N; k++) tiles[k].g = "meer";
+  const r = mulberry(4711);
+  const blob = (ci, cj, rad, wob) => {
+    const ph = [r() * 6.3, r() * 6.3];
+    for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) {
+      const a = Math.atan2(j - cj, i - ci), d = Math.hypot(i - ci, (j - cj) * 1.15), rr = rad + Math.sin(a * 3 + ph[0]) * wob + Math.sin(a * 5 + ph[1]) * wob * 0.5;
+      if (d < rr - 1.1) W(i, j, "gras");
+      else if (d < rr && G2(i, j) === "meer") W(i, j, "sand");
+    }
+  };
+  blob(8.5, 8, 6.2, 0.9);
+  blob(16, 15.5, 2.6, 0.4);
+  for (let i = 5; i <= 12; i++) W(i, 8, "strasse");
+  for (let j = 8; j <= 13; j++) W(8, j, "strasse");
+  let aj = 14;
+  while (G2(8, aj) !== "meer" && aj < N - 1) aj++;
+  for (let j = 14; j < aj; j++) W(8, j, "strasse");
+  W(8, aj, "anleger");
+  let si = 16;
+  while (G2(si, 15) !== "meer" && si > 0) si--;
+  W(si, 15, "anleger");
+  W(0, N - 3, "seetor");
+  const O = (i, j, t) => {
+    if (G2(i, j) !== "gras" && G2(i, j) !== "sand") return;
+    tiles[I(i, j)].o = { t, r: ITEMS[t].house ? orient(i, j) : (i * 7 + j) % 4, s: i * 97 + j * 13 + 5 };
+  };
+  [
+    [6, 7, "haus"],
+    [10, 7, "villa"],
+    [7, 9, "haus"],
+    [11, 9, "haus"],
+    [9, 10, "baum"],
+    [4, 6, "baum"],
+    [5, 10, "tanne"],
+    [12, 5, "baum"],
+    [6, 4, "blumen"],
+    [10, 4, "tanne"],
+    [3, 9, "baum"],
+    [13, 8, "laterne"],
+    [7, 11, "lagerfeuer"],
+    [9, 6, "blumen"],
+    [16, 15, "baum"],
+    [17, 16, "blumen"],
+    [15, 16, "tanne"]
+  ].forEach(([i, j, t]) => O(i, j, t));
+  rebuildAll();
+  {
+    const k = I(8, aj), dp = dockPose(k), f = spawnFerry(dp.x, dp.z, dp.axis);
+    f.last = k;
+    f.tgt = k;
+    f.wait = 8;
+  }
+  {
+    const c = center(4, 15);
+    addCar("boot", c.x, c.z, Math.PI / 2, false);
+  }
+  placeCarOn(6, 8, "lambo", 1);
+  addAnimal("hund", center(9, 9).x + 1, center(9, 9).z);
+  addAnimal("huhn", center(5, 8).x, center(5, 8).z + 1.5);
+  bc.x = center(9, 10).x;
+  bc.z = center(9, 10).z;
+  bc.d = 52;
+  bc.yaw = bc.yawT = 0.55;
+  game.dayT = 0.36;
+}
 const editScene = new THREE.Scene();
 const editCam = new THREE.PerspectiveCamera(45, 1, 0.1, 200);
 editScene.add(new THREE.HemisphereLight(16777215, 8956535, 0.72));
@@ -6830,6 +6943,7 @@ if (window.__CUBO_DEBUG) window.__cubo = {
   },
   emptyWorld: () => emptyWorld(),
   sampleWorld: () => sampleWorld(),
+  islandWorld: () => islandWorld(),
   carPos: (k) => {
     const c = game.driveCar || cars[k || 0];
     return c ? { x: c.x, z: c.z } : null;
@@ -7185,6 +7299,7 @@ $("#mSaveNew").addEventListener("click", async () => {
 });
 $("#mSample").addEventListener("click", () => freshWorld("sample"));
 $("#mEmpty").addEventListener("click", () => freshWorld("empty"));
+$("#mIsland").addEventListener("click", () => freshWorld("insel"));
 $("#btnSave").addEventListener("click", () => {
   ac();
   saveWorld(false, false);
@@ -7210,7 +7325,17 @@ function resize() {
 }
 window.addEventListener("resize", resize);
 const perf = { acc: 0, n: 0, cool: 3e3, raised: false };
-let last = performance.now(), blink = 0, autoSave = 0, slotSave = 0;
+let last = performance.now(), blink = 0, autoSave = 0, slotSave = 0, edgeCheck = 0;
+function updateOuter() {
+  let sea = 0, n = 0;
+  const N = game.N;
+  for (let k = 0; k < N; k++) for (const [i, j] of [[k, 0], [k, N - 1], [0, k], [N - 1, k]]) {
+    n++;
+    if (tiles[j * N + i].g === "meer") sea++;
+  }
+  const m = sea / n > 0.5 ? outerSea : outerLand;
+  if (outer.material !== m) outer.material = m;
+}
 function frame(now) {
   const raw = now - last, dt = Math.min(0.05, raw / 1e3);
   last = now;
@@ -7288,6 +7413,11 @@ function frame(now) {
   if (autoSave > 8) {
     autoSave = 0;
     save();
+  }
+  edgeCheck -= dt;
+  if (edgeCheck <= 0) {
+    edgeCheck = 1;
+    updateOuter();
   }
   slotSave += dt;
   if (slotSave > 60) {
@@ -7631,6 +7761,7 @@ button:focus-visible{outline:3px solid var(--sun-deep);outline-offset:2px;}
     <button class="mb go" id="mSaveNew">Als neue Welt speichern</button>
     <div id="worlds"></div>
     <div class="mrow"><button class="mb" id="mEmpty">Neue leere Wiese</button><button class="mb" id="mSample">Neue Beispielstadt</button></div>
+    <div class="mrow"><button class="mb" id="mIsland">Neue Inselwelt</button></div>
     <div class="mrow"><button class="mb" id="mExport">Welt-Code kopieren</button><button class="mb" id="mExportAll">Alle Welten kopieren</button></div>
     <div class="mrow"><button class="mb" id="mImport">Code einfügen</button></div>
     <h3 class="msub">Einstellungen</h3>
@@ -7648,7 +7779,7 @@ button:focus-visible{outline:3px solid var(--sun-deep);outline-offset:2px;}
     <h2 id="tvTitle">Wohin soll die Reise gehen?</h2>
     <p id="tvSub"></p>
     <div id="tvWorlds"></div>
-    <div class="mrow"><button class="mb" id="tvNewEmpty">Neue Wiese</button><button class="mb" id="tvNewSample">Neue Stadt</button></div>
+    <div class="mrow"><button class="mb" id="tvNewEmpty">Neue Wiese</button><button class="mb" id="tvNewSample">Neue Stadt</button><button class="mb" id="tvNewIsland">Neue Inselwelt</button></div>
     <button class="mb" id="tvStay">Hier bleiben</button>
   </div>
 </div>

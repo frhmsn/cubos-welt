@@ -126,6 +126,18 @@ export const scenarios = {
     await snap('neue-welt');
   },
 
+  async inseln({ page, snap }) {
+    await api(page, 'islandWorld');
+    await frames(page, 60);
+    await snap('inselwelt');
+    await api(page, 'emptyWorld');
+    await place(page, 'meer', rect(0, 19, 0, 19));
+    await place(page, 'insel', [...rect(6, 9, 7, 10), [10, 9], [11, 9], [12, 10]]);
+    await cam(page, 9, 9, 40);
+    await frames(page, 30);
+    await snap('mit-pinsel-gemalt');
+  },
+
   async faehre({ page, snap }) {
     await place(page, 'faehre', [[10, 18]]);
     await frames(page, 60);

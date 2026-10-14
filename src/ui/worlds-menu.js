@@ -101,6 +101,7 @@ $('#menu').addEventListener('click',e=>{if(e.target.id==='menu')$('#menu').hidde
 $('#mSaveNew').addEventListener('click',async()=>{ac();const w=await saveWorld(true,false);if(w)renderWorlds();});
 $('#mSample').addEventListener('click',()=>freshWorld('sample'));
 $('#mEmpty').addEventListener('click',()=>freshWorld('empty'));
+$('#mIsland').addEventListener('click',()=>freshWorld('insel'));
 $('#btnSave').addEventListener('click',()=>{ac();saveWorld(false,false);});
 
 // ---------- Einstellungen ----------

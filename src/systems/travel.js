@@ -15,7 +15,7 @@ import { inTile } from './build.js';
 import { enterCar, setMode, startRide } from '../ui/modes.js';
 import { CKEY, store } from '../core/storage.js';
 import { applyData, emptyWorld, save } from '../core/save.js';
-import { sampleWorld } from '../content/sample-world.js';
+import { islandWorld, sampleWorld } from '../content/sample-world.js';
 import { hint } from '../ui/hint.js';
 import { animals, cars, groundM, isRail, isWater, tiles } from '../core/world-data.js';
 import { saveWorld } from '../core/worlds.js';
@@ -78,6 +78,7 @@ async function doTravel(dest){
   let name='';
   if(dest==='empty'){emptyWorld();game.curWorld=null;name='deine neue Welt';}
   else if(dest==='sample'){sampleWorld();game.curWorld=null;name='die neue Stadt';}
+  else if(dest==='insel'){islandWorld();game.curWorld=null;name='die Inselwelt';}
   else{let d=null;try{d=JSON.parse(dest.data);}catch(e){}if(d&&applyData(d)){game.curWorld=dest.id;name=dest.name;}else{sampleWorld();game.curWorld=null;name='die neue Stadt';}}
   try{if(game.curWorld)localStorage.setItem(CKEY,game.curWorld);else localStorage.removeItem(CKEY);}catch(e){}
   if(info.kind==='train'){
@@ -101,6 +102,7 @@ function stayHere(){
 }
 $('#tvNewEmpty').addEventListener('click',()=>doTravel('empty'));
 $('#tvNewSample').addEventListener('click',()=>doTravel('sample'));
+$('#tvNewIsland').addEventListener('click',()=>doTravel('insel'));
 $('#tvStay').addEventListener('click',stayHere);
 
 export { clearTile, startTravel };

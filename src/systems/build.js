@@ -17,6 +17,8 @@ import { addFish, fishOk, splash } from './fish.js';
 import { openEditor } from './editor.js';
 import { hint } from '../ui/hint.js';
 import { animals, cars, ferries, gAt, isRail, isRoad, isWater, orient, pops, rot, tiles, trains } from '../core/world-data.js';
+import { islandStroke } from '../core/islands.js';
+import { emit } from '../core/events.js';
 
 // ---------- Bauen ----------
 const ray=new THREE.Raycaster(),plane=new THREE.Plane(new THREE.Vector3(0,1,0),0),hitV=new THREE.Vector3();
@@ -39,6 +41,14 @@ function apply(i,j,painting){
     if(!did&&t.o&&(t.o.t==='teil'||t.o.t==='aquarium')){const s0=t.o.t==='teil'?t.o.s|0:4,pi=i-(Math.floor(s0/3)-1),pj=j-(s0%3-1);removeBig(pi,pj);plop();game.dirty=true;return;}
     if(!did){if(t.o){t.o=null;rebuildObj(i,j);did=true;}else if(t.g!=='gras'){setGround(i,j,'gras');did=true;}}
     if(did){plop();game.dirty=true;} return;
+  }
+  if(game.sel==='insel'){
+    // Insel-Pinsel: Land ins Wasser malen, Strand entsteht von selbst
+    if(t.o&&(t.o.t==='teil'||t.o.t==='aquarium'))return;
+    const ch=islandStroke(i,j);
+    if(!ch.length){if(!painting){nope();hint('Hier ist schon Land. Mal ins Wasser!',2500);}return;}
+    for(const [a,b,g] of ch)setGround(a,b,g);
+    plop();game.dirty=true;emit('insel:gemalt',{i,j});return;
   }
   if(it.kind==='ground'){if(t.o&&(t.o.t==='teil'||t.o.t==='aquarium')){if(!painting){nope();hint('Hier steht das Aquarium. Reiß es erst ab.',2500);}return;}if(t.g===game.sel)return;setGround(i,j,game.sel);plop();game.dirty=true;return;}
   if(t.o&&t.o.t==='teil'&&it.kind!=='fish'){if(!painting){nope();hint('Hier steht das Aquarium.',2000);}return;}

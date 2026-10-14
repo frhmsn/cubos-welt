@@ -1,8 +1,8 @@
 // Spielschleife: jedes Bild alle Systeme aktualisieren und zeichnen, Leistung anpassen.
 import { game, pl } from './state.js';
 import { $ } from './util.js';
-import { buildCam, dprMax, renderer, scene, walkCam } from '../render/renderer.js';
-import { nightMats, polBlue, polRed, seaTex, waterMat } from '../render/materials.js';
+import { buildCam, dprMax, outer, renderer, scene, walkCam } from '../render/renderer.js';
+import { nightMats, outerLand, outerSea, polBlue, polRed, seaTex, waterMat } from '../render/materials.js';
 import { portalMat } from '../content/models/rail.js';
 import { updateCarAI } from '../systems/traffic.js';
 import { updateCrossings, updateTrains } from '../systems/trains.js';
@@ -21,7 +21,7 @@ import { destroyUnderwater, subUnder, uHemi, uSun, underScene } from '../systems
 import { updateAquaUI, updateAquariums } from '../systems/aquarium.js';
 import { save } from './save.js';
 import { editCam, editScene, placeEditCam } from '../systems/editor.js';
-import { animals, cars, ferries, pops } from './world-data.js';
+import { animals, cars, ferries, pops, tiles } from './world-data.js';
 import { focus } from './focus.js';
 import { saveWorld } from './worlds.js';
 
@@ -32,7 +32,9 @@ function resize(){
 }
 window.addEventListener('resize',resize);
 const perf={acc:0,n:0,cool:3000,raised:false};
-let last=performance.now(),blink=0,autoSave=0,slotSave=0;
+let last=performance.now(),blink=0,autoSave=0,slotSave=0,edgeCheck=0;
+/** Außenboden an den Rand der Welt anpassen: viel Meer am Rand, dann Meer bis zum Horizont. */
+function updateOuter(){let sea=0,n=0;const N=game.N;for(let k=0;k<N;k++)for(const [i,j] of [[k,0],[k,N-1],[0,k],[N-1,k]]){n++;if(tiles[j*N+i].g==='meer')sea++;}const m=sea/n>.5?outerSea:outerLand;if(outer.material!==m)outer.material=m;}
 function frame(now){
   const raw=now-last,dt=Math.min(.05,raw/1000); last=now;
   if(raw>0&&raw<250){perf.acc+=raw;perf.n++;}
@@ -63,6 +65,7 @@ function frame(now){
   waterMat.color.setHSL(.56,.72,.55+Math.sin(now*.0012)*.03);
   seaTex.offset.set((now*.00002)%1,(now*.000012)%1);
   autoSave+=dt; if(autoSave>8){autoSave=0;save();}
+  edgeCheck-=dt; if(edgeCheck<=0){edgeCheck=1;updateOuter();}
   slotSave+=dt; if(slotSave>60){slotSave=0;if(game.worldDirty&&game.curWorld&&game.mode!=='edit')saveWorld(false,true);}
   if(game.mode==='edit'){
     placeEditCam(); renderer.setClearColor(0xbfe6ff);

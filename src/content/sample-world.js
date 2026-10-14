@@ -1,4 +1,4 @@
-// Die Beispielstadt und die leere Wiese als Startwelten.
+// Startwelten: die Beispielstadt und die Inselwelt (die leere Wiese ist emptyWorld in core/save.js).
 import '../core/save.js'; // Ladereihenfolge: läuft nach core/save.js (siehe docs/ARCHITEKTUR.md)
 import { game } from '../core/state.js';
 import { I, START_N, center } from '../core/grid.js';
@@ -11,6 +11,7 @@ import { addAnimal } from '../systems/animals.js';
 import { bc } from '../render/build-camera.js';
 import { rebuildAll } from '../core/save.js';
 import { orient, rot, tiles } from '../core/world-data.js';
+import { mulberry } from '../core/util.js';
 
 function sampleWorld(){
   resetTiles(START_N);
@@ -46,4 +47,39 @@ function sampleWorld(){
   bc.x=0; bc.z=3; bc.d=48; bc.yaw=bc.yawT=.55; game.dayT=.36;
 }
 
-export { sampleWorld };
+/**
+ * Inselwelt: Meer mit einer großen und einer kleinen Insel, Anlegern, Fähre, Boot und Seetor.
+ * Die Form ist fest (Startwert), damit jede neue Inselwelt gleich schön aussieht.
+ */
+function islandWorld(){
+  resetTiles(START_N);
+  const N=game.N,W=(i,j,g)=>{if(i>=0&&j>=0&&i<N&&j<N)tiles[I(i,j)].g=g;},G=(i,j)=>(i>=0&&j>=0&&i<N&&j<N)?tiles[I(i,j)].g:null;
+  for(let k=0;k<N*N;k++)tiles[k].g='meer';
+  const r=mulberry(4711);
+  const blob=(ci,cj,rad,wob)=>{const ph=[r()*6.3,r()*6.3];for(let j=0;j<N;j++)for(let i=0;i<N;i++){
+    const a=Math.atan2(j-cj,i-ci),d=Math.hypot(i-ci,(j-cj)*1.15),rr=rad+Math.sin(a*3+ph[0])*wob+Math.sin(a*5+ph[1])*wob*.5;
+    if(d<rr-1.1)W(i,j,'gras');else if(d<rr&&G(i,j)==='meer')W(i,j,'sand');}};
+  blob(8.5,8,6.2,.9);   // große Insel
+  blob(16,15.5,2.6,.4); // kleine Insel
+  // Kleiner Weg über die große Insel bis zum Anleger
+  for(let i=5;i<=12;i++)W(i,8,'strasse');
+  for(let j=8;j<=13;j++)W(8,j,'strasse');
+  let aj=14;while(G(8,aj)!=='meer'&&aj<N-1)aj++;
+  for(let j=14;j<aj;j++)W(8,j,'strasse');
+  W(8,aj,'anleger');
+  // Anleger an der kleinen Insel (Westseite)
+  let si=16;while(G(si,15)!=='meer'&&si>0)si--;W(si,15,'anleger');
+  W(0,N-3,'seetor');
+  const O=(i,j,t)=>{if(G(i,j)!=='gras'&&G(i,j)!=='sand')return;tiles[I(i,j)].o={t,r:ITEMS[t].house?orient(i,j):(i*7+j)%4,s:i*97+j*13+5};};
+  [[6,7,'haus'],[10,7,'villa'],[7,9,'haus'],[11,9,'haus'],[9,10,'baum'],[4,6,'baum'],[5,10,'tanne'],[12,5,'baum'],[6,4,'blumen'],
+   [10,4,'tanne'],[3,9,'baum'],[13,8,'laterne'],[7,11,'lagerfeuer'],[9,6,'blumen'],[16,15,'baum'],[17,16,'blumen'],[15,16,'tanne']
+  ].forEach(([i,j,t])=>O(i,j,t));
+  rebuildAll();
+  {const k=I(8,aj),dp=dockPose(k),f=spawnFerry(dp.x,dp.z,dp.axis);f.last=k;f.tgt=k;f.wait=8;}
+  {const c=center(4,15);addCar('boot',c.x,c.z,Math.PI/2,false);}
+  placeCarOn(6,8,'lambo',1);
+  addAnimal('hund',center(9,9).x+1,center(9,9).z); addAnimal('huhn',center(5,8).x,center(5,8).z+1.5);
+  bc.x=center(9,10).x; bc.z=center(9,10).z; bc.d=52; bc.yaw=bc.yawT=.55; game.dayT=.36;
+}
+
+export { islandWorld, sampleWorld };

@@ -62,4 +62,8 @@ function bake(group){
 }
 function disposeGroup(g){if(!g)return;g.traverse(o=>{if(o.isMesh&&o.userData.own)o.geometry.dispose();});}
 
-export { BX, G, M, bake, box, bulbMat, disposeGroup, doorMat, facadeMat, fairyMats, flameCore, flameMat, floodMat, glassMat, glowFire, glowTex, glowWarm, headMat, mesh, nightMat, nightMats, polBlue, polRed, seaMat, seaTex, tailMat, waterMat, winMat };
+// Boden außerhalb der Welt: Wiese oder Meer, je nachdem, was am Rand der Welt überwiegt
+const outerLand=new THREE.MeshStandardMaterial({color:0x5c9a40,roughness:1});
+const outerSea=(()=>{const t=seaTex.clone();t.needsUpdate=true;t.repeat.set(250,250);return new THREE.MeshStandardMaterial({map:t,roughness:.6,metalness:0});})();
+
+export { BX, G, M, bake, box, bulbMat, disposeGroup, doorMat, facadeMat, fairyMats, flameCore, flameMat, floodMat, glassMat, glowFire, glowTex, glowWarm, headMat, mesh, nightMat, nightMats, outerLand, outerSea, polBlue, polRed, seaMat, seaTex, tailMat, waterMat, winMat };

@@ -3,7 +3,7 @@ import '../systems/travel.js'; // Ladereihenfolge: läuft nach systems/travel.js
 import { exitCar, setMode } from '../ui/modes.js';
 import { hint } from '../ui/hint.js';
 import { plop, tone } from '../systems/audio.js';
-import { sampleWorld } from '../content/sample-world.js';
+import { islandWorld, sampleWorld } from '../content/sample-world.js';
 import { buildCam, canvas, renderer, scene } from '../render/renderer.js';
 import { bc, placeBuildCam } from '../render/build-camera.js';
 import { $ } from './util.js';
@@ -52,7 +52,7 @@ async function openWorld(w){
 }
 async function freshWorld(kind){
   await keepCurrent(); toBuild();
-  if(kind==='sample')sampleWorld();else emptyWorld();
+  if(kind==='sample')sampleWorld();else if(kind==='insel')islandWorld();else emptyWorld();
   game.curWorld=null; try{localStorage.removeItem(CKEY);}catch(e){}
   game.worldDirty=false; save(); $('#menu').hidden=true; plop();
   hint('Neue Welt! Mit der Wolke oben speicherst du sie.',3500);

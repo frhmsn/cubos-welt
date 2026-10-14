@@ -13,7 +13,7 @@ import { fishing } from './systems/fishing.js';
 import { refreshAquariums } from './systems/aquarium.js';
 import { select } from './ui/inventory.js';
 import { emptyWorld, serialize } from './core/save.js';
-import { sampleWorld } from './content/sample-world.js';
+import { islandWorld, sampleWorld } from './content/sample-world.js';
 import { animals, aquariums, cars, ferries, trains } from './core/world-data.js';
 import { catchBook, whaleBook } from './systems/catch-book.js';
 import { closeEditor, editTap, openEditor } from './systems/editor.js';
@@ -55,6 +55,7 @@ if (window.__CUBO_DEBUG) window.__cubo = {
   setCatch: (o) => { Object.assign(catchBook, o); refreshAquariums(); },
   emptyWorld: () => emptyWorld(),
   sampleWorld: () => sampleWorld(),
+  islandWorld: () => islandWorld(),
   carPos: (k) => { const c = game.driveCar || cars[k || 0]; return c ? { x: c.x, z: c.z } : null; },
   fp: () => {
     const r = (v) => Math.round(v * 1000) / 1000;

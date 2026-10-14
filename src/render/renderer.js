@@ -30,4 +30,4 @@ const stars=(()=>{const n=500,p=new Float32Array(n*3);for(let k=0;k<n;k++){const
   const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(p,3));
   const m=new THREE.Points(g,new THREE.PointsMaterial({color:0xffffff,size:2,sizeAttenuation:false,transparent:true,opacity:0,fog:false}));scene.add(m);return m;})();
 
-export { buildCam, canvas, dprMax, fill, hemi, moon, moonBall, renderer, scene, stars, sun, sunBall, walkCam };
+export { buildCam, canvas, dprMax, fill, hemi, moon, moonBall, outer, renderer, scene, stars, sun, sunBall, walkCam };
