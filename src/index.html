@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<!-- APP-HEAD -->
+<title>Cubos Welten entdecken</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<script type="module" src="./main.js"></script>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="top">
+  <button class="rb" id="btnFull" aria-label="Vollbild"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button>
+  <button class="rb" id="btnSave" aria-label="Welt speichern"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18.5h10.5a4 4 0 0 0 .6-7.96A6 6 0 0 0 6.6 9.1 4.7 4.7 0 0 0 7 18.5z" fill="#CFEAFF"/><path d="m9.2 13.6 2.2 2.2 4-4.2" stroke-width="2.4"/></svg></button>
+  <button class="rb" id="btnTime" aria-label="Tag oder Nacht"></button>
+  <button class="rb" id="btnRot" aria-label="Welt drehen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 3.5V9h-5.5"/></svg></button>
+  <button class="rb" id="btnView" aria-label="Ansicht wechseln"></button>
+  <button class="rb" id="btnMenu" aria-label="Menü"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2.2"/><circle cx="12" cy="12" r="2.2"/><circle cx="19" cy="12" r="2.2"/></svg></button>
+</div>
+
+<div id="inv">
+  <div id="cats"></div>
+  <div id="row">
+    <div id="tools">
+      <button class="it" data-id="hand" id="toolHand"><span class="ball"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M12 3 9 6M12 3l3 3M12 21l-3-3M12 21l3-3M3 12l3-3M3 12l3 3M21 12l-3-3M21 12l-3 3"/></svg></span><span>Schauen</span></button>
+      <button class="it" data-id="radierer" id="toolErase"><span class="ball"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 3.5 21 9l-10 10H6.5L3 15.5z" fill="#F7A8B8"/><path d="M8.5 10.5 14 16M11 20h10"/></svg></span><span>Weg damit</span></button>
+    </div>
+    <div id="items"></div>
+  </div>
+</div>
+
+<div id="editTop" hidden>
+  <button class="pill hot" id="eDone"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Fertig</button>
+  <div class="grp">
+    <button class="rb" id="eUndo" aria-label="Rückgängig"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></button>
+    <button class="rb" id="eTemplate" aria-label="Haus-Vorlage"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2" stroke-linejoin="round"><path d="M3 11 12 3.5 21 11" stroke-linecap="round"/><path d="M5.5 9.5V20h13V9.5" fill="#F3EEE3"/><path d="M10 20v-5h4v5" fill="#B98552"/></svg></button>
+    <button class="rb" id="eClear" aria-label="Alles abreißen"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4.5h6V7"/><path d="M6.5 7l1 13h9l1-13" fill="#F7A8B8"/></svg></button>
+  </div>
+</div>
+<div id="editTray" hidden>
+  <div id="row2" style="display:flex;gap:10px;align-items:flex-start">
+    <div id="editTools" style="display:flex;gap:8px;padding-right:10px;border-right:2px dashed #DCCCAB;flex:0 0 auto">
+      <button class="it" data-id="E_hand"><span class="ball"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 3.5V9h-5.5"/></svg></span><span>Drehen</span></button>
+      <button class="it" data-id="E_radierer"><span class="ball"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 3.5 21 9l-10 10H6.5L3 15.5z" fill="#F7A8B8"/><path d="M8.5 10.5 14 16M11 20h10"/></svg></span><span>Abbauen</span></button>
+    </div>
+    <div id="editItems"></div>
+  </div>
+</div>
+
+<div id="pad" hidden></div>
+<div id="joy" class="rest" hidden><div id="knob"></div></div>
+<div id="walkBtns" hidden>
+  <button class="pill hot" id="btnEnter" hidden><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="1.8" stroke-linejoin="round"><path d="M2.5 15.5v-3l2.2-4.5h10.2l4.2 4.5h2.4v3z" fill="#fff"/><circle cx="7.3" cy="16.3" r="2" fill="#1F2A37"/><circle cx="16.7" cy="16.3" r="2" fill="#1F2A37"/></svg>Einsteigen</button>
+  <button class="pill hot" id="btnHonk" hidden><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h3l6 4V6l-6 4z" fill="#fff"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg><span id="honkTxt">Hupen</span></button>
+  <button class="pill hot" id="btnDive" hidden><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="13" rx="8" ry="3.6" fill="#F5C211"/><path d="M10 9.4V7h3v2.4M12 7V4.5h1.5"/><path d="M12 18.5v3m-2.5-1.5L12 22.5l2.5-2.5"/></svg><span id="diveTxt">Abtauchen</span></button>
+  <button class="pill" id="btnFish" hidden><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21 15 4"/><path d="M15 4c3 2 4 6 4 10"/><path d="M19 14v3a2 2 0 1 1-2-2"/><path d="M3 12c2-2 5-2 7 0-2 2-5 2-7 0z" fill="#F28C28"/></svg><span id="fishTxt">Angeln</span></button>
+  <button class="pill hot" id="btnSail" hidden><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M3 14h18l-2.5 4.5h-13z" fill="#fff"/><path d="M8 14V9h6v5M11 9V5.5"/><path d="M2 21c2 0 2-1 4-1s2 1 4 1 2-1 4-1 2 1 4 1 2-1 4-1"/></svg>Ablegen</button>
+  <button class="pill" id="btnExit" hidden><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4H6v16h7"/><path d="M10.5 12H21m-3.5-3.5L21 12l-3.5 3.5"/></svg>Aussteigen</button>
+</div>
+
+<div id="hint" class="off"></div>
+<div id="fade"></div>
+<div id="catch" hidden>
+  <div id="catchCard">
+    <img id="catchImg" alt="">
+    <h2 id="catchTitle"></h2>
+    <p id="catchSub"></p>
+    <p id="catchBook"></p>
+    <div class="mrow"><button class="mb go" id="catchKeep">Mitnehmen</button><button class="mb" id="catchFree">Freilassen</button></div>
+  </div>
+</div>
+<div id="aqPanel" hidden>
+  <div class="stIc" style="background:#1E8F9E"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c3-4 8-4 12 0-4 4-9 4-12 0z"/><path d="M15 12l5-3v6z"/><circle cx="7.5" cy="11.3" r=".8" fill="#fff"/></svg></div>
+  <div class="stTx"><b>Dein Aquarium</b><span id="aqSub"></span></div>
+  <div id="aqList"></div>
+  <span id="aqMini"></span>
+</div>
+<div id="stPanel" hidden>
+  <div class="stIc"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="3.5" width="12" height="13" rx="3"/><path d="M6 10h12M9 20l-1.5 1.5M15 20l1.5 1.5"/><circle cx="9" cy="13.5" r=".9" fill="#fff"/><circle cx="15" cy="13.5" r=".9" fill="#fff"/></svg></div>
+  <div class="stTx"><b id="stTitle">Bahnhof</b><span id="stSub"></span></div>
+  <div class="stBtns"><button class="pill hot" id="stGo">Einsteigen</button><button class="pill" id="stAlt">Weiterfahren</button></div>
+</div>
+
+<div id="menu" hidden>
+  <div id="menuCard">
+    <div class="mh"><h2>Meine Welten</h2><button class="rb" id="mClose" aria-label="Schließen"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <p id="mStore">Welten werden geladen …</p>
+    <button class="mb go" id="mSaveNew">Als neue Welt speichern</button>
+    <div id="worlds"></div>
+    <div class="mrow"><button class="mb" id="mEmpty">Neue leere Wiese</button><button class="mb" id="mSample">Neue Beispielstadt</button></div>
+    <div class="mrow"><button class="mb" id="mExport">Welt-Code kopieren</button><button class="mb" id="mExportAll">Alle Welten kopieren</button></div>
+    <div class="mrow"><button class="mb" id="mImport">Code einfügen</button></div>
+    <div id="codeBox" hidden>
+      <p id="codeInfo"></p>
+      <textarea id="codeTxt" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
+      <div class="mrow"><button class="mb go" id="codeGo">Kopieren</button><button class="mb" id="codeClose">Fertig</button></div>
+    </div>
+  </div>
+</div>
+
+<div id="travel" hidden>
+  <div id="travelCard">
+    <h2 id="tvTitle">Wohin soll die Reise gehen?</h2>
+    <p id="tvSub"></p>
+    <div id="tvWorlds"></div>
+    <div class="mrow"><button class="mb" id="tvNewEmpty">Neue Wiese</button><button class="mb" id="tvNewSample">Neue Stadt</button></div>
+    <button class="mb" id="tvStay">Hier bleiben</button>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- APP-BODY -->
+</body>
+</html>
