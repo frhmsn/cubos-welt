@@ -86,7 +86,6 @@ function setDive(car,on){
   updDiveBtn(car);
 }
 function updDiveBtn(car){$('#diveTxt').textContent=car&&car.diving?'Auftauchen':'Abtauchen';}
-game.wasUnder = false;
 function subUnder(){return game.mode==='drive'&&game.driveCar&&ITEMS[game.driveCar.type].sub&&(game.driveCar.dive||0)>.45;}
 function forceSurface(car){if(!car||!ITEMS[car.type].sub)return;car.diving=false;car.dive=0;if(car.g.parent!==scene){underScene.remove(car.g);scene.add(car.g);}car.g.position.y=-.22;destroyUnderwater();}
 $('#btnDive').addEventListener('click',()=>{ac();if(game.driveCar)setDive(game.driveCar,!game.driveCar.diving);});

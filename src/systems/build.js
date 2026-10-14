@@ -19,7 +19,6 @@ import { hint } from '../ui/hint.js';
 import { animals, cars, ferries, gAt, isRail, isRoad, isWater, orient, pops, rot, tiles, trains } from '../core/world-data.js';
 
 // ---------- Bauen ----------
-game.sel = 'hand'; game.curCat = 'land'; game.dirty = false;
 const ray=new THREE.Raycaster(),plane=new THREE.Plane(new THREE.Vector3(0,1,0),0),hitV=new THREE.Vector3();
 function pickTile(cx,cy){
   const r=canvas.getBoundingClientRect(),v=new THREE.Vector2(((cx-r.left)/r.width)*2-1,-((cy-r.top)/r.height)*2+1);

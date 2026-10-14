@@ -5,7 +5,7 @@ import { $ } from '../core/util.js';
 // ---------- Renderer & Szene ----------
 const canvas=$('#c');
 const renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});
-let dprMax=Math.min(window.devicePixelRatio||1,2); game.dpr = Math.min(dprMax,1.5); game.dprLock = false;
+let dprMax=Math.min(window.devicePixelRatio||1,2); game.dpr = Math.min(dprMax,1.5);
 renderer.setPixelRatio(game.dpr);
 renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFShadowMap;
 const scene=new THREE.Scene();

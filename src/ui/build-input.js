@@ -12,7 +12,7 @@ import { ec, editTap } from '../systems/editor.js';
 import { saveSoon } from '../core/autosave.js';
 
 // ---------- Eingabe Bauen ----------
-const ptrs=new Map(); game.gest = null; let lastPaint=null;
+const ptrs=new Map(); let lastPaint=null;
 function two(){const [a,b]=[...ptrs.values()];return{d:Math.hypot(a.x-b.x,a.y-b.y),a:Math.atan2(b.y-a.y,b.x-a.x),mx:(a.x+b.x)/2,my:(a.y+b.y)/2};}
 function paintAt(x,y){const t=pickTile(x,y);if(!t)return;const key=t.i+','+t.j;if(key===lastPaint)return;lastPaint=key;apply(t.i,t.j,true);}
 canvas.addEventListener('pointerdown',e=>{

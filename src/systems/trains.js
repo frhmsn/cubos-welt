@@ -19,7 +19,6 @@ import { chime, whistle } from './audio.js';
 
 // ---------- Eisenbahn ----------
 const TCL=3.45,TLEN=3.2,TCARS=3;
-game.rideTrain = null; game.traveling = null;
 function trainCarModel(type,role){
   const g=new THREE.Group(),ice=type==='ice',L=TLEN,W=1.3,y0=.42;
   const body=M(ice?'#F2F3F5':'#D7261E',{roughness:.35,metalness:.15}),band=M(ice?'#D7261E':'#F4F4F2'),dark=M('#2A2D31');

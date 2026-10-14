@@ -15,7 +15,56 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
-  <script type="module" crossorigin>const game = {};
+  <script type="module" crossorigin>const game = {
+  // ---------- Modus und Steuerung ----------
+  mode: "build",
+  // 'build' (Bauen), 'walk' (Laufen), 'drive' (Fahren), 'ride' (Mitfahren), 'edit' (Bauwerkstatt)
+  driveCar: null,
+  // Fahrzeug, das gerade gesteuert wird
+  rideTrain: null,
+  // Zug, in dem man mitfährt
+  traveling: null,
+  // laufende Reise in eine andere Welt
+  stState: "",
+  // was das Bahnhof-Panel gerade zeigt
+  gest: null,
+  // laufende Touch-Geste im Baumodus (Zoomen, Drehen)
+  // ---------- Bauen ----------
+  sel: "hand",
+  // ausgewähltes Ding im Inventar (ID aus content/catalog.js)
+  curCat: "land",
+  // offene Inventar-Kategorie
+  dirty: false,
+  // Welt geändert, Autosave steht aus
+  // ---------- Tag und Nacht ----------
+  dayT: 0.36,
+  // Tageszeit 0..1 (0,5 = Mittag)
+  dayTarget: null,
+  // Ziel-Tageszeit beim Umschalten per Knopf
+  // ---------- Unter Wasser ----------
+  wasUnder: false,
+  // war die Kamera im letzten Bild unter Wasser
+  // ---------- Meine Welten ----------
+  curWorld: null,
+  // ID der geöffneten Welt (core/storage.js liest sie beim Start)
+  worldDirty: false,
+  // geöffnete Welt hat ungespeicherte Änderungen
+  saving: false,
+  // Speichern läuft gerade
+  worldCache: [],
+  // zuletzt geladene Welten-Liste fürs Menü
+  // ---------- Beim Start von anderen Modulen gesetzt ----------
+  N: 0,
+  // Kantenlänge der Welt in Feldern (core/grid.js)
+  HALF: 0,
+  // halbe Weltbreite in Einheiten (core/grid.js)
+  cam: null,
+  // aktive Kamera (render/renderer.js)
+  dpr: 1,
+  // Auflösungsfaktor (render/renderer.js, core/loop.js passt ihn an)
+  dprLock: false
+  // Auflösung nicht mehr automatisch ändern
+};
 const pl = { x: 0, z: 0, yaw: 0, pitch: 0, bob: 0 };
 const TILE = 4, START_N = 20, MAX_N = 60, GROW = 5;
 game.N = START_N;
@@ -624,7 +673,6 @@ const canvas = $("#c");
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" });
 let dprMax = Math.min(window.devicePixelRatio || 1, 2);
 game.dpr = Math.min(dprMax, 1.5);
-game.dprLock = false;
 renderer.setPixelRatio(game.dpr);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFShadowMap;
@@ -2761,8 +2809,6 @@ function removeCar(c) {
   cars.splice(k, 1);
 }
 const TCL = 3.45, TLEN = 3.2, TCARS = 3;
-game.rideTrain = null;
-game.traveling = null;
 function trainCarModel(type, role) {
   const g = new THREE.Group(), ice = type === "ice", L = TLEN, W = 1.3, y0 = 0.42;
   const body = M(ice ? "#F2F3F5" : "#D7261E", { roughness: 0.35, metalness: 0.15 }), band = M(ice ? "#D7261E" : "#F4F4F2"), dark = M("#2A2D31");
@@ -3439,9 +3485,6 @@ function updateAnimal(a, dt) {
   a.g.position.set(a.x, 0, a.z);
   a.g.rotation.y = a.h;
 }
-game.sel = "hand";
-game.curCat = "land";
-game.dirty = false;
 const ray = new THREE.Raycaster(), plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), hitV = new THREE.Vector3();
 function pickTile(cx, cy) {
   const r = canvas.getBoundingClientRect(), v = new THREE.Vector2((cx - r.left) / r.width * 2 - 1, -((cy - r.top) / r.height) * 2 + 1);
@@ -3724,7 +3767,6 @@ function apply(i, j, painting) {
   }
 }
 const ptrs = /* @__PURE__ */ new Map();
-game.gest = null;
 let lastPaint = null;
 function two() {
   const [a, b] = [...ptrs.values()];
@@ -3859,8 +3901,6 @@ function resolve(p, rad) {
   }
   return hit;
 }
-game.mode = "build";
-game.driveCar = null;
 const joy = { x: 0, y: 0 };
 let joyId = null, lookId = null, joyO = null, lookLast = null;
 const keys = {};
@@ -4052,7 +4092,6 @@ function stationNear() {
   return -1;
 }
 const trainAt = (k) => trains.find((tr) => tr.state === "halt" && tr.atStation && tr.stopK === k);
-game.stState = "";
 function showStation(state, title, sub, go, alt) {
   if (state === game.stState) return;
   game.stState = state;
@@ -4125,8 +4164,6 @@ $("#stAlt").addEventListener("click", () => {
     showStation("");
   }
 });
-game.dayT = 0.36;
-game.dayTarget = null;
 let wasDay = null;
 const DAY_LEN = 300;
 const cNight = new THREE.Color(858168), cDay = new THREE.Color(9425919), cDusk = new THREE.Color(15899243), sky = new THREE.Color();
@@ -4992,7 +5029,6 @@ function setDive(car, on2) {
 function updDiveBtn(car) {
   $("#diveTxt").textContent = car && car.diving ? "Auftauchen" : "Abtauchen";
 }
-game.wasUnder = false;
 function subUnder() {
   return game.mode === "drive" && game.driveCar && ITEMS[game.driveCar.type].sub && (game.driveCar.dive || 0) > 0.45;
 }
@@ -5066,8 +5102,7 @@ function insideAquarium() {
   }
   return null;
 }
-game.aqShown = null;
-let aqTimer = 0;
+let aqShown = null, aqTimer = 0;
 $("#aqPanel").addEventListener("click", () => {
   ac();
   const P = $("#aqPanel");
@@ -5082,8 +5117,8 @@ $("#aqPanel").addEventListener("click", () => {
 });
 function updateAquaUI() {
   const aq = insideAquarium(), P = $("#aqPanel");
-  if (aq === game.aqShown) return;
-  game.aqShown = aq;
+  if (aq === aqShown) return;
+  aqShown = aq;
   clearTimeout(aqTimer);
   if (!aq) {
     P.hidden = true;
@@ -5110,7 +5145,7 @@ function updateAquaUI() {
 }
 on("fang:geaendert", () => {
   refreshAquariums();
-  game.aqShown = void 0;
+  aqShown = void 0;
 });
 const LKEY = "kunos-welten", CKEY = "kunos-welt-cur";
 game.curWorld = null;
@@ -5118,9 +5153,6 @@ try {
   game.curWorld = localStorage.getItem(CKEY);
 } catch (e) {
 }
-game.worldDirty = false;
-game.saving = false;
-game.worldCache = [];
 const localStore = {
   kind: "local",
   async list() {

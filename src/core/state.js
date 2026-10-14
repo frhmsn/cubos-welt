@@ -1,33 +1,41 @@
 // Gemeinsamer, veränderlicher Spielzustand.
-// Hier liegen Werte, die mehrere Module neu setzen (z. B. der aktuelle Modus).
-// Werte, die nur ein Modul ändert, bleiben dort als normale Variable.
-// Die Startwerte setzt jeweils das Modul, aus dem der Wert stammt.
-/**
- * Felder:
- *   HALF  (früher in core/grid.js)
- *   N  (früher in core/grid.js)
- *   aqShown  (früher in systems/aquarium.js)
- *   cam  (früher in render/renderer.js)
- *   curCat  (früher in systems/build.js)
- *   curWorld  (früher in core/storage.js)
- *   dayT  (früher in render/daynight.js)
- *   dayTarget  (früher in render/daynight.js)
- *   dirty  (früher in systems/build.js)
- *   dpr  (früher in render/renderer.js)
- *   dprLock  (früher in render/renderer.js)
- *   driveCar  (früher in systems/player.js)
- *   gest  (früher in ui/build-input.js)
- *   mode  (früher in systems/player.js)
- *   rideTrain  (früher in systems/trains.js)
- *   saving  (früher in core/storage.js)
- *   sel  (früher in systems/build.js)
- *   stState  (früher in ui/station-panel.js)
- *   traveling  (früher in systems/trains.js)
- *   wasUnder  (früher in systems/underwater.js)
- *   worldCache  (früher in core/storage.js)
- *   worldDirty  (früher in core/storage.js)
- */
-export const game = {};
+// Hier liegen nur Werte, die mehrere Module lesen UND neu setzen. Werte, die nur ein Modul
+// ändert, bleiben dort als normale Variable. Neues Feld: hier mit Startwert und Kommentar eintragen.
+
+export const game = {
+  // ---------- Modus und Steuerung ----------
+  mode: 'build',     // 'build' (Bauen), 'walk' (Laufen), 'drive' (Fahren), 'ride' (Mitfahren), 'edit' (Bauwerkstatt)
+  driveCar: null,    // Fahrzeug, das gerade gesteuert wird
+  rideTrain: null,   // Zug, in dem man mitfährt
+  traveling: null,   // laufende Reise in eine andere Welt
+  stState: '',       // was das Bahnhof-Panel gerade zeigt
+  gest: null,        // laufende Touch-Geste im Baumodus (Zoomen, Drehen)
+
+  // ---------- Bauen ----------
+  sel: 'hand',       // ausgewähltes Ding im Inventar (ID aus content/catalog.js)
+  curCat: 'land',    // offene Inventar-Kategorie
+  dirty: false,      // Welt geändert, Autosave steht aus
+
+  // ---------- Tag und Nacht ----------
+  dayT: .36,         // Tageszeit 0..1 (0,5 = Mittag)
+  dayTarget: null,   // Ziel-Tageszeit beim Umschalten per Knopf
+
+  // ---------- Unter Wasser ----------
+  wasUnder: false,   // war die Kamera im letzten Bild unter Wasser
+
+  // ---------- Meine Welten ----------
+  curWorld: null,    // ID der geöffneten Welt (core/storage.js liest sie beim Start)
+  worldDirty: false, // geöffnete Welt hat ungespeicherte Änderungen
+  saving: false,     // Speichern läuft gerade
+  worldCache: [],    // zuletzt geladene Welten-Liste fürs Menü
+
+  // ---------- Beim Start von anderen Modulen gesetzt ----------
+  N: 0,              // Kantenlänge der Welt in Feldern (core/grid.js)
+  HALF: 0,           // halbe Weltbreite in Einheiten (core/grid.js)
+  cam: null,         // aktive Kamera (render/renderer.js)
+  dpr: 1,            // Auflösungsfaktor (render/renderer.js, core/loop.js passt ihn an)
+  dprLock: false,    // Auflösung nicht mehr automatisch ändern
+};
 
 /** Spielfigur: Position (x, z), Blickrichtung (yaw, pitch) und Wippen beim Laufen. */
 export const pl = {x:0,z:0,yaw:0,pitch:0,bob:0};

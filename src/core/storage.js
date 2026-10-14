@@ -4,7 +4,6 @@ import { game } from './state.js';
 // ---------- Meine Welten ----------
 const LKEY='kunos-welten',CKEY='kunos-welt-cur';
 game.curWorld = null; try{game.curWorld=localStorage.getItem(CKEY);}catch(e){}
-game.worldDirty = false; game.saving = false; game.worldCache = [];
 const localStore={kind:'local',
   async list(){try{const a=JSON.parse(localStorage.getItem(LKEY)||'[]');return Array.isArray(a)?a:[];}catch(e){return [];}},
   async put(w){const a=await localStore.list();const i=a.findIndex(x=>x.id===w.id);if(i>=0)a[i]=w;else a.push(w);localStorage.setItem(LKEY,JSON.stringify(a));},

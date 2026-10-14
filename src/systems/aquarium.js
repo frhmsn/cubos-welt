@@ -44,12 +44,12 @@ function insideAquarium(){
   for(const aq of aquariums.values()){if(Math.hypot(pl.x-aq.x,pl.z-aq.z)<AQ_R-.3)return aq;}
   return null;
 }
-game.aqShown = null; let aqTimer=0;
+let aqShown=null, aqTimer=0;
 $('#aqPanel').addEventListener('click',()=>{ac();const P=$('#aqPanel');clearTimeout(aqTimer);
   if(P.classList.contains('mini')){P.classList.remove('mini');plop();aqTimer=setTimeout(()=>P.classList.add('mini'),6000);}else{P.classList.add('mini');}});
 function updateAquaUI(){
   const aq=insideAquarium(),P=$('#aqPanel');
-  if(aq===game.aqShown)return;game.aqShown=aq;
+  if(aq===aqShown)return;aqShown=aq;
   clearTimeout(aqTimer);
   if(!aq){P.hidden=true;return;}
   const tot=Object.keys(FISH).reduce((a,k)=>a+(catchBook[k]||0),0);
@@ -63,6 +63,6 @@ function updateAquaUI(){
 }
 
 // Neuer Fang oder eingefügter Code: Becken neu füllen, Panel beim nächsten Bild neu aufbauen
-on('fang:geaendert',()=>{refreshAquariums();game.aqShown=undefined;});
+on('fang:geaendert',()=>{refreshAquariums();aqShown=undefined;});
 
 export { clearAquarium, fillAquarium, refreshAquariums, updateAquaUI, updateAquariums };

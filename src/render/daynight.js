@@ -6,7 +6,7 @@ import { glowWarm, nightMats } from './materials.js';
 import { bc } from './build-camera.js';
 
 // ---------- Tag und Nacht ----------
-game.dayT = .36; game.dayTarget = null; let wasDay=null; const DAY_LEN=300;
+let wasDay=null; const DAY_LEN=300;
 const cNight=new THREE.Color(0x0d1838),cDay=new THREE.Color(0x8fd3ff),cDusk=new THREE.Color(0xf29a6b),sky=new THREE.Color();
 const hDay=new THREE.Color(0xdff2ff),hNight=new THREE.Color(0x4a5a9a);
 const ICON_SUN='<svg viewBox="0 0 24 24" fill="none" stroke="#E8A400" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4.6" fill="#FFC21A"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>';

@@ -15,7 +15,6 @@ function stationNear(){
   return -1;
 }
 const trainAt=k=>trains.find(tr=>tr.state==='halt'&&tr.atStation&&tr.stopK===k);
-game.stState = '';
 function showStation(state,title,sub,go,alt){
   if(state===game.stState)return;game.stState=state;
   const P=$('#stPanel');if(!state){P.hidden=true;return;}

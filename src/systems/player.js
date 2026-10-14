@@ -15,7 +15,6 @@ import { SUB_Y, updateUnderwater } from './underwater.js';
 import { cars, gAt } from '../core/world-data.js';
 
 // ---------- Laufen & Fahren ----------
-game.mode = 'build'; game.driveCar = null;
 const joy={x:0,y:0}; let joyId=null,lookId=null,joyO=null,lookLast=null;
 const keys={};
 const pad=$('#pad'),joyEl=$('#joy'),knob=$('#knob');
