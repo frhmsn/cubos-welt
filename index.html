@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Cubos Welt">
 <meta name="theme-color" content="#8FD3FF">
 <link rel="manifest" href="manifest.webmanifest">
@@ -9063,16 +9063,6 @@ button.oc:active{transform:translateY(2px);}
   #hud{top:calc(env(safe-area-inset-top,0px) + 12px);}
   #orderPill{max-width:calc(100vw - 140px);}
   #hint{top:calc(env(safe-area-inset-top,0px) + 112px);}
-}
-
-/* ---------- Home-Bildschirm-App: bis ganz nach unten ----------
-   iOS 26 meldet in der Home-Bildschirm-App mit durchsichtiger Statusleiste die Höhe um die Statusleiste zu kurz.
-   Dann bleibt unten ein hellblauer Streifen. 100lvh ist die volle Höhe: Bild und untere Knöpfe reichen damit bis an den Rand.
-   Wo alles stimmt, ist 100lvh gleich 100 % und es ändert sich nichts. */
-@media (display-mode: standalone), (display-mode: fullscreen){
-  #c{height:100lvh;bottom:auto;}
-  #inv,#editTray,#walkBtns,#pad{bottom:calc(100% - 100lvh);}
-  #joy.rest{top:calc(100lvh - env(safe-area-inset-bottom,0px) - 100px);}
 }</style>
 </head>
 <body>

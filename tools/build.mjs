@@ -15,9 +15,12 @@ const built = fs.readFileSync(path.join(ROOT, 'dist/index.html'), 'utf8');
 if (!built.includes(CDN)) throw new Error('Three.js-Einbindung nicht gefunden');
 
 // ---------- App ----------
+// Statusleiste undurchsichtig ('default'): Mit 'black-translucent' macht iOS 26 die Home-Bildschirm-App unten
+// um die Höhe der Statusleiste zu kurz, darunter bleibt ein Streifen, den die Seite nicht füllen kann
+// (WebKit-Fehler 301108/301994). iOS liest die Einstellung nur beim Hinzufügen zum Home-Bildschirm.
 const appHead = `<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="${SHORT}">
 <meta name="theme-color" content="#8FD3FF">
 <link rel="manifest" href="manifest.webmanifest">
