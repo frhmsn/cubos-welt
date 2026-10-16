@@ -25,7 +25,7 @@ await ev(() => window.__cubo.frames(10));
 await shot('5-gefaellt');
 console.log(JSON.stringify(await ev(() => window.__cubo.fp().rucksack)));
 // Markt mit Fischen
-await ev(() => { const c = window.__cubo; c.give(0, 0, ['makrele', 'makrele', 'hai', 'barsch']); const p = c.center(9, 15); c.setPl(p.x, p.z + 3.5, 0); c.frames(10); });
+await ev(() => { const c = window.__cubo; c.give(0, 0, ['makrele', 'makrele', 'thunfisch', 'barsch']); const p = c.center(9, 15); c.setPl(p.x, p.z + 3.5, 0); c.frames(10); });
 await shot('6-markt-nah');
 await ev(() => { window.__cubo.click('#btnPlace'); window.__cubo.frames(5); });
 await shot('7-markt');

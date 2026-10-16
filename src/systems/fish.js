@@ -15,7 +15,8 @@ import { nearFocus } from '../core/focus.js';
 /** Darf diese Art an dieser Stelle schwimmen? (Habitat aus content/fish/<art>.js) */
 function fishOk(type,x,z){const t=tileAt(x,z);if(!t)return false;return fishGrounds(type).includes(gAt(t.i,t.j));}
 function anyWater(x,z){const t=tileAt(x,z);if(!t)return false;const g=gAt(t.i,t.j);return g==='wasser'||g==='meer';}
-const okF=(f,x,z)=>f.free?anyWater(x,z):fishOk(f.type,x,z);
+// Jede Art nur in ihrem Wasser, auch von Hand ausgesetzte (free). Alte Spielstände mit Meeresfischen im See räumen sich so auf.
+const okF=(f,x,z)=>fishOk(f.type,x,z);
 function addFish(type,x,z){
   const sil=new THREE.Mesh(silGeo,silMat);sil.scale.setScalar(FISH[type].sil);sil.position.set(x,.035,z);scene.add(sil);
   let fin=null;if(FISH_BY_ID[type].dorsalFin){fin=new THREE.Mesh(finGeo,M('#4A5560'));fin.scale.setScalar(1.6);fin.castShadow=false;scene.add(fin);}

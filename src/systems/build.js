@@ -130,10 +130,12 @@ function applyTool(i,j,painting){
   }
   if(it.kind==='fish'){
     if(!(gAt(i,j)==='wasser'||gAt(i,j)==='meer')){nope();hint('Fische brauchen Wasser. Tippe auf einen See oder aufs Meer.',3000);return;}
+    // Jede Art nur in ihr Wasser: Seefische in Seen und Flüsse, Meeresfische ins Meer (wie in echt)
+    const c=center(i,j);
+    if(!fishOk(it.fish,c.x,c.z)){if(!painting){nope();hint(FISH[it.fish].plural+' leben '+FISH[it.fish].where+'. Setz sie dort ins Wasser!',3500);}return;}
     if(fishes.length>=70){nope();hint('Das Wasser ist voll. Angle erst ein paar Fische!',2500);return;}
-    const c=center(i,j),x=c.x+(Math.random()-.5)*2,z=c.z+(Math.random()-.5)*2,f=addFish(it.fish,x,z);f.free=true;f.flee=1.5;
+    const x=c.x+(Math.random()-.5)*2,z=c.z+(Math.random()-.5)*2,f=addFish(it.fish,x,z);f.free=true;f.flee=1.5;
     splash(x,z,true);tone(520,.1,'sine',.08,0,.5);tone(300,.25,'sine',.06,.1,.6);game.dirty=true;
-    if(!fishOk(it.fish,x,z))hint(FISH[it.fish].plural+' leben eigentlich '+FISH[it.fish].where+'. Hier schwimmt er trotzdem.',3000);
     return;
   }
   if(it.kind==='animal'){

@@ -161,7 +161,7 @@ export const scenarios = {
     await click(page, '#btnChop');
     await frames(page, 10);
     await snap('gefaellt');
-    await api(page, 'give', 0, 0, ['makrele', 'makrele', 'hai']);
+    await api(page, 'give', 0, 0, ['makrele', 'makrele', 'thunfisch']);
     const m = await api(page, 'center', 9, 15);
     await api(page, 'setPl', m.x, m.z + 3.5, 0);
     await frames(page, 5);

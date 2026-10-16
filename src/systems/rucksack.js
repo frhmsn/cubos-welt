@@ -2,6 +2,7 @@
 // Gilt für alle Welten gemeinsam (wie das Fangbuch) und reist in Welt-Codes mit.
 // Blatt-Modul ohne Grafik, deshalb in Node testbar (tests/unit/rucksack.test.js).
 import { emit } from '../core/events.js';
+import { isProtected } from '../content/fish/index.js';
 
 const KEY = 'cubos-rucksack';
 /** Startwerte für ein neues Gerät: etwas Holz für die ersten Häuser. */
@@ -13,7 +14,8 @@ function clean(s) {
   const out = fresh();
   if (!s || typeof s !== 'object') return out;
   out.taler = n(s.taler); out.holz = s.holz == null ? START.holz : n(s.holz);
-  for (const [k, v] of Object.entries(s.eimer || {})) if (n(v)) out.eimer[k] = n(v);
+  // Geschützte Arten gehören nicht in den Eimer (frühere Fänge werden still freigelassen)
+  for (const [k, v] of Object.entries(s.eimer || {})) if (n(v) && !isProtected(k)) out.eimer[k] = n(v);
   for (const k of Object.keys(s.gekauft || {})) out.gekauft[k] = true;
   return out;
 }
@@ -37,7 +39,8 @@ function spend(what, n) {
   r[what] -= n; changed(what);
   return true;
 }
-function putInBucket(type) { r.eimer[type] = (r.eimer[type] || 0) + 1; changed('eimer'); }
+/** Legt einen Fisch in den Eimer. Geschützte Arten nie. Rückgabe: hat es geklappt? */
+function putInBucket(type) { if (isProtected(type)) return false; r.eimer[type] = (r.eimer[type] || 0) + 1; changed('eimer'); return true; }
 /** Nimmt bis zu n Fische aus dem Eimer (beliebige Arten). Rückgabe: wie viele es waren. */
 function takeFish(n) {
   let left = n;

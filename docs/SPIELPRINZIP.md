@@ -34,6 +34,13 @@ Gelten für alle Welten gemeinsam (wie das Fangbuch) und reisen in Welt-Codes mi
 - Fertig heißt noch nicht bezahlt: die Taler holt man im Auftragshaus ab. Das ist der Grund, zurückzukommen.
 - Öffnen: mit dem Männchen hinlaufen (Knopf "Aufträge") oder im Baumodus mit "Schauen" auf das Haus tippen.
 
+## Geschützte Tiere und echte Lebensräume
+
+- Hai, Rochen, Stör und Mondfisch sind **geschützt**: Sie schwimmen herum und man darf sie anschauen (U-Boot, Aquarium, selbst aussetzen), aber sie beißen nie an und kommen nie in den Eimer. Wirft man die Angel neben einen, sagt das Spiel einmal, warum. Wale werden ohnehin nur beobachtet.
+- Im Fangbuch stehen geschützte Arten mit dem Vermerk "geschützt" statt "noch keiner".
+- Jede Art lebt nur in ihrem Wasser, wie in echt: Barsch, Hecht, Karpfen, Wels und Stör in Seen und Flüssen, alle anderen im Meer. Auch beim Aussetzen von Hand und beim Freilassen gilt das; falsche Fische aus alten Spielständen verschwinden von selbst.
+- Neue Art als geschützt markieren: `protected: true` in `content/fish/<art>.js`.
+
 ## Markt
 
 - Verkauft den ganzen Eimer auf einmal ("Alles verkaufen"). Kein Feilschen, keine Einzelauswahl.

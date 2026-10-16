@@ -43,6 +43,13 @@ function renderItems(){
   const cat=CATS.find(c=>c.id===game.curCat);
   if(cat.special==='fang'){
     for(const ft of Object.keys(FISH)){
+      if(FISH[ft].prot){
+        // Geschützte Arten: nur anschauen, nicht angeln
+        const b=document.createElement('button');b.className='it fang prot';
+        b.innerHTML=`<span class="ball">${thumbs['F_'+ft]?`<img alt="" src="${thumbs['F_'+ft]}">`:''}</span><span>${FISH[ft].label}</span><small>geschützt</small>`;
+        b.addEventListener('click',()=>{ac();plop();hint(FISH[ft].plural+' sind geschützt. Man darf sie nicht angeln, nur anschauen!',3500);});
+        el.appendChild(b);continue;
+      }
       const n=catchBook[ft]||0,rec=catchRec[ft],b=document.createElement('button');b.className='it fang'+(n?'':' none');
       b.innerHTML=`<span class="ball">${thumbs['F_'+ft]?`<img alt="" src="${thumbs['F_'+ft]}">`:''}${n?`<span class="cnt">${n}</span>`:''}</span><span>${n?FISH[ft].label:'???'}</span><small>${n&&rec?'Rekord '+fmtLen(rec):'noch keiner'}</small>`;
       b.addEventListener('click',()=>{ac();plop();hint(n?`${n} ${n===1?FISH[ft].label:FISH[ft].plural} gefangen. Der größte war ${fmtLen(rec||0)} lang.`:(FISH[ft].plural+' gibt es '+FISH[ft].where+'.')+(n?'':' Fahr mit dem Fischerboot raus und angle!'),3500);});

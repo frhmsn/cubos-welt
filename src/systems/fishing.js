@@ -8,7 +8,7 @@ import { scene } from '../render/renderer.js';
 import { G, disposeGroup, mesh } from '../render/materials.js';
 import { ac, nopeSnd, plop, tone } from './audio.js';
 import { FISH, fishModel, fishes, pickFish } from '../content/fish.js';
-import { addFish, anyWater, fishOk, okF, removeFish, splash } from './fish.js';
+import { addFish, fishOk, okF, removeFish, splash } from './fish.js';
 import { thumbs } from '../ui/inventory.js';
 import { FISH_BY_ID } from '../content/fish/index.js';
 import { hint } from '../ui/hint.js';
@@ -41,11 +41,13 @@ function updateFishing(dt){
   if(F.phase==='cast'){const k=Math.min(1,F.t/.6);bobber.position.set(tip.x+(F.x-tip.x)*k,tip.y*(1-k)+Math.sin(Math.PI*k)*1.2+by*k,tip.z+(F.z-tip.z)*k);if(k>=1){F.phase='wait';F.t=0;splash(F.x,F.z);}}
   else if(F.phase==='wait'){
     bobber.position.set(F.x,by,F.z);
-    if(!F.fish){let best=null,bd=81;for(const f of fishes){if(f.jump||f.flee>0)continue;const d=(f.x-F.x)**2+(f.z-F.z)**2;if(d<bd*1.8&&okF(f,F.x,F.z)){bd=d;best=f;}}
+    if(!F.fish){let best=null,bd=81,prot=null;for(const f of fishes){if(f.jump||f.flee>0)continue;const d=(f.x-F.x)**2+(f.z-F.z)**2;if(d<bd*1.8&&okF(f,F.x,F.z)){if(FISH[f.type].prot){if(d<30)prot=f;continue;}bd=d;best=f;}}
+      // Geschützte Tiere beißen nie an. Einmal pro Wurf sagen, warum.
+      if(prot&&!F.told){F.told=true;const S=FISH[prot.type];hint(`Ein ${S.label}! ${S.plural} sind geschützt. Er beißt nicht an.`,3500);}
       if(best){F.fish=best;best.hook=true;}
       else{F.wait+=dt;
         if(F.wait>3.5){const tile=tileAt(F.x,F.z),sea=tile&&gAt(tile.i,tile.j)==='meer';
-          for(let q=0;q<10;q++){const a=Math.random()*6.283,x=F.x+Math.cos(a)*7,z=F.z+Math.sin(a)*7,type=pickFish(sea);
+          for(let q=0;q<10;q++){const a=Math.random()*6.283,x=F.x+Math.cos(a)*7,z=F.z+Math.sin(a)*7,type=pickFish(sea,true);
             if(fishOk(type,x,z)&&fishOk(type,F.x,F.z)){const f=addFish(type,x,z);F.fish=f;f.hook=true;break;}}
           if(!F.fish&&F.wait>8){stopFishing('Hier gibt es keine Fische. Fahr weiter raus aufs Wasser.');return;}}}}
     else if(!fishes.includes(F.fish)){F.fish=null;}
@@ -88,6 +90,6 @@ function showCatch(type,len){
   tone(523,.15,'sine',.09);tone(659,.15,'sine',.09,.15);tone(784,.15,'sine',.09,.3);tone(1047,.35,'sine',.09,.45);
 }
 $('#catchKeep').addEventListener('click',()=>{ac();$('#catch').hidden=true;plop();if(lastCatch)putInBucket(lastCatch.type);hint('Ab in den Eimer!',1800);});
-$('#catchFree').addEventListener('click',()=>{ac();$('#catch').hidden=true;if(lastCatch&&game.driveCar){const c=game.driveCar,x=c.x+Math.sin(c.h)*3,z=c.z+Math.cos(c.h)*3;if(anyWater(x,z)){const f=addFish(lastCatch.type,x,z);f.free=!fishOk(lastCatch.type,x,z);f.flee=2.5;splash(x,z,true);}}hint('Tschüss Fisch!',1800);});
+$('#catchFree').addEventListener('click',()=>{ac();$('#catch').hidden=true;if(lastCatch&&game.driveCar){const c=game.driveCar,x=c.x+Math.sin(c.h)*3,z=c.z+Math.cos(c.h)*3;if(fishOk(lastCatch.type,x,z)){const f=addFish(lastCatch.type,x,z);f.flee=2.5;splash(x,z,true);}}hint('Tschüss Fisch!',1800);});
 $('#btnFish').addEventListener('click',()=>{ac();if(!fishing)startFishing();else reelIn();});
 export { fishing, stopFishing, updateFishing };

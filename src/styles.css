@@ -227,3 +227,4 @@ button.oc:active{transform:translateY(2px);}
 .it .lock svg{width:28px;height:28px;}
 .it .ballwrap{position:relative;}
 @media (max-width:760px){#hint{top:calc(env(safe-area-inset-top,0px) + 160px);width:max-content;max-width:calc(100vw - 40px);box-sizing:border-box;}}
+.it.prot small{color:#2E8B57;font-weight:700;}

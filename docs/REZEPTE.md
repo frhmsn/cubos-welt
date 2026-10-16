@@ -12,7 +12,7 @@ Schritt für Schritt für die häufigsten Erweiterungen. Nach jedem Rezept: `npm
    - `habitat: ['see']` (Seen und Flüsse) oder `['meer']`. Regel: nur eins von beiden, im Meer leben nur Meeresbewohner (der Unit-Test prüft das).
    - `spawn: { see: 0.1 }` Häufigkeit je Gewässer. **Die Summe aller Arten je Gewässer muss 1 bleiben**, also andere Arten etwas verringern (der Unit-Test prüft das).
    - `speed`, `jumps`, `scale` (shadow = Schatten im Wasser, underwater, aquarium, rod = an der Angel, jump = beim Springen)
-   - optional: `wow: true` (besonderer Fang), `bigCatch`, `maxCount`, `dorsalFin`
+   - optional: `wow: true` (besonderer Fang), `bigCatch`, `maxCount`, `dorsalFin`, `protected: true` (geschützt: beißt nie an, nur anschauen)
 3. `model({ g, body, box, mesh, M, finGeo, fl })` gestalten. Der Fisch schaut nach +z, Länge etwa 1. `body(farbe, sx, sy, sz, y, z)` ist ein Ellipsoid, `box(g, farbe, w, h, d, x, y, z)` ein Quader.
 4. In `src/content/fish/index.js` importieren und in `FISH_LIST` eintragen. Die Position bestimmt die Reihenfolge im Inventar.
 5. Fertig: Inventar-Eintrag, Fangbuch, Aquarium, Unterwasserwelt und Spawn kommen automatisch.

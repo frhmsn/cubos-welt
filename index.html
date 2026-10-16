@@ -199,6 +199,8 @@ const stoer = {
   // lebt im Fluss und laicht dort
   taler: 8,
   // so viele Taler gibt der Markt für einen Fisch
+  protected: true,
+  // geschützt: beißt nicht an, nur anschauen (kommt nie in den Eimer)
   spawn: { see: 0.1 },
   // Häufigkeit je Gewässer
   speed: 0.6,
@@ -258,6 +260,8 @@ const hai = {
   habitat: ["meer"],
   taler: 10,
   // so viele Taler gibt der Markt für einen Fisch
+  protected: true,
+  // geschützt: beißt nicht an, nur anschauen (kommt nie in den Eimer)
   spawn: { meer: 0.09 },
   // Häufigkeit je Gewässer
   speed: 1.2,
@@ -532,6 +536,8 @@ const mondfisch = {
   habitat: ["meer"],
   taler: 10,
   // so viele Taler gibt der Markt für einen Fisch
+  protected: true,
+  // geschützt: beißt nicht an, nur anschauen (kommt nie in den Eimer)
   spawn: { meer: 0.05 },
   // Häufigkeit je Gewässer
   speed: 0.3,
@@ -558,6 +564,8 @@ const rochen = {
   habitat: ["meer"],
   taler: 5,
   // so viele Taler gibt der Markt für einen Fisch
+  protected: true,
+  // geschützt: beißt nicht an, nur anschauen (kommt nie in den Eimer)
   spawn: { meer: 0.06 },
   // Häufigkeit je Gewässer
   speed: 0.7,
@@ -631,10 +639,18 @@ const FISH = Object.fromEntries(FISH_LIST.map((f) => [f.id, {
   rs: f.scale.rod,
   wow: f.wow ? 1 : 0,
   where: whereText(f.habitat),
-  taler: f.taler
+  taler: f.taler,
+  prot: f.protected ? 1 : 0
 }]));
 const LAKE_FISH = FISH_LIST.filter((f) => f.spawn.see).map((f) => [f.id, f.spawn.see]);
 const SEA_FISH = FISH_LIST.filter((f) => f.spawn.meer).map((f) => [f.id, f.spawn.meer]);
+const isProtected = (id) => !!(FISH_BY_ID[id] && FISH_BY_ID[id].protected);
+const catchable = (L) => {
+  const l = L.filter(([id]) => !isProtected(id)), s = l.reduce((a, [, w]) => a + w, 0);
+  return l.map(([id, w]) => [id, w / s]);
+};
+const LAKE_CATCH = catchable(LAKE_FISH);
+const SEA_CATCH = catchable(SEA_FISH);
 const lambo = {
   id: "lambo",
   label: "Lamborghini",
@@ -2109,8 +2125,8 @@ function groundModel(type, conn) {
   }
   return g;
 }
-function pickFish(sea) {
-  const L = sea ? SEA_FISH : LAKE_FISH;
+function pickFish(sea, forHook) {
+  const L = forHook ? sea ? SEA_CATCH : LAKE_CATCH : sea ? SEA_FISH : LAKE_FISH;
   let r2 = Math.random();
   for (const [t2, w] of L) {
     if ((r2 -= w) <= 0) {
@@ -4118,7 +4134,7 @@ function clean(s) {
   if (!s || typeof s !== "object") return out;
   out.taler = n(s.taler);
   out.holz = s.holz == null ? START.holz : n(s.holz);
-  for (const [k, v] of Object.entries(s.eimer || {})) if (n(v)) out.eimer[k] = n(v);
+  for (const [k, v] of Object.entries(s.eimer || {})) if (n(v) && !isProtected(k)) out.eimer[k] = n(v);
   for (const k of Object.keys(s.gekauft || {})) out.gekauft[k] = true;
   return out;
 }
@@ -4161,8 +4177,10 @@ function spend(what, n) {
   return true;
 }
 function putInBucket(type) {
+  if (isProtected(type)) return false;
   r.eimer[type] = (r.eimer[type] || 0) + 1;
   changed("eimer");
+  return true;
 }
 function takeFish(n) {
   let left = n;
@@ -4513,19 +4531,26 @@ function applyTool(i, j, painting) {
       hint("Fische brauchen Wasser. Tippe auf einen See oder aufs Meer.", 3e3);
       return;
     }
+    const c = center(i, j);
+    if (!fishOk(it.fish, c.x, c.z)) {
+      if (!painting) {
+        nope();
+        hint(FISH[it.fish].plural + " leben " + FISH[it.fish].where + ". Setz sie dort ins Wasser!", 3500);
+      }
+      return;
+    }
     if (fishes.length >= 70) {
       nope();
       hint("Das Wasser ist voll. Angle erst ein paar Fische!", 2500);
       return;
     }
-    const c = center(i, j), x = c.x + (Math.random() - 0.5) * 2, z = c.z + (Math.random() - 0.5) * 2, f = addFish(it.fish, x, z);
+    const x = c.x + (Math.random() - 0.5) * 2, z = c.z + (Math.random() - 0.5) * 2, f = addFish(it.fish, x, z);
     f.free = true;
     f.flee = 1.5;
     splash(x, z, true);
     tone(520, 0.1, "sine", 0.08, 0, 0.5);
     tone(300, 0.25, "sine", 0.06, 0.1, 0.6);
     game.dirty = true;
-    if (!fishOk(it.fish, x, z)) hint(FISH[it.fish].plural + " leben eigentlich " + FISH[it.fish].where + ". Hier schwimmt er trotzdem.", 3e3);
     return;
   }
   if (it.kind === "animal") {
@@ -5516,7 +5541,7 @@ function anyWater(x, z) {
   const g = gAt(t2.i, t2.j);
   return g === "wasser" || g === "meer";
 }
-const okF = (f, x, z) => f.free ? anyWater(x, z) : fishOk(f.type, x, z);
+const okF = (f, x, z) => fishOk(f.type, x, z);
 function addFish(type, x, z) {
   const sil = new THREE.Mesh(silGeo, silMat);
   sil.scale.setScalar(FISH[type].sil);
@@ -5734,14 +5759,23 @@ function updateFishing(dt) {
   } else if (F.phase === "wait") {
     bobber.position.set(F.x, by, F.z);
     if (!F.fish) {
-      let best = null, bd = 81;
+      let best = null, bd = 81, prot = null;
       for (const f of fishes) {
         if (f.jump || f.flee > 0) continue;
         const d = (f.x - F.x) ** 2 + (f.z - F.z) ** 2;
         if (d < bd * 1.8 && okF(f, F.x, F.z)) {
+          if (FISH[f.type].prot) {
+            if (d < 30) prot = f;
+            continue;
+          }
           bd = d;
           best = f;
         }
+      }
+      if (prot && !F.told) {
+        F.told = true;
+        const S = FISH[prot.type];
+        hint(`Ein ${S.label}! ${S.plural} sind geschützt. Er beißt nicht an.`, 3500);
       }
       if (best) {
         F.fish = best;
@@ -5751,7 +5785,7 @@ function updateFishing(dt) {
         if (F.wait > 3.5) {
           const tile = tileAt(F.x, F.z), sea = tile && gAt(tile.i, tile.j) === "meer";
           for (let q = 0; q < 10; q++) {
-            const a = Math.random() * 6.283, x = F.x + Math.cos(a) * 7, z = F.z + Math.sin(a) * 7, type = pickFish(sea);
+            const a = Math.random() * 6.283, x = F.x + Math.cos(a) * 7, z = F.z + Math.sin(a) * 7, type = pickFish(sea, true);
             if (fishOk(type, x, z) && fishOk(type, F.x, F.z)) {
               const f = addFish(type, x, z);
               F.fish = f;
@@ -5872,9 +5906,8 @@ $("#catchFree").addEventListener("click", () => {
   $("#catch").hidden = true;
   if (lastCatch && game.driveCar) {
     const c = game.driveCar, x = c.x + Math.sin(c.h) * 3, z = c.z + Math.cos(c.h) * 3;
-    if (anyWater(x, z)) {
+    if (fishOk(lastCatch.type, x, z)) {
       const f = addFish(lastCatch.type, x, z);
-      f.free = !fishOk(lastCatch.type, x, z);
       f.flee = 2.5;
       splash(x, z, true);
     }
@@ -6900,6 +6933,18 @@ function renderItems() {
   const cat = CATS.find((c) => c.id === game.curCat);
   if (cat.special === "fang") {
     for (const ft of Object.keys(FISH)) {
+      if (FISH[ft].prot) {
+        const b2 = document.createElement("button");
+        b2.className = "it fang prot";
+        b2.innerHTML = `<span class="ball">${thumbs["F_" + ft] ? `<img alt="" src="${thumbs["F_" + ft]}">` : ""}</span><span>${FISH[ft].label}</span><small>geschützt</small>`;
+        b2.addEventListener("click", () => {
+          ac();
+          plop();
+          hint(FISH[ft].plural + " sind geschützt. Man darf sie nicht angeln, nur anschauen!", 3500);
+        });
+        el.appendChild(b2);
+        continue;
+      }
       const n = catchBook[ft] || 0, rec = catchRec[ft], b = document.createElement("button");
       b.className = "it fang" + (n ? "" : " none");
       b.innerHTML = `<span class="ball">${thumbs["F_" + ft] ? `<img alt="" src="${thumbs["F_" + ft]}">` : ""}${n ? `<span class="cnt">${n}</span>` : ""}</span><span>${n ? FISH[ft].label : "???"}</span><small>${n && rec ? "Rekord " + fmtLen(rec) : "noch keiner"}</small>`;
@@ -7627,7 +7672,7 @@ const ORDERS = [
   { id: "welt-entdecken", text: "Entdecke eine andere Welt.", tip: "Fahr mit der Fähre durch das Seetor oder mit dem Zug durch den Tunnel.", on: "reise", taler: 12 },
   { id: "markt-verkaufen", text: "Verkauf Fische auf dem Markt.", tip: "Bau einen Markt. Dann lauf hin und tippe auf Verkaufen.", on: "markt:verkauft", taler: 4 },
   { id: "haus-bauen", text: "Bau ein neues Haus.", tip: "Unter Häuser ein Haus wählen und auf die Wiese tippen. Häuser kosten Holz.", on: "gebaut", when: (d) => ["haus", "villa", "hochhaus", "feuerwache", "garage"].includes(d.id), taler: 5 },
-  { id: "fisch-meer", text: "Fang einen Fisch im Meer.", tip: "Im Meer schwimmen Thunfische, Haie und Marline.", on: "fang:geaendert", when: fromSea, taler: 6 },
+  { id: "fisch-meer", text: "Fang einen Fisch im Meer.", tip: "Im Meer schwimmen Makrelen, Thunfische und Marline.", on: "fang:geaendert", when: fromSea, taler: 6 },
   { id: "baeume-faellen", text: "Fäll zwei Bäume.", tip: "Lauf mit dem Männchen zu einem Baum und tippe auf Holz fällen.", on: "baum:gefaellt", count: 2, taler: 4 },
   { id: "zug-fahren", text: "Fahr mit dem Zug mit.", tip: "Lauf zum Bahnhof. Wenn der Zug hält, tippe auf Einsteigen.", on: "mitfahren", taler: 5 },
   { id: "fische-bringen", text: "Bring drei Fische.", tip: "Fang Fische mit dem Boot und leg sie in den Eimer.", give: { fisch: 3 }, taler: 12 },
@@ -8987,7 +9032,8 @@ button.oc:active{transform:translateY(2px);}
 .it .lock{position:absolute;right:-2px;bottom:-2px;width:28px;height:28px;z-index:1;}
 .it .lock svg{width:28px;height:28px;}
 .it .ballwrap{position:relative;}
-@media (max-width:760px){#hint{top:calc(env(safe-area-inset-top,0px) + 160px);width:max-content;max-width:calc(100vw - 40px);box-sizing:border-box;}}</style>
+@media (max-width:760px){#hint{top:calc(env(safe-area-inset-top,0px) + 160px);width:max-content;max-width:calc(100vw - 40px);box-sizing:border-box;}}
+.it.prot small{color:#2E8B57;font-weight:700;}</style>
 </head>
 <body>
 <canvas id="c"></canvas>

@@ -15,7 +15,7 @@ export const ORDERS = [
   { id: 'welt-entdecken', text: 'Entdecke eine andere Welt.', tip: 'Fahr mit der Fähre durch das Seetor oder mit dem Zug durch den Tunnel.', on: 'reise', taler: 12 },
   { id: 'markt-verkaufen', text: 'Verkauf Fische auf dem Markt.', tip: 'Bau einen Markt. Dann lauf hin und tippe auf Verkaufen.', on: 'markt:verkauft', taler: 4 },
   { id: 'haus-bauen', text: 'Bau ein neues Haus.', tip: 'Unter Häuser ein Haus wählen und auf die Wiese tippen. Häuser kosten Holz.', on: 'gebaut', when: (d) => ['haus', 'villa', 'hochhaus', 'feuerwache', 'garage'].includes(d.id), taler: 5 },
-  { id: 'fisch-meer', text: 'Fang einen Fisch im Meer.', tip: 'Im Meer schwimmen Thunfische, Haie und Marline.', on: 'fang:geaendert', when: fromSea, taler: 6 },
+  { id: 'fisch-meer', text: 'Fang einen Fisch im Meer.', tip: 'Im Meer schwimmen Makrelen, Thunfische und Marline.', on: 'fang:geaendert', when: fromSea, taler: 6 },
   { id: 'baeume-faellen', text: 'Fäll zwei Bäume.', tip: 'Lauf mit dem Männchen zu einem Baum und tippe auf Holz fällen.', on: 'baum:gefaellt', count: 2, taler: 4 },
   { id: 'zug-fahren', text: 'Fahr mit dem Zug mit.', tip: 'Lauf zum Bahnhof. Wenn der Zug hält, tippe auf Einsteigen.', on: 'mitfahren', taler: 5 },
   { id: 'fische-bringen', text: 'Bring drei Fische.', tip: 'Fang Fische mit dem Boot und leg sie in den Eimer.', give: { fisch: 3 }, taler: 12 },

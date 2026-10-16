@@ -67,7 +67,8 @@ for (const f of FISH_LIST) {
   add(S.wow ? `Wow, ein ${S.label}!` : `Du hast ${S.art || 'einen'} ${S.label} gefangen!`);
   if (f.bigCatch) add(f.bigCatch.title);
   add(`${S.plural} gibt es ${S.where}.`);
-  add(`${S.plural} leben eigentlich ${S.where}.`);
+  add(`${S.plural} leben ${S.where}.`);
+  if (S.prot) { add(`Ein ${S.label}!`); add(`${S.plural} sind geschützt.`); }
 }
 add('Neuer Rekord!');
 add('Willkommen in der neuen Welt!');

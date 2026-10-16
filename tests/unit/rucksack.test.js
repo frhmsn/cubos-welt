@@ -1,7 +1,7 @@
 // Rucksack und Aufträge: Taler, Holz, Eimer, Kaufen, Auftrag annehmen, erledigen, abholen.
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ORDERS, ORDER_EVENTS } from '../../src/content/orders/index.js';
-import { FISH_LIST } from '../../src/content/fish/index.js';
+import { FISH_LIST, LAKE_CATCH, SEA_CATCH, isProtected } from '../../src/content/fish/index.js';
 import { VEHICLE_LIST } from '../../src/content/vehicles/index.js';
 
 let ev, r, o;
@@ -31,6 +31,24 @@ describe('Inhalte', () => {
   });
 });
 
+describe('Geschützte Tiere', () => {
+  it('Hai und andere geschützte Arten beißen nie an und kommen nicht in den Eimer', () => {
+    expect(isProtected('hai')).toBe(true);
+    for (const [id] of [...LAKE_CATCH, ...SEA_CATCH]) expect(isProtected(id), id).toBe(false);
+    for (const L of [LAKE_CATCH, SEA_CATCH]) expect(L.reduce((a, [, w]) => a + w, 0)).toBeCloseTo(1, 6);
+    expect(r.putInBucket('hai')).toBe(false);
+    expect(r.putInBucket('makrele')).toBe(true);
+    expect(r.eimer()).toEqual({ makrele: 1 });
+    r.mergeRucksack({ eimer: { hai: 3 } });
+    expect(r.eimer().hai).toBeUndefined();
+  });
+  it('kleine Süßwasserfische nur im See, Meeresfische nur im Meer', () => {
+    for (const f of FISH_LIST) expect(f.habitat.length, f.id).toBe(1);
+    const lake = FISH_LIST.filter((f) => f.habitat[0] === 'see').map((f) => f.id).sort();
+    expect(lake).toEqual(['barsch', 'hecht', 'karpfen', 'stoer', 'wels']);
+  });
+});
+
 describe('Rucksack', () => {
   it('startet mit Holz, zählt Taler und Fische, kauft nur mit genug Talern', () => {
     expect(r.holz()).toBe(r.START.holz);
@@ -40,7 +58,7 @@ describe('Rucksack', () => {
     expect(r.buy('motorboot', 30)).toBe(true);
     expect(r.owns('motorboot')).toBe(true);
     expect(r.taler()).toBe(10);
-    r.putInBucket('makrele'); r.putInBucket('makrele'); r.putInBucket('hai');
+    r.putInBucket('makrele'); r.putInBucket('makrele'); r.putInBucket('thunfisch');
     expect(r.fishCount()).toBe(3);
     expect(r.takeFish(2)).toBe(2);
     expect(r.fishCount()).toBe(1);
@@ -50,7 +68,7 @@ describe('Rucksack', () => {
   });
   it('Welt-Code: größerer Wert gewinnt, Gekauftes kommt dazu', () => {
     r.addTaler(5);
-    expect(r.mergeRucksack({ taler: 3, holz: 50, eimer: { hai: 2 }, gekauft: { goldlambo: true } })).toBe(true);
+    expect(r.mergeRucksack({ taler: 3, holz: 50, eimer: { thunfisch: 2 }, gekauft: { goldlambo: true } })).toBe(true);
     expect(r.taler()).toBe(5); expect(r.holz()).toBe(50); expect(r.owns('goldlambo')).toBe(true); expect(r.fishCount()).toBe(2);
     expect(r.mergeRucksack({ taler: 1 })).toBe(false);
   });

@@ -39,14 +39,20 @@ export const FISH_BY_ID = Object.fromEntries(FISH_LIST.map((f) => [f.id, f]));
 
 /**
  * Kurzform für die Spielsysteme (gleiche Felder wie früher, damit Spielstände und Code passen):
- * label, plural, art, len, sil, speed, jump, uw, aq, rs, wow, where, taler (Marktpreis)
+ * label, plural, art, len, sil, speed, jump, uw, aq, rs, wow, where, taler (Marktpreis), prot (geschützt)
  */
 export const FISH = Object.fromEntries(FISH_LIST.map((f) => [f.id, {
   label: f.label, plural: f.plural, art: f.article, len: f.length,
   sil: f.scale.shadow, speed: f.speed, jump: f.jumps ? 1 : 0, uw: f.scale.underwater, aq: f.scale.aquarium,
-  rs: f.scale.rod, wow: f.wow ? 1 : 0, where: whereText(f.habitat), taler: f.taler,
+  rs: f.scale.rod, wow: f.wow ? 1 : 0, where: whereText(f.habitat), taler: f.taler, prot: f.protected ? 1 : 0,
 }]));
 
 /** Spawn-Tabellen [[id, Gewicht], ...] je Gewässer. */
 export const LAKE_FISH = FISH_LIST.filter((f) => f.spawn.see).map((f) => [f.id, f.spawn.see]);
 export const SEA_FISH = FISH_LIST.filter((f) => f.spawn.meer).map((f) => [f.id, f.spawn.meer]);
+/** Geschützte Arten: schwimmen herum, beißen aber nie an und kommen nicht in den Eimer. */
+export const isProtected = (id) => !!(FISH_BY_ID[id] && FISH_BY_ID[id].protected);
+/** Was an der Angel anbeißen kann, je Gewässer (ohne geschützte Arten, Gewichte neu auf 1 gerechnet). */
+const catchable = (L) => { const l = L.filter(([id]) => !isProtected(id)), s = l.reduce((a, [, w]) => a + w, 0); return l.map(([id, w]) => [id, w / s]); };
+export const LAKE_CATCH = catchable(LAKE_FISH);
+export const SEA_CATCH = catchable(SEA_FISH);

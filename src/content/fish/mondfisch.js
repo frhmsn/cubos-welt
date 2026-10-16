@@ -5,6 +5,7 @@ export default {
   length: [1, 3], // Meter, zufällig beim Fang
   habitat: ['meer'],
   taler: 10, // so viele Taler gibt der Markt für einen Fisch
+  protected: true, // geschützt: beißt nicht an, nur anschauen (kommt nie in den Eimer)
   spawn: { meer: .05 }, // Häufigkeit je Gewässer
   speed: .3, jumps: false,
   scale: { shadow: 1.8, underwater: 1, aquarium: .28, rod: .9, jump: 1.1 },
