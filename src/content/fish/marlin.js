@@ -4,6 +4,7 @@ export default {
   label: 'Blauer Marlin', plural: 'Blaue Marline',
   length: [1.5, 4], // Meter, zufällig beim Fang
   habitat: ['meer'],
+  taler: 12, // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: .02 }, // Häufigkeit je Gewässer
   speed: 1.7, jumps: true,
   scale: { shadow: 2.4, underwater: .95, aquarium: .23, rod: .8, jump: 1.1 },

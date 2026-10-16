@@ -16,8 +16,19 @@
 //   'reise'             Reise in eine andere Welt beendet. Daten: { kind ('train'/'ferry'), neu ('empty'/'sample'/'insel'/null) }
 //   'werkstatt:fertig'  Bauwerkstatt mit Fertig geschlossen
 //   'welt:gespeichert'  Welt mit dem Wolken-Knopf oder im Menü gespeichert
-//   'aufgabe:geschafft' Aufgabe erledigt. Daten: { chapter, task, stars }
-//   'kapitel:geschafft' Kapitel komplett. Daten: { chapter, bonus }
+//   'bild'              Jedes Bild der Spielschleife (core/loop.js). Daten: { dt }. Für kleine Prüfungen wie "Ist ein Ort in der Nähe?"
+//   'rucksack:geaendert' Taler, Holz, Eimer oder Gekauftes haben sich geändert. Daten: { why }
+//   'baum:gefaellt'     Baum mit dem Männchen gefällt. Daten: { type, holz }
+//   'markt:verkauft'    Fische auf dem Markt verkauft. Daten: { fische, taler }
+//   'gekauft'           Etwas mit Talern gekauft. Daten: { id }
+//   'tuer'              Tür auf- oder zugemacht. Daten: { auf }
+//   'ort:antippen'      Im Baumodus ein Auftragshaus oder einen Markt angetippt. Daten: { station }
+//   'kaufen:frage'      Gesperrtes Ding im Inventar angetippt, Kaufen-Fenster soll aufgehen. Daten: { id }
+//   'auftrag:angenommen' Auftrag gewählt oder abgebrochen. Daten: { id } (null: abgebrochen)
+//   'auftrag:fortschritt' Ein Schritt eines Auftrags geschafft. Daten: { id, cnt }
+//   'auftrag:fertig'    Auftrag erledigt, Taler warten im Auftragshaus. Daten: { id }
+//   'auftrag:abgeholt'  Taler für einen Auftrag abgeholt. Daten: { id, taler }
+// Nur im ausgebauten Aufgabenbuch (src/extras/aufgabenbuch): 'aufgabe:geschafft', 'kapitel:geschafft', 'aufgaben:geladen'.
 
 const handlers = new Map();
 

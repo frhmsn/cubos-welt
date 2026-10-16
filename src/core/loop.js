@@ -9,7 +9,7 @@ import { updateCrossings, updateTrains } from '../systems/trains.js';
 import { updateFerry } from '../systems/ferries.js';
 import { updateAnimal } from '../systems/animals.js';
 import { updateDay } from '../render/daynight.js';
-import { updateGarages, updateLights } from '../render/lights.js';
+import { updateDoors, updateGarages, updateLights } from '../render/lights.js';
 import { bc, placeBuildCam } from '../render/build-camera.js';
 import { updateDrive, updateWalk } from '../systems/player.js';
 import { updateStationUI } from '../ui/station-panel.js';
@@ -26,6 +26,7 @@ import { focus } from './focus.js';
 import { saveWorld } from './worlds.js';
 import { dreamAutoOff, renderDream } from '../render/dream.js';
 import { updateSparkles } from '../render/sparkles.js';
+import { emit } from './events.js';
 
 // ---------- Schleife ----------
 function resize(){
@@ -52,7 +53,7 @@ function frame(now){
   if(game.mode==='build'||game.mode==='edit')focus.set(bc.x,0,bc.z); else if(game.mode==='walk')focus.set(pl.x,0,pl.z); else if(game.mode==='drive'&&game.driveCar)focus.set(game.driveCar.x,0,game.driveCar.z); else if(game.mode==='ride'&&game.rideTrain)focus.set(game.rideTrain.x,0,game.rideTrain.z);
   const night=updateDay(dt,focus);
   updateSparkles(dt,focus,night,game.mode!=='edit'&&!subUnder());
-  updateLights(dt,night); updateGarages(dt);
+  updateLights(dt,night); updateGarages(dt); updateDoors(dt);
   if(!game.traveling){
     updateTrains(dt);
     for(const f of ferries.slice())updateFerry(f,dt);
@@ -63,6 +64,7 @@ function frame(now){
   updateCrossings(dt);
   if(game.mode==='ride')updateRide(dt);
   updateStationUI(); updateAquaUI(); updateAquariums(dt);
+  emit('bild',{dt});
   portalMat.color.setHSL((now*.00008)%1,.8,.7); portalMat.opacity=.55+.2*Math.sin(now*.003);
   blink+=dt; const on=Math.floor(blink*3)%2===0; polBlue.emissiveIntensity=on?2:.1; polRed.emissiveIntensity=on?.1:2;
   for(let k=pops.length-1;k>=0;k--){const p=pops[k];p.t+=dt*4;const t=Math.min(p.t,1),s=1+2.2*Math.pow(t-1,3)+1.2*Math.pow(t-1,2);p.g.scale.setScalar(Math.max(.05,s));if(t>=1){p.g.scale.setScalar(1);pops.splice(k,1);}if(!p.g.matrixAutoUpdate)p.g.updateMatrix();}

@@ -29,7 +29,8 @@ for (const v of graph.keys()) if (!I.has(v)) sc(v);
 const cyc = sccs.filter((c) => c.length > 1);
 // Module, die main.js nie lädt, laufen nie (z. B. ein UI-Modul, das nur Knöpfe verdrahtet)
 const seen = new Set(); (function go(v) { if (seen.has(v)) return; seen.add(v); for (const w of allEdges.get(v) || []) go(w); })('main.js');
-const orphans = [...graph.keys()].filter((f) => !seen.has(f));
+// src/extras/ enthält ausgebaute Erweiterungen, die absichtlich nicht geladen werden
+const orphans = [...graph.keys()].filter((f) => !seen.has(f) && !f.startsWith('extras' + path.sep));
 if (orphans.length) { console.log('NICHT GELADEN (von main.js aus nicht erreichbar): ' + orphans.join(', ')); process.exitCode = 1; }
 if (process.argv.includes('--free')) console.log(sccs.filter((c) => c.length === 1).map((c) => c[0]).sort().join('\n'));
 else { console.log(`${graph.size} Module, ${cyc.length} Zyklus-Gruppe(n)`); for (const c of cyc) console.log(`Zyklus mit ${c.length} Modulen: ${c.sort().join(', ')}`); }

@@ -6,7 +6,7 @@ import { ITEMS } from '../content/catalog.js';
 
 let tiles=[], groundM=[], objM=[], cols=[];
 const cars=[], animals=[], pops=[];
-const lightMap=new Map(), garages=new Map(), flames=new Map(), crossings=new Map(), aquariums=new Map();
+const lightMap=new Map(), doors=new Map(), garages=new Map(), flames=new Map(), crossings=new Map(), aquariums=new Map();
 const trains=[], ferries=[];
 const RAILT=new Set(['schiene','bahnhof','uebergang','tunnel']), ROADT=new Set(['strasse','uebergang']), WATT=new Set(['wasser','meer','anleger','seetor']);
 const gAt=(i,j)=>inb(i,j)?tiles[I(i,j)].g:null;
@@ -30,4 +30,4 @@ function orient(i,j){
 /** Neue Felder-Arrays setzen (beim Zurücksetzen und Vergrößern der Welt). */
 function setWorldArrays(t,g,o,c){tiles=t;groundM=g;objM=o;cols=c;}
 
-export { FLAT, RAILT, ROADT, WATT, animals, aquariums, cars, cols, crossings, ferries, flames, freeAt, gAt, garages, groundM, isRail, isRoad, isWater, lightMap, objM, orient, pops, rot, setWorldArrays, tiles, toWorld, trains };
+export { FLAT, RAILT, ROADT, WATT, animals, aquariums, cars, cols, crossings, doors, ferries, flames, freeAt, gAt, garages, groundM, isRail, isRoad, isWater, lightMap, objM, orient, pops, rot, setWorldArrays, tiles, toWorld, trains };

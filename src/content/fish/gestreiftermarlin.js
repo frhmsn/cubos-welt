@@ -4,6 +4,7 @@ export default {
   label: 'Gestreifter Marlin', plural: 'Gestreifte Marline',
   length: [1.4, 3.5], // Meter, zufällig beim Fang
   habitat: ['meer'],
+  taler: 12, // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: .01 }, // Häufigkeit je Gewässer, sehr selten
   speed: 1.8, jumps: true,
   scale: { shadow: 2.2, underwater: 1, aquarium: .25, rod: .82, jump: 1.1 },

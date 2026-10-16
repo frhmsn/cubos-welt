@@ -4,6 +4,7 @@ export default {
   label: 'Stör', plural: 'Störe',
   length: [.8, 2.5], // Meter, zufällig beim Fang
   habitat: ['see'], // lebt im Fluss und laicht dort
+  taler: 8, // so viele Taler gibt der Markt für einen Fisch
   spawn: { see: .1 }, // Häufigkeit je Gewässer
   speed: .6, jumps: false,
   scale: { shadow: 1.7, underwater: 1.2, aquarium: .28, rod: .9, jump: 1.1 },

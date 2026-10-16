@@ -4,6 +4,7 @@ export default {
   label: 'Hecht', plural: 'Hechte',
   length: [.45, 1.3], // Meter, zufällig beim Fang
   habitat: ['see'],
+  taler: 4, // so viele Taler gibt der Markt für einen Fisch
   spawn: { see: .2 }, // Häufigkeit je Gewässer
   speed: 1.3, jumps: true,
   scale: { shadow: 1.2, underwater: 1.4, aquarium: .4, rod: 1.2, jump: 1.1 },

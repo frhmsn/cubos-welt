@@ -6,14 +6,15 @@
 //
 // Quellen:
 // 1. Feste Texte in hint(...), speak(...) und stopFishing(...) überall in src (Teile mit Variablen fallen weg).
-// 2. Texte aus den Inhaltsdateien: Aufgaben, Fische, Wale, Bildstile, so zusammengesetzt wie im Spiel.
+// 2. Texte aus den Inhaltsdateien: Aufträge, Fische, Wale, Bildstile, Taler-Zahlen, so zusammengesetzt wie im Spiel.
 // Sätze, die hier fehlen (z. B. mit Weltnamen), liest im Spiel die Stimme des Geräts.
 import fs from 'node:fs';
 import path from 'node:path';
 import * as acorn from 'acorn';
 import * as walk from 'acorn-walk';
 import { splitSpeech } from '../src/systems/voice-split.js';
-import { CHAPTERS } from '../src/content/quests/index.js';
+import { ORDERS } from '../src/content/orders/index.js';
+import { BUILDING_LIST } from '../src/content/buildings/index.js';
 import { FISH, FISH_LIST } from '../src/content/fish/index.js';
 import { WHALE } from '../src/content/whales/index.js';
 
@@ -33,6 +34,8 @@ function files(dir) {
   });
 }
 for (const f of files(path.join(root, 'src'))) {
+  // Ausgebaute Erweiterungen sprechen nicht
+  if (f.includes(path.sep + 'extras' + path.sep)) continue;
   const src = fs.readFileSync(f, 'utf8');
   if (!/\b(hint|speak|stopFishing)\(/.test(src)) continue;
   const ast = acorn.parse(src, { ecmaVersion: 'latest', sourceType: 'module' });
@@ -54,13 +57,11 @@ for (const f of files(path.join(root, 'src'))) {
 }
 
 // ---------- 2. Inhalte ----------
-add('Geschafft! Super! Du hast einen Stern bekommen. Nächste Aufgabe: Deine nächste Aufgabe: Toll!');
-for (const c of CHAPTERS) {
-  add(c.title);
-  add(`Das Kapitel ${c.title} ist geschafft.`);
-  if (c.bonus) add(`Du bekommst ${c.bonus.akk || c.bonus.text}!`);
-  for (const t of c.tasks) { add(t.text); add(t.tip); }
-}
+add('Dein Auftrag: Super! Toll!');
+for (const o of ORDERS) { add(o.text); add(o.tip); }
+// Taler-Belohnungen (Aufträge, Markt) und Holz vom Fällen
+for (let n = 1; n <= 150; n++) add(`Du bekommst ${n} Taler!`);
+for (const n of new Set(BUILDING_LIST.filter((b) => b.chop).map((b) => b.chop))) add(`Tock, tock! ${n} Holz für dich!`);
 for (const f of FISH_LIST) {
   const S = FISH[f.id];
   add(S.wow ? `Wow, ein ${S.label}!` : `Du hast ${S.art || 'einen'} ${S.label} gefangen!`);

@@ -89,6 +89,8 @@ const barsch = {
   length: [0.18, 0.45],
   // Meter, zufällig beim Fang
   habitat: ["see"],
+  taler: 2,
+  // so viele Taler gibt der Markt für einen Fisch
   spawn: { see: 0.3 },
   // Häufigkeit je Gewässer
   speed: 0.8,
@@ -111,6 +113,8 @@ const hecht = {
   length: [0.45, 1.3],
   // Meter, zufällig beim Fang
   habitat: ["see"],
+  taler: 4,
+  // so viele Taler gibt der Markt für einen Fisch
   spawn: { see: 0.2 },
   // Häufigkeit je Gewässer
   speed: 1.3,
@@ -133,6 +137,8 @@ const karpfen = {
   length: [0.3, 0.9],
   // Meter, zufällig beim Fang
   habitat: ["see"],
+  taler: 3,
+  // so viele Taler gibt der Markt für einen Fisch
   spawn: { see: 0.25 },
   // Häufigkeit je Gewässer
   speed: 0.5,
@@ -158,6 +164,8 @@ const wels = {
   length: [0.8, 2.6],
   // Meter, zufällig beim Fang
   habitat: ["see"],
+  taler: 6,
+  // so viele Taler gibt der Markt für einen Fisch
   spawn: { see: 0.15 },
   // Häufigkeit je Gewässer
   speed: 0.45,
@@ -189,6 +197,8 @@ const stoer = {
   // Meter, zufällig beim Fang
   habitat: ["see"],
   // lebt im Fluss und laicht dort
+  taler: 8,
+  // so viele Taler gibt der Markt für einen Fisch
   spawn: { see: 0.1 },
   // Häufigkeit je Gewässer
   speed: 0.6,
@@ -221,6 +231,8 @@ const thunfisch = {
   length: [0.8, 2.2],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
+  taler: 6,
+  // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: 0.23 },
   // Häufigkeit je Gewässer
   speed: 1.6,
@@ -244,6 +256,8 @@ const hai = {
   length: [1.5, 3.5],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
+  taler: 10,
+  // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: 0.09 },
   // Häufigkeit je Gewässer
   speed: 1.2,
@@ -278,6 +292,8 @@ const makrele = {
   length: [0.25, 0.5],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
+  taler: 2,
+  // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: 0.16 },
   // Häufigkeit je Gewässer
   speed: 1.4,
@@ -305,6 +321,8 @@ const bonito = {
   length: [0.4, 0.8],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
+  taler: 3,
+  // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: 0.11 },
   // Häufigkeit je Gewässer
   speed: 1.5,
@@ -332,6 +350,8 @@ const mahimahi = {
   length: [0.6, 1.6],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
+  taler: 5,
+  // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: 0.09 },
   // Häufigkeit je Gewässer
   speed: 1.3,
@@ -357,6 +377,8 @@ const barrakuda = {
   length: [0.6, 1.8],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
+  taler: 5,
+  // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: 0.08 },
   // Häufigkeit je Gewässer
   speed: 1.4,
@@ -384,6 +406,8 @@ const schwertfisch = {
   length: [1.2, 3],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
+  taler: 10,
+  // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: 0.05 },
   // Häufigkeit je Gewässer
   speed: 1.5,
@@ -415,6 +439,8 @@ const marlin = {
   length: [1.5, 4],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
+  taler: 12,
+  // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: 0.02 },
   // Häufigkeit je Gewässer
   speed: 1.7,
@@ -443,6 +469,8 @@ const schwarzermarlin = {
   length: [1.6, 4.5],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
+  taler: 12,
+  // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: 0.01 },
   // Häufigkeit je Gewässer, sehr selten
   speed: 1.6,
@@ -472,6 +500,8 @@ const gestreiftermarlin = {
   length: [1.4, 3.5],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
+  taler: 12,
+  // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: 0.01 },
   // Häufigkeit je Gewässer, sehr selten
   speed: 1.8,
@@ -500,6 +530,8 @@ const mondfisch = {
   length: [1, 3],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
+  taler: 10,
+  // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: 0.05 },
   // Häufigkeit je Gewässer
   speed: 0.3,
@@ -524,6 +556,8 @@ const rochen = {
   length: [0.5, 2],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
+  taler: 5,
+  // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: 0.06 },
   // Häufigkeit je Gewässer
   speed: 0.7,
@@ -547,6 +581,8 @@ const kalmar = {
   length: [0.3, 1.2],
   // Meter, zufällig beim Fang
   habitat: ["meer"],
+  taler: 4,
+  // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: 0.04 },
   // Häufigkeit je Gewässer
   speed: 1.1,
@@ -574,7 +610,7 @@ const FISH_LIST = [barsch, hecht, karpfen, wels, stoer, thunfisch, hai, makrele,
 const WATER$1 = { see: "wasser", meer: "meer" };
 const whereText = (h) => h.includes("see") && h.includes("meer") ? "in Seen, Flüssen und im Meer" : h.includes("meer") ? "im Meer" : "in Seen und Flüssen";
 function check(f) {
-  const need = ["id", "label", "plural", "length", "habitat", "spawn", "speed", "scale", "model"];
+  const need = ["id", "label", "plural", "length", "habitat", "taler", "spawn", "speed", "scale", "model"];
   for (const k of need) if (f[k] == null) throw new Error(`Fisch ${f.id || "?"}: Feld "${k}" fehlt`);
   for (const h of f.habitat) if (!WATER$1[h]) throw new Error(`Fisch ${f.id}: unbekanntes Habitat "${h}"`);
   for (const h of Object.keys(f.spawn)) if (!f.habitat.includes(h)) throw new Error(`Fisch ${f.id}: spawn "${h}" passt nicht zum Habitat`);
@@ -594,7 +630,8 @@ const FISH = Object.fromEntries(FISH_LIST.map((f) => [f.id, {
   aq: f.scale.aquarium,
   rs: f.scale.rod,
   wow: f.wow ? 1 : 0,
-  where: whereText(f.habitat)
+  where: whereText(f.habitat),
+  taler: f.taler
 }]));
 const LAKE_FISH = FISH_LIST.filter((f) => f.spawn.see).map((f) => [f.id, f.spawn.see]);
 const SEA_FISH = FISH_LIST.filter((f) => f.spawn.meer).map((f) => [f.id, f.spawn.meer]);
@@ -799,8 +836,8 @@ const goldlambo = {
   label: "Gold-Lambo",
   category: "auto",
   // Inventar-Kategorie: 'auto' oder 'see'
-  bonus: "stadt",
-  // erscheint erst, wenn dieses Kapitel geschafft ist
+  price: 60,
+  // kostet so viele Taler (Rucksack); vorher ist er im Inventar mit Schloss
   speed: 7,
   max: 18,
   // Beschleunigung und Höchstgeschwindigkeit
@@ -813,16 +850,52 @@ const goldlambo = {
     box2(g, "#7A5A10", 0.05, 0.26, 0.05, 0.33, 0.64, -0.96);
     for (const x of [-0.12, 0.12]) box2(g, "#FFFFFF", 0.08, 0.02, 2.2, x, 0.53, 0, false);
     for (const z of [0.55, -0.2, -0.75]) {
-      const st = box2(g, "#FFFFFF", 0.2, 0.03, 0.2, 0, 0.56, z, false);
-      st.rotation.y = Math.PI / 4;
+      const st2 = box2(g, "#FFFFFF", 0.2, 0.03, 0.2, 0, 0.56, z, false);
+      st2.rotation.y = Math.PI / 4;
     }
     wheels2(g, [-0.46, 0.46], [-0.7, 0.72], 0.22);
     lights2(g, 0.34, 1.12, -1.12, [-0.3, 0.3]);
   }
 };
-const VEHICLE_LIST = [lambo, goldlambo, ferrari, polizei, feuerwehrauto, bus, boot, uboot];
+const motorboot = {
+  id: "motorboot",
+  label: "Motorboot",
+  category: "see",
+  // Inventar-Kategorie: 'auto' oder 'see'
+  price: 30,
+  // kostet so viele Taler (Rucksack); vorher ist es im Inventar mit Schloss
+  speed: 7,
+  max: 20,
+  // Beschleunigung und Höchstgeschwindigkeit (Fischerboot: 3 und 9)
+  boat: true,
+  // fährt nur auf Wasser, man kann damit angeln
+  // Fahrzeug schaut nach +z.
+  model({ g, M: M2, G: G2, BX: BX2, box: box2, mesh: mesh2, prof: prof2, glassMat: glassMat2, headMat: headMat2, bake: bake2 }) {
+    const hull = M2("#FAFAF7", { roughness: 0.35 }), red = M2("#E8343C", { roughness: 0.4 });
+    mesh2(prof2("mboat", [[-1.35, -0.05], [0.7, -0.05], [1.5, 0.3], [1.5, 0.42], [-1.35, 0.42]], 1.25), hull, 0, 0, 0, g);
+    mesh2(prof2("mboatS", [[-1.36, 0.2], [1.2, 0.2], [1.48, 0.3], [-1.36, 0.3]], 1.27), red, 0, 0, 0, g);
+    box2(g, "#C9A27A", 1.05, 0.04, 1.6, 0, 0.44, -0.45, false);
+    const ws = box2(g, glassMat2, 1.05, 0.32, 0.06, 0, 0.62, 0.5, false);
+    ws.rotation.x = -0.5;
+    for (const x of [-0.27, 0.27]) {
+      box2(g, "#2B3A4A", 0.4, 0.14, 0.42, x, 0.52, -0.05);
+      box2(g, "#2B3A4A", 0.4, 0.4, 0.1, x, 0.72, -0.27);
+    }
+    box2(g, "#2B3A4A", 0.9, 0.16, 0.4, 0, 0.52, -0.9);
+    const wh = mesh2(G2("mwheel", () => new THREE.TorusGeometry(0.11, 0.025, 6, 14)), "#1F1F1F", -0.27, 0.78, 0.28, g, false);
+    wh.rotation.x = -0.9;
+    box2(g, "#2B2F36", 0.34, 0.55, 0.3, 0, 0.5, -1.45);
+    box2(g, "#E8343C", 0.36, 0.12, 0.32, 0, 0.78, -1.45);
+    box2(g, "#2B2F36", 0.1, 0.45, 0.1, 0, 0.05, -1.5);
+    const rod = mesh2(G2("rod", () => new THREE.CylinderGeometry(0.025, 0.035, 1.7, 6)), "#3A2A1A", 0.5, 1, -0.7, g);
+    rod.rotation.x = 0.9;
+    mesh2(BX2(0.18, 0.18, 0.18), headMat2, -0.27, 0.9, 0.02, g, false);
+    return bake2(g);
+  }
+};
+const VEHICLE_LIST = [lambo, goldlambo, ferrari, polizei, feuerwehrauto, bus, boot, motorboot, uboot];
 const VEHICLE_BY_ID = Object.fromEntries(VEHICLE_LIST.map((v) => [v.id, v]));
-const vehicleItem = (v) => ({ kind: "car", label: v.label, speed: v.speed, max: v.max, ...v.siren ? { siren: true } : {}, ...v.boat ? { boat: true } : {}, ...v.sub ? { sub: true } : {}, ...v.bonus ? { bonus: v.bonus } : {} });
+const vehicleItem = (v) => ({ kind: "car", label: v.label, speed: v.speed, max: v.max, ...v.siren ? { siren: true } : {}, ...v.boat ? { boat: true } : {}, ...v.sub ? { sub: true } : {}, ...v.price ? { price: v.price } : {} });
 const hund = {
   id: "hund",
   label: "Hund",
@@ -916,13 +989,15 @@ const haus = {
   label: "Haus",
   category: "haus",
   // Inventar-Kategorie
+  holz: 5,
+  // kostet so viel Holz (Rucksack); beim Abreißen kommt es zurück
   house: true,
   // begehbar
   // Ein Feld ist 4x4 Einheiten, Mitte bei 0, Tür nach +z. Rückgabe: { g, cols, lights }
   model(seed, o, { mulberry: mulberry2, box: box2, shell: shell2, gable: gable2, chair: chair2 }) {
-    const r = mulberry2(seed), g = new THREE.Group(), cols2 = [];
-    const wall = ["#F6E6C8", "#CFE3F0", "#F4D2C4", "#DDEBCB", "#FFF1B8"][Math.floor(r() * 5)];
-    const roof = ["#C7472E", "#8E4A2F", "#3F5A73", "#B23A48"][Math.floor(r() * 4)];
+    const r2 = mulberry2(seed), g = new THREE.Group(), cols2 = [];
+    const wall = ["#F6E6C8", "#CFE3F0", "#F4D2C4", "#DDEBCB", "#FFF1B8"][Math.floor(r2() * 5)];
+    const roof = ["#C7472E", "#8E4A2F", "#3F5A73", "#B23A48"][Math.floor(r2() * 4)];
     shell2(g, cols2, { wall });
     gable2(g, 3.2, 3.2, 2.8, wall, roof);
     box2(g, "#9C4A3A", 0.32, 0.9, 0.32, 0.8, 3.55, -0.7);
@@ -942,6 +1017,8 @@ const villa = {
   label: "Villa",
   category: "haus",
   // Inventar-Kategorie
+  holz: 8,
+  // kostet so viel Holz (Rucksack); beim Abreißen kommt es zurück
   house: true,
   // begehbar
   // Ein Feld ist 4x4 Einheiten, Mitte bei 0, Tür nach +z. Rückgabe: { g, cols, lights }
@@ -966,6 +1043,8 @@ const hochhaus = {
   label: "Hochhaus",
   category: "haus",
   // Inventar-Kategorie
+  holz: 12,
+  // kostet so viel Holz (Rucksack); beim Abreißen kommt es zurück
   house: true,
   // begehbar
   // Ein Feld ist 4x4 Einheiten, Mitte bei 0, Tür nach +z. Rückgabe: { g, cols, lights }
@@ -992,6 +1071,8 @@ const feuerwache = {
   label: "Feuerwache",
   category: "haus",
   // Inventar-Kategorie
+  holz: 8,
+  // kostet so viel Holz (Rucksack); beim Abreißen kommt es zurück
   house: true,
   // begehbar
   // Ein Feld ist 4x4 Einheiten, Mitte bei 0, Tür nach +z. Rückgabe: { g, cols, lights }
@@ -1015,6 +1096,8 @@ const garage = {
   label: "Garage",
   category: "haus",
   // Inventar-Kategorie
+  holz: 4,
+  // kostet so viel Holz (Rucksack); beim Abreißen kommt es zurück
   house: true,
   // begehbar
   // Ein Feld ist 4x4 Einheiten, Mitte bei 0, Tür nach +z. Rückgabe: { g, cols, lights }
@@ -1048,11 +1131,88 @@ const garage = {
     return { g, cols: cols2, lights: [[0, 2.25, 0, 16773328, 1.1, 6]] };
   }
 };
+const auftragshaus = {
+  id: "auftragshaus",
+  label: "Auftragshaus",
+  category: "haus",
+  // Inventar-Kategorie
+  house: true,
+  // begehbar, Tür zur Straße
+  station: "auftraege",
+  // in der Nähe erscheint der Knopf "Aufträge" (ui/places.js)
+  // Ein Feld ist 4x4 Einheiten, Mitte bei 0, Tür nach +z. Rückgabe: { g, cols, lights }
+  model(seed, o, { G: G2, M: M2, box: box2, mesh: mesh2, shell: shell2, plant: plant2 }) {
+    const g = new THREE.Group(), cols2 = [], wall = "#FFE7A8", gold = M2("#FFC21A", { roughness: 0.35, metalness: 0.3, emissive: "#8A5A00", emissiveIntensity: 0.25 });
+    shell2(g, cols2, { w: 3.4, d: 3.4, h: 3, wall, doorW: 1.4, doorH: 2.3, floor: "#B98552" });
+    box2(g, "#3E7CC4", 3.8, 0.25, 3.8, 0, 3.12, 0);
+    box2(g, "#F6F1E4", 1.2, 1, 1.2, 0, 3.75, 0);
+    mesh2(G2("tower", () => new THREE.ConeGeometry(0.95, 1, 4)), M2("#3E7CC4", { flatShading: true }), 0, 4.75, 0, g).rotation.y = Math.PI / 4;
+    const coin = mesh2(G2("coinBig", () => new THREE.CylinderGeometry(0.42, 0.42, 0.1, 20)), gold, 0, 3.8, 0.62, g);
+    coin.rotation.x = Math.PI / 2;
+    box2(g, "#C98A00", 0.1, 0.42, 0.04, 0, 3.8, 0.68, false);
+    box2(g, "#F6F1E4", 1.5, 0.5, 0.08, 0, 2.6, 1.76);
+    box2(g, "#C9A65A", 0.12, 0.6, 0.12, -0.78, 2.6, 1.78);
+    box2(g, "#C9A65A", 0.12, 0.6, 0.12, 0.78, 2.6, 1.78);
+    for (let k = 0; k < 3; k++) box2(g, "#8B6A45", 1 - k * 0.2, 0.05, 0.02, 0, 2.74 - k * 0.12, 1.81, false);
+    box2(g, "#8B5A2B", 2.2, 0.95, 0.6, 0, 0.48, -0.7);
+    cols2.push(["b", -1.1, 1.1, -1, -0.4]);
+    box2(g, "#A8743E", 2.3, 0.08, 0.7, 0, 0.99, -0.7);
+    for (const [x, n] of [[-0.6, 3], [-0.3, 5], [0.5, 2]]) for (let k = 0; k < n; k++) mesh2(G2("coinS", () => new THREE.CylinderGeometry(0.13, 0.13, 0.05, 12)), gold, x, 1.06 + k * 0.055, -0.65, g, false);
+    box2(g, "#B98552", 2.2, 1.2, 0.06, 0, 1.9, -1.58);
+    for (const [x, y, c] of [[-0.7, 2.1, "#FFFFFF"], [-0.2, 1.85, "#FFF4CC"], [0.35, 2.15, "#DDF2FF"], [0.75, 1.8, "#FFFFFF"]]) box2(g, c, 0.38, 0.46, 0.02, x, y, -1.54, false);
+    plant2(g, 1.2, 0.9, 0.9);
+    plant2(g, -1.2, 0.9, 0.9);
+    return { g, cols: cols2, lights: [[0, 2.5, 0, 16769184, 1.2, 7]] };
+  }
+};
+const markt = {
+  id: "markt",
+  label: "Markt",
+  category: "haus",
+  // Inventar-Kategorie
+  rot: true,
+  // drehbar: nochmal antippen
+  station: "markt",
+  // in der Nähe erscheint der Knopf "Verkaufen" (ui/places.js)
+  holz: 6,
+  // kostet so viel Holz
+  // Ein Feld ist 4x4 Einheiten, Mitte bei 0, Vorderseite nach +z. Rückgabe: { g, cols, lights }
+  model(seed, o, { mulberry: mulberry2, G: G2, M: M2, box: box2, mesh: mesh2, fishModel: fishModel2 }) {
+    const r2 = mulberry2(seed), g = new THREE.Group(), cols2 = [];
+    for (const x of [-1.5, 1.5]) for (const z of [-0.9, 0.9]) {
+      mesh2(G2("mpost", () => new THREE.CylinderGeometry(0.07, 0.07, 2.6, 8)), "#8B6A45", x, 1.3, z, g);
+    }
+    for (let k = 0; k < 6; k++) {
+      const s = box2(g, k % 2 ? "#FFFFFF" : "#E8473C", 0.55, 0.08, 2.3, -1.375 + k * 0.55, 2.7, 0);
+      s.rotation.x = -0.12;
+    }
+    box2(g, "#E8473C", 3.3, 0.3, 0.06, 0, 2.5, 1.2, false);
+    box2(g, "#9B6A3C", 3, 0.9, 0.9, 0, 0.45, 0.4);
+    cols2.push(["b", -1.5, 1.5, -0.05, 0.85]);
+    box2(g, "#DDF2FF", 2.8, 0.06, 0.75, 0, 0.93, 0.4, false);
+    const kinds = ["makrele", "thunfisch", "barsch", "hecht", "bonito", "karpfen"];
+    for (let k = 0; k < 4; k++) {
+      const f = fishModel2(kinds[Math.floor(r2() * kinds.length)]);
+      f.scale.setScalar(0.55);
+      f.position.set(-1.05 + k * 0.7, 1.02, 0.4);
+      f.rotation.set(0, Math.PI / 2 + (r2() - 0.5) * 0.4, Math.PI / 2);
+      g.add(f);
+    }
+    for (const [x, z] of [[-1.2, -0.6], [-0.5, -0.7], [1.1, -0.6]]) box2(g, "#B98552", 0.6, 0.45, 0.5, x, 0.23, z);
+    box2(g, "#6E737A", 0.35, 0.3, 0.3, 0.9, 1.1, 0.2);
+    mesh2(G2("scaleP", () => new THREE.CylinderGeometry(0.22, 0.22, 0.03, 14)), "#C0C6CC", 0.9, 1.27, 0.2, g, false);
+    const coin = mesh2(G2("coinM", () => new THREE.CylinderGeometry(0.3, 0.3, 0.08, 18)), M2("#FFC21A", { roughness: 0.35, metalness: 0.3, emissive: "#8A5A00", emissiveIntensity: 0.25 }), 0, 3.05, 1.18, g);
+    coin.rotation.x = Math.PI / 2;
+    return { g, cols: cols2, lights: [[0, 2.3, 0.4, 16773328, 0.9, 6]] };
+  }
+};
 const aquarium = {
   id: "aquarium",
   label: "Aquarium",
   category: "haus",
   // Inventar-Kategorie
+  holz: 15,
+  // kostet so viel Holz (Rucksack); beim Abreißen kommt es zurück
   house: true,
   big: true,
   // begehbar, 3x3 Felder
@@ -1065,9 +1225,9 @@ const aquarium = {
     mesh2(G2("aqwin", () => new THREE.CylinderGeometry(R2 + 0.03, R2 + 0.03, 0.75, 56, 1, true, gap / 2 + 0.2, Math.PI * 2 - gap - 0.4)), winMat2, 0, 3.1, 0, g, false);
     mesh2(G2("aqbase", () => new THREE.CylinderGeometry(R2 + 0.05, R2 + 0.05, 0.35, 56, 1, true, gap / 2, Math.PI * 2 - gap)), trim, 0, 0.17, 0, g, false);
     mesh2(G2("aqcap", () => {
-      const r2 = new THREE.RingGeometry(R2 - 0.3, R2 + 0.2, 56);
-      r2.rotateX(-Math.PI / 2);
-      return r2;
+      const r3 = new THREE.RingGeometry(R2 - 0.3, R2 + 0.2, 56);
+      r3.rotateX(-Math.PI / 2);
+      return r3;
     }), trim, 0, H2 + 0.01, 0, g);
     const dome = mesh2(G2("aqdome", () => new THREE.SphereGeometry(R2 + 0.1, 48, 14, 0, Math.PI * 2, 0, Math.PI / 2)), M2("#5FC3DA", { side: DS, roughness: 0.35 }), 0, H2, 0, g);
     dome.scale.y = 0.42;
@@ -1101,25 +1261,25 @@ const aquarium = {
     mesh2(G2("tkglass", () => new THREE.CylinderGeometry(2.55, 2.55, 3.5, 44, 1, true)), tankGlass2, 0, 2.3, 0, g, false);
     mesh2(G2("tktop", () => new THREE.CylinderGeometry(2.75, 2.75, 0.3, 44)), "#2A3442", 0, 4.12, 0, g);
     mesh2(G2("tklight", () => {
-      const r2 = new THREE.RingGeometry(1.6, 2.45, 44);
-      r2.rotateX(Math.PI / 2);
-      return r2;
+      const r3 = new THREE.RingGeometry(1.6, 2.45, 44);
+      r3.rotateX(Math.PI / 2);
+      return r3;
     }), M2("#BFE9FF", { emissive: "#7FD8FF", emissiveIntensity: 0.9, side: DS }), 0, 3.96, 0, g, false);
-    const r = mulberry2(21), cor = ["#F27C9B", "#F2A541", "#B57BE0", "#E8504A", "#5FD1B5"];
+    const r2 = mulberry2(21), cor = ["#F27C9B", "#F2A541", "#B57BE0", "#E8504A", "#5FD1B5"];
     for (let k = 0; k < 26; k++) {
-      const a = r() * 6.283, rr = 0.4 + r() * 1.9, x = Math.sin(a) * rr, z = Math.cos(a) * rr;
+      const a = r2() * 6.283, rr = 0.4 + r2() * 1.9, x = Math.sin(a) * rr, z = Math.cos(a) * rr;
       const m = mesh2(G2("tweed", () => new THREE.ConeGeometry(0.07, 0.9, 4)), M2("#2E8B57", { flatShading: true }), x, 1.1, z, g, false);
-      m.scale.y = 0.6 + r() * 1.4;
+      m.scale.y = 0.6 + r2() * 1.4;
     }
     for (let k = 0; k < 10; k++) {
-      const a = r() * 6.283, rr = 0.5 + r() * 1.7;
+      const a = r2() * 6.283, rr = 0.5 + r2() * 1.7;
       const m = mesh2(G2("tcor", () => new THREE.IcosahedronGeometry(0.16, 0)), M2(cor[k % 5], { flatShading: true }), Math.sin(a) * rr, 0.78, Math.cos(a) * rr, g, false);
-      m.scale.set(1.3 + r(), 1.5 + r() * 2, 1.3 + r());
+      m.scale.set(1.3 + r2(), 1.5 + r2() * 2, 1.3 + r2());
     }
     for (let k = 0; k < 6; k++) {
-      const a = r() * 6.283, rr = r() * 2;
+      const a = r2() * 6.283, rr = r2() * 2;
       const m = mesh2(G2("trk", () => new THREE.DodecahedronGeometry(0.2, 0)), M2("#7D8288", { flatShading: true }), Math.sin(a) * rr, 0.75, Math.cos(a) * rr, g, false);
-      m.scale.setScalar(1 + r() * 1.5);
+      m.scale.setScalar(1 + r2() * 1.5);
     }
     box2(g, "#8B5A2B", 0.5, 0.32, 0.34, 0.9, 0.84, -0.6, false);
     box2(g, "#F2C230", 0.52, 0.06, 0.36, 0.9, 1.02, -0.6, false);
@@ -1146,18 +1306,20 @@ const baum = {
   label: "Baum",
   category: "natur",
   // Inventar-Kategorie
+  chop: 2,
+  // mit dem Männchen fällen gibt so viel Holz
   paint: true,
   // mit dem Finger malen
   // Ein Feld ist 4x4 Einheiten, Mitte bei 0, Tür nach +z. Rückgabe: { g, cols, lights }
   model(seed, o, { mulberry: mulberry2, G: G2, M: M2, mesh: mesh2 }) {
-    const r = mulberry2(seed), g = new THREE.Group(), cols2 = [];
-    const n = 2 + Math.floor(r() * 2);
+    const r2 = mulberry2(seed), g = new THREE.Group(), cols2 = [];
+    const n = 2 + Math.floor(r2() * 2);
     for (let k = 0; k < n; k++) {
-      const x = (r() - 0.5) * 2.6, z = (r() - 0.5) * 2.6, s = 0.85 + r() * 0.45;
+      const x = (r2() - 0.5) * 2.6, z = (r2() - 0.5) * 2.6, s = 0.85 + r2() * 0.45;
       mesh2(G2("trunk", () => new THREE.CylinderGeometry(0.12, 0.17, 1.3, 7)), "#7A5232", x, 0.65 * s, z, g).scale.setScalar(s);
-      const c = mesh2(G2("crown", () => new THREE.IcosahedronGeometry(1, 0)), M2(["#3E9B4F", "#4FAE45", "#2F8A47"][k % 3], { flatShading: true }), x, (1.7 + r() * 0.3) * s, z, g);
+      const c = mesh2(G2("crown", () => new THREE.IcosahedronGeometry(1, 0)), M2(["#3E9B4F", "#4FAE45", "#2F8A47"][k % 3], { flatShading: true }), x, (1.7 + r2() * 0.3) * s, z, g);
       c.scale.set(s, s * 1.1, s);
-      c.rotation.y = r() * 3;
+      c.rotation.y = r2() * 3;
       cols2.push(["c", x, z, 0.3]);
     }
     return { g, cols: cols2 };
@@ -1168,14 +1330,16 @@ const tanne = {
   label: "Tanne",
   category: "natur",
   // Inventar-Kategorie
+  chop: 3,
+  // mit dem Männchen fällen gibt so viel Holz
   paint: true,
   // mit dem Finger malen
   // Ein Feld ist 4x4 Einheiten, Mitte bei 0, Tür nach +z. Rückgabe: { g, cols, lights }
   model(seed, o, { mulberry: mulberry2, G: G2, M: M2, mesh: mesh2 }) {
-    const r = mulberry2(seed), g = new THREE.Group(), cols2 = [];
-    const n = 2 + Math.floor(r() * 2);
+    const r2 = mulberry2(seed), g = new THREE.Group(), cols2 = [];
+    const n = 2 + Math.floor(r2() * 2);
     for (let k = 0; k < n; k++) {
-      const x = (r() - 0.5) * 2.6, z = (r() - 0.5) * 2.6, s = 0.85 + r() * 0.5, f = M2("#24704A", { flatShading: true });
+      const x = (r2() - 0.5) * 2.6, z = (r2() - 0.5) * 2.6, s = 0.85 + r2() * 0.5, f = M2("#24704A", { flatShading: true });
       mesh2(G2("ftr", () => new THREE.CylinderGeometry(0.1, 0.14, 0.7, 6)), "#6B4428", x, 0.35 * s, z, g).scale.setScalar(s);
       [[1.05, 1.3, 1.1], [0.82, 1.1, 1.75], [0.55, 0.9, 2.35]].forEach(([rad, h, y], q) => {
         const c = mesh2(G2("cone" + q, () => new THREE.ConeGeometry(rad, h, 7)), f, x, y * s, z, g);
@@ -1195,9 +1359,9 @@ const blumen = {
   // mit dem Finger malen
   // Ein Feld ist 4x4 Einheiten, Mitte bei 0, Tür nach +z. Rückgabe: { g, cols, lights }
   model(seed, o, { mulberry: mulberry2, G: G2, M: M2, mesh: mesh2 }) {
-    const r = mulberry2(seed), g = new THREE.Group(), cols2 = [];
+    const r2 = mulberry2(seed), g = new THREE.Group(), cols2 = [];
     for (let k = 0; k < 14; k++) {
-      const x = (r() - 0.5) * 3.4, z = (r() - 0.5) * 3.4;
+      const x = (r2() - 0.5) * 3.4, z = (r2() - 0.5) * 3.4;
       if (k < 6) {
         mesh2(G2("tuft", () => new THREE.ConeGeometry(0.12, 0.35, 5)), "#4FA63C", x, 0.17, z, g, false);
         continue;
@@ -1309,12 +1473,12 @@ const flutlicht = {
   model(seed, o, { BX: BX2, G: G2, box: box2, floodMat: floodMat2, glowWarm: glowWarm2, mesh: mesh2, glow: glow2 }) {
     const g = new THREE.Group(), cols2 = [["c", 0, -0.6, 0.2]];
     mesh2(G2("fpole", () => new THREE.CylinderGeometry(0.1, 0.16, 6.6, 8)), "#8D969E", 0, 3.3, -0.6, g);
-    const head = new THREE.Group();
-    head.position.set(0, 6.6, -0.45);
-    head.rotation.x = 0.55;
-    g.add(head);
-    box2(head, "#5A6168", 1.6, 1, 0.18, 0, 0, 0);
-    for (const [x, y] of [[-0.4, 0.24], [0.4, 0.24], [-0.4, -0.24], [0.4, -0.24]]) mesh2(BX2(0.62, 0.36, 0.06), floodMat2, x, y, 0.11, head, false);
+    const head2 = new THREE.Group();
+    head2.position.set(0, 6.6, -0.45);
+    head2.rotation.x = 0.55;
+    g.add(head2);
+    box2(head2, "#5A6168", 1.6, 1, 0.18, 0, 0, 0);
+    for (const [x, y] of [[-0.4, 0.24], [0.4, 0.24], [-0.4, -0.24], [0.4, -0.24]]) mesh2(BX2(0.62, 0.36, 0.06), floodMat2, x, y, 0.11, head2, false);
     box2(g, "#8D969E", 0.8, 0.12, 0.5, 0, 0.06, -0.6);
     glow2(g, glowWarm2, 0, 1.6, 5);
     return { g, cols: cols2, lights: [[0, 6, 0.4, 15922943, 2.6, 24]] };
@@ -1327,11 +1491,11 @@ const lagerfeuer = {
   // Inventar-Kategorie
   // Ein Feld ist 4x4 Einheiten, Mitte bei 0, Tür nach +z. Rückgabe: { g, cols, lights }
   model(seed, o, { mulberry: mulberry2, G: G2, M: M2, box: box2, flameCore: flameCore2, flameMat: flameMat2, glowFire: glowFire2, mesh: mesh2, glow: glow2 }) {
-    const r = mulberry2(seed), g = new THREE.Group(), cols2 = [["c", 0, 0, 0.9]];
+    const r2 = mulberry2(seed), g = new THREE.Group(), cols2 = [["c", 0, 0, 0.9]];
     for (let k = 0; k < 9; k++) {
       const a = k / 9 * Math.PI * 2;
       const s = mesh2(G2("fstone", () => new THREE.DodecahedronGeometry(0.18, 0)), M2("#8E949B", { flatShading: true }), Math.cos(a) * 0.62, 0.1, Math.sin(a) * 0.62, g);
-      s.rotation.set(r() * 3, r() * 3, 0);
+      s.rotation.set(r2() * 3, r2() * 3, 0);
     }
     for (let k = 0; k < 3; k++) {
       const l = mesh2(G2("flog", () => new THREE.CylinderGeometry(0.07, 0.08, 1, 6)), "#6B4428", 0, 0.14, 0, g);
@@ -1354,10 +1518,11 @@ const lagerfeuer = {
     return { g, cols: cols2, lights: [[0, 0.9, 0, 16751168, 2.2, 11, 1]] };
   }
 };
-const BUILDING_LIST = [haus, villa, hochhaus, feuerwache, garage, aquarium, baum, tanne, blumen, berg, laterne, gartenlampe, lichterkette, flutlicht, lagerfeuer];
+const BUILDING_LIST = [haus, villa, hochhaus, feuerwache, garage, auftragshaus, markt, aquarium, baum, tanne, blumen, berg, laterne, gartenlampe, lichterkette, flutlicht, lagerfeuer];
 const BUILDING_BY_ID = Object.fromEntries(BUILDING_LIST.map((b) => [b.id, b]));
 const FLAGS = ["house", "walkable", "rot", "paint", "big"];
-const buildingItem = (b) => Object.assign({ kind: "obj", label: b.label }, ...FLAGS.filter((f) => b[f]).map((f) => ({ [f]: true })));
+const VALUES = ["station", "holz", "chop"];
+const buildingItem = (b) => Object.assign({ kind: "obj", label: b.label }, ...FLAGS.filter((f) => b[f]).map((f) => ({ [f]: true })), ...VALUES.filter((f) => b[f]).map((f) => ({ [f]: b[f] })));
 const ITEMS = {
   hand: { kind: "tool", label: "Schauen" },
   radierer: { kind: "tool", label: "Weg damit", paint: true },
@@ -1442,13 +1607,13 @@ scene.add(outer);
 const sunBall = new THREE.Mesh(new THREE.SphereGeometry(12, 20, 14), new THREE.MeshBasicMaterial({ color: 16773808, fog: false }));
 const moonBall = new THREE.Mesh(new THREE.SphereGeometry(8, 20, 14), new THREE.MeshBasicMaterial({ color: 15265023, fog: false }));
 scene.add(sunBall, moonBall);
-const stars$1 = (() => {
+const stars = (() => {
   const n = 500, p = new Float32Array(n * 3);
   for (let k = 0; k < n; k++) {
-    const a = Math.random() * Math.PI * 2, e = Math.random() * 1.2 + 0.08, r = 380;
-    p[k * 3] = Math.cos(a) * Math.cos(e) * r;
-    p[k * 3 + 1] = Math.sin(e) * r;
-    p[k * 3 + 2] = Math.sin(a) * Math.cos(e) * r;
+    const a = Math.random() * Math.PI * 2, e = Math.random() * 1.2 + 0.08, r2 = 380;
+    p[k * 3] = Math.cos(a) * Math.cos(e) * r2;
+    p[k * 3 + 1] = Math.sin(e) * r2;
+    p[k * 3 + 2] = Math.sin(a) * Math.cos(e) * r2;
   }
   const g = new THREE.BufferGeometry();
   g.setAttribute("position", new THREE.BufferAttribute(p, 3));
@@ -1544,12 +1709,12 @@ const [facMap, facEm] = (() => {
   x.fillRect(0, 0, W, H2);
   y.fillStyle = "#000";
   y.fillRect(0, 0, W, H2);
-  for (let r = 0; r < 8; r++) for (let c = 0; c < 4; c++) {
+  for (let r2 = 0; r2 < 8; r2++) for (let c = 0; c < 4; c++) {
     x.fillStyle = "#3E5468";
-    x.fillRect(c * 32 + 6, r * 32 + 6, 20, 22);
+    x.fillRect(c * 32 + 6, r2 * 32 + 6, 20, 22);
     if (Math.random() < 0.55) {
       y.fillStyle = "#ffd27a";
-      y.fillRect(c * 32 + 6, r * 32 + 6, 20, 22);
+      y.fillRect(c * 32 + 6, r2 * 32 + 6, 20, 22);
     }
   }
   return [new THREE.CanvasTexture(a), new THREE.CanvasTexture(b)];
@@ -1652,7 +1817,7 @@ function updateBase() {
 updateBase();
 let tiles = [], groundM = [], objM = [], cols = [];
 const cars = [], animals = [], pops = [];
-const lightMap = /* @__PURE__ */ new Map(), garages = /* @__PURE__ */ new Map(), flames = /* @__PURE__ */ new Map(), crossings = /* @__PURE__ */ new Map(), aquariums = /* @__PURE__ */ new Map();
+const lightMap = /* @__PURE__ */ new Map(), doors = /* @__PURE__ */ new Map(), garages = /* @__PURE__ */ new Map(), flames = /* @__PURE__ */ new Map(), crossings = /* @__PURE__ */ new Map(), aquariums = /* @__PURE__ */ new Map();
 const trains = [], ferries = [];
 const RAILT = /* @__PURE__ */ new Set(["schiene", "bahnhof", "uebergang", "tunnel"]), ROADT = /* @__PURE__ */ new Set(["strasse", "uebergang"]), WATT = /* @__PURE__ */ new Set(["wasser", "meer", "anleger", "seetor"]);
 const gAt = (i, j) => inb(i, j) ? tiles[I(i, j)].g : null;
@@ -1660,8 +1825,8 @@ const isRoad = (i, j) => ROADT.has(gAt(i, j));
 const isRail = (i, j) => RAILT.has(gAt(i, j));
 const isWater = (i, j) => WATT.has(gAt(i, j));
 const FLAT = /* @__PURE__ */ new Set(["strasse", "sand", "wasser", "meer", "schiene", "uebergang"]);
-function rot(x, z, r) {
-  switch (r & 3) {
+function rot(x, z, r2) {
+  switch (r2 & 3) {
     case 0:
       return [x, z];
     case 1:
@@ -1672,12 +1837,12 @@ function rot(x, z, r) {
       return [-z, x];
   }
 }
-function toWorld(cl, r, c) {
+function toWorld(cl, r2, c) {
   if (cl[0] === "c") {
-    const p = rot(cl[1], cl[2], r);
+    const p = rot(cl[1], cl[2], r2);
     return { c: 1, x: p[0] + c.x, z: p[1] + c.z, r: cl[3] };
   }
-  const a = rot(cl[1], cl[3], r), b = rot(cl[2], cl[4], r);
+  const a = rot(cl[1], cl[3], r2), b = rot(cl[2], cl[4], r2);
   return { c: 0, x0: Math.min(a[0], b[0]) + c.x, x1: Math.max(a[0], b[0]) + c.x, z0: Math.min(a[1], b[1]) + c.z, z1: Math.max(a[1], b[1]) + c.z };
 }
 function freeAt(i, j) {
@@ -1727,23 +1892,23 @@ function signMat(text, bg) {
   x.fillText(text, 128, 35);
   return signCache[text] = new THREE.MeshStandardMaterial({ map: new THREE.CanvasTexture(c), roughness: 0.6 });
 }
-function lsub(g, r) {
+function lsub(g, r2) {
   const s = new THREE.Group();
-  s.rotation.y = r * Math.PI / 2;
+  s.rotation.y = r2 * Math.PI / 2;
   g.add(s);
   return s;
 }
-function lcol(ud, r, cl) {
+function lcol(ud, r2, cl) {
   if (cl[0] === "c") {
-    const q = rot(cl[1], cl[2], r);
+    const q = rot(cl[1], cl[2], r2);
     ud.cols.push(["c", q[0], q[1], cl[3]]);
   } else {
-    const a = rot(cl[1], cl[3], r), b = rot(cl[2], cl[4], r);
+    const a = rot(cl[1], cl[3], r2), b = rot(cl[2], cl[4], r2);
     ud.cols.push(["b", Math.min(a[0], b[0]), Math.max(a[0], b[0]), Math.min(a[1], b[1]), Math.max(a[1], b[1])]);
   }
 }
-function llight(ud, r, x, y, z, c, i, d) {
-  const q = rot(x, z, r);
+function llight(ud, r2, x, y, z, c, i, d) {
+  const q = rot(x, z, r2);
   ud.lights.push([q[0], y, q[1], c, i, d]);
 }
 function trackPiece(g, x0, z0, x1, z1, yo) {
@@ -1785,8 +1950,8 @@ function railTrack(g, dirs) {
     }
   }
   for (const d of left) {
-    const v = DIRS[d], st = dirs.length === 1 ? -0.9 : 0;
-    trackPiece(g, v[0] * st, v[1] * st, v[0] * h, v[1] * h, n++ * 8e-3);
+    const v = DIRS[d], st2 = dirs.length === 1 ? -0.9 : 0;
+    trackPiece(g, v[0] * st2, v[1] * st2, v[0] * h, v[1] * h, n++ * 8e-3);
     if (dirs.length === 1) {
       const pb = box(g, "#D7261E", 1.3, 0.45, 0.25, -v[0] * 1, 0.3, -v[1] * 1);
       pb.rotation.y = Math.atan2(v[0], v[1]);
@@ -1795,18 +1960,18 @@ function railTrack(g, dirs) {
 }
 const stationAxis = (rl) => rl.includes(1) || rl.includes(3) ? 1 : rl.length ? 0 : 1;
 function stationBits(g, conn) {
-  const rl = conn.rail || [], r = stationAxis(rl), ud = g.userData;
+  const rl = conn.rail || [], r2 = stationAxis(rl), ud = g.userData;
   let sg = 1;
   if (conn.side != null) {
-    const q = rot(1, 0, r);
+    const q = rot(1, 0, r2);
     sg = q[0] === DIRS[conn.side][0] && q[1] === DIRS[conn.side][1] ? 1 : -1;
   }
-  const s = lsub(g, r), X = (v) => sg * v;
+  const s = lsub(g, r2), X = (v) => sg * v;
   box(s, "#BFC3C8", 1.15, 0.22, TILE - 0.04, X(1.43), 0.11, 0);
   box(s, "#F2C230", 0.1, 0.012, TILE - 0.04, X(0.93), 0.226, 0, false);
   for (const z of [-1.25, 1.25]) {
     box(s, "#4A5058", 0.1, 2.3, 0.1, X(1.75), 1.37, z);
-    lcol(ud, r, ["c", X(1.75), z, 0.14]);
+    lcol(ud, r2, ["c", X(1.75), z, 0.14]);
   }
   box(s, "#2F6BBE", 1.35, 0.1, 3.2, X(1.45), 2.56, 0);
   box(s, "#8B6A45", 0.4, 0.08, 1.1, X(1.72), 0.58, 0);
@@ -1814,22 +1979,22 @@ function stationBits(g, conn) {
   for (const z of [-0.45, 0.45]) box(s, "#4A5058", 0.3, 0.36, 0.06, X(1.72), 0.4, z);
   box(s, signMat("BAHNHOF", "#1E5AA8"), 0.06, 0.42, 1.6, X(1.82), 2.2, 0);
   mesh(BX(0.5, 0.05, 0.16), bulbMat, X(1.45), 2.49, 0, s, false);
-  llight(ud, r, X(1.45), 2.3, 0, 16769712, 1.2, 8);
-  ud.side = rot(X(1.5), 0, r);
+  llight(ud, r2, X(1.45), 2.3, 0, 16769712, 1.2, 8);
+  ud.side = rot(X(1.5), 0, r2);
 }
 function crossingBits(g, conn) {
   const rl = conn.rail || [], rd = conn.dirs || [];
-  let r;
-  if (rl.includes(1) || rl.includes(3)) r = 1;
-  else if (rl.length) r = 0;
-  else r = rd.includes(1) || rd.includes(3) ? 0 : 1;
+  let r2;
+  if (rl.includes(1) || rl.includes(3)) r2 = 1;
+  else if (rl.length) r2 = 0;
+  else r2 = rd.includes(1) || rd.includes(3) ? 0 : 1;
   box(g, "#3D434B", TILE, 0.4, TILE, 0, -0.2, 0, false);
-  const s = lsub(g, r), ud = g.userData;
+  const s = lsub(g, r2), ud = g.userData;
   box(s, "#6E737A", 1.1, 0.02, TILE, 0, 0.01, 0, false);
   for (const x of [-0.42, 0.42]) box(s, railMat, 0.09, 0.05, TILE, x, 0.025, 0, false);
   for (const [x, z, ry] of [[-1.3, -1.8, 0], [1.3, 1.8, Math.PI]]) {
     box(s, "#F4F4F2", 0.13, 1.15, 0.13, x, 0.575, z);
-    lcol(ud, r, ["c", x, z, 0.12]);
+    lcol(ud, r2, ["c", x, z, 0.12]);
     mesh(BX(0.17, 0.17, 0.07), blinkMat, x, 0.95, z + (ry ? 0.09 : -0.09), s, false);
     const arm = mesh(G("arm", () => {
       const b = new THREE.BoxGeometry(0.09, 0.09, 1.65);
@@ -1842,7 +2007,7 @@ function crossingBits(g, conn) {
   }
 }
 function tunnelBits(g, conn) {
-  const rl = conn.rail || [], r = rl.length ? rl[0] : 1, s = lsub(g, r), ud = g.userData;
+  const rl = conn.rail || [], r2 = rl.length ? rl[0] : 1, s = lsub(g, r2), ud = g.userData;
   trackPiece(s, 0, -1.2, 0, TILE / 2, 0);
   box(s, "#7A7F86", 3.6, 3.15, 1.5, 0, 1.57, 0.2);
   mesh(BX(1.95, 2.25, 0.12), darkMat, 0, 1.27, 0.98, s, false);
@@ -1853,24 +2018,24 @@ function tunnelBits(g, conn) {
   mesh(G("tsnow", () => new THREE.ConeGeometry(0.85, 1.3, 7)), M("#F4F6F8", { flatShading: true }), 0, 4.2, -1.6, s);
   mesh(G("trock", () => new THREE.DodecahedronGeometry(0.6, 0)), M("#8E949B", { flatShading: true }), -1.55, 0.4, 0.5, s);
   mesh(G("trock2", () => new THREE.DodecahedronGeometry(0.45, 0)), M("#8E949B", { flatShading: true }), 1.6, 0.3, 0.2, s);
-  lcol(ud, r, ["b", -2, 2, -2, 0.95]);
+  lcol(ud, r2, ["b", -2, 2, -2, 0.95]);
 }
 function seetorBits(g, conn) {
-  const r = conn.water != null ? conn.water : 0, s = lsub(g, r), ud = g.userData;
-  ud.water = r;
+  const r2 = conn.water != null ? conn.water : 0, s = lsub(g, r2), ud = g.userData;
+  ud.water = r2;
   for (const x of [-1.78, 1.78]) {
     for (let k = 0; k < 5; k++) mesh(G("tw", () => new THREE.CylinderGeometry(0.32, 0.36, 0.72, 10)), M(k % 2 ? "#F4F4F2" : "#D7261E"), x, 0.36 + k * 0.72, 0, s);
     mesh(G("twtop", () => new THREE.CylinderGeometry(0.22, 0.22, 0.35, 10)), bulbMat, x, 3.78, 0, s, false);
-    llight(ud, r, x, 3.8, 0, 16773312, 1.3, 10);
-    lcol(ud, r, ["c", x, 0, 0.4]);
+    llight(ud, r2, x, 3.8, 0, 16773312, 1.3, 10);
+    lcol(ud, r2, ["c", x, 0, 0.4]);
   }
   box(s, "#F4F4F2", 3.95, 0.28, 0.28, 0, 4.08, 0);
   mesh(G("portalp", () => new THREE.PlaneGeometry(3.1, 3.6)), portalMat, 0, 1.95, 0, s, false);
   for (const [x, z, c] of [[-1.3, 1.6, "#D7261E"], [1.3, 1.6, "#2E9E4F"], [-1.3, -1.6, "#D7261E"], [1.3, -1.6, "#2E9E4F"]]) mesh(G("buoy", () => new THREE.ConeGeometry(0.2, 0.5, 8)), c, x, 0.2, z, s);
 }
 function anlegerBits(g, conn) {
-  const r = conn.land != null ? conn.land : 0, s = lsub(g, r), ud = g.userData;
-  ud.land = r;
+  const r2 = conn.land != null ? conn.land : 0, s = lsub(g, r2), ud = g.userData;
+  ud.land = r2;
   for (const x of [-1.8, 1.8]) {
     box(s, "#9B7650", 0.42, 0.12, 3.7, x, 0.16, 0);
     for (const z of [-1.6, 0, 1.6]) mesh(G("ppost", () => new THREE.CylinderGeometry(0.08, 0.08, 0.7, 6)), "#5E4632", x, -0.1, z, s);
@@ -1879,10 +2044,10 @@ function anlegerBits(g, conn) {
   box(s, "#9B7650", 3.2, 0.12, 0.16, 0, 0.16, 1.92);
   mesh(G("lpole", () => new THREE.CylinderGeometry(0.06, 0.08, 3.1, 8)), "#3D434B", 1.8, 1.55, 1.5, s);
   mesh(BX(0.3, 0.05, 0.2), bulbMat, 1.8, 3.08, 1.5, s, false);
-  llight(ud, r, 1.8, 2.9, 1.5, 16766106, 1.3, 10);
+  llight(ud, r2, 1.8, 2.9, 1.5, 16766106, 1.3, 10);
   box(s, signMat("FÄHRE", "#1E8F7E"), 0.06, 0.42, 1.2, -1.85, 1.15, 1.5);
   box(s, "#3D434B", 0.08, 0.95, 0.08, -1.85, 0.48, 1.5);
-  lcol(ud, r, ["c", 1.8, 1.5, 0.12]);
+  lcol(ud, r2, ["c", 1.8, 1.5, 0.12]);
 }
 function groundModel(type, conn) {
   const g = new THREE.Group();
@@ -1946,9 +2111,9 @@ function groundModel(type, conn) {
 }
 function pickFish(sea) {
   const L = sea ? SEA_FISH : LAKE_FISH;
-  let r = Math.random();
+  let r2 = Math.random();
   for (const [t2, w] of L) {
-    if ((r -= w) <= 0) {
+    if ((r2 -= w) <= 0) {
       const max = FISH_BY_ID[t2].maxCount;
       if (max && fishes.filter((f) => f.type === t2).length >= max) return L.reduce((a, b) => b[1] > a[1] ? b : a)[0];
       return t2;
@@ -2012,11 +2177,11 @@ function shell(g, cols2, o) {
   box(g, wm, doorW, h - doorH, t2, 0, doorH + (h - doorH) / 2, hd - t2 / 2);
   box(g, o.floor || "#C8955B", w - 2 * t2, 0.04, d - 2 * t2, 0, 0.02, 0, false);
   box(g, "#FBF7EE", w - 2 * t2, 0.04, d - 2 * t2, 0, h - 0.03, 0, false);
-  const pane = (x, z, r) => {
+  const pane = (x, z, r2) => {
     const m = mesh(BX(winW, winH, t2 + 0.05), winMat, x, winY, z, g, false);
-    m.rotation.y = r;
+    m.rotation.y = r2;
     const s = mesh(BX(winW + 0.14, 0.06, t2 + 0.16), "#FFFFFF", x, winY - winH / 2 - 0.03, z, g, false);
-    s.rotation.y = r;
+    s.rotation.y = r2;
   };
   pane(-w / 4, -hd + t2 / 2, 0);
   pane(w / 4, -hd + t2 / 2, 0);
@@ -2028,6 +2193,10 @@ function shell(g, cols2, o) {
   }
   mesh(BX(0.3, 0.07, 0.3), bulbMat, 0, h - 0.08, 0, g, false);
   box(g, "#7A5A3A", doorW - 0.1, 0.02, 0.45, 0, 0.015, hd + 0.28, false);
+  const lw = doorW - 0.06, lh = doorH - 0.03;
+  const leaf = mesh(G("leaf" + lw + "_" + lh, () => new THREE.BoxGeometry(lw, lh, 0.07).translate(lw / 2, lh / 2, 0)), M("#A8743E"), -lw / 2, 0, hd - t2 / 2, g);
+  leaf.userData.keep = true;
+  leaf.userData.leaf = { w: lw, col: ["b", -doorW / 2, doorW / 2, hd - t2 - 0.04, hd + 0.04] };
 }
 function gable(g, w, d, h, wall, roof) {
   const geo2 = G("gab" + w + "_" + d, () => {
@@ -2046,13 +2215,13 @@ function gable(g, w, d, h, wall, roof) {
   m.receiveShadow = true;
   g.add(m);
 }
-function chair(g, x, z, r, col2) {
+function chair(g, x, z, r2, col2) {
   const c = new THREE.Group();
   box(c, col2, 0.38, 0.05, 0.38, 0, 0.45, 0);
   box(c, col2, 0.38, 0.45, 0.05, 0, 0.7, -0.17);
   box(c, col2, 0.06, 0.45, 0.06, 0, 0.22, 0);
   c.position.set(x, 0, z);
-  c.rotation.y = r;
+  c.rotation.y = r2;
   g.add(c);
 }
 function plant(g, x, z, s) {
@@ -2064,13 +2233,13 @@ const tankWater = new THREE.MeshStandardMaterial({ color: 4764896, transparent: 
 const tankGlass = new THREE.MeshStandardMaterial({ color: 14677247, transparent: true, opacity: 0.12, roughness: 0.05, depthWrite: false });
 const AQ_R = 5.6, AQ_H = 4.4, AQ_GAP = 0.48;
 MODELS.teil = () => ({ g: new THREE.Group(), cols: [], lights: [] });
-function glow(g, mat2, x, z, r) {
+function glow(g, mat2, x, z, r2) {
   const m = mesh(G("glowp", () => {
     const p = new THREE.PlaneGeometry(1, 1);
     p.rotateX(-Math.PI / 2);
     return p;
   }), mat2, x, 0.03, z, g, false);
-  m.scale.set(r * 2, 1, r * 2);
+  m.scale.set(r2 * 2, 1, r2 * 2);
   m.receiveShadow = false;
   return m;
 }
@@ -2288,20 +2457,29 @@ function updateLights(dt, night) {
 }
 function updateGarages(dt) {
   for (const g of garages.values()) {
-    let near = false;
+    let near2 = false;
     for (const c of cars) {
       if ((c.x - g.x) ** 2 + (c.z - g.z) ** 2 < (c === game.driveCar ? 42 : 6)) {
-        near = true;
+        near2 = true;
         break;
       }
     }
-    if (!near && game.mode === "walk" && (pl.x - g.x) ** 2 + (pl.z - g.z) ** 2 < 12) near = true;
-    const tgt = near ? 1 : 0;
+    if (!near2 && game.mode === "walk" && (pl.x - g.x) ** 2 + (pl.z - g.z) ** 2 < 12) near2 = true;
+    const tgt = near2 ? 1 : 0;
     if (Math.abs(tgt - g.open) < 1e-3) continue;
     g.open += (tgt - g.open) * Math.min(1, dt * 3.5);
     const dh = g.door.userData.door, sc = Math.max(0.04, 1 - g.open * 0.96);
     g.door.scale.y = sc;
     g.door.position.y = dh - dh * sc / 2;
+  }
+}
+function updateDoors(dt) {
+  for (const d of doors.values()) {
+    if (Math.abs(d.target - d.open) < 1e-3) continue;
+    d.open += (d.target - d.open) * Math.min(1, dt * 5);
+    if (Math.abs(d.target - d.open) < 0.01) d.open = d.target;
+    d.leaf.rotation.y = d.r0 + d.open * 1.5;
+    d.leaf.updateMatrix();
   }
 }
 const buckelwal = {
@@ -2398,17 +2576,17 @@ function voiceKey(sentence) {
   }
   return h.toString(16).padStart(8, "0");
 }
-const KEY$3 = "cubos-vorlesen";
+const KEY$4 = "cubos-vorlesen";
 const synth = typeof window !== "undefined" ? window.speechSynthesis : null;
 let enabled$1 = true;
 try {
-  enabled$1 = localStorage.getItem(KEY$3) !== "0";
+  enabled$1 = localStorage.getItem(KEY$4) !== "0";
 } catch (e) {
 }
 let voice = null, lastText = "";
 let clips = null;
 const canFetch = typeof fetch === "function" && typeof location !== "undefined" && /^https?:$/.test(location.protocol);
-const manifest = canFetch ? fetch("voice/manifest.json", { cache: "no-cache" }).then((r) => r.ok ? r.json() : null).then((m) => {
+const manifest = canFetch ? fetch("voice/manifest.json", { cache: "no-cache" }).then((r2) => r2.ok ? r2.json() : null).then((m) => {
   clips = new Set(m && m.clips || []);
 }).catch(() => {
   clips = /* @__PURE__ */ new Set();
@@ -2425,9 +2603,9 @@ function decode(a, data) {
 }
 function loadClip(a, key) {
   if (!buffers.has(key)) {
-    const p = fetch("voice/clips/" + key + ".mp3").then((r) => {
-      if (!r.ok) throw new Error(r.status);
-      return r.arrayBuffer();
+    const p = fetch("voice/clips/" + key + ".mp3").then((r2) => {
+      if (!r2.ok) throw new Error(r2.status);
+      return r2.arrayBuffer();
     }).then((d) => decode(a, d));
     p.catch(() => buffers.delete(key));
     buffers.set(key, p);
@@ -2516,13 +2694,13 @@ function speak(text, { force = false } = {}) {
     if (my === token) speakDevice(text);
   };
   if (clips) go();
-  else Promise.race([manifest, new Promise((r) => setTimeout(r, 1500))]).then(go);
+  else Promise.race([manifest, new Promise((r2) => setTimeout(r2, 1500))]).then(go);
 }
 const repeatSpeech = () => speak(lastText, { force: true });
 function setSpeech(on2) {
   enabled$1 = !!on2;
   try {
-    localStorage.setItem(KEY$3, on2 ? "1" : "0");
+    localStorage.setItem(KEY$4, on2 ? "1" : "0");
   } catch (e) {
   }
   if (!on2) {
@@ -2546,8 +2724,8 @@ function hint(txt, ms, { silent = false } = {}) {
 }
 $("#hint").addEventListener("click", () => repeatSpeech());
 const focus = new THREE.Vector3();
-function nearFocus(x, z, r) {
-  return (x - focus.x) ** 2 + (z - focus.z) ** 2 < r * r;
+function nearFocus(x, z, r2) {
+  return (x - focus.x) ** 2 + (z - focus.z) ** 2 < r2 * r2;
 }
 const handlers = /* @__PURE__ */ new Map();
 function on(name, fn) {
@@ -2621,9 +2799,9 @@ function mergeFang(f) {
       catchBook[k] = n;
       ch = true;
     }
-    const r = +(f.r || {})[k] || 0;
-    if (r > (catchRec[k] || 0)) {
-      catchRec[k] = r;
+    const r2 = +(f.r || {})[k] || 0;
+    if (r2 > (catchRec[k] || 0)) {
+      catchRec[k] = r2;
       ch = true;
     }
   }
@@ -2654,8 +2832,8 @@ function seaAt(x, z) {
 function whaleOk(x, z) {
   if (!seaAt(x, z)) return false;
   for (let a = 0; a < 8; a++) {
-    const r = a % 2 ? 5.5 : 4.2;
-    if (!seaAt(x + Math.cos(a * 0.785) * r, z + Math.sin(a * 0.785) * r)) return false;
+    const r2 = a % 2 ? 5.5 : 4.2;
+    if (!seaAt(x + Math.cos(a * 0.785) * r2, z + Math.sin(a * 0.785) * r2)) return false;
   }
   return true;
 }
@@ -2716,7 +2894,7 @@ function spout(w) {
 }
 function whaleTarget(w) {
   for (let q = 0; q < 12; q++) {
-    const a = Math.random() * 6.283, r = 8 + Math.random() * 16, nx = w.x + Math.cos(a) * r, nz = w.z + Math.sin(a) * r;
+    const a = Math.random() * 6.283, r2 = 8 + Math.random() * 16, nx = w.x + Math.cos(a) * r2, nz = w.z + Math.sin(a) * r2;
     if (whaleOk(nx, nz)) {
       w.tx = nx;
       w.tz = nz;
@@ -2841,6 +3019,7 @@ function dropObj(grp) {
   disposeGroup(grp);
   lightMap.delete(grp);
   garages.delete(grp);
+  doors.delete(grp);
   flames.delete(grp);
   const aq = aquariums.get(grp);
   if (aq) {
@@ -2863,6 +3042,7 @@ function resetTiles(nn) {
   for (const aq of aquariums.values()) clearAquarium(aq);
   lightMap.clear();
   garages.clear();
+  doors.clear();
   flames.clear();
   crossings.clear();
   aquariums.clear();
@@ -2909,7 +3089,7 @@ function groundConn(i, j) {
     }
   }
   if (t2.g === "bahnhof") {
-    const r = stationAxis(conn.rail), cand = r === 1 ? [0, 2] : [1, 3];
+    const r2 = stationAxis(conn.rail), cand = r2 === 1 ? [0, 2] : [1, 3];
     conn.side = cand.find((d) => {
       const a = i + DIRS[d][0], b = j + DIRS[d][1];
       return inb(a, b) && !isRail(a, b) && !isWater(a, b) && !(tiles[I(a, b)].o && ITEMS[tiles[I(a, b)].o.t].house);
@@ -2993,6 +3173,12 @@ function rebuildObj(i, j, pop) {
   if (door) {
     const p = rot(0, 1, o.r);
     garages.set(grp, { door, x: c.x + p[0] * 1.6, z: c.z + p[1] * 1.6, open: 0 });
+  }
+  const leaf = grp.children.find((m) => m.userData.leaf);
+  if (leaf) {
+    const L = leaf.userData.leaf, col2 = toWorld(L.col, o.r, c), p = rot(leaf.position.x + L.w / 2, leaf.position.z, o.r);
+    cols[k].push(col2);
+    doors.set(grp, { leaf, col: col2, x: c.x + p[0], z: c.z + p[1], r0: leaf.rotation.y, open: 0, target: 0 });
   }
   const fl = grp.children.filter((m) => m.userData.flame);
   if (fl.length) flames.set(grp, fl);
@@ -3095,8 +3281,8 @@ function setGround(i, j, g) {
     }
   }
 }
-const wheelGeo = (r, w) => G("wh" + r + "_" + w, () => {
-  const g = new THREE.CylinderGeometry(r, r, w, 14);
+const wheelGeo = (r2, w) => G("wh" + r2 + "_" + w, () => {
+  const g = new THREE.CylinderGeometry(r2, r2, w, 14);
   g.rotateZ(Math.PI / 2);
   return g;
 });
@@ -3112,11 +3298,11 @@ function prof(key, pts, width) {
     return e;
   });
 }
-function wheels(g, xs, zs, r) {
+function wheels(g, xs, zs, r2) {
   const tire = M("#1A1A1A", { roughness: 0.9 }), hub = M("#C8CCD0", { metalness: 0.5, roughness: 0.4 });
   for (const x of xs) for (const z of zs) {
-    mesh(wheelGeo(r, 0.2), tire, x, r, z, g);
-    mesh(wheelGeo(+(r * 0.5).toFixed(3), 0.22), hub, x, r, z, g);
+    mesh(wheelGeo(r2, 0.2), tire, x, r2, z, g);
+    mesh(wheelGeo(+(r2 * 0.5).toFixed(3), 0.22), hub, x, r2, z, g);
   }
 }
 function lights(g, y, zf, zb, xs) {
@@ -3273,8 +3459,8 @@ function updateCarAI(car, dt) {
   car.g.rotation.y = car.h;
 }
 function placeCarOn(i, j, type, d) {
-  const c = center(i, j), r = rightOf(d);
-  return addCar(type, c.x + r[0] * 0.9, c.z + r[1] * 0.9, Math.atan2(DIRS[d][0], DIRS[d][1]), true);
+  const c = center(i, j), r2 = rightOf(d);
+  return addCar(type, c.x + r2[0] * 0.9, c.z + r2[1] * 0.9, Math.atan2(DIRS[d][0], DIRS[d][1]), true);
 }
 function removeCar(c) {
   const k = cars.indexOf(c);
@@ -3613,18 +3799,18 @@ function pushTrains(p, rad) {
 function updateCrossings(dt) {
   let any = false;
   for (const cr of crossings.values()) {
-    let near = false;
+    let near2 = false;
     for (const tr of trains) {
       for (const c of tr.cars) {
         const q = c.g.position;
         if ((q.x - cr.x) ** 2 + (q.z - cr.z) ** 2 < 100) {
-          near = true;
+          near2 = true;
           break;
         }
       }
-      if (near) break;
+      if (near2) break;
     }
-    const tgt = near ? 0 : 1;
+    const tgt = near2 ? 0 : 1;
     if (Math.abs(cr.up - tgt) > 1e-3) setArms(cr, cr.up + clamp(tgt - cr.up, -dt * 1.4, dt * 1.4));
     cr.closed = cr.up < 0.85;
     if (cr.up < 0.98) any = true;
@@ -3643,8 +3829,8 @@ function ferryModel() {
   box(g, "#D7261E", 0.78, 0.12, 1.5, 1.38, 1.92, 0);
   box(g, "#F2C230", 0.2, 0.5, 0.2, 1.38, 2.2, 0.3);
   for (const sz of [-1, 1]) {
-    const r = box(g, "#5A6168", 2.2, 0.06, 0.55, 0, 0.24, sz * 2.32);
-    r.rotation.x = sz * 0.16;
+    const r2 = box(g, "#5A6168", 2.2, 0.06, 0.55, 0, 0.24, sz * 2.32);
+    r2.rotation.x = sz * 0.16;
   }
   mesh(BX(0.2, 0.1, 0.2), bulbMat, 1.38, 2.04, -0.4, g, false);
   for (const z of [-1, 1]) box(g, "#F28C28", 0.05, 0.24, 0.24, -1.51, 0.55, z, false);
@@ -3734,7 +3920,7 @@ function planFerry(f) {
     f.wait = 5;
     return;
   }
-  const st = ps.findIndex((k) => k > f.last), ord = st < 0 ? ps : ps.slice(st).concat(ps.slice(0, st));
+  const st2 = ps.findIndex((k) => k > f.last), ord = st2 < 0 ? ps : ps.slice(st2).concat(ps.slice(0, st2));
   for (const k of ord) {
     const pth = waterPath(here.i, here.j, k);
     if (!pth) continue;
@@ -3784,9 +3970,9 @@ function updateFerry(f, dt) {
       let tg = 3.2 * Math.max(0.15, al * al);
       if (last2) tg = Math.min(tg, d * 1.2 + 0.2);
       f.v += clamp(tg - f.v, -3 * dt, 1.5 * dt);
-      const st = Math.min(Math.max(f.v, 0) * dt, d);
-      f.x += dx / d * st;
-      f.z += dz / d * st;
+      const st2 = Math.min(Math.max(f.v, 0) * dt, d);
+      f.x += dx / d * st2;
+      f.z += dz / d * st2;
     }
   } else if (f.state === "align") {
     const dh = angDiff(f.alignH, f.h);
@@ -3920,9 +4106,109 @@ function islandStroke(i, j) {
   }
   return out;
 }
+const KEY$3 = "cubos-rucksack";
+const START = { taler: 0, holz: 10, eimer: {}, gekauft: {} };
+let r = fresh();
+function fresh() {
+  return { taler: START.taler, holz: START.holz, eimer: {}, gekauft: {} };
+}
+function clean(s) {
+  const n = (v) => Math.max(0, Math.floor(+v || 0));
+  const out = fresh();
+  if (!s || typeof s !== "object") return out;
+  out.taler = n(s.taler);
+  out.holz = s.holz == null ? START.holz : n(s.holz);
+  for (const [k, v] of Object.entries(s.eimer || {})) if (n(v)) out.eimer[k] = n(v);
+  for (const k of Object.keys(s.gekauft || {})) out.gekauft[k] = true;
+  return out;
+}
+try {
+  r = clean(JSON.parse(localStorage.getItem(KEY$3) || "null"));
+} catch (e) {
+}
+const persist$1 = () => {
+  try {
+    localStorage.setItem(KEY$3, JSON.stringify(r));
+  } catch (e) {
+  }
+};
+const changed = (why) => {
+  persist$1();
+  emit("rucksack:geaendert", { why });
+};
+const taler = () => r.taler;
+const holz = () => r.holz;
+const eimer = () => ({ ...r.eimer });
+const fishCount = () => Object.values(r.eimer).reduce((a, b) => a + b, 0);
+const owns = (id) => !!r.gekauft[id];
+function addTaler(n, why = "taler") {
+  if (n > 0) {
+    r.taler += n;
+    changed(why);
+  }
+}
+function addHolz(n, why = "holz") {
+  if (n > 0) {
+    r.holz += n;
+    changed(why);
+  }
+}
+function spend(what, n) {
+  if (!(n > 0)) return true;
+  if (r[what] < n) return false;
+  r[what] -= n;
+  changed(what);
+  return true;
+}
+function putInBucket(type) {
+  r.eimer[type] = (r.eimer[type] || 0) + 1;
+  changed("eimer");
+}
+function takeFish(n) {
+  let left = n;
+  for (const k of Object.keys(r.eimer)) {
+    const t2 = Math.min(left, r.eimer[k]);
+    r.eimer[k] -= t2;
+    left -= t2;
+    if (!r.eimer[k]) delete r.eimer[k];
+    if (!left) break;
+  }
+  if (left < n) changed("eimer");
+  return n - left;
+}
+function emptyBucket() {
+  const e = r.eimer;
+  r.eimer = {};
+  if (Object.keys(e).length) changed("eimer");
+  return e;
+}
+function buy(id, price) {
+  if (owns(id)) return true;
+  if (r.taler < price) return false;
+  r.taler -= price;
+  r.gekauft[id] = true;
+  changed("gekauft");
+  return true;
+}
+const rucksackData = () => JSON.parse(JSON.stringify(r));
+function mergeRucksack(s) {
+  if (!s || typeof s !== "object") return false;
+  const o = clean(s), before = JSON.stringify(r);
+  r.taler = Math.max(r.taler, o.taler);
+  r.holz = Math.max(r.holz, o.holz);
+  for (const [k, v] of Object.entries(o.eimer)) r.eimer[k] = Math.max(r.eimer[k] || 0, v);
+  Object.assign(r.gekauft, o.gekauft);
+  if (JSON.stringify(r) === before) return false;
+  changed("code");
+  return true;
+}
+function resetRucksack(s) {
+  r = clean(s || START);
+  changed("reset");
+}
 const ray = new THREE.Raycaster(), plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), hitV = new THREE.Vector3();
 function pickTile(cx, cy) {
-  const r = canvas.getBoundingClientRect(), v = new THREE.Vector2((cx - r.left) / r.width * 2 - 1, -((cy - r.top) / r.height) * 2 + 1);
+  const r2 = canvas.getBoundingClientRect(), v = new THREE.Vector2((cx - r2.left) / r2.width * 2 - 1, -((cy - r2.top) / r2.height) * 2 + 1);
   ray.setFromCamera(v, buildCam);
   if (!ray.ray.intersectPlane(plane, hitV)) return null;
   return tileAt(hitV.x, hitV.z);
@@ -3935,6 +4221,23 @@ function nope() {
     void b.offsetWidth;
     b.classList.add("nope");
   }
+}
+function refund(id) {
+  const n = ITEMS[id] && ITEMS[id].holz;
+  if (n) addHolz(n, "abriss");
+}
+function pay(id, old, painting) {
+  const cost = ITEMS[id] && ITEMS[id].holz || 0, back = old && ITEMS[old] && ITEMS[old].holz || 0;
+  if (cost > holz() + back) {
+    if (!painting) {
+      nope();
+      hint("Dafür brauchst du mehr Holz. Fäll Bäume mit dem Männchen!", 3500);
+    }
+    return false;
+  }
+  if (back) addHolz(back, "abriss");
+  spend("holz", cost);
+  return true;
 }
 function inTile(e, i, j) {
   const t2 = tileAt(e.x, e.z);
@@ -3950,7 +4253,14 @@ function apply(i, j, painting) {
 }
 function applyTool(i, j, painting) {
   const it = ITEMS[game.sel], t2 = tiles[I(i, j)];
-  if (game.sel === "hand") return;
+  if (game.sel === "hand") {
+    if (!painting && t2.o && ITEMS[t2.o.t] && ITEMS[t2.o.t].station) emit("ort:antippen", { station: ITEMS[t2.o.t].station });
+    return;
+  }
+  if (it && it.price && !owns(game.sel)) {
+    if (!painting) emit("kaufen:frage", { id: game.sel });
+    return;
+  }
   if (game.sel === "eigen") {
     openEditor(i, j);
     return;
@@ -3981,12 +4291,14 @@ function applyTool(i, j, painting) {
     if (!did && t2.o && (t2.o.t === "teil" || t2.o.t === "aquarium")) {
       const s0 = t2.o.t === "teil" ? t2.o.s | 0 : 4, pi = i - (Math.floor(s0 / 3) - 1), pj = j - (s0 % 3 - 1);
       removeBig(pi, pj);
+      refund("aquarium");
       plop();
       game.dirty = true;
       return;
     }
     if (!did) {
       if (t2.o) {
+        refund(t2.o.t);
         t2.o = null;
         rebuildObj(i, j);
         did = true;
@@ -4026,6 +4338,7 @@ function applyTool(i, j, painting) {
       return;
     }
     if (t2.g === game.sel) return;
+    if (t2.o && game.sel !== "gras" && game.sel !== "sand") refund(t2.o.t);
     setGround(i, j, game.sel);
     plop();
     game.dirty = true;
@@ -4057,6 +4370,7 @@ function applyTool(i, j, painting) {
         return;
       }
     }
+    if (!pay("aquarium", null)) return;
     claimArea(i, j);
     t2.o = { t: "aquarium", r: orientBig(i, j), s: 1 };
     rebuildObj(i, j, true);
@@ -4075,8 +4389,9 @@ function applyTool(i, j, painting) {
       game.dirty = true;
       return;
     }
+    if (!pay(game.sel, t2.o && t2.o.t, painting)) return;
     if (t2.g !== "gras" && t2.g !== "sand") setGround(i, j, "gras");
-    t2.o = { t: game.sel, r: it.house || game.sel === "flutlicht" ? orient(i, j) : Math.floor(Math.random() * 4), s: Math.floor(Math.random() * 1e9) };
+    t2.o = { t: game.sel, r: it.house || it.station || game.sel === "flutlicht" ? orient(i, j) : Math.floor(Math.random() * 4), s: Math.floor(Math.random() * 1e9) };
     if (it.house) {
       for (let k = animals.length - 1; k >= 0; k--) if (inTile(animals[k], i, j)) {
         const a = animals[k];
@@ -4327,6 +4642,7 @@ function resolve(p, rad) {
     if (!inb(i, j)) continue;
     const gm = groundM[I(i, j)], lists = gm && gm.userData.cols && gm.userData.cols.length ? [cols[I(i, j)], gm.userData.cols] : [cols[I(i, j)]];
     for (const list of lists) for (const c of list) {
+      if (c.off) continue;
       if (c.c) {
         const dx = p.x - c.x, dz = p.z - c.z, dd = Math.hypot(dx, dz), m = rad + c.r;
         if (dd < m && dd > 1e-6) {
@@ -4551,11 +4867,11 @@ function stationNear() {
   return -1;
 }
 const trainAt = (k) => trains.find((tr) => tr.state === "halt" && tr.atStation && tr.stopK === k);
-function showStation(state2, title, sub, go, alt) {
-  if (state2 === game.stState) return;
-  game.stState = state2;
+function showStation(state, title, sub, go, alt) {
+  if (state === game.stState) return;
+  game.stState = state;
   const P = $("#stPanel");
-  if (!state2) {
+  if (!state) {
     P.hidden = true;
     return;
   }
@@ -4566,7 +4882,7 @@ function showStation(state2, title, sub, go, alt) {
   if (go) $("#stGo").textContent = go;
   $("#stAlt").hidden = !alt;
   if (alt) $("#stAlt").textContent = alt;
-  if (state2 === "here" || state2 === "ridestop") tone(988, 0.12, "sine", 0.07);
+  if (state === "here" || state === "ridestop") tone(988, 0.12, "sine", 0.07);
 }
 function updateStationUI() {
   if (game.traveling) {
@@ -4777,7 +5093,7 @@ function ensureTargets() {
   renderer.getDrawingBufferSize(size);
   const w = Math.max(1, size.x | 0), h = Math.max(1, size.y | 0);
   if (rtScene && rtScene.width === w && rtScene.height === h) return;
-  for (const r of [rtScene, rtA, rtB]) if (r) r.dispose();
+  for (const r2 of [rtScene, rtA, rtB]) if (r2) r2.dispose();
   const ms = renderer.capabilities.isWebGL2 && THREE.WebGLMultisampleRenderTarget;
   const opt = { stencilBuffer: true };
   rtScene = ms ? new THREE.WebGLMultisampleRenderTarget(w, h, opt) : new THREE.WebGLRenderTarget(w, h, opt);
@@ -4810,21 +5126,21 @@ function renderDream(scene2, cam, { tilt = 1, night = 0 } = {}) {
   blurMat.uniforms.uDir.value.set(0, 1.6 / rtA.height);
   pass(blurMat, rtA);
   const u = compMat.uniforms;
-  const st = STYLES[style];
+  const st2 = STYLES[style];
   u.tScene.value = rtScene.texture;
   u.tBlur.value = rtA.texture;
   u.uTexel.value.set(1 / rtScene.width, 1 / rtScene.height);
-  u.uTilt.value = tilt * st.tilt;
-  u.uFocusW.value = st.focusW;
+  u.uTilt.value = tilt * st2.tilt;
+  u.uFocusW.value = st2.focusW;
   u.uNight.value = night;
-  u.uBloom.value = st.bloom;
-  u.uSat.value = st.sat;
-  u.uContrast.value = st.contrast;
-  u.uLift.value.fromArray(st.lift);
-  u.uWarm.value.fromArray(st.warm);
-  u.uVig.value = st.vig;
-  u.uGrain.value = st.grain;
-  u.uInk.value = st.ink;
+  u.uBloom.value = st2.bloom;
+  u.uSat.value = st2.sat;
+  u.uContrast.value = st2.contrast;
+  u.uLift.value.fromArray(st2.lift);
+  u.uWarm.value.fromArray(st2.warm);
+  u.uVig.value = st2.vig;
+  u.uGrain.value = st2.grain;
+  u.uInk.value = st2.ink;
   pass(compMat, null);
 }
 function setStyle(id) {
@@ -4933,8 +5249,8 @@ function updateDay(dt, focus2) {
   hemi.color.copy(hNight).lerp(hDay, dayF);
   fill.intensity = 0.17 - 0.06 * dayF;
   for (const n of nightMats) n.m.emissiveIntensity = n.base + n.k * night;
-  stars$1.material.opacity = night * 0.9;
-  stars$1.position.copy(focus2);
+  stars.material.opacity = night * 0.9;
+  stars.position.copy(focus2);
   sunBall.position.copy(focus2).addScaledVector(sd, 320);
   sunBall.visible = elev > -0.15;
   moonBall.position.copy(focus2).addScaledVector(sd, -320);
@@ -4987,22 +5303,22 @@ function startWalk() {
   pl.z = bc.z;
   pl.yaw = bc.yaw;
   pl.pitch = -0.05;
-  let st = tileAt(bc.x, bc.z), to = st && tiles[I(st.i, st.j)].o;
+  let st2 = tileAt(bc.x, bc.z), to = st2 && tiles[I(st2.i, st2.j)].o;
   if (to && to.t === "teil") {
     const s0 = to.s | 0;
-    st = { i: st.i - (Math.floor(s0 / 3) - 1), j: st.j - (s0 % 3 - 1) };
-    to = inb(st.i, st.j) ? tiles[I(st.i, st.j)].o : null;
+    st2 = { i: st2.i - (Math.floor(s0 / 3) - 1), j: st2.j - (s0 % 3 - 1) };
+    to = inb(st2.i, st2.j) ? tiles[I(st2.i, st2.j)].o : null;
   }
   if (to && to.t === "aquarium") {
-    const c = center(st.i, st.j), f = DIRS[to.r];
+    const c = center(st2.i, st2.j), f = DIRS[to.r];
     pl.x = c.x + f[0] * (AQ_R + 1.2);
     pl.z = c.z + f[1] * (AQ_R + 1.2);
     pl.yaw = Math.atan2(f[0], f[1]);
   } else if (to && (ITEMS[to.t].house || to.t === "berg")) {
-    const c = center(st.i, st.j);
+    const c = center(st2.i, st2.j);
     let d = to.r;
-    if (!freeAt(st.i + DIRS[d][0], st.j + DIRS[d][1])) {
-      for (let k = 0; k < 4; k++) if (freeAt(st.i + DIRS[k][0], st.j + DIRS[k][1])) {
+    if (!freeAt(st2.i + DIRS[d][0], st2.j + DIRS[d][1])) {
+      for (let k = 0; k < 4; k++) if (freeAt(st2.i + DIRS[k][0], st2.j + DIRS[k][1])) {
         d = k;
         break;
       }
@@ -5017,7 +5333,7 @@ function startWalk() {
   pl.x = p.x;
   pl.z = p.z;
   setMode("walk");
-  hint("Links läufst du, rechts schaust du dich um. Geh durch die Tür ins Haus!");
+  hint("Links läufst du, rechts schaust du dich um. Vor einer Tür kannst du sie aufmachen!");
 }
 function enterCar(car) {
   game.driveCar = car;
@@ -5052,8 +5368,8 @@ function exitCar(toBuild2) {
   if (ITEMS[car.type].sub) forceSurface(car);
   if (ITEMS[car.type].boat && !toBuild2) {
     let spot = null;
-    for (const r of [1.8, 2.4, 3, 3.6]) for (let a = 0; a < 16 && !spot; a++) {
-      const x = car.x + Math.cos(a / 16 * 6.283) * r, z = car.z + Math.sin(a / 16 * 6.283) * r;
+    for (const r2 of [1.8, 2.4, 3, 3.6]) for (let a = 0; a < 16 && !spot; a++) {
+      const x = car.x + Math.cos(a / 16 * 6.283) * r2, z = car.z + Math.sin(a / 16 * 6.283) * r2;
       const t2 = tileAt(x, z);
       if (t2 && !isWater(t2.i, t2.j) && canStand(x, z) && !resolve({ x, z }, 0.32)) spot = { x, z };
     }
@@ -5279,7 +5595,7 @@ function updateFish(dt) {
     let dx = f.tx - f.x, dz = f.tz - f.z, d = Math.hypot(dx, dz);
     if (d < 0.3 && !f.hook) {
       for (let q = 0; q < 6; q++) {
-        const a = Math.random() * 6.3, r = 2 + Math.random() * 5, nx = f.x + Math.cos(a) * r, nz = f.z + Math.sin(a) * r;
+        const a = Math.random() * 6.3, r2 = 2 + Math.random() * 5, nx = f.x + Math.cos(a) * r2, nz = f.z + Math.sin(a) * r2;
         if (okF(f, nx, nz)) {
           f.tx = nx;
           f.tz = nz;
@@ -5293,8 +5609,8 @@ function updateFish(dt) {
     if (d > 0.05) {
       const want = Math.atan2(dx, dz);
       f.h += clamp(angDiff(want, f.h), -2.2 * dt, 2.2 * dt);
-      const st = Math.min(sp * dt * (0.5 + 0.5 * Math.max(0, Math.cos(angDiff(want, f.h)))), d);
-      const nx = f.x + Math.sin(f.h) * st, nz = f.z + Math.cos(f.h) * st;
+      const st2 = Math.min(sp * dt * (0.5 + 0.5 * Math.max(0, Math.cos(angDiff(want, f.h)))), d);
+      const nx = f.x + Math.sin(f.h) * st2, nz = f.z + Math.cos(f.h) * st2;
       if (okF(f, nx, nz)) {
         f.x = nx;
         f.z = nz;
@@ -5535,7 +5851,7 @@ function showCatch(type, len) {
   $("#catchImg").hidden = !thumbs["F_" + type];
   const big = FISH_BY_ID[type].bigCatch;
   $("#catchTitle").textContent = S.wow ? "Wow, ein " + S.label + "!" : big && len > big.from ? big.title : "Du hast " + (S.art || "einen") + " " + S.label + " gefangen!";
-  $("#catchSub").textContent = "Er ist " + fmtLen(len) + " lang." + (rec && catchBook[type] > 1 ? " Neuer Rekord!" : "");
+  $("#catchSub").textContent = "Er ist " + fmtLen(len) + " lang." + (rec && catchBook[type] > 1 ? " Neuer Rekord!" : "") + " Auf dem Markt gibt es " + S.taler + " Taler dafür.";
   speak($("#catchTitle").textContent + (rec && catchBook[type] > 1 ? " Neuer Rekord!" : ""));
   $("#catchBook").textContent = "Dein Fang: " + Object.keys(FISH).filter((k) => catchBook[k]).map((k) => catchBook[k] + " " + (catchBook[k] === 1 ? FISH[k].label : FISH[k].plural)).join(", ");
   $("#catch").hidden = false;
@@ -5548,6 +5864,7 @@ $("#catchKeep").addEventListener("click", () => {
   ac();
   $("#catch").hidden = true;
   plop();
+  if (lastCatch) putInBucket(lastCatch.type);
   hint("Ab in den Eimer!", 1800);
 });
 $("#catchFree").addEventListener("click", () => {
@@ -5606,7 +5923,7 @@ underScene.add(bubbles);
 const bubbleState = Array.from({ length: 40 }, () => ({ x: 0, y: -99, z: 0, v: 0 }));
 function buildUnderwater() {
   if (under) return;
-  const grp = new THREE.Group(), r = mulberry(4711), wall = M("#5E5444", { flatShading: true }), sandA = M("#C9B27A"), sandB = M("#BBA36C"), mud = M("#7A6A4A");
+  const grp = new THREE.Group(), r2 = mulberry(4711), wall = M("#5E5444", { flatShading: true }), sandA = M("#C9B27A"), sandB = M("#BBA36C"), mud = M("#7A6A4A");
   const rock = G("urock", () => new THREE.DodecahedronGeometry(0.5, 0)), weed = G("uweed", () => new THREE.ConeGeometry(0.12, 1.6, 4)), coral = G("ucoral", () => new THREE.IcosahedronGeometry(0.35, 0));
   const coralM = ["#F27C9B", "#F2A541", "#B57BE0", "#E8504A"].map((c) => M(c, { flatShading: true })), weedM = M("#2E8B57", { flatShading: true }), rockM = M("#7D8288", { flatShading: true });
   let rays = 0;
@@ -5616,18 +5933,18 @@ function buildUnderwater() {
     box(grp, sea ? (i + j) % 2 ? sandA : sandB : mud, TILE, 0.2, TILE, c.x, -4.1, c.z, false);
     const n = sea ? 4 : 2;
     for (let k = 0; k < n; k++) {
-      const x = c.x + (r() - 0.5) * 3.4, z = c.z + (r() - 0.5) * 3.4, q = r();
+      const x = c.x + (r2() - 0.5) * 3.4, z = c.z + (r2() - 0.5) * 3.4, q = r2();
       if (q < 0.35) {
         const m = mesh(weed, weedM, x, -3.2, z, grp, false);
-        m.scale.set(1, 0.7 + r() * 0.8, 1);
-        m.rotation.z = (r() - 0.5) * 0.3;
+        m.scale.set(1, 0.7 + r2() * 0.8, 1);
+        m.rotation.z = (r2() - 0.5) * 0.3;
       } else if (q < 0.6 && sea) {
-        const m = mesh(coral, coralM[Math.floor(r() * 4)], x, -3.85, z, grp, false);
-        m.scale.set(1 + r(), 1 + r() * 1.5, 1 + r());
+        const m = mesh(coral, coralM[Math.floor(r2() * 4)], x, -3.85, z, grp, false);
+        m.scale.set(1 + r2(), 1 + r2() * 1.5, 1 + r2());
       } else {
         const m = mesh(rock, rockM, x, -3.9, z, grp, false);
-        m.scale.set(0.6 + r(), 0.4 + r() * 0.6, 0.6 + r());
-        m.rotation.y = r() * 3;
+        m.scale.set(0.6 + r2(), 0.4 + r2() * 0.6, 0.6 + r2());
+        m.rotation.y = r2() * 3;
       }
     }
     for (let d = 0; d < 4; d++) {
@@ -5635,14 +5952,14 @@ function buildUnderwater() {
       if (isWater(a, b)) continue;
       const w = box(grp, wall, d % 2 ? 0.6 : TILE + 0.6, 4.3, d % 2 ? TILE + 0.6 : 0.6, c.x + DIRS[d][0] * (TILE / 2 + 0.3), -2.05, c.z + DIRS[d][1] * (TILE / 2 + 0.3), false);
       for (let k = 0; k < 2; k++) {
-        const m = mesh(rock, wall, c.x + DIRS[d][0] * (TILE / 2 - 0.1) + (d % 2 ? 0 : (r() - 0.5) * 3), -3.6 + r() * 2.5, c.z + DIRS[d][1] * (TILE / 2 - 0.1) + (d % 2 ? (r() - 0.5) * 3 : 0), grp, false);
-        m.scale.setScalar(0.8 + r());
+        const m = mesh(rock, wall, c.x + DIRS[d][0] * (TILE / 2 - 0.1) + (d % 2 ? 0 : (r2() - 0.5) * 3), -3.6 + r2() * 2.5, c.z + DIRS[d][1] * (TILE / 2 - 0.1) + (d % 2 ? (r2() - 0.5) * 3 : 0), grp, false);
+        m.scale.setScalar(0.8 + r2());
       }
     }
-    if (sea && rays < 24 && r() < 0.3) {
+    if (sea && rays < 24 && r2() < 0.3) {
       rays++;
-      const ray2 = mesh(G("uray", () => new THREE.PlaneGeometry(1.2, 6)), rayMat, c.x + (r() - 0.5) * 2, -2, c.z + (r() - 0.5) * 2, grp, false);
-      ray2.rotation.set(0, r() * 3, 0.25);
+      const ray2 = mesh(G("uray", () => new THREE.PlaneGeometry(1.2, 6)), rayMat, c.x + (r2() - 0.5) * 2, -2, c.z + (r2() - 0.5) * 2, grp, false);
+      ray2.rotation.set(0, r2() * 3, 0.25);
       ray2.userData.keep = true;
     }
   }
@@ -5654,14 +5971,14 @@ function buildUnderwater() {
     }
   });
   underScene.add(baked);
-  const st = seaTex.clone();
-  st.needsUpdate = true;
-  st.repeat.set(game.N, game.N);
-  const surf = new THREE.Mesh(new THREE.PlaneGeometry(game.N * TILE, game.N * TILE), new THREE.MeshBasicMaterial({ map: st, color: 10477823, transparent: true, opacity: 0.55, side: THREE.DoubleSide, depthWrite: false, fog: false }));
+  const st2 = seaTex.clone();
+  st2.needsUpdate = true;
+  st2.repeat.set(game.N, game.N);
+  const surf = new THREE.Mesh(new THREE.PlaneGeometry(game.N * TILE, game.N * TILE), new THREE.MeshBasicMaterial({ map: st2, color: 10477823, transparent: true, opacity: 0.55, side: THREE.DoubleSide, depthWrite: false, fog: false }));
   surf.rotation.x = Math.PI / 2;
   surf.position.y = 0;
   underScene.add(surf);
-  under = { baked, surf, st, models: /* @__PURE__ */ new Map() };
+  under = { baked, surf, st: st2, models: /* @__PURE__ */ new Map() };
 }
 const rayMat = new THREE.MeshBasicMaterial({ map: glowTex, color: 10479871, transparent: true, opacity: 0.18, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide });
 function destroyUnderwater() {
@@ -5751,8 +6068,8 @@ function updateUnderwater(dt, car) {
       b.y += b.v * dt;
       b.x += (Math.random() - 0.5) * 0.02;
     }
-    const cp = game.cam.position, near = (b.x - cp.x) ** 2 + (b.y - cp.y) ** 2 + (b.z - cp.z) ** 2 < 1.6;
-    pos2.setXYZ(k, b.x, near ? -99 : b.y, b.z);
+    const cp = game.cam.position, near2 = (b.x - cp.x) ** 2 + (b.y - cp.y) ** 2 + (b.z - cp.z) ** 2 < 1.6;
+    pos2.setXYZ(k, b.x, near2 ? -99 : b.y, b.z);
   });
   pos2.needsUpdate = true;
 }
@@ -6012,7 +6329,7 @@ function ensurePortal(type) {
             best = q;
           }
         }
-        for (let st = 1; st <= 4; st++) set(i + DIRS[best][0] * st, j + DIRS[best][1] * st, st === 3 ? "bahnhof" : "schiene");
+        for (let st2 = 1; st2 <= 4; st2++) set(i + DIRS[best][0] * st2, j + DIRS[best][1] * st2, st2 === 3 ? "bahnhof" : "schiene");
       }
     }
   } else {
@@ -6300,9 +6617,9 @@ const TEX = {
     x.fillStyle = "#D8CBB6";
     x.fillRect(0, 0, 16, 16);
     x.fillStyle = "#B4472F";
-    for (let r = 0; r < 4; r++) {
-      const off = r % 2 ? 4 : 0;
-      for (let c = -1; c < 2; c++) x.fillRect(c * 8 + off + 1, r * 4 + 1, 7, 3);
+    for (let r2 = 0; r2 < 4; r2++) {
+      const off = r2 % 2 ? 4 : 0;
+      for (let c = -1; c < 2; c++) x.fillRect(c * 8 + off + 1, r2 * 4 + 1, 7, 3);
     }
     x.fillStyle = "#9E3B26";
     for (let k = 0; k < 8; k++) x.fillRect(rnd16(), rnd16(), 1, 1);
@@ -6311,7 +6628,7 @@ const TEX = {
     x.fillStyle = "#B98552";
     x.fillRect(0, 0, 16, 16);
     x.fillStyle = "#9A6A3E";
-    for (let r = 0; r < 4; r++) x.fillRect(0, r * 4 + 3, 16, 1);
+    for (let r2 = 0; r2 < 4; r2++) x.fillRect(0, r2 * 4 + 3, 16, 1);
     for (let k = 0; k < 10; k++) x.fillRect(rnd16(), rnd16(), 2, 1);
   }),
   p: pixTex((x) => noiseFill(x, "#E2DACA", ["#D5CCB8", "#ECE6DA"])),
@@ -6331,9 +6648,9 @@ const TEX = {
     x.fillStyle = "#7E2C20";
     x.fillRect(0, 0, 16, 16);
     x.fillStyle = "#A83C2B";
-    for (let r = 0; r < 4; r++) {
-      const off = r % 2 ? 2 : 0;
-      for (let c = 0; c < 5; c++) x.fillRect(c * 4 + off - 1, r * 4, 3, 3);
+    for (let r2 = 0; r2 < 4; r2++) {
+      const off = r2 % 2 ? 2 : 0;
+      for (let c = 0; c < 5; c++) x.fillRect(c * 4 + off - 1, r2 * 4, 3, 3);
     }
   }),
   f: pixTex((x) => {
@@ -6421,12 +6738,12 @@ function meshVoxels(v) {
   function wedge(b, x0, y0, z0, d) {
     const B = VB, h = B / 2, s = Math.SQRT1_2;
     const P = (x, y, z) => {
-      const r = rot(x - h, z - h, d);
-      return [x0 + h + r[0], y0 + y, z0 + h + r[1]];
+      const r2 = rot(x - h, z - h, d);
+      return [x0 + h + r2[0], y0 + y, z0 + h + r2[1]];
     };
     const Nr = (x, y, z) => {
-      const r = rot(x, z, d);
-      return [r[0], y, r[1]];
+      const r2 = rot(x, z, d);
+      return [r2[0], y, r2[1]];
     };
     quad2(b, P(0, 0, 0), P(B, 0, 0), P(B, 0, B), P(0, 0, B), Nr(0, -1, 0));
     quad2(b, P(B, 0, 0), P(0, 0, 0), P(0, B, 0), P(B, B, 0), Nr(0, 0, -1));
@@ -6539,142 +6856,11 @@ MODELS.eigen = (seed, o) => {
   }
   return { g: meshVoxels(v), cols: voxCols(v), lights: lights2 };
 };
-const stadt = {
-  id: "stadt",
-  title: "Erste Stadt",
-  icon: "haus",
-  bonus: { item: "goldlambo", text: "ein goldener Lamborghini", akk: "einen goldenen Lamborghini" },
-  tasks: [
-    { id: "stadt-strasse", text: "Bau eine Straße aus drei Stücken.", tip: "Tippe unten auf Land, dann auf Straße. Dann tippe dreimal nebeneinander in die Wiese.", on: "gebaut", when: (d) => d.id === "strasse", count: 3 },
-    { id: "stadt-haus", text: "Bau ein Haus.", tip: "Tippe unten auf Häuser und such dir ein Haus aus. Neben einer Straße zeigt die Tür zur Straße.", on: "gebaut", when: (d) => ["haus", "villa", "hochhaus", "feuerwache", "garage"].includes(d.id) },
-    { id: "stadt-baum", text: "Pflanz zwei Bäume.", tip: "Unter Natur gibt es Bäume und Tannen.", on: "gebaut", when: (d) => d.id === "baum" || d.id === "tanne", count: 2 },
-    { id: "stadt-auto", text: "Stell ein Auto auf die Straße.", tip: "Unter Autos ein Auto aussuchen und auf die Straße tippen.", on: "gebaut", when: (d) => d.kind === "car" && !["boot", "uboot"].includes(d.id) },
-    { id: "stadt-laufen", text: "Lauf selbst durch deine Stadt.", tip: "Tippe oben rechts auf das Männchen.", on: "modus", when: (d) => d.mode === "walk" },
-    { id: "stadt-fahren", text: "Steig in ein Auto und fahr los.", tip: "Lauf zu einem Auto und tippe auf Einsteigen.", on: "eingestiegen", when: (d) => !["boot", "uboot"].includes(d.type) },
-    { id: "stadt-hupen", text: "Drück im Auto auf die Hupe.", tip: "Beim Fahren ist unten rechts der Hupen-Knopf.", on: "hupen", when: (d) => d.mode === "drive" }
-  ]
-};
-const bahn = {
-  id: "bahn",
-  title: "Eisenbahn",
-  icon: "zug",
-  tasks: [
-    { id: "bahn-gleis", text: "Bau ein Gleis aus fünf Stücken.", tip: "Unter Bahn findest du das Gleis. Du kannst mit dem Finger malen.", on: "gebaut", when: (d) => d.id === "schiene", count: 5 },
-    { id: "bahn-bahnhof", text: "Bau einen Bahnhof auf das Gleis.", tip: "Den Bahnhof direkt auf ein Gleis-Stück setzen.", on: "gebaut", when: (d) => d.id === "bahnhof" },
-    { id: "bahn-zug", text: "Stell einen Zug auf das Gleis.", tip: "Regionalzug oder Schnellzug auf ein Gleis tippen.", on: "gebaut", when: (d) => d.kind === "train" },
-    { id: "bahn-mitfahren", text: "Fahr mit dem Zug mit.", tip: "Lauf zum Bahnhof. Wenn der Zug hält, tippe auf Einsteigen.", on: "mitfahren" },
-    { id: "bahn-pfeifen", text: "Lass den Zug pfeifen.", tip: "Im Zug unten rechts auf Pfeifen tippen.", on: "hupen", when: (d) => d.mode === "ride" }
-  ]
-};
-const meer = {
-  id: "meer",
-  title: "Am Meer",
-  icon: "boot",
-  tasks: [
-    { id: "meer-malen", text: "Mal ein Meer aus zehn Feldern.", tip: "Unter Wasser das Meer wählen und mit dem Finger malen.", on: "gebaut", when: (d) => d.id === "meer", count: 10 },
-    { id: "meer-boot", text: "Setz ein Fischerboot ins Meer.", tip: "Das Fischerboot findest du unter Wasser.", on: "gebaut", when: (d) => d.id === "boot" },
-    { id: "meer-einsteigen", text: "Steig ins Fischerboot.", tip: "Lauf ans Ufer zum Boot und tippe auf Einsteigen.", on: "eingestiegen", when: (d) => d.type === "boot" },
-    { id: "meer-fisch", text: "Fang einen Fisch.", tip: "Fahr zu einem Schatten im Wasser und tippe auf Angeln. Wenn es spritzt, schnell noch einmal tippen!", on: "fang:geaendert", when: (d) => !!d.type },
-    { id: "meer-drei", text: "Fang drei Fische.", tip: "Im Meer gibt es andere Fische als im See.", on: "fang:geaendert", when: (d) => !!d.type, count: 3 },
-    { id: "meer-aussetzen", text: "Setz einen Fisch in einen See.", tip: "Unter Fische einen Fisch wählen und ins Wasser tippen.", on: "gebaut", when: (d) => d.kind === "fish" }
-  ]
-};
-const entdecker = {
-  id: "entdecker",
-  title: "Entdecker",
-  icon: "uboot",
-  tasks: [
-    { id: "entd-uboot", text: "Steig in ein U-Boot.", tip: "Das U-Boot findest du unter Wasser. Es braucht Meer.", on: "eingestiegen", when: (d) => d.type === "uboot" },
-    { id: "entd-tauchen", text: "Tauch mit dem U-Boot ab.", tip: "Im U-Boot unten rechts auf Abtauchen tippen.", on: "tauchen" },
-    { id: "entd-wal", text: "Entdecke einen Wal.", tip: "Wale leben in einem großen Meer. Halte Ausschau nach der Fontäne!", on: "wal:gesehen" },
-    { id: "entd-aquarium", text: "Bau ein Aquarium.", tip: "Unter Häuser ist das Aquarium. Es braucht drei mal drei Felder.", on: "gebaut", when: (d) => d.id === "aquarium" },
-    { id: "entd-hinein", text: "Geh ins Aquarium hinein.", tip: "Lauf mit dem Männchen durch die Tür.", on: "aquarium:betreten" },
-    { id: "entd-nacht", text: "Mach es Nacht.", tip: "Oben rechts auf die Sonne tippen.", on: "tageszeit", when: (d) => d.nacht },
-    { id: "entd-werkstatt", text: "Bau ein Haus Stein für Stein.", tip: "Unter Häuser auf Selbst bauen tippen, dann auf die Wiese.", on: "werkstatt:fertig" }
-  ]
-};
-const inseln = {
-  id: "inseln",
-  title: "Inselwelt",
-  icon: "faehre",
-  tasks: [
-    { id: "insel-pinsel", text: "Mal eine Insel ins Meer.", tip: "Mit dem Insel-Pinsel ins Meer malen. Der Strand kommt von allein.", on: "insel:gemalt", count: 6 },
-    { id: "insel-anleger", text: "Bau einen Anleger am Ufer.", tip: "Den Anleger ins Wasser direkt neben das Land setzen.", on: "gebaut", when: (d) => d.id === "anleger" },
-    { id: "insel-faehre", text: "Setz eine Fähre ins Wasser.", tip: "Die Fähre fährt von Anleger zu Anleger.", on: "gebaut", when: (d) => d.id === "faehre" },
-    { id: "insel-reise", text: "Reise in eine andere Welt.", tip: "Fahr mit der Fähre durch das Seetor oder mit dem Zug durch den Tunnel.", on: "reise" },
-    { id: "insel-speichern", text: "Speichere deine Welt.", tip: "Oben rechts auf die Wolke tippen.", on: "welt:gespeichert" }
-  ]
-};
-const CHAPTERS = [stadt, bahn, meer, entdecker, inseln];
-const QUEST_EVENTS = ["gebaut", "insel:gemalt", "modus", "eingestiegen", "mitfahren", "hupen", "tageszeit", "tauchen", "aquarium:betreten", "reise", "werkstatt:fertig", "welt:gespeichert", "fang:geaendert", "wal:gesehen"];
-const ALL_TASKS = CHAPTERS.flatMap((c) => c.tasks.map((t2) => ({ ...t2, chapter: c.id })));
-const KEY$1 = "cubos-aufgaben";
-let state = { done: {}, cnt: {} };
-try {
-  const s = JSON.parse(localStorage.getItem(KEY$1) || "null");
-  if (s && s.done) state = { done: s.done, cnt: s.cnt || {} };
-} catch (e) {
-}
-const persist = () => {
-  try {
-    localStorage.setItem(KEY$1, JSON.stringify(state));
-  } catch (e) {
-  }
-};
-const chapterDone = (c) => c.tasks.every((t2) => state.done[t2.id]);
-const stars = () => ALL_TASKS.filter((t2) => state.done[t2.id]).length;
-const totalStars = () => ALL_TASKS.length;
-const isUnlocked = (chapterId) => {
-  const c = CHAPTERS.find((x) => x.id === chapterId);
-  return !!c && chapterDone(c);
-};
-const currentChapter = () => CHAPTERS.find((c) => !chapterDone(c)) || CHAPTERS[CHAPTERS.length - 1];
-const nextTask = () => {
-  const c = currentChapter();
-  const t2 = c.tasks.find((x) => !state.done[x.id]);
-  return t2 ? { ...t2, chapter: c.id } : null;
-};
-const isDone = (taskId) => !!state.done[taskId];
-const progressOf = (task) => Math.min(state.cnt[task.id] || 0, task.count || 1);
-function complete(task) {
-  state.done[task.id] = true;
-  persist();
-  const c = CHAPTERS.find((x) => x.id === task.chapter);
-  emit("aufgabe:geschafft", { chapter: c.id, task: task.id, stars: stars() });
-  if (chapterDone(c)) emit("kapitel:geschafft", { chapter: c.id, bonus: c.bonus || null });
-}
-for (const ev of new Set(ALL_TASKS.map((t2) => t2.on))) {
-  on(ev, (d = {}) => {
-    for (const t2 of ALL_TASKS) {
-      if (t2.on !== ev || state.done[t2.id]) continue;
-      if (t2.when && !t2.when(d)) continue;
-      state.cnt[t2.id] = (state.cnt[t2.id] || 0) + 1;
-      if (state.cnt[t2.id] >= (t2.count || 1)) complete(t2);
-      else persist();
-    }
-  });
-}
-const questData = () => ({ done: state.done, cnt: state.cnt });
-function mergeQuests(q) {
-  if (!q || typeof q !== "object") return false;
-  let ch = false;
-  for (const t2 of ALL_TASKS) {
-    if (q.done && q.done[t2.id] && !state.done[t2.id]) {
-      state.done[t2.id] = true;
-      ch = true;
-    }
-    const n = +(q.cnt || {})[t2.id] || 0;
-    if (n > (state.cnt[t2.id] || 0)) {
-      state.cnt[t2.id] = n;
-      ch = true;
-    }
-  }
-  if (ch) {
-    persist();
-    emit("aufgaben:geladen", {});
-  }
-  return ch;
-}
+const ICON_COIN = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#FFC21A" stroke="#C98A00" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="#C98A00" stroke-width="1.6"/></svg>';
+const ICON_WOOD = '<svg viewBox="0 0 24 24"><rect x="2.5" y="8" width="16" height="9" rx="4.5" fill="#B98552" stroke="#7A5232" stroke-width="1.8"/><ellipse cx="18" cy="12.5" rx="3.2" ry="4.5" fill="#E8C99A" stroke="#7A5232" stroke-width="1.8"/><circle cx="18" cy="12.5" r="1.5" fill="none" stroke="#B98552" stroke-width="1.2"/></svg>';
+const ICON_BUCKET = '<svg viewBox="0 0 24 24"><path d="M4.5 8h15l-1.8 12.5H6.3z" fill="#8FC5F0" stroke="#2F6FA8" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 8c0-5 14-5 14 0" fill="none" stroke="#2F6FA8" stroke-width="1.6"/><path d="M8 13.5c1.6-1.6 4.2-1.6 5.8 0-1.6 1.6-4.2 1.6-5.8 0zm5.8 0 2.4-1.5v3z" fill="#F28C28"/></svg>';
+const ICON_SCROLL = '<svg viewBox="0 0 24 24"><path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7" fill="#FFF4CC" stroke="#C9A65A" stroke-width="1.8"/><path d="M6 4a2 2 0 0 0-2 2v2h4V6a2 2 0 0 0-2-2z" fill="#F2DFA0" stroke="#C9A65A" stroke-width="1.8"/><path d="M10 9h6M10 12.5h6M10 16h4" stroke="#8B6A45" stroke-width="1.6" stroke-linecap="round"/></svg>';
+const ICON_LOCK = '<svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5" fill="#FFC21A" stroke="#8A5A00" stroke-width="1.8"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" fill="none" stroke="#8A5A00" stroke-width="2"/><circle cx="12" cy="15.5" r="1.6" fill="#8A5A00"/></svg>';
 let thumbs = {};
 function select(id) {
   if (ITEMS[id] && ITEMS[id].kind === "action") {
@@ -6742,14 +6928,20 @@ function renderItems() {
     return;
   }
   for (const id of cat.items) {
-    if (ITEMS[id].bonus && !isUnlocked(ITEMS[id].bonus)) continue;
+    const it = ITEMS[id], locked = !!it.price && !owns(id);
     const b = document.createElement("button");
-    b.className = "it" + (game.sel === id ? " on" : "");
+    b.className = "it" + (game.sel === id ? " on" : "") + (locked ? " locked" : "");
     b.dataset.id = id;
-    b.innerHTML = `<span class="ball">${thumbs[id] ? `<img alt="" src="${thumbs[id]}">` : ITEMS[id].icon || ""}</span><span>${ITEMS[id].label}</span>`;
+    const cost = locked ? `<small class="cost">${ICON_COIN}${it.price}</small>` : it.holz ? `<small class="cost">${ICON_WOOD}${it.holz}</small>` : "";
+    b.innerHTML = `<span class="ballwrap"><span class="ball">${thumbs[id] ? `<img alt="" src="${thumbs[id]}">` : it.icon || ""}</span>${locked ? `<span class="lock">${ICON_LOCK}</span>` : ""}</span><span>${it.label}</span>${cost}`;
     b.addEventListener("click", () => {
       ac();
-      if (ITEMS[id].kind !== "action") plop();
+      if (locked) {
+        plop();
+        emit("kaufen:frage", { id });
+        return;
+      }
+      if (it.kind !== "action") plop();
       select(id);
     });
     el.appendChild(b);
@@ -6847,8 +7039,6 @@ const refreshFang = () => {
 };
 on("fang:geaendert", refreshFang);
 on("wal:gesehen", refreshFang);
-on("kapitel:geschafft", () => renderItems());
-on("aufgaben:geladen", () => renderItems());
 const SAVE_VERSION = 1;
 const MIGRATIONS = {};
 function migrate(d) {
@@ -6864,11 +7054,11 @@ function migrate(d) {
   }
   return d;
 }
-const KEY = "kunos-welt-1";
+const KEY$1 = "kunos-welt-1";
 setSaver(save);
 function save() {
   try {
-    localStorage.setItem(KEY, JSON.stringify(serialize()));
+    localStorage.setItem(KEY$1, JSON.stringify(serialize()));
   } catch (e) {
   }
 }
@@ -6888,7 +7078,7 @@ function serialize() {
 function load() {
   let d = null;
   try {
-    d = JSON.parse(localStorage.getItem(KEY) || "null");
+    d = JSON.parse(localStorage.getItem(KEY$1) || "null");
   } catch (e) {
     d = null;
   }
@@ -6990,7 +7180,7 @@ function sampleWorld() {
   R2(10, 2);
   R2(10, 3);
   const O = (i, j, t2) => {
-    tiles[I(i, j)].o = { t: t2, r: ITEMS[t2].house ? orient(i, j) : (i * 7 + j) % 4, s: i * 97 + j * 13 + 5 };
+    tiles[I(i, j)].o = { t: t2, r: ITEMS[t2].house || ITEMS[t2].station ? orient(i, j) : (i * 7 + j) % 4, s: i * 97 + j * 13 + 5 };
   };
   [
     [5, 3, "haus"],
@@ -6998,7 +7188,7 @@ function sampleWorld() {
     [9, 3, "villa"],
     [12, 3, "haus"],
     [14, 3, "haus"],
-    [5, 5, "haus"],
+    [5, 5, "auftragshaus"],
     [11, 5, "hochhaus"],
     [13, 5, "hochhaus"],
     [14, 13, "feuerwache"],
@@ -7051,6 +7241,7 @@ function sampleWorld() {
     [16, 10, "laterne"],
     [9, 12, "laterne"],
     [2, 13, "baum"],
+    [9, 15, "markt"],
     [7, 5, "eigen"],
     [6, 5, "garage"],
     [2, 11, "lagerfeuer"],
@@ -7098,9 +7289,9 @@ function islandWorld() {
     if (i >= 0 && j >= 0 && i < N2 && j < N2) tiles[I(i, j)].g = g;
   }, G2 = (i, j) => i >= 0 && j >= 0 && i < N2 && j < N2 ? tiles[I(i, j)].g : null;
   for (let k = 0; k < N2 * N2; k++) tiles[k].g = "meer";
-  const r = mulberry(4711);
+  const r2 = mulberry(4711);
   const blob = (ci, cj, rad, wob) => {
-    const ph = [r() * 6.3, r() * 6.3];
+    const ph = [r2() * 6.3, r2() * 6.3];
     for (let j = 0; j < N2; j++) for (let i = 0; i < N2; i++) {
       const a = Math.atan2(j - cj, i - ci), d = Math.hypot(i - ci, (j - cj) * 1.15), rr = rad + Math.sin(a * 3 + ph[0]) * wob + Math.sin(a * 5 + ph[1]) * wob * 0.5;
       if (d < rr - 1.1) W(i, j, "gras");
@@ -7121,12 +7312,13 @@ function islandWorld() {
   W(0, N2 - 3, "seetor");
   const O = (i, j, t2) => {
     if (G2(i, j) !== "gras" && G2(i, j) !== "sand") return;
-    tiles[I(i, j)].o = { t: t2, r: ITEMS[t2].house ? orient(i, j) : (i * 7 + j) % 4, s: i * 97 + j * 13 + 5 };
+    tiles[I(i, j)].o = { t: t2, r: ITEMS[t2].house || ITEMS[t2].station ? orient(i, j) : (i * 7 + j) % 4, s: i * 97 + j * 13 + 5 };
   };
   [
     [6, 7, "haus"],
     [10, 7, "villa"],
-    [7, 9, "haus"],
+    [7, 9, "auftragshaus"],
+    [9, 12, "markt"],
     [11, 9, "haus"],
     [9, 10, "baum"],
     [4, 6, "baum"],
@@ -7250,13 +7442,13 @@ function closeEditor() {
     }
   } else {
     if (t2.g !== "gras" && t2.g !== "sand") setGround(i, j, "gras");
-    const r = t2.o && t2.o.t === "eigen" ? t2.o.r : orient(i, j);
+    const r2 = t2.o && t2.o.t === "eigen" ? t2.o.r : orient(i, j);
     for (let k = animals.length - 1; k >= 0; k--) if (inTile(animals[k], i, j)) {
       const a = animals[k];
       a.tx = a.x;
       a.tz = a.z;
     }
-    t2.o = { t: "eigen", r, s: 0, b: s };
+    t2.o = { t: "eigen", r: r2, s: 0, b: s };
     rebuildObj(i, j, true);
   }
   const c = center(i, j);
@@ -7288,12 +7480,12 @@ function towardCamDir() {
   return best;
 }
 function removeDoor(x, y, z) {
-  const st = [[x, y, z]];
-  while (st.length) {
-    const [a, b, c] = st.pop();
+  const st2 = [[x, y, z]];
+  while (st2.length) {
+    const [a, b, c] = st2.pop();
     if (!vin(a, b, c) || edit.v[VI(a, b, c)] !== "d") continue;
     edit.v[VI(a, b, c)] = ".";
-    st.push([a + 1, b, c], [a - 1, b, c], [a, b + 1, c], [a, b - 1, c], [a, b, c + 1], [a, b, c - 1]);
+    st2.push([a + 1, b, c], [a - 1, b, c], [a, b + 1, c], [a, b - 1, c], [a, b, c + 1], [a, b, c - 1]);
   }
 }
 function placeDoor(t2, carve) {
@@ -7328,7 +7520,7 @@ function nopeEdit() {
 }
 function editTap(cx, cy) {
   if (!edit || editSel === "E_hand") return;
-  const r = canvas.getBoundingClientRect(), nv = new THREE.Vector2((cx - r.left) / r.width * 2 - 1, -((cy - r.top) / r.height) * 2 + 1);
+  const r2 = canvas.getBoundingClientRect(), nv = new THREE.Vector2((cx - r2.left) / r2.width * 2 - 1, -((cy - r2.top) / r2.height) * 2 + 1);
   placeEditCam();
   editCam.updateMatrixWorld();
   voxGroup.updateMatrixWorld(true);
@@ -7428,6 +7620,436 @@ $("#eClear").addEventListener("click", () => {
   tone(200, 0.25, "sawtooth", 0.06, 0, 0.5);
   hint("Alles weg. Mit dem Pfeil oben holst du es zurück.", 3e3);
 });
+const fromSea = (d) => !!d.type && FISH_BY_ID[d.type] && FISH_BY_ID[d.type].habitat.includes("meer");
+const ORDERS = [
+  { id: "fische-drei", text: "Fang drei Fische.", tip: "Steig in ein Boot, fahr zu den Schatten im Wasser und tippe auf Angeln.", on: "fang:geaendert", when: (d) => !!d.type, count: 3, taler: 6 },
+  { id: "holz-fuenf", text: "Bring fünf Holz.", tip: "Lauf mit dem Männchen zu einem Baum und tippe auf Holz fällen.", give: { holz: 5 }, taler: 8 },
+  { id: "welt-entdecken", text: "Entdecke eine andere Welt.", tip: "Fahr mit der Fähre durch das Seetor oder mit dem Zug durch den Tunnel.", on: "reise", taler: 12 },
+  { id: "markt-verkaufen", text: "Verkauf Fische auf dem Markt.", tip: "Bau einen Markt. Dann lauf hin und tippe auf Verkaufen.", on: "markt:verkauft", taler: 4 },
+  { id: "haus-bauen", text: "Bau ein neues Haus.", tip: "Unter Häuser ein Haus wählen und auf die Wiese tippen. Häuser kosten Holz.", on: "gebaut", when: (d) => ["haus", "villa", "hochhaus", "feuerwache", "garage"].includes(d.id), taler: 5 },
+  { id: "fisch-meer", text: "Fang einen Fisch im Meer.", tip: "Im Meer schwimmen Thunfische, Haie und Marline.", on: "fang:geaendert", when: fromSea, taler: 6 },
+  { id: "baeume-faellen", text: "Fäll zwei Bäume.", tip: "Lauf mit dem Männchen zu einem Baum und tippe auf Holz fällen.", on: "baum:gefaellt", count: 2, taler: 4 },
+  { id: "zug-fahren", text: "Fahr mit dem Zug mit.", tip: "Lauf zum Bahnhof. Wenn der Zug hält, tippe auf Einsteigen.", on: "mitfahren", taler: 5 },
+  { id: "fische-bringen", text: "Bring drei Fische.", tip: "Fang Fische mit dem Boot und leg sie in den Eimer.", give: { fisch: 3 }, taler: 12 },
+  { id: "baeume-pflanzen", text: "Pflanz drei Bäume.", tip: "Unter Natur gibt es Bäume und Tannen.", on: "gebaut", when: (d) => d.id === "baum" || d.id === "tanne", count: 3, taler: 3 },
+  { id: "tauchen", text: "Tauch mit dem U-Boot ab.", tip: "Setz ein U-Boot ins Wasser, steig ein und tippe auf Abtauchen.", on: "tauchen", taler: 6 },
+  { id: "aquarium", text: "Besuch das Aquarium.", tip: "Unter Häuser ist das Aquarium. Lauf mit dem Männchen hinein.", on: "aquarium:betreten", taler: 4 },
+  { id: "insel-malen", text: "Mal eine Insel ins Meer.", tip: "Mit dem Insel-Pinsel ins Meer malen. Der Strand kommt von allein.", on: "insel:gemalt", count: 4, taler: 5 },
+  { id: "nacht", text: "Mach es Nacht.", tip: "Oben rechts auf die Sonne tippen.", on: "tageszeit", when: (d) => d.nacht, taler: 2 },
+  { id: "holz-zehn", text: "Bring zehn Holz.", tip: "Tannen geben mehr Holz als Bäume.", give: { holz: 10 }, taler: 15 }
+];
+const ORDER_EVENTS = ["fang:geaendert", "reise", "markt:verkauft", "gebaut", "baum:gefaellt", "mitfahren", "tauchen", "aquarium:betreten", "insel:gemalt", "tageszeit", "eingestiegen", "gekauft"];
+const ORDER_BY_ID = Object.fromEntries(ORDERS.map((o) => [o.id, o]));
+const KEY = "cubos-auftraege";
+let st = { active: null, n: {} };
+try {
+  const s = JSON.parse(localStorage.getItem(KEY) || "null");
+  if (s && typeof s === "object") st = { active: s.active && ORDER_BY_ID[s.active.id] ? s.active : null, n: s.n || {} };
+} catch (e) {
+}
+const persist = () => {
+  try {
+    localStorage.setItem(KEY, JSON.stringify(st));
+  } catch (e) {
+  }
+};
+function activeOrder() {
+  if (!st.active) return null;
+  const o = ORDER_BY_ID[st.active.id];
+  return { ...o, cnt: st.active.cnt, fertig: st.active.fertig || canGive(o) };
+}
+function offers(k = 3) {
+  return ORDERS.map((o, i) => [o, st.n[o.id] || 0, i]).sort((a, b) => a[1] - b[1] || a[2] - b[2]).slice(0, k).map((x) => x[0]);
+}
+const timesDone = () => Object.values(st.n).reduce((a, b) => a + b, 0);
+function canGive(o) {
+  if (!o.give) return false;
+  return (o.give.holz || 0) <= holz() && (o.give.fisch || 0) <= fishCount();
+}
+function accept(id) {
+  if (!ORDER_BY_ID[id]) return false;
+  st.active = { id, cnt: 0, fertig: false };
+  persist();
+  wasReady = canGive(ORDER_BY_ID[id]);
+  emit("auftrag:angenommen", { id });
+  return true;
+}
+function cancel() {
+  if (st.active) {
+    st.active = null;
+    persist();
+    emit("auftrag:angenommen", { id: null });
+  }
+}
+function claim() {
+  const a = activeOrder();
+  if (!a || !a.fertig) return 0;
+  if (a.give) {
+    if (a.give.holz && !spend("holz", a.give.holz)) return 0;
+    if (a.give.fisch) takeFish(a.give.fisch);
+  }
+  st.n[a.id] = (st.n[a.id] || 0) + 1;
+  st.active = null;
+  persist();
+  addTaler(a.taler, "auftrag");
+  emit("auftrag:abgeholt", { id: a.id, taler: a.taler });
+  return a.taler;
+}
+for (const ev of new Set(ORDERS.filter((o) => o.on).map((o) => o.on))) {
+  on(ev, (d = {}) => {
+    const a = st.active && ORDER_BY_ID[st.active.id];
+    if (!a || a.on !== ev || st.active.fertig) return;
+    if (a.when && !a.when(d)) return;
+    st.active.cnt++;
+    if (st.active.cnt >= (a.count || 1)) {
+      st.active.fertig = true;
+      persist();
+      emit("auftrag:fertig", { id: a.id });
+    } else {
+      persist();
+      emit("auftrag:fortschritt", { id: a.id, cnt: st.active.cnt });
+    }
+  });
+}
+let wasReady = false;
+on("rucksack:geaendert", () => {
+  const a = st.active && ORDER_BY_ID[st.active.id];
+  const ready = !!a && canGive(a);
+  if (ready && !wasReady) emit("auftrag:fertig", { id: a.id });
+  wasReady = ready;
+});
+function resetOrders() {
+  st = { active: null, n: {} };
+  wasReady = false;
+  persist();
+}
+const COIN_SM = ICON_COIN;
+const shown$1 = { taler: null, holz: null, eimer: null };
+function updatePurse() {
+  const v = { taler: taler(), holz: holz(), eimer: fishCount() };
+  for (const k of Object.keys(v)) {
+    const el = $("#n" + k[0].toUpperCase() + k.slice(1));
+    if (shown$1[k] !== null && v[k] > shown$1[k]) {
+      const c = el.parentElement;
+      c.classList.remove("bump");
+      void c.offsetWidth;
+      c.classList.add("bump");
+    }
+    el.textContent = v[k];
+    shown$1[k] = v[k];
+  }
+  $("#hud").hidden = game.mode === "edit";
+}
+$("#chipTaler").addEventListener("click", () => {
+  ac();
+  plop();
+  hint("Taler bekommst du im Auftragshaus und auf dem Markt. Damit kannst du tolle Sachen kaufen!", 4e3);
+});
+$("#chipHolz").addEventListener("click", () => {
+  ac();
+  plop();
+  hint("Holz bekommst du, wenn du mit dem Männchen Bäume fällst. Häuser bauen kostet Holz.", 4e3);
+});
+$("#chipEimer").addEventListener("click", () => {
+  ac();
+  plop();
+  hint(fishCount() ? "Das sind deine Fische im Eimer. Auf dem Markt bekommst du Taler dafür!" : "Dein Eimer ist leer. Fang Fische mit dem Boot und leg sie in den Eimer.", 4e3);
+});
+const progress = (a) => a.give ? "" : (a.count || 1) > 1 ? `${Math.min(a.cnt, a.count)} von ${a.count}` : "";
+function updatePill() {
+  const a = activeOrder(), p = $("#orderPill");
+  p.hidden = !a || game.mode === "edit";
+  if (!a) return;
+  p.classList.toggle("done", !!a.fertig);
+  const pr = progress(a);
+  $("#orderTxt").textContent = a.fertig ? "Fertig! Ab zum Auftragshaus." : a.text + (pr ? " " + pr : "");
+}
+$("#orderPill").addEventListener("click", () => {
+  ac();
+  const a = activeOrder();
+  if (!a) return;
+  speak(a.fertig ? "Dein Auftrag ist fertig! Hol dir deine Taler im Auftragshaus." : a.text + " " + a.tip, { force: true });
+});
+let toastT = 0;
+function coinToast(title, sub) {
+  $("#ctTitle").textContent = title;
+  $("#ctSub").textContent = sub || "";
+  const el = $("#coinToast");
+  el.hidden = false;
+  el.style.animation = "none";
+  void el.offsetWidth;
+  el.style.animation = "";
+  clearTimeout(toastT);
+  toastT = setTimeout(() => {
+    el.hidden = true;
+  }, 2600);
+  for (let k = 0; k < 5; k++) tone(988 + k * 120, 0.09, "sine", 0.07, k * 0.08, 1.2);
+}
+let cur = null;
+function openPlace(kind, arg) {
+  cur = { kind, arg };
+  $("#place").hidden = false;
+  render(true);
+}
+function closePlace() {
+  $("#place").hidden = true;
+  cur = null;
+}
+$("#plClose").addEventListener("click", () => {
+  ac();
+  closePlace();
+});
+$("#place").addEventListener("click", (e) => {
+  if (e.target.id === "place") closePlace();
+});
+const thumb = (id) => thumbs[id] ? `<img alt="" src="${thumbs[id]}">` : "";
+function head(icon, title, sub) {
+  $("#plIc").innerHTML = icon;
+  $("#plTitle").textContent = title;
+  $("#plSub").textContent = sub;
+}
+function btn(cls, html, fn, disabled) {
+  const b = document.createElement("button");
+  b.className = "mb " + cls;
+  b.innerHTML = html;
+  b.disabled = !!disabled;
+  b.addEventListener("click", () => {
+    ac();
+    fn();
+  });
+  return b;
+}
+function orderCard(o, extra) {
+  const el = document.createElement(extra.button ? "button" : "div");
+  el.className = "oc" + (extra.cur ? " cur" : "");
+  el.innerHTML = `<div class="tx"><b>${o.text}</b>${extra.tip ? `<span>${o.tip}</span>` : ""}${extra.pr ? `<small>${extra.pr}</small>` : ""}</div><div class="rw">${COIN_SM}${o.taler}</div>`;
+  return el;
+}
+function render(fresh2) {
+  if (!cur) return;
+  const body = $("#plBody");
+  body.innerHTML = "";
+  if (cur.kind === "auftraege") renderOrders(body, fresh2);
+  else if (cur.kind === "markt") renderMarket(body, fresh2);
+  else if (cur.kind === "kaufen") renderBuy(body, fresh2);
+}
+function renderOrders(body, fresh2) {
+  const a = activeOrder();
+  head(thumb("auftragshaus") || ICON_SCROLL, "Auftragshaus", a ? a.fertig ? "Dein Auftrag ist fertig!" : "Dein Auftrag läuft noch." : "Such dir einen Auftrag aus!");
+  if (a) {
+    body.appendChild(orderCard(a, { tip: !a.fertig, pr: a.fertig ? "" : progress(a), cur: true }));
+    if (a.fertig) {
+      body.appendChild(btn("go", `${COIN_SM}${a.give ? "Abgeben und" : ""} ${a.taler} Taler abholen`, () => {
+        const n = claim();
+        if (!n) {
+          nopeSnd();
+          return;
+        }
+        coinToast(`Super! ${n} Taler!`, "Such dir gleich den nächsten Auftrag aus.");
+        speak(`Super! Du bekommst ${n} Taler!`);
+        render(false);
+      }));
+      if (fresh2) speak("Toll, dein Auftrag ist fertig! Hol dir deine Taler.");
+    } else {
+      if (a.give) {
+        const need = a.give.holz ? `Du hast ${holz()} von ${a.give.holz} Holz.` : `Du hast ${fishCount()} von ${a.give.fisch} Fischen im Eimer.`;
+        const p = document.createElement("p");
+        p.id = "plNeed";
+        p.style.margin = "0";
+        p.textContent = need;
+        body.appendChild(p);
+      }
+      body.appendChild(btn("", "Lieber einen anderen Auftrag", () => {
+        cancel();
+        plop();
+        render(true);
+      }));
+      if (fresh2) speak(a.text + " " + a.tip);
+    }
+    return;
+  }
+  for (const o of offers()) {
+    const c = orderCard(o, { button: true, tip: false });
+    c.addEventListener("click", () => {
+      ac();
+      accept(o.id);
+      chime();
+      closePlace();
+      hint("Dein Auftrag: " + o.text + " " + o.tip, 5e3);
+    });
+    body.appendChild(c);
+  }
+  if (fresh2) speak("Such dir einen Auftrag aus! Tippe auf einen.");
+}
+function marketValue() {
+  const e = eimer();
+  return Object.keys(e).reduce((s, k) => s + e[k] * (FISH[k] && FISH[k].taler || 1), 0);
+}
+function renderMarket(body, fresh2) {
+  const e = eimer(), n = fishCount();
+  head(thumb("markt") || ICON_BUCKET, "Markt", n ? "So viele Taler bekommst du für deine Fische:" : "Dein Eimer ist leer.");
+  if (!n) {
+    const p = document.createElement("p");
+    p.style.margin = "0";
+    p.textContent = "Fang Fische mit dem Boot und leg sie in den Eimer.";
+    body.appendChild(p);
+    if (fresh2) speak("Dein Eimer ist leer. Fang Fische mit dem Boot und leg sie in den Eimer.");
+    return;
+  }
+  for (const k of Object.keys(e)) {
+    const S = FISH[k];
+    if (!S) continue;
+    const row = document.createElement("div");
+    row.className = "oc";
+    row.innerHTML = `${thumb("F_" + k)}<div class="tx"><b>${e[k]} ${e[k] === 1 ? S.label : S.plural}</b><span>${S.taler} Taler pro Fisch</span></div><div class="rw">${COIN_SM}${e[k] * S.taler}</div>`;
+    body.appendChild(row);
+  }
+  const total = marketValue();
+  body.appendChild(btn("go", `${COIN_SM}Alles verkaufen: ${total} Taler`, () => {
+    const sold = emptyBucket(), cnt = Object.values(sold).reduce((a, b) => a + b, 0);
+    addTaler(total, "markt");
+    emit("markt:verkauft", { fische: cnt, taler: total });
+    coinToast(`${total} Taler!`, "Danke für die Fische!");
+    speak(`Danke für die Fische! Du bekommst ${total} Taler!`);
+    render(false);
+  }));
+  if (fresh2) speak("Willkommen auf dem Markt! Tippe auf Alles verkaufen.");
+}
+function renderBuy(body, fresh2) {
+  const id = cur.arg, it = ITEMS[id], price = it.price, have = taler(), ok = have >= price;
+  head(thumb(id), it.label, `Kostet ${price} Taler. Du hast ${have} Taler.`);
+  body.appendChild(btn("go", `${COIN_SM}Für ${price} Taler kaufen`, () => {
+    if (!buy(id, price)) {
+      nopeSnd();
+      return;
+    }
+    emit("gekauft", { id });
+    closePlace();
+    renderItems();
+    select(id);
+    coinToast("Juhu!", it.label + " gehört jetzt dir.");
+    speak("Juhu! Das gehört jetzt dir!");
+  }, !ok));
+  body.appendChild(btn("", "Später", closePlace));
+  if (fresh2) speak(ok ? "Möchtest du das kaufen?" : "Dafür brauchst du mehr Taler. Angle Fische und verkauf sie auf dem Markt!");
+}
+let near = { place: null, tree: null, door: null }, shownPlace = "auftraege";
+function scan(x, z, reach) {
+  const t2 = tileAt(x, z);
+  const out = { place: null, tree: null };
+  if (!t2) return out;
+  let bp = reach.place, bt = reach.tree;
+  for (let dj = -1; dj <= 1; dj++) for (let di = -1; di <= 1; di++) {
+    const i = t2.i + di, j = t2.j + dj;
+    if (!inb(i, j)) continue;
+    const o = tiles[I(i, j)].o, it = o && ITEMS[o.t];
+    if (!it) continue;
+    const c = center(i, j), d = Math.hypot(c.x - x, c.z - z);
+    if (it.station && d < bp) {
+      bp = d;
+      out.place = it.station;
+    }
+    if (it.chop && d < bt) {
+      bt = d;
+      out.tree = { i, j, type: o.t, holz: it.chop };
+    }
+  }
+  return out;
+}
+function updateNear() {
+  let n = { place: null, tree: null };
+  if (!game.traveling) {
+    if (game.mode === "walk") n = scan(pl.x, pl.z, { place: 4.4, tree: 3.1 });
+    else if (game.mode === "drive" && game.driveCar && ITEMS[game.driveCar.type].boat) n = { place: scan(game.driveCar.x, game.driveCar.z, { place: 6.5, tree: 0 }).place === "markt" ? "markt" : null, tree: null };
+  }
+  n.door = null;
+  if (game.mode === "walk" && !game.traveling) {
+    let bd = 2.3;
+    for (const d of doors.values()) {
+      const dd = Math.hypot(d.x - pl.x, d.z - pl.z);
+      if (dd < bd) {
+        bd = dd;
+        n.door = d;
+      }
+    }
+  }
+  near = n;
+  $("#btnDoor").hidden = !n.door;
+  if (n.door) $("#doorTxt").textContent = n.door.target ? "Tür zu" : "Tür auf";
+  $("#btnPlace").hidden = !n.place;
+  if (n.place && n.place !== shownPlace) {
+    shownPlace = n.place;
+    $("#placeTxt").textContent = n.place === "markt" ? "Verkaufen" : "Aufträge";
+    $("#placeIc").innerHTML = n.place === "markt" ? ICON_BUCKET : ICON_SCROLL;
+  }
+  $("#btnChop").hidden = !n.tree;
+}
+$("#btnDoor").addEventListener("click", () => {
+  const d = near.door;
+  if (!d) return;
+  ac();
+  d.target = d.target ? 0 : 1;
+  d.col.off = d.target === 1;
+  if (d.target) {
+    tone(330, 0.18, "triangle", 0.05, 0, 1.3);
+    tone(440, 0.12, "sine", 0.04, 0.12);
+  } else tone(160, 0.12, "square", 0.06, 0.15);
+  emit("tuer", { auf: !!d.target });
+  updateNear();
+});
+$("#btnPlace").addEventListener("click", () => {
+  ac();
+  plop();
+  if (near.place) openPlace(near.place);
+});
+$("#btnChop").addEventListener("click", () => {
+  const tr = near.tree;
+  if (!tr) return;
+  ac();
+  const t2 = tiles[I(tr.i, tr.j)];
+  if (!t2.o || t2.o.t !== tr.type) return;
+  t2.o = null;
+  rebuildObj(tr.i, tr.j);
+  saveSoon();
+  tone(220, 0.06, "square", 0.08);
+  tone(200, 0.06, "square", 0.08, 0.16);
+  tone(150, 0.3, "triangle", 0.07, 0.34, 0.5);
+  addHolz(tr.holz, "gefaellt");
+  emit("baum:gefaellt", { type: tr.type, holz: tr.holz });
+  hint(`Tock, tock! ${tr.holz} Holz für dich!`, 2500);
+  updateNear();
+});
+on("bild", updateNear);
+on("modus", () => {
+  updateNear();
+  updatePill();
+  updatePurse();
+  if (cur) closePlace();
+});
+on("rucksack:geaendert", (d) => {
+  updatePurse();
+  updatePill();
+  if (cur) render(false);
+  if (d && (d.why === "gekauft" || d.why === "code" || d.why === "reset")) renderItems();
+});
+on("auftrag:angenommen", updatePill);
+on("auftrag:fortschritt", updatePill);
+on("auftrag:fertig", () => {
+  updatePill();
+  chime();
+  hint("Auftrag geschafft! Hol dir deine Taler im Auftragshaus.", 4500);
+});
+on("auftrag:abgeholt", updatePill);
+on("ort:antippen", (d) => {
+  ac();
+  plop();
+  openPlace(d.station);
+});
+on("kaufen:frage", (d) => {
+  openPlace("kaufen", d.id);
+});
+updatePurse();
+updatePill();
 const shown = [];
 function lineup(ids, size2 = 1.6) {
   for (const m of shown.splice(0)) scene.remove(m);
@@ -7482,6 +8104,27 @@ if (window.__CUBO_DEBUG) window.__cubo = {
     Object.assign(catchBook, o);
     refreshAquariums();
   },
+  // Rucksack und Aufträge
+  rucksack: (o) => {
+    if (o) resetRucksack(o);
+    return rucksackData();
+  },
+  give: (taler2, holz2, fish) => {
+    addTaler(taler2 || 0);
+    addHolz(holz2 || 0);
+    for (const f of fish || []) putInBucket(f);
+  },
+  resetOrders: () => resetOrders(),
+  accept: (id) => accept(id),
+  claim: () => claim(),
+  openPlace: (kind, arg) => openPlace(kind, arg),
+  doors: () => [...doors.values()].map((d) => ({ x: d.x, z: d.z, auf: d.target })),
+  click: (sel) => {
+    const e = document.querySelector(sel);
+    if (!e || e.hidden || e.disabled) return false;
+    e.click();
+    return true;
+  },
   emptyWorld: () => emptyWorld(),
   sampleWorld: () => sampleWorld(),
   islandWorld: () => islandWorld(),
@@ -7490,7 +8133,7 @@ if (window.__CUBO_DEBUG) window.__cubo = {
     return c ? { x: c.x, z: c.z } : null;
   },
   fp: () => {
-    const r = (v) => Math.round(v * 1e3) / 1e3;
+    const r2 = (v) => Math.round(v * 1e3) / 1e3;
     const vis = (id) => {
       const e = document.getElementById(id);
       return e ? !e.hidden : null;
@@ -7501,21 +8144,25 @@ if (window.__CUBO_DEBUG) window.__cubo = {
       sel: game.sel,
       curCat: game.curCat,
       world: JSON.stringify(serialize()),
-      cars: cars.map((c) => [c.type, c.mode, r(c.x), r(c.z), r(c.h)]),
-      trains: trains.map((t2) => [t2.type, r(t2.odo || 0)]),
-      ferries: ferries.map((f) => [r(f.x), r(f.z)]),
-      fishes: fishes.map((f) => [f.type, r(f.x), r(f.z), !!f.free]),
-      whales: whales.map((w) => [w.type, w.st, r(w.x), r(w.z)]),
-      animals: animals.map((a) => [a.type, r(a.x), r(a.z)]),
-      pl: [r(pl.x), r(pl.z), r(pl.yaw)],
+      cars: cars.map((c) => [c.type, c.mode, r2(c.x), r2(c.z), r2(c.h)]),
+      trains: trains.map((t2) => [t2.type, r2(t2.odo || 0)]),
+      ferries: ferries.map((f) => [r2(f.x), r2(f.z)]),
+      fishes: fishes.map((f) => [f.type, r2(f.x), r2(f.z), !!f.free]),
+      whales: whales.map((w) => [w.type, w.st, r2(w.x), r2(w.z)]),
+      animals: animals.map((a) => [a.type, r2(a.x), r2(a.z)]),
+      pl: [r2(pl.x), r2(pl.z), r2(pl.yaw)],
       driving: game.driveCar ? game.driveCar.type : null,
       riding: !!game.rideTrain,
       fishing: fishing ? fishing.phase : null,
       catchBook: JSON.stringify(catchBook),
       whaleBook: JSON.stringify(whaleBook),
       aquarium: [...aquariums.values()].map((a) => a.fish.length),
-      quests: { stars: stars(), next: (nextTask() || {}).id || null },
-      ui: { book: vis("questBook"), travel: vis("travel"), st: vis("stPanel"), aq: vis("aqPanel"), dive: vis("btnDive"), fish: vis("btnFish"), menu: vis("menu"), catch: vis("catch") }
+      rucksack: rucksackData(),
+      auftrag: (() => {
+        const a = activeOrder();
+        return a ? [a.id, a.cnt, !!a.fertig] : null;
+      })(),
+      ui: { place: vis("place"), placeBtn: vis("btnPlace"), chop: vis("btnChop"), travel: vis("travel"), st: vis("stPanel"), aq: vis("aqPanel"), dive: vis("btnDive"), fish: vis("btnFish"), menu: vis("menu"), catch: vis("catch") }
     };
   }
 };
@@ -7533,8 +8180,8 @@ async function encodeWorld(obj) {
   const bytes = new TextEncoder().encode(JSON.stringify(obj));
   if (globalThis.CompressionStream) {
     try {
-      const st = new Blob([bytes]).stream().pipeThrough(new CompressionStream("gzip"));
-      return "KUNOWELT1:" + b64(new Uint8Array(await new Response(st).arrayBuffer()));
+      const st2 = new Blob([bytes]).stream().pipeThrough(new CompressionStream("gzip"));
+      return "KUNOWELT1:" + b64(new Uint8Array(await new Response(st2).arrayBuffer()));
     } catch (e) {
     }
   }
@@ -7546,8 +8193,8 @@ async function decodeWorld(code) {
   let u = unb64(m[2]);
   if (m[1] === "1") {
     if (!globalThis.DecompressionStream) throw new Error("gzip");
-    const st = new Blob([u]).stream().pipeThrough(new DecompressionStream("gzip"));
-    u = new Uint8Array(await new Response(st).arrayBuffer());
+    const st2 = new Blob([u]).stream().pipeThrough(new DecompressionStream("gzip"));
+    u = new Uint8Array(await new Response(st2).arrayBuffer());
   }
   return JSON.parse(new TextDecoder().decode(u));
 }
@@ -7567,9 +8214,9 @@ $("#mExportAll").addEventListener("click", async () => {
   l.sort((a, b) => (a.updated || 0) - (b.updated || 0));
   const worlds = l.map((w) => ({ name: w.name, data: w.id === game.curWorld ? JSON.stringify(serialize()) : w.data })).filter((w) => w.data);
   if (game.curWorld == null || !l.some((w) => w.id === game.curWorld)) worlds.push({ name: "Mitgebrachte Welt", data: JSON.stringify(serialize()) });
-  const code = await encodeWorld({ v: 2, worlds, fang: fangData(), aufgaben: questData() });
+  const code = await encodeWorld({ v: 2, worlds, fang: fangData(), rucksack: rucksackData() });
   $("#codeTxt").value = code;
-  $("#codeInfo").textContent = worlds.length + (worlds.length === 1 ? " Welt" : " Welten") + ' plus Fangbuch und Aquarium als ein Code. Kopiere ihn und füge ihn auf dem anderen Gerät mit „Code einfügen" ein.';
+  $("#codeInfo").textContent = worlds.length + (worlds.length === 1 ? " Welt" : " Welten") + ' plus Fangbuch, Aquarium und Rucksack als ein Code. Kopiere ihn und füge ihn auf dem anderen Gerät mit „Code einfügen" ein.';
 });
 $("#mExport").addEventListener("click", async () => {
   ac();
@@ -7585,7 +8232,7 @@ $("#mExport").addEventListener("click", async () => {
     if (w) name = w.name;
   } catch (e) {
   }
-  const code = await encodeWorld({ v: 1, name, data: JSON.stringify(serialize()), fang: fangData(), aufgaben: questData() });
+  const code = await encodeWorld({ v: 1, name, data: JSON.stringify(serialize()), fang: fangData(), rucksack: rucksackData() });
   $("#codeTxt").value = code;
   $("#codeInfo").textContent = "Das ist „" + name + '" als Code. Kopiere ihn und füge ihn auf dem anderen Gerät mit „Code einfügen" ein.';
 });
@@ -7639,7 +8286,7 @@ $("#codeGo").addEventListener("click", async () => {
       return false;
     }
   });
-  const fangNew = mergeFang(obj.fang) | mergeQuests(obj.aufgaben);
+  const fangNew = mergeFang(obj.fang) | mergeRucksack(obj.rucksack);
   if (!ok.length) {
     if (fangNew) {
       $("#codeBox").hidden = true;
@@ -7982,6 +8629,7 @@ function frame(now) {
   updateSparkles(dt, focus, night, game.mode !== "edit" && !subUnder());
   updateLights(dt, night);
   updateGarages(dt);
+  updateDoors(dt);
   if (!game.traveling) {
     updateTrains(dt);
     for (const f of ferries.slice()) updateFerry(f, dt);
@@ -7996,6 +8644,7 @@ function frame(now) {
   updateStationUI();
   updateAquaUI();
   updateAquariums(dt);
+  emit("bild", { dt });
   portalMat.color.setHSL(now * 8e-5 % 1, 0.8, 0.7);
   portalMat.opacity = 0.55 + 0.2 * Math.sin(now * 3e-3);
   blink += dt;
@@ -8083,124 +8732,12 @@ $("#btnFull").addEventListener("click", () => {
     if (!can) return no();
     const fn = de.requestFullscreen || de.webkitRequestFullscreen;
     if (!fn) return no();
-    const r = fn.call(de);
-    if (r && r.catch) r.catch(no);
+    const r2 = fn.call(de);
+    if (r2 && r2.catch) r2.catch(no);
   } catch (e) {
     no();
   }
 });
-const SPEAKER = '<svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z" fill="#FFC21A"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>';
-let shownChapter = null;
-function updateDock() {
-  $("#questStars").textContent = stars();
-  const t2 = nextTask();
-  $("#questPill").hidden = !t2 || game.mode === "edit";
-  $("#questDock").hidden = game.mode === "edit";
-  if (t2) $("#questPillTxt").textContent = t2.text;
-}
-function renderBook() {
-  const cur = shownChapter || currentChapter().id;
-  $("#qbStars").textContent = `Du hast ${stars()} von ${totalStars()} Sternen gesammelt.`;
-  const chs = $("#qbChapters");
-  chs.innerHTML = "";
-  for (const c of CHAPTERS) {
-    const n = c.tasks.filter((t2) => isDone(t2.id)).length, b = document.createElement("button");
-    b.className = "qch" + (c.id === cur ? " on" : "") + (n === c.tasks.length ? " done" : "");
-    b.innerHTML = `${thumbs[c.icon] ? `<img alt="" src="${thumbs[c.icon]}">` : ""}<span>${c.title}</span><small>${n}/${c.tasks.length}</small>`;
-    b.addEventListener("click", () => {
-      ac();
-      plop();
-      shownChapter = c.id;
-      renderBook();
-      speak(c.title);
-    });
-    chs.appendChild(b);
-  }
-  const ch = CHAPTERS.find((c) => c.id === cur), next = nextTask();
-  const list = $("#qbTasks");
-  list.innerHTML = "";
-  for (const t2 of ch.tasks) {
-    const ok = isDone(t2.id), el = document.createElement("div");
-    el.className = "qt" + (ok ? " ok" : "") + (next && next.id === t2.id ? " next" : "");
-    const cnt = t2.count && !ok ? `<small>${progressOf(t2)} von ${t2.count}</small>` : "";
-    el.innerHTML = `<div class="ck">${ok ? "✓" : ""}</div><div class="tx"><b>${t2.text}</b>${ok ? "" : `<span>${t2.tip}</span>`}${cnt}</div><button class="say" aria-label="Vorlesen">${SPEAKER}</button><div class="st" aria-hidden="true">★</div>`;
-    el.querySelector(".say").addEventListener("click", () => {
-      ac();
-      speak(ok ? t2.text + " Geschafft!" : t2.text + " " + t2.tip, { force: true });
-    });
-    list.appendChild(el);
-  }
-  const bo = $("#qbBonus");
-  if (ch.bonus) {
-    const un = isUnlocked(ch.id), it = ITEMS[ch.bonus.item];
-    bo.className = un ? "" : "locked";
-    bo.innerHTML = `${thumbs[ch.bonus.item] ? `<img alt="" src="${thumbs[ch.bonus.item]}">` : ""}<span>${un ? `Geschafft! Du hast ${ch.bonus.akk || ch.bonus.text}. Er steht bei ${it && it.kind === "car" ? "den Autos" : "deinen Sachen"}.` : `Schaff alle Aufgaben in diesem Kapitel, dann bekommst du ${ch.bonus.akk || ch.bonus.text}!`}</span>`;
-  } else bo.innerHTML = "";
-}
-function openBook() {
-  ac();
-  plop();
-  shownChapter = null;
-  renderBook();
-  $("#questBook").hidden = false;
-  const t2 = nextTask();
-  if (t2) speak("Deine nächste Aufgabe: " + t2.text);
-}
-$("#btnQuest").addEventListener("click", openBook);
-$("#questPill").addEventListener("click", () => {
-  ac();
-  const t2 = nextTask();
-  if (t2) speak(t2.text + " " + t2.tip, { force: true });
-});
-$("#qbClose").addEventListener("click", () => {
-  $("#questBook").hidden = true;
-});
-$("#questBook").addEventListener("click", (e) => {
-  if (e.target.id === "questBook") $("#questBook").hidden = true;
-});
-let toastT = 0, bigUntil = 0;
-function toast(title, sub, ms, big = false) {
-  const now = performance.now();
-  if (!big && now < bigUntil) return;
-  if (big) bigUntil = now + ms;
-  $("#questToastTitle").textContent = title;
-  $("#questToastSub").textContent = sub;
-  const el = $("#questToast");
-  el.hidden = false;
-  el.style.animation = "none";
-  void el.offsetWidth;
-  el.style.animation = "";
-  clearTimeout(toastT);
-  toastT = setTimeout(() => {
-    el.hidden = true;
-  }, ms);
-}
-on("aufgabe:geschafft", () => {
-  tone(523, 0.12, "sine", 0.09);
-  tone(784, 0.12, "sine", 0.09, 0.12);
-  tone(1047, 0.3, "sine", 0.09, 0.24);
-  const t2 = nextTask();
-  toast("Super, ein Stern!", t2 ? "Nächste Aufgabe: " + t2.text : "Du hast alle Aufgaben geschafft!", 3200);
-  speak("Super! Du hast einen Stern bekommen." + (t2 ? " Nächste Aufgabe: " + t2.text : ""));
-  updateDock();
-  if (!$("#questBook").hidden) renderBook();
-});
-on("kapitel:geschafft", (d) => {
-  const c = CHAPTERS.find((x) => x.id === d.chapter);
-  const sub = d.bonus ? `Dein Geschenk: ${d.bonus.text}!` : "Ein ganzes Kapitel!";
-  toast(`Kapitel „${c.title}“ geschafft!`, sub, 4500, true);
-  setTimeout(() => speak(`Toll! Das Kapitel ${c.title} ist geschafft. ${d.bonus ? "Du bekommst " + (d.bonus.akk || d.bonus.text) + "!" : ""}`), 3300);
-  tone(523, 0.15, "sine", 0.09, 0.4);
-  tone(659, 0.15, "sine", 0.09, 0.55);
-  tone(784, 0.15, "sine", 0.09, 0.7);
-  tone(1047, 0.4, "sine", 0.09, 0.85);
-});
-on("aufgaben:geladen", () => {
-  updateDock();
-  if (!$("#questBook").hidden) renderBook();
-});
-on("modus", updateDock);
-updateDock();
 resize();
 if (!load()) sampleWorld();
 setMode("build");
@@ -8214,10 +8751,7 @@ setTimeout(() => {
   renderCats();
   renderItems();
   renderEditTray();
-  {
-    const t2 = nextTask();
-    hint(stars() === 0 && t2 ? "Oben links ist dein Aufgabenbuch. Deine erste Aufgabe: " + t2.text : "Wähle unten etwas aus und tippe in die Welt. Oben rechts ist das Männchen. Damit läufst du selbst durch die Stadt!", 6500);
-  }
+  hint(tiles.some((t2) => t2.o && t2.o.t === "auftragshaus") ? "Im Auftragshaus bekommst du Aufträge und Taler. Tippe auf das Haus mit der goldenen Münze!" : "Bau ein Auftragshaus! Du findest es unten bei den Häusern. Dort bekommst du Aufträge und Taler.", 6500);
 }, 60);
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) {
@@ -8400,70 +8934,78 @@ button:focus-visible{outline:3px solid var(--sun-deep);outline-offset:2px;}
 
 #menuCard .msub{margin:14px 0 6px;font-size:16px;font-weight:600;color:#4A5563;}
 
-/* ---------- Aufgabenbuch ---------- */
-#questDock{position:fixed;left:calc(env(safe-area-inset-left,0px) + 12px);top:calc(env(safe-area-inset-top,0px) + 12px);z-index:5;display:flex;align-items:center;gap:10px;max-width:calc(100vw - 460px);}
-#btnQuest{position:relative;flex:0 0 auto;}
-#btnQuest .badge{position:absolute;right:-6px;bottom:-4px;min-width:24px;height:24px;padding:0 6px;box-sizing:border-box;border-radius:12px;background:var(--sun);
-  box-shadow:inset 0 -2px 0 var(--sun-deep);font-weight:700;font-size:14px;line-height:24px;text-align:center;font-variant-numeric:tabular-nums;color:var(--ink);}
-#questPill{display:flex;align-items:center;gap:8px;min-width:0;height:44px;padding:0 16px 0 10px;border:none;border-radius:22px;background:var(--tray-solid);
-  box-shadow:0 2px 0 rgba(31,42,55,.08),0 4px 12px rgba(31,42,55,.12);font:600 15px var(--f-display);color:var(--ink);cursor:pointer;}
-#questPill[hidden]{display:none!important;}
-#questPill .qp-star{color:var(--sun-deep);font-size:20px;line-height:1;}
-#questPill span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
-@media (max-width:760px){#questPill{display:none!important;}#questDock{max-width:none;}}
-#questToast{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);z-index:12;background:var(--tray-solid);border-radius:28px;padding:18px 28px;
-  display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 12px 40px rgba(20,40,60,.3);text-align:center;max-width:min(86vw,420px);animation:qtIn .5s cubic-bezier(.2,1.6,.4,1);}
-#questToast .qt-star{font-size:64px;line-height:1;color:var(--sun);text-shadow:0 3px 0 var(--sun-deep);animation:qtSpin 1s ease-out;}
-#questToast b{font-size:22px;}
-#questToast span{font-size:15px;color:#4A5563;}
-@keyframes qtIn{from{transform:translate(-50%,-50%) scale(.4);opacity:0;}to{transform:translate(-50%,-50%) scale(1);opacity:1;}}
-@keyframes qtSpin{from{transform:rotate(-180deg) scale(.3);}to{transform:rotate(0) scale(1);}}
-#questBook{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:rgba(15,25,40,.35);padding-inline:16px;}
-#questCard{background:var(--tray-solid);border-radius:26px;padding:18px;width:min(100%,560px);max-height:86vh;overflow-y:auto;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;}
-#questCard h2{margin:0;font-size:24px;font-weight:700;}
-#questCard .mh{display:flex;align-items:center;justify-content:space-between;}
-#qbStars{margin:0;font-size:15px;color:#4A5563;}
-#qbChapters{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;}
-.qch{flex:0 0 auto;display:flex;align-items:center;gap:6px;height:48px;padding:0 14px 0 6px;border:none;border-radius:24px;background:var(--chip);font:600 15px var(--f-display);color:var(--ink);}
-.qch img{width:36px;height:36px;border-radius:50%;background:#fff;}
-.qch small{font-size:12px;color:#6A7280;font-variant-numeric:tabular-nums;}
-.qch.on{background:var(--sun);box-shadow:inset 0 -3px 0 var(--sun-deep);}
-.qch.on small{color:var(--ink);}
-.qch.done::after{content:'✓';margin-left:2px;color:#2E8B57;font-weight:700;}
-#qbTasks{display:flex;flex-direction:column;gap:8px;}
-.qt{display:flex;align-items:flex-start;gap:12px;background:#fff;border-radius:18px;padding:12px;box-shadow:0 2px 0 rgba(31,42,55,.06);}
-.qt.next{box-shadow:0 0 0 3px var(--sun),0 4px 12px rgba(232,164,0,.25);}
-.qt .ck{flex:0 0 auto;width:34px;height:34px;border-radius:50%;border:3px solid #CBD2D9;display:grid;place-items:center;font-weight:700;font-size:18px;color:#fff;box-sizing:border-box;}
-.qt.ok .ck{background:#3BAA5C;border-color:#3BAA5C;}
-.qt .tx{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:3px;}
-.qt .tx b{font-size:17px;line-height:1.25;}
-.qt.ok .tx b{color:#6A7280;}
-.qt .tx span{font-size:14px;line-height:1.35;color:#4A5563;}
-.qt .tx small{font-size:13px;color:var(--sun-deep);font-weight:600;font-variant-numeric:tabular-nums;}
-.qt .say{flex:0 0 auto;width:40px;height:40px;border-radius:50%;border:none;background:var(--chip);display:grid;place-items:center;padding:0;}
-.qt .say svg{width:22px;height:22px;}
-.qt .st{flex:0 0 auto;font-size:22px;color:#D6DBE0;line-height:34px;}
-.qt.ok .st{color:var(--sun);}
-#qbBonus{background:#FFF4CC;border-radius:18px;padding:12px 14px;display:flex;align-items:center;gap:12px;font-size:15px;line-height:1.35;}
-#qbBonus:empty{display:none;}
-#qbBonus img{width:56px;height:56px;border-radius:50%;background:#fff;flex:0 0 auto;}
-#qbBonus.locked img{filter:grayscale(1) brightness(.7);}</style>
+/* ---------- Rucksack, Aufträge, Orte (ui/places.js) ---------- */
+#hud{position:fixed;left:calc(env(safe-area-inset-left,0px) + 12px);top:calc(env(safe-area-inset-top,0px) + 12px);z-index:5;display:flex;flex-direction:column;align-items:flex-start;gap:8px;max-width:calc(100vw - 420px);}
+#purse{display:flex;gap:6px;}
+.chip{display:flex;align-items:center;gap:5px;height:44px;padding:0 14px 0 7px;border:none;border-radius:22px;background:var(--tray-solid);
+  font-weight:700;font-size:19px;font-variant-numeric:tabular-nums;box-shadow:0 3px 0 rgba(31,42,55,.12),0 6px 14px rgba(20,40,60,.16);}
+.chip svg{width:30px;height:30px;}
+.chip.bump{animation:bump .5s;}
+@keyframes bump{30%{transform:scale(1.25);}60%{transform:scale(.95);}}
+#orderPill{display:flex;align-items:center;gap:8px;min-width:0;max-width:100%;height:44px;padding:0 16px 0 8px;border:none;border-radius:22px;background:var(--tray-solid);
+  font-weight:600;font-size:15px;box-shadow:0 3px 0 rgba(31,42,55,.12),0 6px 14px rgba(20,40,60,.16);}
+#orderPill svg{width:30px;height:30px;flex:0 0 auto;}
+#orderPill span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
+#orderPill.done{background:var(--sun);box-shadow:inset 0 -3px 0 var(--sun-deep),0 6px 14px rgba(20,40,60,.16);animation:glow 1.6s ease-in-out infinite;}
+@keyframes glow{50%{transform:scale(1.04);}}
+@media (max-width:760px){#hud{max-width:none;top:calc(env(safe-area-inset-top,0px) + 66px);}.chip{height:38px;font-size:16px;padding:0 11px 0 5px;}.chip svg{width:26px;height:26px;}#orderPill{height:38px;font-size:14px;max-width:calc(100vw - 24px);}}
+#coinToast{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);z-index:12;background:var(--tray-solid);border-radius:28px;padding:18px 30px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;box-shadow:0 10px 40px rgba(20,40,60,.3);animation:ctIn .35s cubic-bezier(.2,1.6,.4,1);pointer-events:none;max-width:min(86vw,420px);}
+#coinToast .ct-coin svg{width:76px;height:76px;animation:ctSpin 1s ease-out;}
+#coinToast b{font-size:26px;}
+#coinToast span{font-size:15px;color:#4A5563;}
+@keyframes ctIn{from{transform:translate(-50%,-50%) scale(.4);opacity:0;}to{transform:translate(-50%,-50%) scale(1);opacity:1;}}
+@keyframes ctSpin{from{transform:rotateY(0) scale(.3);}to{transform:rotateY(720deg) scale(1);}}
+#place{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:rgba(15,25,40,.35);padding-inline:16px;}
+#placeCard{background:var(--tray-solid);border-radius:26px;padding:18px;width:min(100%,520px);max-height:86vh;overflow-y:auto;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;}
+#placeCard .mh{display:flex;align-items:center;gap:12px;}
+#placeCard h2{margin:0;font-size:24px;font-weight:700;flex:1 1 auto;}
+.plIc{width:54px;height:54px;border-radius:50%;background:#fff;display:grid;place-items:center;overflow:hidden;flex:0 0 auto;}
+.plIc img{width:54px;height:54px;object-fit:contain;}
+.plIc svg{width:34px;height:34px;}
+#plSub{margin:0;font-size:15px;line-height:1.4;color:#4A5563;}
+#plBody{display:flex;flex-direction:column;gap:8px;}
+.oc{display:flex;align-items:center;gap:12px;background:#fff;border:none;border-radius:18px;padding:12px 14px;text-align:left;box-shadow:0 2px 0 rgba(31,42,55,.06);}
+button.oc:active{transform:translateY(2px);}
+.oc.cur{box-shadow:0 0 0 3px var(--sun),0 4px 12px rgba(232,164,0,.25);}
+.oc .tx{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:3px;}
+.oc .tx b{font-size:18px;line-height:1.25;}
+.oc .tx span{font-size:14px;line-height:1.35;color:#4A5563;}
+.oc .tx small{font-size:14px;color:var(--sun-deep);font-weight:700;font-variant-numeric:tabular-nums;}
+.oc .rw,.cost{display:flex;align-items:center;gap:3px;font-weight:700;font-variant-numeric:tabular-nums;}
+.oc .rw{flex:0 0 auto;font-size:18px;color:#8A5A00;background:#FFF4CC;border-radius:14px;padding:6px 10px 6px 6px;}
+.oc .rw svg{width:24px;height:24px;}
+.oc img{width:44px;height:44px;border-radius:50%;background:#F6F1E4;flex:0 0 auto;object-fit:contain;}
+#plBody .mb{height:58px;font-size:18px;display:flex;align-items:center;justify-content:center;gap:8px;}
+#plBody .mb svg{width:28px;height:28px;}
+#plBody .mb[disabled]{opacity:.45;}
+.cost{justify-content:center;font-size:11px;color:#6A4A10;margin-top:-3px;}
+.cost svg{width:14px;height:14px;}
+.it.locked .ball{position:relative;}
+.it.locked .ball img{filter:grayscale(.85) brightness(.85);}
+.it.locked .ball::after{content:'';position:absolute;inset:0;background:rgba(255,251,242,.25);border-radius:50%;}
+.it .lock{position:absolute;right:-2px;bottom:-2px;width:28px;height:28px;z-index:1;}
+.it .lock svg{width:28px;height:28px;}
+.it .ballwrap{position:relative;}
+@media (max-width:760px){#hint{top:calc(env(safe-area-inset-top,0px) + 160px);width:max-content;max-width:calc(100vw - 40px);box-sizing:border-box;}}</style>
 </head>
 <body>
 <canvas id="c"></canvas>
 
-<div id="questDock">
-  <button class="rb" id="btnQuest" aria-label="Aufgabenbuch"><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M12 2.8l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.6l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z" fill="#FFC21A" stroke="#C98A00" stroke-width="1.6"/></svg><span class="badge" id="questStars">0</span></button>
-  <button id="questPill" hidden><span class="qp-star" aria-hidden="true">★</span><span id="questPillTxt"></span></button>
+<div id="hud">
+  <div id="purse">
+    <button class="chip" id="chipTaler" aria-label="Taler"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#FFC21A" stroke="#C98A00" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="#C98A00" stroke-width="1.6"/></svg><b id="nTaler">0</b></button>
+    <button class="chip" id="chipHolz" aria-label="Holz"><svg viewBox="0 0 24 24"><rect x="2.5" y="8" width="16" height="9" rx="4.5" fill="#B98552" stroke="#7A5232" stroke-width="1.8"/><ellipse cx="18" cy="12.5" rx="3.2" ry="4.5" fill="#E8C99A" stroke="#7A5232" stroke-width="1.8"/><circle cx="18" cy="12.5" r="1.5" fill="none" stroke="#B98552" stroke-width="1.2"/></svg><b id="nHolz">0</b></button>
+    <button class="chip" id="chipEimer" aria-label="Fische im Eimer"><svg viewBox="0 0 24 24"><path d="M4.5 8h15l-1.8 12.5H6.3z" fill="#8FC5F0" stroke="#2F6FA8" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 8c0-5 14-5 14 0" fill="none" stroke="#2F6FA8" stroke-width="1.6"/><path d="M8 13.5c1.6-1.6 4.2-1.6 5.8 0-1.6 1.6-4.2 1.6-5.8 0zm5.8 0 2.4-1.5v3z" fill="#F28C28"/></svg><b id="nEimer">0</b></button>
+  </div>
+  <button id="orderPill" hidden><svg viewBox="0 0 24 24"><path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7" fill="#FFF4CC" stroke="#C9A65A" stroke-width="1.8"/><path d="M6 4a2 2 0 0 0-2 2v2h4V6a2 2 0 0 0-2-2z" fill="#F2DFA0" stroke="#C9A65A" stroke-width="1.8"/><path d="M10 9h6M10 12.5h6M10 16h4" stroke="#8B6A45" stroke-width="1.6" stroke-linecap="round"/></svg><span id="orderTxt"></span></button>
 </div>
-<div id="questToast" hidden><div class="qt-star">★</div><b id="questToastTitle"></b><span id="questToastSub"></span></div>
-<div id="questBook" hidden>
-  <div id="questCard">
-    <div class="mh"><h2>Aufgabenbuch</h2><button class="rb" id="qbClose" aria-label="Schließen"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
-    <p id="qbStars"></p>
-    <div id="qbChapters"></div>
-    <div id="qbTasks"></div>
-    <div id="qbBonus"></div>
+<div id="coinToast" hidden><div class="ct-coin"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#FFC21A" stroke="#C98A00" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="#C98A00" stroke-width="1.6"/></svg></div><b id="ctTitle"></b><span id="ctSub"></span></div>
+<div id="place" hidden>
+  <div id="placeCard">
+    <div class="mh"><div class="plIc" id="plIc"></div><h2 id="plTitle"></h2><button class="rb" id="plClose" aria-label="Schließen"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <p id="plSub"></p>
+    <div id="plBody"></div>
   </div>
 </div>
 <div id="top">
@@ -8507,6 +9049,9 @@ button:focus-visible{outline:3px solid var(--sun-deep);outline-offset:2px;}
 <div id="pad" hidden></div>
 <div id="joy" class="rest" hidden><div id="knob"></div></div>
 <div id="walkBtns" hidden>
+  <button class="pill hot" id="btnPlace" hidden><span id="placeIc" style="display:contents"><svg viewBox="0 0 24 24"><path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7" fill="#FFF4CC" stroke="#C9A65A" stroke-width="1.8"/><path d="M6 4a2 2 0 0 0-2 2v2h4V6a2 2 0 0 0-2-2z" fill="#F2DFA0" stroke="#C9A65A" stroke-width="1.8"/><path d="M10 9h6M10 12.5h6M10 16h4" stroke="#8B6A45" stroke-width="1.6" stroke-linecap="round"/></svg></span><span id="placeTxt">Aufträge</span></button>
+  <button class="pill hot" id="btnDoor" hidden><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round"><path d="M5 21V3.5h10V21" fill="#B98552"/><path d="M3 21h18"/><circle cx="12.3" cy="12.5" r="1" fill="#1F2A37"/></svg><span id="doorTxt">Tür auf</span></button>
+  <button class="pill hot" id="btnChop" hidden><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 9.5 4 20" stroke="#7A5232" stroke-width="2.6"/><path d="M12.5 4.5c3.2-.4 6.4 1.6 7.5 4.6l-3.8 3.8-6-6z" fill="#C0C6CC"/></svg>Holz fällen</button>
   <button class="pill hot" id="btnEnter" hidden><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="1.8" stroke-linejoin="round"><path d="M2.5 15.5v-3l2.2-4.5h10.2l4.2 4.5h2.4v3z" fill="#fff"/><circle cx="7.3" cy="16.3" r="2" fill="#1F2A37"/><circle cx="16.7" cy="16.3" r="2" fill="#1F2A37"/></svg>Einsteigen</button>
   <button class="pill hot" id="btnHonk" hidden><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h3l6 4V6l-6 4z" fill="#fff"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg><span id="honkTxt">Hupen</span></button>
   <button class="pill hot" id="btnDive" hidden><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="13" rx="8" ry="3.6" fill="#F5C211"/><path d="M10 9.4V7h3v2.4M12 7V4.5h1.5"/><path d="M12 18.5v3m-2.5-1.5L12 22.5l2.5-2.5"/></svg><span id="diveTxt">Abtauchen</span></button>
@@ -8523,7 +9068,7 @@ button:focus-visible{outline:3px solid var(--sun-deep);outline-offset:2px;}
     <h2 id="catchTitle"></h2>
     <p id="catchSub"></p>
     <p id="catchBook"></p>
-    <div class="mrow"><button class="mb go" id="catchKeep">Mitnehmen</button><button class="mb" id="catchFree">Freilassen</button></div>
+    <div class="mrow"><button class="mb go" id="catchKeep">In den Eimer</button><button class="mb" id="catchFree">Freilassen</button></div>
   </div>
 </div>
 <div id="aqPanel" hidden>

@@ -9,7 +9,7 @@ import { hint } from './hint.js';
 import { fangData, mergeFang } from '../systems/catch-book.js';
 import { freshWorld, newId, openWorld, saveWorld } from '../core/worlds.js';
 import { setSpeech, speak, speechAvailable, speechOn } from '../systems/speech.js';
-import { mergeQuests, questData } from '../systems/quests.js';
+import { mergeRucksack, rucksackData } from '../systems/rucksack.js';
 import { STYLE_ORDER, setStyle, styleId, styleLabel } from '../render/dream.js';
 
 let codeMode='export';
@@ -19,13 +19,13 @@ $('#mExportAll').addEventListener('click',async()=>{
   l.sort((a,b)=>(a.updated||0)-(b.updated||0));
   const worlds=l.map(w=>({name:w.name,data:w.id===game.curWorld?JSON.stringify(serialize()):w.data})).filter(w=>w.data);
   if(game.curWorld==null||!l.some(w=>w.id===game.curWorld))worlds.push({name:'Mitgebrachte Welt',data:JSON.stringify(serialize())});
-  const code=await encodeWorld({v:2,worlds,fang:fangData(),aufgaben:questData()});
-  $('#codeTxt').value=code;$('#codeInfo').textContent=worlds.length+(worlds.length===1?' Welt':' Welten')+' plus Fangbuch und Aquarium als ein Code. Kopiere ihn und füge ihn auf dem anderen Gerät mit „Code einfügen" ein.';
+  const code=await encodeWorld({v:2,worlds,fang:fangData(),rucksack:rucksackData()});
+  $('#codeTxt').value=code;$('#codeInfo').textContent=worlds.length+(worlds.length===1?' Welt':' Welten')+' plus Fangbuch, Aquarium und Rucksack als ein Code. Kopiere ihn und füge ihn auf dem anderen Gerät mit „Code einfügen" ein.';
 });
 $('#mExport').addEventListener('click',async()=>{
   ac();codeMode='export';$('#codeBox').hidden=false;$('#codeInfo').textContent='Code wird erstellt …';$('#codeTxt').value='';$('#codeGo').textContent='Kopieren';
   let name='Mitgebrachte Welt';try{const l=await store.list();const w=l.find(x=>x.id===game.curWorld);if(w)name=w.name;}catch(e){}
-  const code=await encodeWorld({v:1,name,data:JSON.stringify(serialize()),fang:fangData(),aufgaben:questData()});
+  const code=await encodeWorld({v:1,name,data:JSON.stringify(serialize()),fang:fangData(),rucksack:rucksackData()});
   $('#codeTxt').value=code;$('#codeInfo').textContent='Das ist „'+name+'" als Code. Kopiere ihn und füge ihn auf dem anderen Gerät mit „Code einfügen" ein.';
 });
 $('#mImport').addEventListener('click',()=>{ac();codeMode='import';$('#codeBox').hidden=false;$('#codeInfo').textContent='Füge hier einen Code ein. Welten, Fangbuch und Aquarium werden übernommen. Was schon da ist, wird nicht doppelt gespeichert.';$('#codeTxt').value='';$('#codeGo').textContent='Laden';setTimeout(()=>$('#codeTxt').focus(),50);});
@@ -41,7 +41,7 @@ $('#codeGo').addEventListener('click',async()=>{
   let obj=null;try{obj=await decodeWorld(ta.value);}catch(e){$('#codeInfo').textContent=e&&e.message==='gzip'?'Dieser Code braucht ein neueres iOS. Bitte iPadOS aktualisieren.':'Das ist kein gültiger Welt-Code. Prüfe, ob er vollständig kopiert wurde.';nopeSnd();return;}
   const list=Array.isArray(obj.worlds)?obj.worlds:[{name:obj.name,data:obj.data}];
   const ok=list.filter(x=>{try{const d=JSON.parse(x.data);return d&&Array.isArray(d.tiles);}catch(e){return false;}});
-  const fangNew=mergeFang(obj.fang)|mergeQuests(obj.aufgaben);
+  const fangNew=mergeFang(obj.fang)|mergeRucksack(obj.rucksack);
   if(!ok.length){if(fangNew){$('#codeBox').hidden=true;hint('Fangbuch übernommen!',2500);return;}$('#codeInfo').textContent='Der Code enthält keine Welt.';nopeSnd();return;}
   let have=[];try{have=await store.list();}catch(e){}
   const tk=data=>{try{return JSON.stringify(JSON.parse(data).tiles);}catch(e){return data;}};

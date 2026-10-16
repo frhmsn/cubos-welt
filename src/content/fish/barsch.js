@@ -4,6 +4,7 @@ export default {
   label: 'Barsch', plural: 'Barsche',
   length: [.18, .45], // Meter, zufällig beim Fang
   habitat: ['see'],
+  taler: 2, // so viele Taler gibt der Markt für einen Fisch
   spawn: { see: .3 }, // Häufigkeit je Gewässer
   speed: .8, jumps: true,
   scale: { shadow: .75, underwater: 1.8, aquarium: .55, rod: 1.6, jump: 1.4 },

@@ -22,6 +22,7 @@ export const scenarios = {
 
   async bauen({ page, snap }) {
     await api(page, 'emptyWorld');
+    await api(page, 'give', 0, 200); // Häuser kosten Holz
     await place(page, 'strasse', [...line(2, 17, 5), ...col(9, 0, 19)]);
     await place(page, 'haus', [[3, 4], [5, 6]]);
     await place(page, 'villa', [[7, 4]]);
@@ -138,33 +139,46 @@ export const scenarios = {
     await snap('mit-pinsel-gemalt');
   },
 
-  async aufgaben({ page, snap }) {
-    await api(page, 'emptyWorld');
-    await frames(page, 10);
+  // Spielprinzip: Auftrag holen und abholen, Holz fällen, Fische verkaufen, Motorboot kaufen, Haus mit Holz bauen
+  async auftraege({ page, snap }) {
+    await frames(page, 30);
     await snap('start');
-    await place(page, 'strasse', line(4, 12, 9));
-    await place(page, 'haus', [[6, 8]]);
-    await frames(page, 20);
-    await snap('zwei-sterne');
-    await place(page, 'baum', [[3, 3], [4, 3]]);
-    await place(page, 'lambo', [[8, 9]]);
+    await place(page, 'hand', [[5, 5]]);
+    await frames(page, 5);
+    await snap('auftragshaus');
+    await click(page, '#plBody button.oc:nth-child(2)');
+    await frames(page, 5);
+    await snap('holz-angenommen');
+    await api(page, 'openPlace', 'auftraege');
+    await click(page, '#plBody .mb.go');
+    await frames(page, 5);
+    await snap('abgeholt');
+    await click(page, '#plClose');
     await api(page, 'startWalk');
+    const t = await api(page, 'center', 6, 7);
+    await api(page, 'setPl', t.x + 2.4, t.z, Math.PI / 2);
+    await frames(page, 5);
+    await click(page, '#btnChop');
     await frames(page, 10);
-    await api(page, 'enterCar', 'lambo');
-    await frames(page, 10);
-    await click(page, '#btnHonk');
-    await frames(page, 10);
-    await snap('kapitel-geschafft');
-    await api(page, 'exitCar');
+    await snap('gefaellt');
+    await api(page, 'give', 0, 0, ['makrele', 'makrele', 'hai']);
+    const m = await api(page, 'center', 9, 15);
+    await api(page, 'setPl', m.x, m.z + 3.5, 0);
+    await frames(page, 5);
+    await click(page, '#btnPlace');
+    await click(page, '#plBody .mb.go');
+    await frames(page, 5);
+    await snap('verkauft');
+    await click(page, '#plClose');
     await api(page, 'setMode', 'build');
-    await page.evaluate(() => document.querySelector('#questToast').hidden = true);
-    await click(page, '#btnQuest');
+    await api(page, 'give', 20);
+    await api(page, 'openPlace', 'kaufen', 'motorboot');
+    await click(page, '#plBody .mb.go');
     await frames(page, 5);
-    await snap('aufgabenbuch');
-    await click(page, '#qbClose');
-    await page.evaluate(() => { const b = [...document.querySelectorAll('#cats button')].find((x) => /Autos/.test(x.textContent)); b && b.click(); });
-    await frames(page, 5);
-    await snap('gold-lambo-im-inventar');
+    await snap('motorboot-gekauft');
+    await place(page, 'haus', [[17, 12]]);
+    await frames(page, 20);
+    await snap('haus-mit-holz');
   },
 
   async faehre({ page, snap }) {
@@ -214,6 +228,7 @@ export const scenarios = {
 
   async aquarium({ page, snap }) {
     await api(page, 'emptyWorld');
+    await api(page, 'give', 0, 50); // Aquarium kostet Holz
     await api(page, 'setCatch', { barsch: 4, hecht: 2, karpfen: 3, wels: 1, stoer: 2, thunfisch: 5, hai: 2, makrele: 3, marlin: 1, mondfisch: 1 });
     await place(page, 'strasse', line(2, 17, 13));
     await place(page, 'aquarium', [[9, 9]]);

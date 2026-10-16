@@ -19,6 +19,7 @@ import { hint } from '../ui/hint.js';
 import { animals, cars, ferries, gAt, isRail, isRoad, isWater, orient, pops, rot, tiles, trains } from '../core/world-data.js';
 import { islandStroke } from '../core/islands.js';
 import { emit } from '../core/events.js';
+import { addHolz, holz, owns, spend } from './rucksack.js';
 
 // ---------- Bauen ----------
 const ray=new THREE.Raycaster(),plane=new THREE.Plane(new THREE.Vector3(0,1,0),0),hitV=new THREE.Vector3();
@@ -27,6 +28,15 @@ function pickTile(cx,cy){
   ray.setFromCamera(v,buildCam); if(!ray.ray.intersectPlane(plane,hitV))return null; return tileAt(hitV.x,hitV.z);
 }
 function nope(){nopeSnd();const b=document.querySelector('.it.on');if(b){b.classList.remove('nope');void b.offsetWidth;b.classList.add('nope');}}
+/** Holz zurück, wenn ein Gebäude abgerissen wird, das Holz gekostet hat. */
+function refund(id){const n=ITEMS[id]&&ITEMS[id].holz;if(n)addHolz(n,'abriss');}
+/** Bezahlt das Holz für ein neues Gebäude (ein ersetztes gibt seins zurück). false: nicht genug Holz. */
+function pay(id,old,painting){
+  const cost=(ITEMS[id]&&ITEMS[id].holz)||0,back=(old&&ITEMS[old]&&ITEMS[old].holz)||0;
+  if(cost>holz()+back){if(!painting){nope();hint('Dafür brauchst du mehr Holz. Fäll Bäume mit dem Männchen!',3500);}return false;}
+  if(back)addHolz(back,'abriss');
+  spend('holz',cost);return true;
+}
 function inTile(e,i,j){const t=tileAt(e.x,e.z);return t&&t.i===i&&t.j===j;}
 /** Tippen mit dem gewählten Ding auf Feld (i, j). Meldet 'gebaut', wenn sich die Welt geändert hat. */
 function apply(i,j,painting){
@@ -37,7 +47,8 @@ function apply(i,j,painting){
 }
 function applyTool(i,j,painting){
   const it=ITEMS[game.sel],t=tiles[I(i,j)];
-  if(game.sel==='hand')return;
+  if(game.sel==='hand'){if(!painting&&t.o&&ITEMS[t.o.t]&&ITEMS[t.o.t].station)emit('ort:antippen',{station:ITEMS[t.o.t].station});return;}
+  if(it&&it.price&&!owns(game.sel)){if(!painting)emit('kaufen:frage',{id:game.sel});return;}
   if(game.sel==='eigen'){openEditor(i,j);return;}
   if(game.sel==='radierer'){
     let did=false;
@@ -45,8 +56,8 @@ function applyTool(i,j,painting){
     for(const f of ferries.slice())if(inTile(f,i,j)&&!playerAboard(f)){for(const c of cars.slice())if(c!==game.driveCar&&onDeckF(f,c.x,c.z))removeCar(c);removeFerry(f);did=true;}
     for(let k=cars.length-1;k>=0;k--)if(inTile(cars[k],i,j)&&cars[k]!==game.driveCar){scene.remove(cars[k].g);disposeGroup(cars[k].g);cars.splice(k,1);did=true;}
     for(let k=animals.length-1;k>=0;k--)if(inTile(animals[k],i,j)){scene.remove(animals[k].g);disposeGroup(animals[k].g);animals.splice(k,1);did=true;}
-    if(!did&&t.o&&(t.o.t==='teil'||t.o.t==='aquarium')){const s0=t.o.t==='teil'?t.o.s|0:4,pi=i-(Math.floor(s0/3)-1),pj=j-(s0%3-1);removeBig(pi,pj);plop();game.dirty=true;return;}
-    if(!did){if(t.o){t.o=null;rebuildObj(i,j);did=true;}else if(t.g!=='gras'){setGround(i,j,'gras');did=true;}}
+    if(!did&&t.o&&(t.o.t==='teil'||t.o.t==='aquarium')){const s0=t.o.t==='teil'?t.o.s|0:4,pi=i-(Math.floor(s0/3)-1),pj=j-(s0%3-1);removeBig(pi,pj);refund('aquarium');plop();game.dirty=true;return;}
+    if(!did){if(t.o){refund(t.o.t);t.o=null;rebuildObj(i,j);did=true;}else if(t.g!=='gras'){setGround(i,j,'gras');did=true;}}
     if(did){plop();game.dirty=true;} return;
   }
   if(game.sel==='insel'){
@@ -57,21 +68,23 @@ function applyTool(i,j,painting){
     for(const [a,b,g] of ch)setGround(a,b,g);
     plop();game.dirty=true;emit('insel:gemalt',{i,j});return;
   }
-  if(it.kind==='ground'){if(t.o&&(t.o.t==='teil'||t.o.t==='aquarium')){if(!painting){nope();hint('Hier steht das Aquarium. Reiß es erst ab.',2500);}return;}if(t.g===game.sel)return;setGround(i,j,game.sel);plop();game.dirty=true;return;}
+  if(it.kind==='ground'){if(t.o&&(t.o.t==='teil'||t.o.t==='aquarium')){if(!painting){nope();hint('Hier steht das Aquarium. Reiß es erst ab.',2500);}return;}if(t.g===game.sel)return;if(t.o&&game.sel!=='gras'&&game.sel!=='sand')refund(t.o.t);setGround(i,j,game.sel);plop();game.dirty=true;return;}
   if(t.o&&t.o.t==='teil'&&it.kind!=='fish'){if(!painting){nope();hint('Hier steht das Aquarium.',2000);}return;}
   if(game.sel==='aquarium'&&!(t.o&&t.o.t==='aquarium')){
     for(let dj=-1;dj<=1;dj++)for(let di=-1;di<=1;di++){const a=i+di,b=j+dj;
       if(!inb(a,b)){nope();hint('Zu nah am Rand. Das Aquarium braucht drei mal drei Felder Platz.',3000);return;}
       const o=tiles[I(a,b)].o;if(o&&(o.t==='aquarium'||o.t==='teil')){nope();hint('Hier ist kein Platz. Das Aquarium braucht drei mal drei Felder.',3000);return;}
       if(game.rideTrain&&game.rideTrain.cars.some(c=>inTile(c.g.position,a,b))){nope();return;}}
+    if(!pay('aquarium',null))return;
     claimArea(i,j);
     t.o={t:'aquarium',r:orientBig(i,j),s:1};rebuildObj(i,j,true);plop();game.dirty=true;
     hint('Ein riesiges Aquarium! Lauf hinein und einmal um das Becken herum.',3500);return;
   }
   if(it.kind==='obj'){
     if(t.o&&t.o.t===game.sel){if(painting)return;if(it.house||it.rot)t.o.r=(t.o.r+1)%4;else t.o.s=Math.floor(Math.random()*1e9);rebuildObj(i,j,true);plop();game.dirty=true;return;}
+    if(!pay(game.sel,t.o&&t.o.t,painting))return;
     if(t.g!=='gras'&&t.g!=='sand')setGround(i,j,'gras');
-    t.o={t:game.sel,r:(it.house||game.sel==='flutlicht')?orient(i,j):Math.floor(Math.random()*4),s:Math.floor(Math.random()*1e9)};
+    t.o={t:game.sel,r:(it.house||it.station||game.sel==='flutlicht')?orient(i,j):Math.floor(Math.random()*4),s:Math.floor(Math.random()*1e9)};
     if(it.house)for(let k=animals.length-1;k>=0;k--)if(inTile(animals[k],i,j)){const a=animals[k];const c=center(i,j);a.x=c.x+2.6;a.z=c.z;a.tx=a.x;a.tz=a.z;}
     rebuildObj(i,j,true); plop(); game.dirty=true; return;
   }

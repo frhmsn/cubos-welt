@@ -9,7 +9,7 @@ Ein Vater-Sohn-Projekt. Die Wünsche des Kindes sind die Produkt-Roadmap.
 npm ci                 # einmalig
 npm test               # Logik-Tests (vitest, Sekunden)
 npm run build          # src/ -> App-Dateien im Repo-Wurzelverzeichnis (GitHub Pages)
-npm run test:e2e       # Browser-Rundgang (16 Szenarien) + Vergleich mit tests/baseline (~2 Min.)
+npm run test:e2e       # Browser-Rundgang (17 Szenarien) + Vergleich mit tests/baseline (~2 Min.)
 npm run check          # alles zusammen, vor jedem Commit
 npm run test:baseline  # aktuellen Lauf als neue Referenz übernehmen (nur bei gewollten Änderungen)
 npm run deps           # Import-Zyklen anzeigen
@@ -27,7 +27,7 @@ npm run voice          # Liste der Vorlese-Sätze (voice/texts.json) neu schreib
 7. **Ladereihenfolge:** Module im Zyklus-Kern haben als ersten Import `import './vorgaenger.js'; // Ladereihenfolge`. Nicht entfernen oder umsortieren. Neue Module möglichst ohne Zyklus bauen (nur importieren, nicht importiert werden von Kern-Modulen beim Laden). Details: `docs/ARCHITEKTUR.md`.
 8. **Spiel-Zufall nur über `Math.random()`**, keine eigene Uhr: Tests machen Zufall und Zeit vorhersagbar (`tests/e2e/env.js`). Reine Deko (Pollen, Glitzer) bekommt eigenen Zufall über `mulberry(startwert)`, damit sie den Spiel-Zufall nicht verschiebt.
 10. **Kommentare nie hinter Code in dieselbe Zeile, wenn danach noch eine Anweisung folgt.** Der Code ist dicht geschrieben; ein `//` mitten in der Zeile schaltet den Rest still ab (so ist einmal das Himmelslicht verschwunden).
-11. **Aufgaben** (`content/quests/`) hören nur auf Ereignisse. Neue Spielfunktion: passendes Ereignis melden, dann kann eine Aufgabe darauf hören. IDs von Aufgaben nie umbenennen.
+11. **Aufträge** (`content/orders/`) hören nur auf Ereignisse. Neue Spielfunktion: passendes Ereignis melden, dann kann ein Auftrag darauf hören. IDs von Aufträgen nie umbenennen. Spielprinzip und Preise: `docs/SPIELPRINZIP.md`. `src/extras/` ist ausgebaut und wird nicht geladen.
 9. **Kein Tree-Shaking, keine neuen Laufzeit-Abhängigkeiten.** Three.js bleibt r128 als globales `THREE` (lokale Datei `three.min.js`).
 
 ## Texte im Spiel

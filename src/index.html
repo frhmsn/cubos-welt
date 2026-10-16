@@ -14,18 +14,20 @@
 <body>
 <canvas id="c"></canvas>
 
-<div id="questDock">
-  <button class="rb" id="btnQuest" aria-label="Aufgabenbuch"><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M12 2.8l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.6l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z" fill="#FFC21A" stroke="#C98A00" stroke-width="1.6"/></svg><span class="badge" id="questStars">0</span></button>
-  <button id="questPill" hidden><span class="qp-star" aria-hidden="true">★</span><span id="questPillTxt"></span></button>
+<div id="hud">
+  <div id="purse">
+    <button class="chip" id="chipTaler" aria-label="Taler"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#FFC21A" stroke="#C98A00" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="#C98A00" stroke-width="1.6"/></svg><b id="nTaler">0</b></button>
+    <button class="chip" id="chipHolz" aria-label="Holz"><svg viewBox="0 0 24 24"><rect x="2.5" y="8" width="16" height="9" rx="4.5" fill="#B98552" stroke="#7A5232" stroke-width="1.8"/><ellipse cx="18" cy="12.5" rx="3.2" ry="4.5" fill="#E8C99A" stroke="#7A5232" stroke-width="1.8"/><circle cx="18" cy="12.5" r="1.5" fill="none" stroke="#B98552" stroke-width="1.2"/></svg><b id="nHolz">0</b></button>
+    <button class="chip" id="chipEimer" aria-label="Fische im Eimer"><svg viewBox="0 0 24 24"><path d="M4.5 8h15l-1.8 12.5H6.3z" fill="#8FC5F0" stroke="#2F6FA8" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 8c0-5 14-5 14 0" fill="none" stroke="#2F6FA8" stroke-width="1.6"/><path d="M8 13.5c1.6-1.6 4.2-1.6 5.8 0-1.6 1.6-4.2 1.6-5.8 0zm5.8 0 2.4-1.5v3z" fill="#F28C28"/></svg><b id="nEimer">0</b></button>
+  </div>
+  <button id="orderPill" hidden><svg viewBox="0 0 24 24"><path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7" fill="#FFF4CC" stroke="#C9A65A" stroke-width="1.8"/><path d="M6 4a2 2 0 0 0-2 2v2h4V6a2 2 0 0 0-2-2z" fill="#F2DFA0" stroke="#C9A65A" stroke-width="1.8"/><path d="M10 9h6M10 12.5h6M10 16h4" stroke="#8B6A45" stroke-width="1.6" stroke-linecap="round"/></svg><span id="orderTxt"></span></button>
 </div>
-<div id="questToast" hidden><div class="qt-star">★</div><b id="questToastTitle"></b><span id="questToastSub"></span></div>
-<div id="questBook" hidden>
-  <div id="questCard">
-    <div class="mh"><h2>Aufgabenbuch</h2><button class="rb" id="qbClose" aria-label="Schließen"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
-    <p id="qbStars"></p>
-    <div id="qbChapters"></div>
-    <div id="qbTasks"></div>
-    <div id="qbBonus"></div>
+<div id="coinToast" hidden><div class="ct-coin"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#FFC21A" stroke="#C98A00" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="#C98A00" stroke-width="1.6"/></svg></div><b id="ctTitle"></b><span id="ctSub"></span></div>
+<div id="place" hidden>
+  <div id="placeCard">
+    <div class="mh"><div class="plIc" id="plIc"></div><h2 id="plTitle"></h2><button class="rb" id="plClose" aria-label="Schließen"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <p id="plSub"></p>
+    <div id="plBody"></div>
   </div>
 </div>
 <div id="top">
@@ -69,6 +71,9 @@
 <div id="pad" hidden></div>
 <div id="joy" class="rest" hidden><div id="knob"></div></div>
 <div id="walkBtns" hidden>
+  <button class="pill hot" id="btnPlace" hidden><span id="placeIc" style="display:contents"><svg viewBox="0 0 24 24"><path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7" fill="#FFF4CC" stroke="#C9A65A" stroke-width="1.8"/><path d="M6 4a2 2 0 0 0-2 2v2h4V6a2 2 0 0 0-2-2z" fill="#F2DFA0" stroke="#C9A65A" stroke-width="1.8"/><path d="M10 9h6M10 12.5h6M10 16h4" stroke="#8B6A45" stroke-width="1.6" stroke-linecap="round"/></svg></span><span id="placeTxt">Aufträge</span></button>
+  <button class="pill hot" id="btnDoor" hidden><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round"><path d="M5 21V3.5h10V21" fill="#B98552"/><path d="M3 21h18"/><circle cx="12.3" cy="12.5" r="1" fill="#1F2A37"/></svg><span id="doorTxt">Tür auf</span></button>
+  <button class="pill hot" id="btnChop" hidden><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 9.5 4 20" stroke="#7A5232" stroke-width="2.6"/><path d="M12.5 4.5c3.2-.4 6.4 1.6 7.5 4.6l-3.8 3.8-6-6z" fill="#C0C6CC"/></svg>Holz fällen</button>
   <button class="pill hot" id="btnEnter" hidden><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="1.8" stroke-linejoin="round"><path d="M2.5 15.5v-3l2.2-4.5h10.2l4.2 4.5h2.4v3z" fill="#fff"/><circle cx="7.3" cy="16.3" r="2" fill="#1F2A37"/><circle cx="16.7" cy="16.3" r="2" fill="#1F2A37"/></svg>Einsteigen</button>
   <button class="pill hot" id="btnHonk" hidden><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h3l6 4V6l-6 4z" fill="#fff"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg><span id="honkTxt">Hupen</span></button>
   <button class="pill hot" id="btnDive" hidden><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="13" rx="8" ry="3.6" fill="#F5C211"/><path d="M10 9.4V7h3v2.4M12 7V4.5h1.5"/><path d="M12 18.5v3m-2.5-1.5L12 22.5l2.5-2.5"/></svg><span id="diveTxt">Abtauchen</span></button>
@@ -85,7 +90,7 @@
     <h2 id="catchTitle"></h2>
     <p id="catchSub"></p>
     <p id="catchBook"></p>
-    <div class="mrow"><button class="mb go" id="catchKeep">Mitnehmen</button><button class="mb" id="catchFree">Freilassen</button></div>
+    <div class="mrow"><button class="mb go" id="catchKeep">In den Eimer</button><button class="mb" id="catchFree">Freilassen</button></div>
   </div>
 </div>
 <div id="aqPanel" hidden>

@@ -11,6 +11,7 @@ function resolve(p,rad){
     const i=ti+di,j=tj+dj; if(!inb(i,j))continue;
     const gm=groundM[I(i,j)],lists=gm&&gm.userData.cols&&gm.userData.cols.length?[cols[I(i,j)],gm.userData.cols]:[cols[I(i,j)]];
     for(const list of lists)for(const c of list){
+      if(c.off)continue;
       if(c.c){const dx=p.x-c.x,dz=p.z-c.z,dd=Math.hypot(dx,dz),m=rad+c.r;if(dd<m&&dd>1e-6){p.x=c.x+dx/dd*m;p.z=c.z+dz/dd*m;hit=true;}}
       else{
         const qx=clamp(p.x,c.x0,c.x1),qz=clamp(p.z,c.z0,c.z1),dx=p.x-qx,dz=p.z-qz,dd=Math.hypot(dx,dz);

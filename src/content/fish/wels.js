@@ -4,6 +4,7 @@ export default {
   label: 'Wels', plural: 'Welse',
   length: [.8, 2.6], // Meter, zufällig beim Fang
   habitat: ['see'],
+  taler: 6, // so viele Taler gibt der Markt für einen Fisch
   spawn: { see: .15 }, // Häufigkeit je Gewässer
   speed: .45, jumps: false,
   scale: { shadow: 1.8, underwater: 1.2, aquarium: .28, rod: .9, jump: 1.1 },

@@ -3,6 +3,7 @@ export default {
   id: 'villa',
   label: 'Villa',
   category: 'haus', // Inventar-Kategorie
+  holz: 8, // kostet so viel Holz (Rucksack); beim Abreißen kommt es zurück
   house: true, // begehbar
   // Ein Feld ist 4x4 Einheiten, Mitte bei 0, Tür nach +z. Rückgabe: { g, cols, lights }
   model(seed, o, { box, shell, plant }) {

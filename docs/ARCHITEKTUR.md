@@ -33,7 +33,7 @@ src/
   content/          Was es gibt (Daten + Aussehen), je Ding eine Datei
     catalog.js      ITEMS und CATS, großteils aus den Listen unten erzeugt
     fish/ whales/ vehicles/ animals/ buildings/   je <id>.js + index.js (Liste, Prüfung)
-    quests/         Aufgabenbuch: ein Kapitel je Datei
+    orders/         Aufträge für das Auftragshaus
     fish.js, whales.js   fishModel(), whaleModel()
     models/         Bau-Helfer und Modell-Funktionen: Boden, Gleise, buildings.js (MODELS), vehicles.js (carModel), animals.js, blocks.js (Bauwerkstatt)
     sample-world.js Beispielstadt
@@ -46,9 +46,13 @@ src/
     speech.js       Vorlesen: fertige Sprachdateien (voice/clips), sonst Gerätestimme; Schalter im Menü
     voice-split.js  Sätze teilen und Dateinamen, auch für tools/voice-texts.mjs
     audio-ctx.js    der eine AudioContext
-    quests.js       Aufgaben-Logik: zählt Ereignisse, Sterne, Boni (ohne Oberfläche, in Node getestet)
-  ui/               Bedienoberfläche: hint.js (liest vor), quest-book.js (Stern-Knopf, Buch, Feier), modes.js, inventory.js, worlds-menu.js, build-input.js, station-panel.js, fullscreen.js
+    rucksack.js     Taler, Holz, Eimer, Gekauftes (ohne Oberfläche, in Node getestet)
+    orders.js       Aufträge: annehmen, Ereignisse zählen, abholen (ohne Oberfläche, in Node getestet)
+  ui/               Bedienoberfläche: hint.js (liest vor), places.js (Rucksack-Anzeige, Auftragshaus, Markt, Kaufen, Holz fällen, Türen), icons.js, modes.js, inventory.js, worlds-menu.js, build-input.js, station-panel.js, fullscreen.js
+  extras/           Ausgebaute Erweiterungen, die nicht geladen werden (aufgabenbuch/ mit README zum Wiedereinbauen)
 ```
+
+Spielprinzip (Sammeln, Tauschen, Bauen): [SPIELPRINZIP.md](SPIELPRINZIP.md).
 
 ## Wichtige Entscheidungen
 
@@ -76,7 +80,9 @@ src/
 | Gespeicherte Welten | localStorage | `kunos-welten` |
 | Geöffnete Welt | localStorage | `kunos-welt-cur` |
 | Fangbuch, Rekorde, Wale | localStorage | `kunos-fang`, `kunos-fang-rekord`, `kunos-wale` |
-| Aufgaben | localStorage | `cubos-aufgaben` |
+| Rucksack (Taler, Holz, Eimer, Gekauftes) | localStorage | `cubos-rucksack` |
+| Laufender Auftrag, erledigte Aufträge | localStorage | `cubos-auftraege` |
+| Aufgabenbuch (ausgebaut, bleibt liegen) | localStorage | `cubos-aufgaben` |
 | Vorlesen, Traumfilter an/aus | localStorage | `cubos-vorlesen`, `cubos-traumfilter` |
 
 Schlüssel tragen noch den alten Namen. Nicht umbenennen, sonst sind die Welten weg.
@@ -85,5 +91,5 @@ Schlüssel tragen noch den alten Namen. Nicht umbenennen, sonst sind die Welten 
 
 - **Logik (`tests/unit`, vitest):** Inhaltsdateien, Spielstand-Umwandlung, Welt-Codes, Ereignisse.
 - **Prüfungen (`tools/lint.mjs`, `tools/deps.mjs`):** fehlende und ungenutzte Importe, Gedankenstriche, Import-Zyklen, Module, die nie geladen werden.
-- **Browser (`tests/e2e`):** `env.js` macht Zufall und Zeit vorhersagbar (Zufall aus three.min.js bekommt einen eigenen Strom) und zeichnet nur das letzte Bild eines Blocks. `scenarios.mjs` spielt 16 Abläufe über `window.__cubo` (debug.js). Jeder Schnappschuss speichert einen Fingerabdruck (Welt, Fahrzeuge, Fische, Fangbuch, sichtbare Panels) und einen Screenshot. `compare.mjs` vergleicht mit `tests/baseline` (nur Daten, Bilder bleiben lokal in `tests/output`). Feier-Karte und Hinweise laufen über die echte Uhr; sie können auf Screenshots zwischen zwei Läufen verschieden sein und gehören deshalb nicht in den Fingerabdruck.
+- **Browser (`tests/e2e`):** `env.js` macht Zufall und Zeit vorhersagbar (Zufall aus three.min.js bekommt einen eigenen Strom) und zeichnet nur das letzte Bild eines Blocks. `scenarios.mjs` spielt 17 Abläufe über `window.__cubo` (debug.js). Jeder Schnappschuss speichert einen Fingerabdruck (Welt, Fahrzeuge, Fische, Fangbuch, sichtbare Panels) und einen Screenshot. `compare.mjs` vergleicht mit `tests/baseline` (nur Daten, Bilder bleiben lokal in `tests/output`). Feier-Karte und Hinweise laufen über die echte Uhr; sie können auf Screenshots zwischen zwei Läufen verschieden sein und gehören deshalb nicht in den Fingerabdruck.
 - `legacy` als Ziel (`node tests/e2e/run.mjs legacy`) spielt dieselben Szenarien mit dem alten Einzeldatei-Stand. Damit wurde der Umbau Pixel für Pixel geprüft.

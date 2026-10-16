@@ -3,6 +3,7 @@ export default {
   id: 'aquarium',
   label: 'Aquarium',
   category: 'haus', // Inventar-Kategorie
+  holz: 15, // kostet so viel Holz (Rucksack); beim Abreißen kommt es zurück
   house: true, big: true, // begehbar, 3x3 Felder
   // Ein Feld ist 4x4 Einheiten, Mitte bei 0, Tür nach +z. Rückgabe: { g, cols, lights }
   model(seed, o, { mulberry, BX, G, M, box, bulbMat, mesh, winMat, signMat, fishModel, tankWater, tankGlass, AQ_R, AQ_H, AQ_GAP }) {

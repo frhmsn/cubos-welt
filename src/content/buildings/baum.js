@@ -3,6 +3,7 @@ export default {
   id: 'baum',
   label: 'Baum',
   category: 'natur', // Inventar-Kategorie
+  chop: 2, // mit dem Männchen fällen gibt so viel Holz
   paint: true, // mit dem Finger malen
   // Ein Feld ist 4x4 Einheiten, Mitte bei 0, Tür nach +z. Rückgabe: { g, cols, lights }
   model(seed, o, { mulberry, G, M, mesh }) {

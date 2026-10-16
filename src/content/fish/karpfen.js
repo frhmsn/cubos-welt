@@ -4,6 +4,7 @@ export default {
   label: 'Karpfen', plural: 'Karpfen',
   length: [.3, .9], // Meter, zufällig beim Fang
   habitat: ['see'],
+  taler: 3, // so viele Taler gibt der Markt für einen Fisch
   spawn: { see: .25 }, // Häufigkeit je Gewässer
   speed: .5, jumps: true,
   scale: { shadow: .95, underwater: 1.6, aquarium: .5, rod: 1.6, jump: 1.1 },

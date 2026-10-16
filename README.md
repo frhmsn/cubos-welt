@@ -1,6 +1,6 @@
 # Cubos Welten entdecken
 
-Ein 3D-Bauspiel für Kinder: Straßen, Häuser, Bahn, Fähren, Meer, Angeln, U-Boot, Aquarium und Wale. Läuft im Browser, am besten als App auf dem Home-Bildschirm von iPad oder iPhone.
+Ein 3D-Bauspiel für Kinder: Straßen, Häuser, Bahn, Fähren, Meer, Angeln, U-Boot, Aquarium und Wale. Im Auftragshaus gibt es Aufträge und Taler, auf dem Markt Taler für Fische, Holz kommt vom Bäumefällen ([Spielprinzip](docs/SPIELPRINZIP.md)). Läuft im Browser, am besten als App auf dem Home-Bildschirm von iPad oder iPhone.
 
 **Spielen:** https://frhmsn.github.io/cubos-welt/
 

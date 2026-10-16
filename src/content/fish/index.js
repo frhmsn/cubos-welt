@@ -26,7 +26,7 @@ const whereText = (h) => (h.includes('see') && h.includes('meer') ? 'in Seen, Fl
 
 /** Prüft eine Fischdatei beim Start, damit Tippfehler sofort auffallen. */
 function check(f) {
-  const need = ['id', 'label', 'plural', 'length', 'habitat', 'spawn', 'speed', 'scale', 'model'];
+  const need = ['id', 'label', 'plural', 'length', 'habitat', 'taler', 'spawn', 'speed', 'scale', 'model'];
   for (const k of need) if (f[k] == null) throw new Error(`Fisch ${f.id || '?'}: Feld "${k}" fehlt`);
   for (const h of f.habitat) if (!WATER[h]) throw new Error(`Fisch ${f.id}: unbekanntes Habitat "${h}"`);
   for (const h of Object.keys(f.spawn)) if (!f.habitat.includes(h)) throw new Error(`Fisch ${f.id}: spawn "${h}" passt nicht zum Habitat`);
@@ -39,12 +39,12 @@ export const FISH_BY_ID = Object.fromEntries(FISH_LIST.map((f) => [f.id, f]));
 
 /**
  * Kurzform für die Spielsysteme (gleiche Felder wie früher, damit Spielstände und Code passen):
- * label, plural, art, len, sil, speed, jump, uw, aq, rs, wow, where
+ * label, plural, art, len, sil, speed, jump, uw, aq, rs, wow, where, taler (Marktpreis)
  */
 export const FISH = Object.fromEntries(FISH_LIST.map((f) => [f.id, {
   label: f.label, plural: f.plural, art: f.article, len: f.length,
   sil: f.scale.shadow, speed: f.speed, jump: f.jumps ? 1 : 0, uw: f.scale.underwater, aq: f.scale.aquarium,
-  rs: f.scale.rod, wow: f.wow ? 1 : 0, where: whereText(f.habitat),
+  rs: f.scale.rod, wow: f.wow ? 1 : 0, where: whereText(f.habitat), taler: f.taler,
 }]));
 
 /** Spawn-Tabellen [[id, Gewicht], ...] je Gewässer. */

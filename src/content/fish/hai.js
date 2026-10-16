@@ -4,6 +4,7 @@ export default {
   label: 'Hai', plural: 'Haie',
   length: [1.5, 3.5], // Meter, zufällig beim Fang
   habitat: ['meer'],
+  taler: 10, // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: .09 }, // Häufigkeit je Gewässer
   speed: 1.2, jumps: false,
   scale: { shadow: 2.5, underwater: 1.15, aquarium: .3, rod: .9, jump: 1.1 },

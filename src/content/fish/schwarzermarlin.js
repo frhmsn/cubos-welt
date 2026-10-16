@@ -4,6 +4,7 @@ export default {
   label: 'Schwarzer Marlin', plural: 'Schwarze Marline',
   length: [1.6, 4.5], // Meter, zufällig beim Fang
   habitat: ['meer'],
+  taler: 12, // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: .01 }, // Häufigkeit je Gewässer, sehr selten
   speed: 1.6, jumps: true,
   scale: { shadow: 2.5, underwater: .95, aquarium: .23, rod: .78, jump: 1.1 },

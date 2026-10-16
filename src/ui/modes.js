@@ -54,7 +54,7 @@ function startWalk(){
     const f=DIRS[d]; pl.x=c.x+f[0]*2.9; pl.z=c.z+f[1]*2.9; pl.yaw=Math.atan2(f[0],f[1]);
   }
   const p={x:pl.x,z:pl.z}; for(let k=0;k<4;k++)resolve(p,.32); pl.x=p.x; pl.z=p.z;
-  setMode('walk'); hint('Links läufst du, rechts schaust du dich um. Geh durch die Tür ins Haus!');
+  setMode('walk'); hint('Links läufst du, rechts schaust du dich um. Vor einer Tür kannst du sie aufmachen!');
 }
 function enterCar(car){
   game.driveCar=car; car.mode='player'; car.v=0;

@@ -4,6 +4,7 @@ export default {
   label: 'Makrele', plural: 'Makrelen', article: 'eine',
   length: [.25, .5], // Meter, zufällig beim Fang
   habitat: ['meer'],
+  taler: 2, // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: .16 }, // Häufigkeit je Gewässer
   speed: 1.4, jumps: true,
   scale: { shadow: .7, underwater: 1.8, aquarium: .5, rod: 1.6, jump: 1.1 },

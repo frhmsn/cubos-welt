@@ -8,6 +8,7 @@ Schritt für Schritt für die häufigsten Erweiterungen. Nach jedem Rezept: `npm
 2. Werte anpassen:
    - `label`, `plural`, optional `article: 'eine'` (für "Du hast eine Makrele gefangen")
    - `length: [min, max]` in Metern
+   - `taler`: so viele Taler gibt der Markt für einen Fisch (kleine Seefische 2, große Meeresfische bis 12)
    - `habitat: ['see']` (Seen und Flüsse) oder `['meer']`. Regel: nur eins von beiden, im Meer leben nur Meeresbewohner (der Unit-Test prüft das).
    - `spawn: { see: 0.1 }` Häufigkeit je Gewässer. **Die Summe aller Arten je Gewässer muss 1 bleiben**, also andere Arten etwas verringern (der Unit-Test prüft das).
    - `speed`, `jumps`, `scale` (shadow = Schatten im Wasser, underwater, aquarium, rod = an der Angel, jump = beim Springen)
@@ -41,14 +42,21 @@ Schritt für Schritt für die häufigsten Erweiterungen. Nach jedem Rezept: `npm
 1. `src/content/animals/hund.js` kopieren, `label`, `speed` und `model({ g, box, leg, legs })` anpassen. Beine mit `leg(...)` anlegen, dann wackeln sie beim Laufen.
 2. In `src/content/animals/index.js` eintragen.
 
-## Neue Aufgabe oder neues Kapitel
+## Neuer Auftrag
 
-1. In `src/content/quests/<kapitel>.js` eine Aufgabe ergänzen: `{ id, text, tip, on, when, count }`.
-   - `text`: kurz, wird vorgelesen (unter 60 Zeichen, der Test prüft das). `tip`: wie es geht, für Kinder.
-   - `on`: ein Ereignis aus `src/core/events.js` (Liste in `QUEST_EVENTS`). `when(d)`: prüft die Ereignis-Daten. `count`: wie oft.
-2. Neues Kapitel: Datei nach Vorlage `bahn.js`, in `src/content/quests/index.js` eintragen. Optional `bonus: { item, text }` und beim Ding `bonus: '<kapitel>'` setzen (Beispiel: Gold-Lambo in `content/vehicles/goldlambo.js`).
-3. Braucht die Aufgabe ein Ereignis, das es noch nicht gibt: im passenden System `emit(...)` aufrufen, in `events.js` dokumentieren und in `QUEST_EVENTS` aufnehmen.
-4. Fortschritt liegt unter `cubos-aufgaben` im Gerät und reist in Welt-Codes mit. IDs von Aufgaben nie umbenennen, sonst verschwinden Haken.
+1. In `src/content/orders/index.js` einen Eintrag ergänzen. IDs nie umbenennen.
+   - Tun: `{ id, text, tip, on, when, count, taler }`. `on` ist ein Ereignis aus `src/core/events.js` (Liste `ORDER_EVENTS`), `when(d)` prüft die Daten, `count` wie oft.
+   - Bringen: `{ id, text, tip, give: { holz: 5 } oder { fisch: 3 }, taler }`.
+   - `text` kurz und als ganzer Satz (wird vorgelesen, der Test erlaubt unter 50 Zeichen), `tip` erklärt den Weg.
+2. Braucht der Auftrag ein Ereignis, das es noch nicht gibt: im passenden System `emit(...)`, in `events.js` dokumentieren, in `ORDER_EVENTS` aufnehmen.
+3. `npm run voice`, dann `npm run check`.
+
+## Etwas kostet Holz oder Taler
+
+- Gebäude: `holz: 5` in `src/content/buildings/<id>.js`. Inventar zeigt den Preis, Bauen zieht ab, Abreißen gibt zurück.
+- Zum Kaufen: `price: 30` in einer Fahrzeug-Datei. Im Inventar mit Schloss, Antippen öffnet das Kaufen-Fenster.
+- Bäume zum Fällen: `chop: 2` (so viel Holz gibt es).
+- Neue Orte wie Auftragshaus und Markt: `station: '<name>'` im Gebäude, das Fenster dazu in `src/ui/places.js`.
 
 ## Neues Ereignis
 
@@ -84,7 +92,7 @@ Bildstile vergleichen: `node tests/e2e/styles.mjs` (alle Stile) und `node tests/
 
 Gesprochen wird mit fertigen MP3-Dateien der Piper-Stimme "Thorsten". Fehlt für einen Satz die Datei, liest die Stimme des Geräts den ganzen Text.
 
-1. Text im Spiel ändern oder neu schreiben. Jeder Satz endet mit `.`, `!`, `?` oder `:` und wird einzeln gesprochen. Feste Sätze in `hint(...)` und `speak(...)` werden automatisch gefunden. Sätze mit Namen aus Inhaltsdateien (Fische, Wale, Aufgaben, Stile) setzt `tools/voice-texts.mjs` zusammen; neue Muster dort ergänzen.
+1. Text im Spiel ändern oder neu schreiben. Jeder Satz endet mit `.`, `!`, `?` oder `:` und wird einzeln gesprochen. Feste Sätze in `hint(...)` und `speak(...)` werden automatisch gefunden. Sätze mit Namen aus Inhaltsdateien (Fische, Wale, Aufträge, Stile) setzt `tools/voice-texts.mjs` zusammen; neue Muster dort ergänzen.
 2. `npm run voice` schreibt `voice/texts.json`. Mit committen und pushen.
 3. Die Action "Erzählerstimme" (`.github/workflows/voice.yml`) spricht nur neue Sätze, löscht alte Dateien und committet `voice/`. Danach `git pull --rebase`.
 4. Stimme oder Tempo ändern: `VOICE` in `voice.yml` oder `LENGTH_SCALE` in `tools/voice_build.py`, Ordner `voice/clips/` löschen, pushen. Dann wird alles neu gesprochen.

@@ -25,6 +25,10 @@ function shell(g,cols,o){
   if(sw>winW+.25){pane(-hw+sw/2,hd-t/2,0);pane(hw-sw/2,hd-t/2,0);}
   mesh(BX(.3,.07,.3),bulbMat,0,h-.08,0,g,false);
   box(g,'#7A5A3A',doorW-.1,.02,.45,0,.015,hd+.28,false);
+  // Tür zum Auf- und Zumachen: Drehpunkt an der linken Kante (world.js meldet sie an, ui/places.js zeigt den Knopf)
+  const lw=doorW-.06,lh=doorH-.03;
+  const leaf=mesh(G('leaf'+lw+'_'+lh,()=>new THREE.BoxGeometry(lw,lh,.07).translate(lw/2,lh/2,0)),M('#A8743E'),-lw/2,0,hd-t/2,g);
+  leaf.userData.keep=true;leaf.userData.leaf={w:lw,col:['b',-doorW/2,doorW/2,hd-t-.04,hd+.04]};
 }
 function gable(g,w,d,h,wall,roof){
   const geo=G('gab'+w+'_'+d,()=>{const s=new THREE.Shape();s.moveTo(-w/2-.3,0);s.lineTo(w/2+.3,0);s.lineTo(0,1.35);s.closePath();const e=new THREE.ExtrudeGeometry(s,{depth:d+.4,bevelEnabled:false});e.translate(0,0,-(d+.4)/2);return e;});

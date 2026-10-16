@@ -31,12 +31,17 @@
     "aquarium": [
      23
     ],
-    "quests": {
-     "stars": 2,
-     "next": "stadt-haus"
+    "rucksack": {
+     "taler": 0,
+     "holz": 45,
+     "eimer": {},
+     "gekauft": {}
     },
+    "auftrag": null,
     "ui": {
-     "book": false,
+     "place": false,
+     "placeBtn": false,
+     "chop": false,
      "travel": false,
      "st": false,
      "aq": false,
@@ -75,12 +80,17 @@
     "aquarium": [
      23
     ],
-    "quests": {
-     "stars": 3,
-     "next": "stadt-haus"
+    "rucksack": {
+     "taler": 0,
+     "holz": 45,
+     "eimer": {},
+     "gekauft": {}
     },
+    "auftrag": null,
     "ui": {
-     "book": false,
+     "place": false,
+     "placeBtn": false,
+     "chop": false,
      "travel": false,
      "st": false,
      "aq": false,
@@ -119,12 +129,17 @@
     "aquarium": [
      23
     ],
-    "quests": {
-     "stars": 4,
-     "next": "stadt-haus"
+    "rucksack": {
+     "taler": 0,
+     "holz": 45,
+     "eimer": {},
+     "gekauft": {}
     },
+    "auftrag": null,
     "ui": {
-     "book": false,
+     "place": false,
+     "placeBtn": false,
+     "chop": false,
      "travel": false,
      "st": false,
      "aq": true,
@@ -163,12 +178,17 @@
     "aquarium": [
      23
     ],
-    "quests": {
-     "stars": 4,
-     "next": "stadt-haus"
+    "rucksack": {
+     "taler": 0,
+     "holz": 45,
+     "eimer": {},
+     "gekauft": {}
     },
+    "auftrag": null,
     "ui": {
-     "book": false,
+     "place": false,
+     "placeBtn": false,
+     "chop": false,
      "travel": false,
      "st": false,
      "aq": true,
@@ -205,12 +225,17 @@
     "catchBook": "{\"barsch\":4,\"hecht\":2,\"karpfen\":3,\"wels\":1,\"stoer\":2,\"thunfisch\":5,\"hai\":2,\"makrele\":3,\"bonito\":0,\"mahimahi\":0,\"barrakuda\":0,\"schwertfisch\":0,\"marlin\":1,\"schwarzermarlin\":0,\"gestreiftermarlin\":0,\"mondfisch\":1,\"rochen\":0,\"kalmar\":0}",
     "whaleBook": "{\"buckelwal\":0,\"pottwal\":0,\"orca\":0}",
     "aquarium": [],
-    "quests": {
-     "stars": 4,
-     "next": "stadt-haus"
+    "rucksack": {
+     "taler": 0,
+     "holz": 60,
+     "eimer": {},
+     "gekauft": {}
     },
+    "auftrag": null,
     "ui": {
-     "book": false,
+     "place": false,
+     "placeBtn": false,
+     "chop": false,
      "travel": false,
      "st": false,
      "aq": false,

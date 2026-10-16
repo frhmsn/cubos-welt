@@ -3,6 +3,7 @@ export default {
   id: 'garage',
   label: 'Garage',
   category: 'haus', // Inventar-Kategorie
+  holz: 4, // kostet so viel Holz (Rucksack); beim Abreißen kommt es zurück
   house: true, // begehbar
   // Ein Feld ist 4x4 Einheiten, Mitte bei 0, Tür nach +z. Rückgabe: { g, cols, lights }
   model(seed, o, { BX, G, M, box, bulbMat, doorMat, mesh }) {

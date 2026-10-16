@@ -3,7 +3,7 @@ import { game, pl } from '../core/state.js';
 import { scene, walkCam } from './renderer.js';
 import { glowFire } from './materials.js';
 import { bc } from './build-camera.js';
-import { cars, flames, garages, lightMap } from '../core/world-data.js';
+import { cars, doors, flames, garages, lightMap } from '../core/world-data.js';
 
 // ---------- Echte Lichter ----------
 /* Feste Anzahl Lampen, die immer zu den nächsten Lichtquellen springen. Feste Anzahl, damit nichts neu kompiliert wird. */
@@ -56,4 +56,13 @@ function updateGarages(dt){
   }
 }
 
-export { lightTime, updateGarages, updateLights };
+/** Türen schwingen sanft auf und zu (Ziel setzt ui/places.js). */
+function updateDoors(dt){
+  for(const d of doors.values()){
+    if(Math.abs(d.target-d.open)<.001)continue;
+    d.open+=(d.target-d.open)*Math.min(1,dt*5);if(Math.abs(d.target-d.open)<.01)d.open=d.target;
+    d.leaf.rotation.y=d.r0+d.open*1.5;d.leaf.updateMatrix();
+  }
+}
+
+export { lightTime, updateDoors, updateGarages, updateLights };

@@ -18,16 +18,16 @@ import { removeWhale, whales } from '../systems/whales.js';
 import { clearAquarium, fillAquarium } from '../systems/aquarium.js';
 import { clearTile } from '../systems/travel.js';
 import { hint } from '../ui/hint.js';
-import { FLAT, animals, aquariums, cars, cols, crossings, ferries, flames, garages, groundM, isRail, isRoad, isWater, lightMap, objM, pops, rot, setWorldArrays, tiles, toWorld, trains } from './world-data.js';
+import { FLAT, animals, aquariums, cars, cols, crossings, doors, ferries, flames, garages, groundM, isRail, isRoad, isWater, lightMap, objM, pops, rot, setWorldArrays, tiles, toWorld, trains } from './world-data.js';
 import { saveSoon } from './autosave.js';
 
 // ---------- Welt-Zustand ----------
-function dropObj(grp){if(!grp)return;scene.remove(grp);disposeGroup(grp);lightMap.delete(grp);garages.delete(grp);flames.delete(grp);const aq=aquariums.get(grp);if(aq){clearAquarium(aq);aquariums.delete(grp);}}
+function dropObj(grp){if(!grp)return;scene.remove(grp);disposeGroup(grp);lightMap.delete(grp);garages.delete(grp);doors.delete(grp);flames.delete(grp);const aq=aquariums.get(grp);if(aq){clearAquarium(aq);aquariums.delete(grp);}}
 function dropGround(grp){if(!grp)return;scene.remove(grp);disposeGroup(grp);lightMap.delete(grp);crossings.delete(grp);}
 function resetTiles(nn){
   for(let k=0;k<groundM.length;k++){dropGround(groundM[k]);dropObj(objM[k]);}
   for(const aq of aquariums.values())clearAquarium(aq);
-  lightMap.clear();garages.clear();flames.clear();crossings.clear();aquariums.clear();
+  lightMap.clear();garages.clear();doors.clear();flames.clear();crossings.clear();aquariums.clear();
   while(trains.length)removeTrain(trains[0]);
   while(ferries.length)removeFerry(ferries[0]);
   while(fishes.length)removeFish(fishes[0]);
@@ -75,6 +75,12 @@ function rebuildObj(i,j,pop){
   if(ls&&ls.length)lightMap.set(grp,ls.map(l=>{const p=rot(l[0],l[2],o.r);return{x:c.x+p[0],y:l[1],z:c.z+p[1],c:l[3],i:l[4],d:l[5],f:l[6]||0};}));
   const door=grp.children.find(m=>m.userData.door);
   if(door){const p=rot(0,1,o.r);garages.set(grp,{door,x:c.x+p[0]*1.6,z:c.z+p[1]*1.6,open:0});}
+  const leaf=grp.children.find(m=>m.userData.leaf);
+  if(leaf){
+    // Tür: zu beim Bauen. Solange sie zu ist, versperrt ein Riegel den Eingang.
+    const L=leaf.userData.leaf,col=toWorld(L.col,o.r,c),p=rot(leaf.position.x+L.w/2,leaf.position.z,o.r);
+    cols[k].push(col);doors.set(grp,{leaf,col,x:c.x+p[0],z:c.z+p[1],r0:leaf.rotation.y,open:0,target:0});
+  }
   const fl=grp.children.filter(m=>m.userData.flame); if(fl.length)flames.set(grp,fl);
   if(mdl.tank){const aq={x:c.x,z:c.z,r:o.r,fish:[]};aquariums.set(grp,aq);fillAquarium(aq);}
   if(pop)pops.push({g:grp,t:0});

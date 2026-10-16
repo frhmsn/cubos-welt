@@ -76,12 +76,17 @@
     "aquarium": [
      0
     ],
-    "quests": {
-     "stars": 6,
-     "next": "stadt-laufen"
+    "rucksack": {
+     "taler": 0,
+     "holz": 153,
+     "eimer": {},
+     "gekauft": {}
     },
+    "auftrag": null,
     "ui": {
-     "book": false,
+     "place": false,
+     "placeBtn": false,
+     "chop": false,
      "travel": false,
      "st": false,
      "aq": false,
@@ -165,12 +170,17 @@
     "aquarium": [
      0
     ],
-    "quests": {
-     "stars": 6,
-     "next": "stadt-laufen"
+    "rucksack": {
+     "taler": 0,
+     "holz": 153,
+     "eimer": {},
+     "gekauft": {}
     },
+    "auftrag": null,
     "ui": {
-     "book": false,
+     "place": false,
+     "placeBtn": false,
+     "chop": false,
      "travel": false,
      "st": false,
      "aq": false,

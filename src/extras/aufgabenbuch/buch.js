@@ -1,14 +1,14 @@
 // Aufgabenbuch (Oberfläche): Stern-Knopf oben links, aktuelle Aufgabe als Leiste, Buch mit Kapiteln und Haken,
-// Feier bei geschafften Aufgaben. Logik: systems/quests.js.
-import { $ } from '../core/util.js';
-import { game } from '../core/state.js';
-import { on } from '../core/events.js';
-import { CHAPTERS } from '../content/quests/index.js';
-import { ITEMS } from '../content/catalog.js';
-import { currentChapter, isDone, isUnlocked, nextTask, progressOf, stars, totalStars } from '../systems/quests.js';
-import { speak } from '../systems/speech.js';
-import { ac, plop, tone } from '../systems/audio.js';
-import { thumbs } from './inventory.js';
+// Feier bei geschafften Aufgaben. Logik: logik.js. Zurzeit ausgebaut, siehe README.md.
+import { $ } from '../../core/util.js';
+import { game } from '../../core/state.js';
+import { on } from '../../core/events.js';
+import { CHAPTERS } from './kapitel/index.js';
+import { ITEMS } from '../../content/catalog.js';
+import { currentChapter, isDone, isUnlocked, nextTask, progressOf, stars, totalStars } from './logik.js';
+import { speak } from '../../systems/speech.js';
+import { ac, plop, tone } from '../../systems/audio.js';
+import { thumbs } from '../../ui/inventory.js';
 
 const SPEAKER = '<svg viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z" fill="#FFC21A"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>';
 let shownChapter = null;

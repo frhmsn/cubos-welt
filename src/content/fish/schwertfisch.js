@@ -4,6 +4,7 @@ export default {
   label: 'Schwertfisch', plural: 'Schwertfische',
   length: [1.2, 3], // Meter, zufällig beim Fang
   habitat: ['meer'],
+  taler: 10, // so viele Taler gibt der Markt für einen Fisch
   spawn: { meer: .05 }, // Häufigkeit je Gewässer
   speed: 1.5, jumps: true,
   scale: { shadow: 2, underwater: 1, aquarium: .25, rod: .85, jump: 1.1 },

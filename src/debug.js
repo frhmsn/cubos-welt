@@ -14,10 +14,12 @@ import { refreshAquariums } from './systems/aquarium.js';
 import { select } from './ui/inventory.js';
 import { emptyWorld, serialize } from './core/save.js';
 import { islandWorld, sampleWorld } from './content/sample-world.js';
-import { animals, aquariums, cars, ferries, trains } from './core/world-data.js';
+import { animals, aquariums, cars, doors, ferries, trains } from './core/world-data.js';
 import { catchBook, whaleBook } from './systems/catch-book.js';
 import { closeEditor, editTap, openEditor } from './systems/editor.js';
-import { nextTask, stars } from './systems/quests.js';
+import { addHolz, addTaler, putInBucket, resetRucksack, rucksackData } from './systems/rucksack.js';
+import { accept, activeOrder, claim, resetOrders } from './systems/orders.js';
+import { openPlace } from './ui/places.js';
 import { setDream, setStyle } from './render/dream.js';
 
 // ---------- Test-Schnittstelle ----------
@@ -57,6 +59,15 @@ if (window.__CUBO_DEBUG) window.__cubo = {
   center: (i, j) => center(i, j),
   setPl: (x, z, yaw) => { pl.x = x; pl.z = z; if (yaw != null) pl.yaw = yaw; },
   setCatch: (o) => { Object.assign(catchBook, o); refreshAquariums(); },
+  // Rucksack und Aufträge
+  rucksack: (o) => { if (o) resetRucksack(o); return rucksackData(); },
+  give: (taler, holz, fish) => { addTaler(taler || 0); addHolz(holz || 0); for (const f of fish || []) putInBucket(f); },
+  resetOrders: () => resetOrders(),
+  accept: (id) => accept(id),
+  claim: () => claim(),
+  openPlace: (kind, arg) => openPlace(kind, arg),
+  doors: () => [...doors.values()].map((d) => ({ x: d.x, z: d.z, auf: d.target })),
+  click: (sel) => { const e = document.querySelector(sel); if (!e || e.hidden || e.disabled) return false; e.click(); return true; },
   emptyWorld: () => emptyWorld(),
   sampleWorld: () => sampleWorld(),
   islandWorld: () => islandWorld(),
@@ -80,8 +91,9 @@ if (window.__CUBO_DEBUG) window.__cubo = {
       catchBook: JSON.stringify(catchBook),
       whaleBook: JSON.stringify(whaleBook),
       aquarium: [...aquariums.values()].map((a) => a.fish.length),
-      quests: { stars: stars(), next: (nextTask() || {}).id || null },
-      ui: { book: vis('questBook'), travel: vis('travel'), st: vis('stPanel'), aq: vis('aqPanel'), dive: vis('btnDive'), fish: vis('btnFish'), menu: vis('menu'), catch: vis('catch') },
+      rucksack: rucksackData(),
+      auftrag: (() => { const a = activeOrder(); return a ? [a.id, a.cnt, !!a.fertig] : null; })(),
+      ui: { place: vis('place'), placeBtn: vis('btnPlace'), chop: vis('btnChop'), travel: vis('travel'), st: vis('stPanel'), aq: vis('aqPanel'), dive: vis('btnDive'), fish: vis('btnFish'), menu: vis('menu'), catch: vis('catch') },
     };
   },
 };

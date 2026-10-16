@@ -1,9 +1,9 @@
-// Goldener Lamborghini: Belohnung für das Kapitel "Erste Stadt" im Aufgabenbuch.
+// Goldener Lamborghini: das große Sparziel. Kostet Taler.
 export default {
   id: 'goldlambo',
   label: 'Gold-Lambo',
   category: 'auto', // Inventar-Kategorie: 'auto' oder 'see'
-  bonus: 'stadt', // erscheint erst, wenn dieses Kapitel geschafft ist
+  price: 60, // kostet so viele Taler (Rucksack); vorher ist er im Inventar mit Schloss
   speed: 7, max: 18, // Beschleunigung und Höchstgeschwindigkeit
   model({ g, M, mesh, box, prof, wheels, lights, glassMat }) {
     const b = M('#FFCF33', { roughness: .2, metalness: .45, emissive: '#8A5A00', emissiveIntensity: .4 });

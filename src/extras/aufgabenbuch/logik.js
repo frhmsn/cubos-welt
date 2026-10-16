@@ -1,8 +1,8 @@
 // Aufgabenbuch (Logik): hört auf Spiel-Ereignisse, zählt Fortschritt, vergibt Sterne und schaltet Boni frei.
 // Ohne Oberfläche und ohne Grafik, deshalb in Node testbar (tests/unit/quests.test.js).
-// Oberfläche: ui/quest-book.js. Inhalte: content/quests/.
-import { on, emit } from '../core/events.js';
-import { ALL_TASKS, CHAPTERS } from '../content/quests/index.js';
+// Oberfläche: buch.js. Inhalte: kapitel/. Zurzeit ausgebaut, siehe README.md.
+import { on, emit } from '../../core/events.js';
+import { ALL_TASKS, CHAPTERS } from './kapitel/index.js';
 
 const KEY = 'cubos-aufgaben';
 let state = { done: {}, cnt: {} };

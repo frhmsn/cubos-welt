@@ -1,6 +1,23 @@
 # Backlog
 
-## Roadmap Spielprinzip (beschlossen am 14.10.2026)
+## Spielprinzip Sammeln, Tauschen, Bauen (beschlossen am 16.10.2026)
+
+Beschreibung: [SPIELPRINZIP.md](SPIELPRINZIP.md).
+
+| # | Paket | Inhalt | Stand |
+|---|---|---|---|
+| 1 | Kern | Aufgabenbuch ausgebaut (in `src/extras/`), Rucksack mit Taler, Holz, Eimer, Auftragshaus mit Aufträgen | erledigt |
+| 2 | Markt | Markt bauen, Fische verkaufen, Motorboot und Gold-Lambo mit Talern kaufen | erledigt |
+| 3 | Holz | Bäume fällen, Häuser kosten Holz (Abreißen gibt es zurück), Türen auf und zu | erledigt |
+
+Als Nächstes (Wünsche von Kuno):
+- **Höhlen in der Erde:** Löcher graben, darunter eine Höhle bauen. Braucht eine eigene Ebene unter dem Boden mit eigener Kamera und eigenem Licht (Aufwand ähnlich wie die Unterwasserwelt). Vorschlag: ein Höhleneingang als Gebäude, der wie das U-Boot in eine eigene Szene führt; dort mit Blöcken graben wie in der Bauwerkstatt.
+- **Klappen** zum Auf- und Zumachen (Falltür in den Boden, gehört zu den Höhlen). Türen gibt es schon (`shell()` in `content/models/buildings.js`, Animation in `render/lights.js`).
+- Bäume wachsen nach dem Fällen langsam nach (Stumpf, der wieder Baum wird).
+- Mehr Dinge zum Kaufen (z. B. Leuchtturm, Regenbogen-Boot), mehr Aufträge.
+- Selbst gefangene Fische im Aquarium ausstellen kostet einen Fisch aus dem Eimer.
+
+## Roadmap Spielprinzip (beschlossen am 14.10.2026, ersetzt)
 
 Grundidee: Aufgaben führen durchs Spiel und bringen es bei, sperren aber nichts. Der freie Baukasten bleibt.
 
@@ -8,13 +25,12 @@ Grundidee: Aufgaben führen durchs Spiel und bringen es bei, sperren aber nichts
 |---|---|---|---|
 | 1 | Vorlesen | Hinweise und Aufgaben mit deutscher Stimme vorlesen (Web Speech), Schalter im Menü | erledigt |
 | 2 | Inseln | Insel-Pinsel (Land ins Meer malen, Strand entsteht von selbst), Startvorlage Inselwelt | erledigt |
-| 3 | Aufgabenbuch | Kapitel (Erste Stadt, Bahn, Meer, Entdecker, Inselwelt), Haken pro Aufgabe, ein Stern pro Aufgabe, goldener Lamborghini als Bonus für Kapitel 1 | erledigt |
+| 3 | Aufgabenbuch | Kapitel (Erste Stadt, Bahn, Meer, Entdecker, Inselwelt), Haken pro Aufgabe, ein Stern pro Aufgabe, goldener Lamborghini als Bonus für Kapitel 1 | erledigt, am 16.10. ausgebaut |
 | 4 | Traumfilter | Miniatur-Unschärfe, sanftes Leuchten, Pastellfarben, Himmelsverlauf, Pollen und Glühwürmchen; abschaltbar, schaltet bei schwachen Geräten selbst ab | erledigt |
 
 Später:
 - Auf dem iPad prüfen: Erzählerstimme (Tempo, Lautstärke neben den Tönen), Traumfilter-Leistung, Lesbarkeit der Aufgaben
 - Vorlesen für Zahlen ("3 Barsche gefangen", Fischlänge): Sätze mit Zahlen 1 bis 20 vorab sprechen
-- Bonus-Dinge für weitere Kapitel (z. B. Leuchtturm, Regenbogen-Boot)
 - Weltkarte: alle Welten als Inseln auf einer Seekarte, antippen und hinreisen
 - Wolkenschatten, die über die Landschaft ziehen
 - Three.js auf aktuelle Version (r186, WebGPU mit WebGL-2-Rückfall); Farben und Licht neu abstimmen

@@ -1,6 +1,6 @@
-// Aufgabenbuch: Inhalte gültig, Ereignisse zählen, Kapitel schaltet Bonus frei.
+// Ausgebautes Aufgabenbuch (src/extras/aufgabenbuch): bleibt getestet, damit es sich wieder einbauen lässt.
 import { describe, it, expect, vi } from 'vitest';
-import { CHAPTERS, ALL_TASKS, QUEST_EVENTS } from '../../src/content/quests/index.js';
+import { CHAPTERS, ALL_TASKS, QUEST_EVENTS } from '../../src/extras/aufgabenbuch/kapitel/index.js';
 import { VEHICLE_LIST } from '../../src/content/vehicles/index.js';
 
 describe('Aufgaben-Inhalte', () => {
@@ -14,11 +14,10 @@ describe('Aufgaben-Inhalte', () => {
       expect(t.text.length, t.id + ': kurz halten, wird vorgelesen').toBeLessThan(60);
     }
   });
-  it('Bonus-Dinge gibt es wirklich und sie verweisen auf ihr Kapitel', () => {
+  it('Bonus-Dinge gibt es wirklich', () => {
     for (const c of CHAPTERS.filter((c) => c.bonus)) {
       const v = VEHICLE_LIST.find((x) => x.id === c.bonus.item);
       expect(v, c.bonus.item).toBeTruthy();
-      expect(v.bonus).toBe(c.id);
     }
   });
 });
@@ -27,7 +26,7 @@ describe('Aufgaben-Logik', () => {
   it('zählt Ereignisse, vergibt Sterne und schaltet nach Kapitel 1 den Bonus frei', async () => {
     vi.resetModules();
     const ev = await import('../../src/core/events.js');
-    const q = await import('../../src/systems/quests.js');
+    const q = await import('../../src/extras/aufgabenbuch/logik.js');
     const got = [];
     ev.on('kapitel:geschafft', (d) => got.push(d));
     expect(q.stars()).toBe(0);
@@ -52,7 +51,7 @@ describe('Aufgaben-Logik', () => {
   });
   it('führt Fortschritt aus einem Welt-Code zusammen', async () => {
     vi.resetModules();
-    const q = await import('../../src/systems/quests.js');
+    const q = await import('../../src/extras/aufgabenbuch/logik.js');
     expect(q.mergeQuests({ done: { 'bahn-zug': true }, cnt: { 'bahn-gleis': 3 } })).toBe(true);
     expect(q.isDone('bahn-zug')).toBe(true);
     expect(q.progressOf(ALL_TASKS.find((t) => t.id === 'bahn-gleis'))).toBe(3);
