@@ -30,7 +30,8 @@ import { emit } from './events.js';
 
 // ---------- Schleife ----------
 function resize(){
-  const w=window.innerWidth,h=window.innerHeight; renderer.setSize(w,h,false);
+  // Größe des Canvas selbst (auf dem iPhone als Home-Bildschirm-App kann er höher sein als innerHeight, siehe styles.css)
+  const cv=renderer.domElement,w=cv.clientWidth||window.innerWidth,h=cv.clientHeight||window.innerHeight; renderer.setSize(w,h,false);
   buildCam.aspect=walkCam.aspect=editCam.aspect=w/h; buildCam.updateProjectionMatrix(); walkCam.updateProjectionMatrix(); editCam.updateProjectionMatrix();
 }
 window.addEventListener('resize',resize);

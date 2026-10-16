@@ -228,3 +228,27 @@ button.oc:active{transform:translateY(2px);}
 .it .ballwrap{position:relative;}
 @media (max-width:760px){#hint{top:calc(env(safe-area-inset-top,0px) + 160px);width:max-content;max-width:calc(100vw - 40px);box-sizing:border-box;}}
 .it.prot small{color:#2E8B57;font-weight:700;}
+
+/* ---------- iPhone: kompakte Leiste oben ----------
+   Geschlossen nur Männchen und drei Punkte. Die drei Punkte klappen Speichern, Tag/Nacht, Drehen und "Meine Welten" als Spalte aus (ui/worlds-menu.js). */
+#btnWorlds{display:none;}
+@media (max-width:520px){
+  #top.open #btnWorlds{display:grid;}
+  #top .rb.opt{display:none;}
+  #top.open{flex-direction:column-reverse;justify-content:flex-end;align-items:flex-end;z-index:8;}
+  #top.open .rb.opt{display:grid;}
+  #top.open #btnMenu{background:var(--sun);box-shadow:inset 0 -3px 0 var(--sun-deep),0 6px 14px rgba(20,40,60,.16);}
+  #hud{top:calc(env(safe-area-inset-top,0px) + 12px);}
+  #orderPill{max-width:calc(100vw - 140px);}
+  #hint{top:calc(env(safe-area-inset-top,0px) + 112px);}
+}
+
+/* ---------- Home-Bildschirm-App: bis ganz nach unten ----------
+   iOS 26 meldet in der Home-Bildschirm-App mit durchsichtiger Statusleiste die Höhe um die Statusleiste zu kurz.
+   Dann bleibt unten ein hellblauer Streifen. 100lvh ist die volle Höhe: Bild und untere Knöpfe reichen damit bis an den Rand.
+   Wo alles stimmt, ist 100lvh gleich 100 % und es ändert sich nichts. */
+@media (display-mode: standalone), (display-mode: fullscreen){
+  #c{height:100lvh;bottom:auto;}
+  #inv,#editTray,#walkBtns,#pad{bottom:calc(100% - 100lvh);}
+  #joy.rest{top:calc(100lvh - env(safe-area-inset-bottom,0px) - 100px);}
+}

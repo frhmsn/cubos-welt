@@ -1,7 +1,7 @@
 // Menü Meine Welten: speichern, öffnen, löschen, Codes kopieren und einfügen.
 import { game } from '../core/state.js';
 import { $ } from '../core/util.js';
-import { ac, nopeSnd } from '../systems/audio.js';
+import { ac, nopeSnd, plop } from '../systems/audio.js';
 import { CKEY, store } from '../core/storage.js';
 import { decodeWorld, encodeWorld } from '../core/world-codes.js';
 import { serialize } from '../core/save.js';
@@ -97,7 +97,14 @@ async function renderWorlds(){
     foot.append(nm,pen,bin); card.append(shot,foot); el.appendChild(card);
   }
 }
-$('#btnMenu').addEventListener('click',()=>{ac();$('#menu').hidden=false;renderWorlds();});
+// iPhone (schmal): oben nur Männchen und drei Punkte. Die drei Punkte klappen die übrigen Knöpfe aus, dort öffnet die Mappe "Meine Welten".
+const compact=()=>window.matchMedia&&matchMedia('(max-width:520px)').matches;
+function openWorldsMenu(){ac();$('#top').classList.remove('open');$('#menu').hidden=false;renderWorlds();}
+$('#btnMenu').addEventListener('click',()=>{if(compact()){ac();plop();$('#top').classList.toggle('open');return;}openWorldsMenu();});
+$('#btnWorlds').addEventListener('click',openWorldsMenu);
+// Nach einem Knopf aus der ausgeklappten Leiste wieder zuklappen (Drehen bleibt offen, man tippt es oft mehrmals)
+for(const id of ['btnSave','btnTime','btnFull'])$('#'+id).addEventListener('click',()=>$('#top').classList.remove('open'));
+document.addEventListener('pointerdown',e=>{if(!e.target.closest('#top'))$('#top').classList.remove('open');},true);
 $('#mClose').addEventListener('click',()=>{$('#menu').hidden=true;});
 $('#menu').addEventListener('click',e=>{if(e.target.id==='menu')$('#menu').hidden=true;});
 $('#mSaveNew').addEventListener('click',async()=>{ac();const w=await saveWorld(true,false);if(w)renderWorlds();});
